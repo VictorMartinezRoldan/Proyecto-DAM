@@ -7,8 +7,8 @@ from keras import layers, models
 def es_jpg(filename):
     return filename.lower().endswith('.jpg')
 
-anchura = 124
-altura = 124
+anchura = 224
+altura = 224
 ruta_train = "dataset_train"
 
 train_x = []
@@ -53,15 +53,15 @@ print("--------------------")
 # Tipo de clasificación = BINARIA
 model = tf.keras.Sequential([
     layers.InputLayer(input_shape=(anchura, altura, 3)),
-    layers.Conv2D(32, (3, 3), activation='relu'),
+    layers.Conv2D(32, (3,3), activation='relu'),
     layers.MaxPooling2D(pool_size=(2, 2)), # Selecciona el valor máximo de una región y conserva la info más importante.
-    layers.Conv2D(64, (3, 3), activation='relu'),
+    layers.Conv2D(64, (3,3), activation='relu'),
     layers.MaxPooling2D(pool_size=(2, 2)),  # Además mejora la eficacia y evita el overfitting.
-    layers.Conv2D(64, (3, 3), activation='relu'),
+    layers.Conv2D(64, (4,4), activation='relu'),
     layers.MaxPooling2D(pool_size=(2, 2)),
-    layers.Conv2D(128, (3, 3), activation='relu'),
+    layers.Conv2D(128, (5,5), activation='relu'),
     layers.MaxPooling2D(pool_size=(2, 2)),
-    layers.Conv2D(128, (3, 3), activation='relu'),
+    layers.Conv2D(128, (6,6), activation='relu'),
     layers.MaxPooling2D(pool_size=(2, 2)),
     layers.Flatten(), # Aplana imagen 2D a un vector 1D para ser procesada por la capas densas.
     layers.Dense(cerebro, activation='relu'),
@@ -76,7 +76,7 @@ print("TODO CORRECTO")
 print("-------------")
 print("Comenzando a entrenar...\n")
 
-model.fit(x_data, y_data, epochs=9, batch_size=128, validation_split=0.2)
+model.fit(x_data, y_data, epochs=9, batch_size=64, validation_split=0.2)
 
 model.save("IA-Banderas.keras")
 print("Modelo guardado.")
