@@ -4,7 +4,7 @@ import numpy as np
 import cv2
 
 # ---------------------------------------------------------
-ruta_imagen = "dataset_train/Venezuela/EjemploVenezuela998.jpg"
+ruta_imagen = "dataset_train/Espana/EjemploEspana777.jpg"
 # ---------------------------------------------------------
 
 model = models.load_model("IA-Banderas.keras")

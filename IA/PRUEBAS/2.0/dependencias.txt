@@ -1,3 +1,15 @@
 tensorflow==2.17.0
 numpy==1.26.4
 opencv-python==4.10.0.84
+
+# SOLUCIÓN AL FALLO :
+# Traceback (most recent call last):
+# File "/workspaces/Proyecto-DAM/IA/PRUEBAS/2.0/tester.py", line 4, in <module>
+#   import cv2
+# ImportError: libGL.so.1: cannot open shared object file: No such file or directory
+
+# LINUX
+# --> sudo apt install libgl1-mesa-glx
+
+# MacOS
+# --> brew install libgl
