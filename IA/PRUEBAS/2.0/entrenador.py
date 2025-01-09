@@ -50,22 +50,23 @@ cerebro = int(num_paises / 2 * 5)
 print(f"Cerebro : {cerebro} neuronas.")
 print("--------------------")
 
+# Tipo de clasificación = BINARIA
 model = tf.keras.Sequential([
     layers.InputLayer(input_shape=(anchura, altura, 3)),
     layers.Conv2D(32, (3, 3), activation='relu'),
-    layers.MaxPooling2D(pool_size=(2, 2)),
+    layers.MaxPooling2D(pool_size=(2, 2)), # Selecciona el valor máximo de una región y conserva la info más importante.
     layers.Conv2D(64, (3, 3), activation='relu'),
-    layers.MaxPooling2D(pool_size=(2, 2)),
+    layers.MaxPooling2D(pool_size=(2, 2)),  # Además mejora la eficacia y evita el overfitting.
     layers.Conv2D(64, (3, 3), activation='relu'),
     layers.MaxPooling2D(pool_size=(2, 2)),
     layers.Conv2D(128, (3, 3), activation='relu'),
     layers.MaxPooling2D(pool_size=(2, 2)),
     layers.Conv2D(128, (3, 3), activation='relu'),
     layers.MaxPooling2D(pool_size=(2, 2)),
-    layers.Flatten(),
+    layers.Flatten(), # Aplana imagen 2D a un vector 1D para ser procesada por la capas densas.
     layers.Dense(cerebro, activation='relu'),
-    layers.Dropout(0.5),
-    layers.Dense(num_paises, activation='sigmoid')
+    layers.Dropout(0.5), # Desactiva aleatoriamente la mitad de las neuronas para que aprenda de otras neuronas.
+    layers.Dense(num_paises, activation='sigmoid') # Neuronas == Num de clases a clasificar
 ])
 
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
