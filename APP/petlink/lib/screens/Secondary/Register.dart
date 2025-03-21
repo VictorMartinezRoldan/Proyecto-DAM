@@ -3,8 +3,8 @@ import 'package:petlink/components/blueButton.dart';
 import 'package:petlink/components/myTextField.dart';
 import 'package:petlink/components/myTextFieldPassword.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatelessWidget {
+  const RegisterPage({super.key});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -13,8 +13,16 @@ class LoginPage extends StatelessWidget {
         MyTextField(hintString: "Usuario",),
         SizedBox(height: 10),
         MyTextFieldPassword(),
+        SizedBox(height: 10),
+        Row(
+          children: [
+            Expanded(child: MyTextField(hintString: "Nombre")),
+            SizedBox(width: 10),
+            Expanded(child: MyTextField(hintString: "Apellidos"))
+          ],
+        ),
         SizedBox(height: 20),
-        BlueButton(text: "INICIAR SESION")
+        BlueButton(text: "REGISTRARSE")
       ],
     );
   }

@@ -11,20 +11,20 @@ class PagesManager extends StatefulWidget {
   State<PagesManager> createState() => _PagesManagerState();
 }
 
-// CONTROLA LAS PAGINAS DE RED SOCIAL,
+// CONTROLA LAS PAGINAS DE RED SOCIAL
 class _PagesManagerState extends State<PagesManager> {
   // ATRIBUTOS
   late var tema = Theme.of(context).colorScheme; // EXTRAER TEMA DE LA APP
 
-  // METODOS
+  // Permite controlar la navegación dentro de un PageView
   final PageController _pageController = PageController();
+  
   int _selectedIndex = 0;
+
+  // METODOS
   
   // METODO PARA CAMBIAR DE PAGINA
   void _onItemTapped(int index) {
-    if (index == 5){
-      index = 3; // CAMBIAMOS PARA QUE NO FALLE
-    }
 
     setState(() {
       _selectedIndex = index;
@@ -37,6 +37,27 @@ class _PagesManagerState extends State<PagesManager> {
       curve: Curves.easeInOut,
     );
   }
+
+  // ANIMACION PAGINA POST
+  void gotoNewPostPage(){
+    Navigator.push(
+      context, 
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => NewPostPage(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) => ScaleTransition(
+          scale: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+            parent: animation, 
+            curve: Curves.easeOut)),
+            alignment: Alignment(0.0, 0.95),
+            child: Align(
+              alignment: Alignment.center,
+              child: child,
+            ),
+            )
+      )
+    );
+  }
+
 
   // INTERFAZ
   @override
@@ -71,22 +92,29 @@ class _PagesManagerState extends State<PagesManager> {
 
         // ICONOS DEL NAVIGATION BAR
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.pets), label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.add_box_outlined), label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.camera_alt_outlined), label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: ""),
+          BottomNavigationBarItem(icon: Icon(Icons.pets), label: ""),                 // 0
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: ""),               // 1
+          BottomNavigationBarItem(icon: Container(
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: tema.inversePrimary,
+            ),
+            child: Icon(Icons.add, color: Colors.white,),
+          ), label: ""),     // 2
+          BottomNavigationBarItem(icon: Icon(Icons.camera_alt_outlined), label: ""),  // 3
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: ""),               // 4
         ],
 
         onTap: (value) {
           // PUBLICAR Y CAMARA SE GESTIONARARAN CON UN:
           // Navigator.push()
           if (value == 2){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => NewPostPage()));
+            gotoNewPostPage();
           } else if (value == 3) {
-            
+            // ACCION CAMARA (IA)
           } else {
-            _onItemTapped(value);
+            _onItemTapped(value); // CAMBIAR DE VENTANA CON ANIMACIÓN
           }
         },
       ),

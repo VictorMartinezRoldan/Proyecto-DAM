@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petlink/screens/Secondary/AuthController.dart';
 import 'package:petlink/screens/Secondary/LoginPage.dart';
 
 class UserPage extends StatefulWidget {
@@ -21,7 +22,7 @@ class _UserPageState extends State<UserPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => AuthController()));
         }, 
         backgroundColor: tema.inversePrimary,
         splashColor: tema.surface,

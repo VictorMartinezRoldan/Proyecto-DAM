@@ -38,7 +38,8 @@ ThemeData lightmode = ThemeData(
     secondary: Colors.grey.shade500,
     inversePrimary: Color.fromRGBO(0, 96, 255, 1),
     // inversePrimary: Color.fromRGBO(47, 0, 255, 1), // MORADO AZULADO
-    onPrimaryContainer: Colors.white
+    onPrimaryContainer: Colors.white,
+    inverseSurface: Color.fromRGBO(0, 16, 42, 1),
   )
 );
 
@@ -51,7 +52,8 @@ ThemeData darkmode = ThemeData(
     surface: Colors.grey.shade900,
     primary: Colors.white,
     secondary: Colors.grey.shade700,
-    inversePrimary: Colors.grey.shade500
+    inversePrimary: Colors.grey.shade500,
+    inverseSurface: Color.fromRGBO(0, 30, 77, 1),
   )
 );
 
