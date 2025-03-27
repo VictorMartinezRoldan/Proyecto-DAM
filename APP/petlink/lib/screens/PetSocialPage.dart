@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petlink/components/publicacionStyle.dart';
 
 class PetSocialPage extends StatefulWidget {
   @override
@@ -10,8 +11,19 @@ class _PetSocialPageState extends State<PetSocialPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text("PetSocialPage", style: TextStyle(color: tema.primary, fontSize: 30, fontWeight: FontWeight.bold)),
+      appBar: AppBar(
+        elevation: 0,
+        foregroundColor: tema.surface,
+        backgroundColor: tema.inversePrimary,
+        title: Text("PetSocialPage", style: TextStyle(fontWeight: FontWeight.bold),),
+        centerTitle: true,
+        
+      ),
+      body: SafeArea(
+        child: ListView.builder(
+          itemCount: 10,
+          itemBuilder: (context, index) => PublicacionStyle(),
+        )
       ),
     );
   }

@@ -93,7 +93,7 @@ class _PagesManagerState extends State<PagesManager> {
         // ICONOS DEL NAVIGATION BAR
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.pets), label: ""),                 // 0
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: ""),               // 1
+          BottomNavigationBarItem(icon: Icon(Icons.auto_stories_rounded), label: ""), // 1
           BottomNavigationBarItem(icon: Container(
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(

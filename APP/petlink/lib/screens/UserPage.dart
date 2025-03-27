@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:petlink/screens/Secondary/AuthController.dart';
-import 'package:petlink/screens/Secondary/LoginPage.dart';
 
 class UserPage extends StatefulWidget {
   @override
