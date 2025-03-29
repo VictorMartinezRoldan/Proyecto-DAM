@@ -33,6 +33,9 @@ dependencies:
   cupertino_icons: ^1.0.8
   provider: ^6.1.2
   flutter_launcher_icons: ^0.14.3
+  supabase_flutter: ^2.8.4
+  sign_in_with_apple: ^6.1.4
+  line_awesome_flutter: ^2.0.0
   
 
 dev_dependencies:

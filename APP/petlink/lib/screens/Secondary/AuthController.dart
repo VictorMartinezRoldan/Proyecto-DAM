@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:petlink/screens/Secondary/LoginPage.dart';
 import 'package:petlink/screens/Secondary/Register.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthController extends StatefulWidget {
   const AuthController({super.key});
@@ -10,107 +11,112 @@ class AuthController extends StatefulWidget {
 }
 
 class _AuthControllerState extends State<AuthController> {
-  // ATRIBUTOS
   bool _showLogin = true;
   String _selected = "Login";
 
-  // METODOS
+Future<void> _register(BuildContext context, String email, String password) async {
+  try {
+    final response = await Supabase.instance.client.auth.signUp(email: email, password: password);
+    if (response.user != null) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Registro exitoso')));
+    }
+  } on AuthException catch (e) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error de autenticación: ${e.message}')));
+  } catch (e) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error inesperado: ${e.toString()}')));
+  }
+}
 
-  // INTERFAZ GRAFICA
+
+  Future<void> _login(String email, String password) async {
+    try {
+      final AuthResponse res = await Supabase.instance.client.auth.signInWithPassword(
+        email: email,
+        password: password,
+      );
+
+      if (res.user != null && mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Login exitoso')),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: ${e.toString()}')),
+      );
+    }
+  }
+
+  void _toggleAuthPage(String selected) {
+    if (mounted) {
+      setState(() {
+        _selected = selected;
+        _showLogin = selected == "Login";
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    var tema = Theme.of(context).colorScheme; // EXTRAER TEMA DE LA APP
+    final tema = Theme.of(context).colorScheme;
 
     return Scaffold(
       backgroundColor: tema.inverseSurface,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-      ),
+      appBar: AppBar(backgroundColor: Colors.transparent),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            // LOGO Y NOMBRE
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset("assets/logos/petlink_white.png", width: 80),
                 const SizedBox(width: 10),
                 const Text("PETLINK",
-                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
-                ),
+                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
               ],
             ),
             const SizedBox(height: 30),
-            // FOTO PERRO
-            //Flexible(fit: FlexFit.loose, child: Image.asset("assets/perro_blackmode.png", width: 100)),
-            // CONTENEDOR BLANCO
             Expanded(
               child: Container(
-                margin: EdgeInsets.only(top: 20),
+                margin: const EdgeInsets.only(top: 20),
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   color: tema.surface,
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(35),
                     topRight: Radius.circular(35),
                   ),
                 ),
                 child: Column(
                   children: [
-                    SizedBox(
-                      width: double.infinity,
-                      // SELECTOR DE PESTAÑA
-                      child: SegmentedButton<String>(
-                        showSelectedIcon: false,
-                        segments: [
-                          const ButtonSegment(value: "Login", label: Text("Login")),
-                          const ButtonSegment(value: "Register", label: Text("Register")),
-                        ],
-                        selected: {_selected},
-                        onSelectionChanged: (newSelection) {
-                          setState(() {
-                            _selected = newSelection.first;
-                            if (_selected == "Login"){
-                              _showLogin = true;
-                            } else {
-                              _showLogin = false;
-                            }
-                          });
-                        },
-                        // ESTILO DE LOS BOTONES DE PESTAÑA
-                        style: ButtonStyle(
-                          side: const WidgetStatePropertyAll(
-                            BorderSide(
-                              width: 0,
-                              color: Color.fromARGB(255, 230, 230, 230)
-                            ),
-                          ),
-                          animationDuration: const Duration(seconds: 0),
-                          backgroundColor: WidgetStateColor.resolveWith((states) {
-                            if (states.contains(WidgetState.selected)) {
-                              return tema
-                                  .inversePrimary; // Color de fondo cuando está seleccionado
-                            } else {
-                              return Color.fromARGB(255, 230, 230, 230); // Color de fondo cuando NO está seleccionado
-                            }
-                          }),
-                          foregroundColor: WidgetStateColor.resolveWith((states) {
-                            if (states.contains(WidgetState.selected)) {
-                              return tema
-                                  .surface; // Color del texto cuando está seleccionado
-                            } else {
-                              return Colors.grey.shade700; // Color del texto cuando NO está seleccionado
-                            }
-                          }),
+                    SegmentedButton<String>(
+                      showSelectedIcon: false,
+                      segments: const [
+                        ButtonSegment(value: "Login", label: Text("Login")),
+                        ButtonSegment(value: "Register", label: Text("Register")),
+                      ],
+                      selected: {_selected},
+                      onSelectionChanged: (newSelection) => _toggleAuthPage(newSelection.first),
+                      style: ButtonStyle(
+                        side: const WidgetStatePropertyAll(
+                          BorderSide(width: 0, color: Color.fromARGB(255, 230, 230, 230)),
                         ),
+                        animationDuration: const Duration(seconds: 0),
+                        backgroundColor: WidgetStateColor.resolveWith((states) =>
+                            states.contains(WidgetState.selected)
+                                ? tema.inversePrimary
+                                : const Color.fromARGB(255, 230, 230, 230)),
+                        foregroundColor: WidgetStateColor.resolveWith((states) =>
+                            states.contains(WidgetState.selected)
+                                ? tema.surface
+                                : Colors.grey.shade700),
                       ),
                     ),
-                    // CONTENIDO DE LAS PESTAÑAS
                     AnimatedSwitcher(
-                        duration: const Duration(milliseconds: 500),
-                        child: _showLogin ? LoginPage() : RegisterPage(), // CARGA UNA U OTRA
+                      duration: const Duration(milliseconds: 500),
+                      child: _showLogin ? const LoginPage() : const RegisterPage(),
                     ),
                   ],
                 ),

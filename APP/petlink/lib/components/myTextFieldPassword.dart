@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class MyTextFieldPassword extends StatefulWidget {
-  const MyTextFieldPassword({super.key});
+  final TextEditingController? controller; // Nuevo parámetro opcional
+  const MyTextFieldPassword({super.key, this.controller});
 
   @override
   State<MyTextFieldPassword> createState() => _MyTextFieldPasswordState();
@@ -21,6 +22,7 @@ class _MyTextFieldPasswordState extends State<MyTextFieldPassword> {
     final fondo = Color.fromARGB(255, 230, 230, 230);
     // Interfaz
     return TextField(
+      controller: widget.controller, // Asignar controlador si existe
       obscureText: !passVisibleState,
       style: TextStyle(color: tema.primary),
       decoration: InputDecoration(

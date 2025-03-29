@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 
 class MyTextField extends StatelessWidget {
   final String hintString;
-  const MyTextField({super.key, required this.hintString});
+  final TextEditingController? controller; // Nuevo parámetro opcional
+  const MyTextField({super.key, required this.hintString, this.controller});
 
   @override
   Widget build(BuildContext context) {
     var tema = Theme.of(context).colorScheme; // EXTRAER TEMA DE LA APP
     final fondo = Color.fromARGB(255, 230, 230, 230);
     return TextField(
+      controller: controller, // Asignar controlador si existe
       style: TextStyle(color: tema.primary),
       decoration: InputDecoration(
         filled: true,
