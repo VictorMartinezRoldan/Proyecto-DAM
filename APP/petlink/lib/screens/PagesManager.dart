@@ -38,6 +38,24 @@ class _PagesManagerState extends State<PagesManager> {
     );
   }
 
+  // LISTENER PARA CUANDO CAMBIA DE PANTALLA
+  @override
+  void initState() {
+    super.initState();
+    _pageController.addListener(() {
+      int newIndex = _pageController.page!.round();
+      if (newIndex != _selectedIndex) {
+        setState(() {
+          if (newIndex == 2){
+            _selectedIndex = 4;
+          } else {
+            _selectedIndex = newIndex;
+          }
+        });
+      }
+    });
+  }
+
   // ANIMACION PAGINA POST
   void gotoNewPostPage(){
     Navigator.push(
