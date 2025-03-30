@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:petlink/screens/Secondary/LoginPage.dart';
-import 'package:petlink/screens/Secondary/Register.dart';
+import 'package:petlink/screens/Secondary/RegisterPage.dart';
+import 'package:petlink/themes/customColors.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthController extends StatefulWidget {
@@ -58,11 +59,14 @@ Future<void> _register(BuildContext context, String email, String password) asyn
 
   @override
   Widget build(BuildContext context) {
-    final tema = Theme.of(context).colorScheme;
+    late var custom = Theme.of(context).extension<CustomColors>()!; // EXTRAER TEMA DE LA APP CUSTOM
+    late var tema = Theme.of(context).colorScheme; // EXTRAER TEMA DE LA APP
 
     return Scaffold(
-      backgroundColor: tema.inverseSurface,
-      appBar: AppBar(backgroundColor: Colors.transparent),
+      backgroundColor: Color.fromRGBO(0, 16, 42, 1),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        foregroundColor: tema.surface),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -73,7 +77,7 @@ Future<void> _register(BuildContext context, String email, String password) asyn
                 Image.asset("assets/logos/petlink_white.png", width: 80),
                 const SizedBox(width: 10),
                 const Text("PETLINK",
-                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
+                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white)),
               ],
             ),
             const SizedBox(height: 30),
@@ -83,7 +87,7 @@ Future<void> _register(BuildContext context, String email, String password) asyn
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: tema.surface,
+                  color: tema.surface, // Fondo del contenedor principal
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(35),
                     topRight: Radius.circular(35),
@@ -91,27 +95,30 @@ Future<void> _register(BuildContext context, String email, String password) asyn
                 ),
                 child: Column(
                   children: [
-                    SegmentedButton<String>(
-                      showSelectedIcon: false,
-                      segments: const [
-                        ButtonSegment(value: "Login", label: Text("Login")),
-                        ButtonSegment(value: "Register", label: Text("Register")),
-                      ],
-                      selected: {_selected},
-                      onSelectionChanged: (newSelection) => _toggleAuthPage(newSelection.first),
-                      style: ButtonStyle(
-                        side: const WidgetStatePropertyAll(
-                          BorderSide(width: 0, color: Color.fromARGB(255, 230, 230, 230)),
+                    SizedBox(
+                      width: double.infinity, // TAMAÑO DE LOGIN / REGISTER
+                      child: SegmentedButton<String>(
+                        showSelectedIcon: false,
+                        segments: const [
+                          ButtonSegment(value: "Login", label: Text("Login")),
+                          ButtonSegment(value: "Register", label: Text("Register")),
+                        ],
+                        selected: {_selected},
+                        onSelectionChanged: (newSelection) => _toggleAuthPage(newSelection.first),
+                        style: ButtonStyle(
+                          side: const WidgetStatePropertyAll(
+                            BorderSide(width: 0, color: Color.fromARGB(255, 230, 230, 230)),
+                          ),
+                          animationDuration: const Duration(seconds: 0),
+                          backgroundColor: WidgetStateColor.resolveWith((states) =>
+                              states.contains(WidgetState.selected)
+                                  ? custom.colorEspecial
+                                  : const Color.fromARGB(255, 230, 230, 230)),
+                          foregroundColor: WidgetStateColor.resolveWith((states) =>
+                              states.contains(WidgetState.selected)
+                                  ? tema.surface
+                                  : Colors.grey.shade700),
                         ),
-                        animationDuration: const Duration(seconds: 0),
-                        backgroundColor: WidgetStateColor.resolveWith((states) =>
-                            states.contains(WidgetState.selected)
-                                ? tema.inversePrimary
-                                : const Color.fromARGB(255, 230, 230, 230)),
-                        foregroundColor: WidgetStateColor.resolveWith((states) =>
-                            states.contains(WidgetState.selected)
-                                ? tema.surface
-                                : Colors.grey.shade700),
                       ),
                     ),
                     AnimatedSwitcher(

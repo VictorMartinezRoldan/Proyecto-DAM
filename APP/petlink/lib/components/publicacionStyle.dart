@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petlink/themes/customColors.dart';
 
 class PublicacionStyle extends StatefulWidget {
   @override
@@ -10,15 +11,15 @@ class _PublicacionStyleState extends State<PublicacionStyle> {
 
   @override
   Widget build(BuildContext context) {
-    late var tema = Theme.of(context).colorScheme; // EXTRAER TEMA DE LA APP
+    late var tema = Theme.of(context).extension<CustomColors>()!; // EXTRAER TEMA DE LA APP
     return Container(
       margin: EdgeInsets.all(15),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: tema.contenedor,
         borderRadius: BorderRadius.circular(40),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.shade300,
+            color: tema.sombraContenedor,
             blurRadius: 10,
             offset: Offset(3, 3)
           )
@@ -32,7 +33,7 @@ class _PublicacionStyleState extends State<PublicacionStyle> {
             margin: EdgeInsets.only(bottom: 10, left: 25, top: 20, right: 25),
             child: Row(
               children: [
-                CircleAvatar(radius: 22, backgroundColor: Colors.grey.shade200, child: Icon(Icons.person, color: tema.secondary,),),
+                CircleAvatar(radius: 22, backgroundColor: Colors.grey.shade200, child: Icon(Icons.person, color: Colors.grey.shade500,),),
                 SizedBox(width: 10),
                 Expanded(
                   child: Column(
@@ -41,22 +42,22 @@ class _PublicacionStyleState extends State<PublicacionStyle> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("NOMBRE", style: TextStyle(color: tema.primary)), 
-                          Text("FECHA", style: TextStyle(color: tema.primary))
+                          Text("NOMBRE"), 
+                          Text("FECHA")
                         ],
                       ),
                       IntrinsicWidth(
                         child: Container(
                           padding: EdgeInsets.only(left: 7, right: 7, bottom: 2, top: 2),
                           decoration: BoxDecoration(
-                            color: tema.inversePrimary,
+                            color: tema.colorEspecial,
                             borderRadius: BorderRadius.circular(20)
                           ),
                           child: Row(
                             children: [
-                              Icon(Icons.pets, size: 18),
+                              Icon(Icons.pets, size: 18, color: tema.contenedor,),
                               SizedBox(width: 5),
-                              Text("ID_USUARIO"),
+                              Text("ID_USUARIO", style: TextStyle(color: tema.contenedor)),
                             ],
                           ),
                         ),
@@ -73,7 +74,6 @@ class _PublicacionStyleState extends State<PublicacionStyle> {
             margin: EdgeInsets.only(left: 25, bottom: 20, right: 25),
             child: Text(
               "Hoy salimos a dar una vuelta y este compa no dudó en sentarse como todo un jefe en medio del pasto. No hizo nada especial, solo estuvo ahí, tranquilo, mirando todo como si el mundo fuera suyo. Y la verdad, no le falta razón.",
-              style: TextStyle(color: tema.primary),
             ),
           ),
       
@@ -103,17 +103,17 @@ class _PublicacionStyleState extends State<PublicacionStyle> {
                       liked = !liked;
                     });
                   },
-                  icon: Icon((!liked) ? Icons.favorite_border_rounded : Icons.favorite_rounded,color: tema.primary,size: 25),
+                  icon: Icon((!liked) ? Icons.favorite_border_rounded : Icons.favorite_rounded,size: 25),
                 ),
-                Text("135", style: TextStyle(color: tema.primary)),
+                Text("135"),
                 SizedBox(width: 20),
                 IconButton(
                   onPressed: () {
                     print("COMENTARIO");
                   },
-                  icon: Icon(Icons.chat_bubble_outline_rounded,color: tema.primary,size: 25),
+                  icon: Icon(Icons.chat_bubble_outline_rounded,size: 25),
                 ),
-                Text("46", style: TextStyle(color: tema.primary)),
+                Text("46"),
               ],
             ),
           ),

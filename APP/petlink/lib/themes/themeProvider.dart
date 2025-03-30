@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petlink/themes/customColors.dart';
 
 class ThemeProvider extends ChangeNotifier {
   // TEMA INICIAL DE LA APP
@@ -32,15 +33,13 @@ class ThemeProvider extends ChangeNotifier {
 // TEMA CLARO
 
 ThemeData lightmode = ThemeData(
-  colorScheme: ColorScheme.dark(
+  colorScheme: ColorScheme.light(
     surface: Color.fromRGBO(242, 246, 255, 1),
-    primary: Colors.black,
-    secondary: Colors.grey.shade500,
-    inversePrimary: Color.fromRGBO(0, 96, 255, 1),
-    // inversePrimary: Color.fromRGBO(47, 0, 255, 1), // MORADO AZULADO
-    onPrimaryContainer: Colors.white,
-    inverseSurface: Color.fromRGBO(0, 16, 42, 1),
-  )
+    primary: Colors.black
+  ),
+  extensions: <ThemeExtension<dynamic>>[
+    CustomColors.light
+  ]
 );
 
 // --------------------------------------------------
@@ -49,12 +48,12 @@ ThemeData lightmode = ThemeData(
 
 ThemeData darkmode = ThemeData(
   colorScheme: ColorScheme.dark(
-    surface: Colors.grey.shade900,
-    primary: Colors.white,
-    secondary: Colors.grey.shade700,
-    inversePrimary: Colors.grey.shade500,
-    inverseSurface: Color.fromRGBO(0, 30, 77, 1),
-  )
+    surface: Color.fromRGBO(24, 24, 24, 1),
+    primary: Colors.white
+  ),
+  extensions: <ThemeExtension<dynamic>>[
+    CustomColors.dark
+  ]
 );
 
 // --------------------------------------------------

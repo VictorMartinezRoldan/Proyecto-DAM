@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petlink/themes/customColors.dart';
 
 class MyTextFieldPassword extends StatefulWidget {
   final TextEditingController? controller; // Nuevo parámetro opcional
@@ -18,7 +19,9 @@ class _MyTextFieldPasswordState extends State<MyTextFieldPassword> {
   @override
   Widget build(BuildContext context) {
     // ATRIBUTOS
-    var tema = Theme.of(context).colorScheme; // EXTRAER TEMA DE LA APP
+    late var custom = Theme.of(context).extension<CustomColors>()!; // EXTRAER TEMA DE LA APP CUSTOM
+    late var tema = Theme.of(context).colorScheme; // EXTRAER TEMA DE LA APP
+    
     final fondo = Color.fromARGB(255, 230, 230, 230);
     // Interfaz
     return TextField(

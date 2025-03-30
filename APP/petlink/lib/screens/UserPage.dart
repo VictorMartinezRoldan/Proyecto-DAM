@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:petlink/screens/Secondary/AuthController.dart';
+import 'package:petlink/themes/customColors.dart';
 
 class UserPage extends StatefulWidget {
   @override
@@ -8,22 +9,24 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
-  late var tema = Theme.of(context).colorScheme;
+  late var custom = Theme.of(context).extension<CustomColors>()!; // EXTRAER TEMA DE LA APP CUSTOM
+  late var tema = Theme.of(context).colorScheme; // EXTRAER TEMA DE LA APP
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        /*
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pop(context); 
           },
           icon: const Icon(LineAwesomeIcons.angle_left),
         ),
+        */
         title: Text(
           'Perfil',
           style: TextStyle(
-            color: tema.primary,
             fontSize: 25,
             fontWeight: FontWeight.bold,
           ),
@@ -32,7 +35,7 @@ class _UserPageState extends State<UserPage> {
         elevation: 0,
         actions: [
           IconButton(
-            icon: Icon(LineAwesomeIcons.cog, color: tema.primary, size: 30),
+            icon: Icon(LineAwesomeIcons.cog, size: 30),
             onPressed: () {
               // Acción para abrir ajustes
             },
@@ -55,21 +58,19 @@ class _UserPageState extends State<UserPage> {
               Text(
                 'Nombre Apellidos',
                 style: TextStyle(
-                  color: tema.primary,
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
                 '@usuario',
-                style: TextStyle(color: tema.primary, fontSize: 16, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 10),
               Text(
                 'Paseador profesional 🦮 | 15 perros me consideran su "tio favorito" | Expert@ en evitar peleas por palos en el parque 🌳 #DogWalkerLife',
                 style: TextStyle(
-                  color: tema.primary,
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                 ),
@@ -77,14 +78,14 @@ class _UserPageState extends State<UserPage> {
               SizedBox(height: 20),
               OutlinedButton.icon(
                 onPressed: () {},
-                icon: Icon(Icons.edit, color: tema.inversePrimary),
+                icon: Icon(Icons.edit, color: custom.colorEspecial),
                 label: Text(
                   'Editar Perfil',
-                  style: TextStyle(color: tema.inversePrimary),
+                  style: TextStyle(color: custom.colorEspecial),
                 ),
                 style: OutlinedButton.styleFrom(
                   side: BorderSide(
-                    color: tema.inversePrimary,
+                    color: custom.colorEspecial,
                     width: 2,
                   ),
                   padding: EdgeInsets.symmetric(
@@ -102,7 +103,6 @@ class _UserPageState extends State<UserPage> {
                 child: Text(
                   'Posts recientes',
                   style: TextStyle(
-                    color: tema.primary,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
@@ -123,8 +123,8 @@ class _UserPageState extends State<UserPage> {
             ), // Asegúrate de que AuthController sea la página deseada
           );
         },
-        backgroundColor: tema.inversePrimary,
-        splashColor: tema.surface,
+        backgroundColor: custom.colorEspecial,
+        splashColor: custom.contenedor, // COMO UN BLANCO
         child: Icon(Icons.person_add),
       ),
     );

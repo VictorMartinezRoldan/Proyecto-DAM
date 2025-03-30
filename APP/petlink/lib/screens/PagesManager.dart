@@ -3,6 +3,7 @@ import 'package:petlink/screens/NewPostPage.dart';
 import 'package:petlink/screens/PetSocialPage.dart';
 import 'package:petlink/screens/PetWikiPage.dart';
 import 'package:petlink/screens/UserPage.dart';
+import 'package:petlink/themes/customColors.dart';
 
 class PagesManager extends StatefulWidget {
   const PagesManager({super.key});
@@ -14,6 +15,7 @@ class PagesManager extends StatefulWidget {
 // CONTROLA LAS PAGINAS DE RED SOCIAL
 class _PagesManagerState extends State<PagesManager> {
   // ATRIBUTOS
+  late var custom = Theme.of(context).extension<CustomColors>()!; // EXTRAER TEMA DE LA APP CUSTOM
   late var tema = Theme.of(context).colorScheme; // EXTRAER TEMA DE LA APP
 
   // Permite controlar la navegación dentro de un PageView
@@ -101,8 +103,8 @@ class _PagesManagerState extends State<PagesManager> {
         showUnselectedLabels: false,
 
         // COLORES DE LOS ICONOS
-        selectedItemColor: tema.inversePrimary,
-        unselectedItemColor: tema.secondary,
+        selectedItemColor: custom.colorEspecial,
+        unselectedItemColor: Colors.grey.shade500,
         iconSize: 27,
 
         // NO SE CREAN ESPACIOS ENTRE ICONOS EN LOS CAMBIOS DE INDICE
@@ -116,9 +118,9 @@ class _PagesManagerState extends State<PagesManager> {
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: tema.inversePrimary,
+              color: custom.colorEspecial,
             ),
-            child: Icon(Icons.add, color: Colors.white,),
+            child: Icon(Icons.add, color: tema.surface),
           ), label: ""),     // 2
           BottomNavigationBarItem(icon: Icon(Icons.camera_alt_outlined), label: ""),  // 3
           BottomNavigationBarItem(icon: Icon(Icons.person), label: ""),               // 4
