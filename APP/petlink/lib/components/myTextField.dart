@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petlink/themes/customColors.dart';
 
 class MyTextField extends StatelessWidget {
   final String hintString;
@@ -7,7 +8,9 @@ class MyTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var tema = Theme.of(context).colorScheme; // EXTRAER TEMA DE LA APP
+    late var custom = Theme.of(context).extension<CustomColors>()!; // EXTRAER TEMA DE LA APP CUSTOM
+    late var tema = Theme.of(context).colorScheme; // EXTRAER TEMA DE LA APP
+    
     final fondo = Color.fromARGB(255, 230, 230, 230);
     return TextField(
       controller: controller, // Asignar controlador si existe

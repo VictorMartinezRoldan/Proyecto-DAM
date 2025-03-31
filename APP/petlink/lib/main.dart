@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:petlink/screens/PagesManager.dart';
 import 'package:petlink/themes/themeProvider.dart';
 import 'package:provider/provider.dart' as provider;
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:window_size/window_size.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,6 +13,9 @@ Future<void> main() async {
     url: 'https://umiaxicevvhttszjoavu.supabase.co',
     anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVtaWF4aWNldnZodHRzempvYXZ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDMwMjUwNTgsImV4cCI6MjA1ODYwMTA1OH0.S27RkemMF0qexe-7dEYTLxnrXbyblXGSZ8fg2x0Hb1I',
   );
+  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    setWindowMinSize(const Size(425, 750)); // Tamaño mínimo de la ventana
+  }
   runApp(const MyApp());
 }
 
