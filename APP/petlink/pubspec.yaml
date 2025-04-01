@@ -41,6 +41,8 @@ dependencies:
   cached_network_image: ^3.4.1
   permission_handler: ^11.4.0
   flutter_file_downloader: ^2.1.0
+  share_plus: ^10.1.4
+  flutter_cache_manager: ^3.4.1
 
 dev_dependencies:
   flutter_test:

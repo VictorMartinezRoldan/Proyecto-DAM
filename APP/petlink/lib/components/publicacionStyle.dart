@@ -140,8 +140,8 @@ class _PublicacionStyleState extends State<PublicacionStyle> {
                           IntrinsicWidth(
                             child: Container(
                               padding: EdgeInsets.only(
-                                left: 7,
-                                right: 7,
+                                left: 8,
+                                right: 8,
                                 bottom: 1,
                                 top: 1,
                               ),
@@ -205,15 +205,13 @@ class _PublicacionStyleState extends State<PublicacionStyle> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder:
-                            (_) => PhotoViewer(
-                              urlPhoto: imageProvider.url,
-                              urlProfile: publi.imagenPerfil,
-                              nombre: publi.nombre,
-                              usuario: publi.usuario,
-                            ),
+                        builder: (_) => PhotoViewer(publicacion: publi),
                       ),
-                    );
+                    ).then((_){
+                      setState(() {
+                        // Reconstruimos en busca de cambios
+                      });
+                    });
                   },
                   child: Stack(
                     alignment: Alignment.center,
@@ -255,37 +253,47 @@ class _PublicacionStyleState extends State<PublicacionStyle> {
               // --------------------------------------------------------------------------------------
               // LIKES Y COMENTARIOS
               Container(
-                margin: EdgeInsets.only(left: 25, bottom: 10, top: 2),
+                margin: EdgeInsets.only(left: 25, bottom: 10, top: 2, right: 25),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    IconButton(
-                      onPressed: () {
-                        setState(() {
-                          publi.liked = !publi.liked;
-                          if (publi.liked) {
-                            publi.likes++;
-                          } else {
-                            publi.likes--;
-                          }
-                        });
-                      },
-                      icon: Icon(
-                        (!publi.liked)
-                            ? Icons.favorite_border_rounded
-                            : Icons.favorite_rounded,
-                        size: 25,
-                      ),
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            setState(() {
+                              publi.liked = !publi.liked;
+                              if (publi.liked) {
+                                publi.likes++;
+                              } else {
+                                publi.likes--;
+                              }
+                            });
+                          },
+                          icon: (!publi.liked)
+                              ? Icon(Icons.favorite_border_rounded, size: 25)
+                              : Icon(Icons.favorite_rounded, size: 25, color: Colors.redAccent,)
+                        ),
+                        Text(publi.likes.toString(), style: TextStyle(color: ((!publi.liked) ? tema.primary : Colors.redAccent), fontSize: 16),), // NUM LIKES
+                        SizedBox(width: 20),
+                        // COMENTARIOS
+                        IconButton(
+                          onPressed: () {
+                            print("COMENTARIO");
+                          },
+                          icon: Icon(Icons.chat_bubble_outline_rounded, size: 25),
+                        ),
+                        Text("46", style: TextStyle(fontSize: 16)), // NUM COMENTARIOS
+                      ],
                     ),
-                    Text(publi.likes.toString()), // NUM LIKES
-                    SizedBox(width: 20),
-                    // COMENTARIOS
+                    // COMPARTIR
                     IconButton(
-                      onPressed: () {
-                        print("COMENTARIO");
-                      },
-                      icon: Icon(Icons.chat_bubble_outline_rounded, size: 25),
-                    ),
-                    Text("46"), // NUM COMENTARIOS
+                      onPressed: (){
+                        Publicacion.compartir(publi);
+                      }, 
+                      icon: Icon(Icons.share, size: 25,),
+                      color: tema.primary,
+                    )
                   ],
                 ),
               ),

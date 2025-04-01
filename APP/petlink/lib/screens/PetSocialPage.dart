@@ -39,6 +39,23 @@ class _PetSocialPageState extends State<PetSocialPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: Row(
+          children: [
+            SizedBox(width: 15),
+            Container(
+              padding: EdgeInsets.all(2),
+              decoration: BoxDecoration(
+                color: custom.colorEspecial,
+                shape: BoxShape.circle
+              ),
+              child: CircleAvatar(
+                backgroundColor: custom.contenedor,
+                child: Icon(Icons.person, color: custom.colorEspecial),
+              )
+            )
+          ],
+        ),
+        leadingWidth: 60,
         actions: [
           IconButton(
             onPressed: (){
@@ -46,10 +63,20 @@ class _PetSocialPageState extends State<PetSocialPage> {
             }, 
             icon: Icon(Icons.refresh))
         ],
-        elevation: 0,
-        foregroundColor: tema.surface,
-        backgroundColor: custom.colorEspecial,
-        title: Text("PetSocialPage", style: TextStyle(fontWeight: FontWeight.bold),),
+        foregroundColor: custom.colorEspecial,
+        backgroundColor: tema.surface,
+        shadowColor: custom.sombraContenedor,
+        title: IntrinsicWidth(
+          child: Row(
+            children: [
+              Icon(Icons.pets),
+              SizedBox(width: 10),
+              Text("PETLINK", style: TextStyle(fontWeight: FontWeight.bold)),
+              SizedBox(width: 10),
+              Icon(Icons.pets),
+            ],
+          ),
+        ),
         centerTitle: true,
       ),
       body: SafeArea(
