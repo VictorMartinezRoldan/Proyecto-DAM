@@ -5,6 +5,8 @@ import 'package:provider/provider.dart'; // IMPORTAR PROVIDER
 import 'package:petlink/themes/themeProvider.dart'; // IMPORTAR THEME PROVIDER
 
 class SettingsPage extends StatefulWidget {
+  const SettingsPage({super.key});
+  
   @override
   State<SettingsPage> createState() => _SettingsPageState();
 }

@@ -5,36 +5,76 @@ import 'package:petlink/screens/Secondary/EditProfilePage.dart';
 import 'package:petlink/screens/Secondary/SettingsPage.dart';
 import 'package:petlink/themes/customColors.dart';
 import 'package:petlink/services/supabase_auth.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class UserPage extends StatefulWidget {
+  const UserPage({super.key});
+
   @override
   State<UserPage> createState() => _UserPageState();
 }
 
 class _UserPageState extends State<UserPage> {
-
-  late var custom; // EXTRAER TEMA DE LA APP CUSTOM
-  late var tema; // EXTRAER TEMA DE LA APP
+  late var custom = Theme.of(context).extension<CustomColors>()!; // EXTRAER TEMA DE LA APP CUSTOM
+  late var tema = Theme.of(context).colorScheme; // EXTRAER TEMA DE LA APP
 
   final SupabaseAuthService authService = SupabaseAuthService();
-  Map<String, dynamic>? datosUser; // DATOS DEL USUARIO
+  Map<String, dynamic>? datosUser;
+  List<String> userPosts = [];
 
   @override
   void initState() {
     super.initState();
-    authService.obtenerUsuario().then((datos) {
-      if (datos != null) {
-        setState(() {
-          datosUser = datos;
-        });
-      }
-    });
+    _cargarUsuario();
   }
 
+  Future<void> _cargarUsuario() async {
+    final datos = await authService.obtenerUsuario();
+    if (datos != null) {
+      setState(() {
+        datosUser = datos;
+      });
+      await _cargarPublicaciones(); // CARGAR PUBLICACIONES DESPUES DE OBTENER EL USUARIO
+    }
+  }
+
+  Future<void> _cargarPublicaciones() async {
+    if (datosUser == null || datosUser?['id'] == null) {
+      print("⛔ datosUser es null o no tiene ID");
+      return;
+    }
+
+    final supabase = Supabase.instance.client;
+
+    try {
+      final response = await supabase
+          .from('publicaciones')
+          .select('imagen_url')
+          .eq('id_usuario', datosUser!['id']);
+
+      print("📡 Respuesta de Supabase: $response");
+
+      if (response.isNotEmpty) {
+        setState(() {
+          userPosts = response
+              .map((post) => post['imagen_url'] as String?)
+              .whereType<String>()
+              .toList();
+        });
+      } else {
+        print("⚠️ No hay publicaciones para este usuario.");
+      }
+    } catch (e) {
+      print("❌ Error obteniendo publicaciones: $e");
+    }
+  }
+  
   @override
   Widget build(BuildContext context) {
     custom = Theme.of(context).extension<CustomColors>()!;
     tema = Theme.of(context).colorScheme;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -62,20 +102,19 @@ class _UserPageState extends State<UserPage> {
               alignment: Alignment.center,
               clipBehavior: Clip.none,
               children: [
-                // IMAGEN DE PORTADA
                 Container(
                   height: 230,
                   width: double.infinity,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: NetworkImage(
-                        'https://vitakraft.es/wp-content/uploads/2020/12/Blog_HistoriaPerros-1110x600.jpg',
+                      image: CachedNetworkImageProvider(
+                        datosUser?['imagen_portada'] ??
+                            'https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png',
                       ),
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
-                // CONTENEDOR CON SOMBRA
                 Positioned(
                   bottom: -60,
                   child: Container(
@@ -94,9 +133,8 @@ class _UserPageState extends State<UserPage> {
                     ),
                   ),
                 ),
-                // IMAGEN DE PERFIL
                 Positioned(
-                  bottom: -30, // AJUSTAR LA POSICIÓN SOBRE EL CONTENEDOR
+                  bottom: -30,
                   child: Container(
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
@@ -105,7 +143,7 @@ class _UserPageState extends State<UserPage> {
                     child: CircleAvatar(
                       radius: 50,
                       backgroundColor: Colors.transparent,
-                      backgroundImage: NetworkImage(
+                      backgroundImage: CachedNetworkImageProvider(
                         datosUser?['imagen_perfil'] ??
                             'https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png',
                       ),
@@ -143,11 +181,14 @@ class _UserPageState extends State<UserPage> {
             ),
             SizedBox(height: 15),
             OutlinedButton.icon(
-              onPressed: () {
-                Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => EditProfilePage()),
-              );
+              onPressed: () async {
+                final result = await Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => EditProfilePage()),
+                );
+                if (result == true) {
+                  _cargarUsuario(); // RECARGAR DATOS SI SE ACTUALIZO EL PERFIL
+                }
               },
               icon: Icon(Icons.edit, color: custom.colorEspecial),
               label: Text(
@@ -189,18 +230,16 @@ class _UserPageState extends State<UserPage> {
           );
         },
         backgroundColor: custom.colorEspecial,
-        splashColor: custom.contenedor, // COMO UN BLANCO
+        splashColor: custom.contenedor,
         child: Icon(Icons.person_add),
       ),
     );
   }
 
   Widget _buildPostGrid() {
-    List<String> imageUrls = List.generate(
-      9,
-      (index) =>
-          'https://eq2imhfmrcc.exactdn.com/wp-content/uploads/2016/08/golden-retriever.jpg?strip=all&lossy=1&ssl=1',
-    );
+    if (userPosts.isEmpty) {
+      return Center(child: Text("No hay publicaciones aún."));
+    }
 
     return GridView.builder(
       shrinkWrap: true,
@@ -210,11 +249,14 @@ class _UserPageState extends State<UserPage> {
         crossAxisSpacing: 4,
         mainAxisSpacing: 4,
       ),
-      itemCount: imageUrls.length,
+      itemCount: userPosts.length,
       itemBuilder: (context, index) {
         return ClipRRect(
           borderRadius: BorderRadius.circular(8),
-          child: Image.network(imageUrls[index], fit: BoxFit.cover),
+          child: Image(
+            image: CachedNetworkImageProvider(userPosts[index]),
+            fit: BoxFit.cover,
+          ),
         );
       },
     );

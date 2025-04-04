@@ -3,34 +3,34 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 class SupabaseAuthService {
   final supabase = Supabase.instance.client;
 
-  Future<Map<String, dynamic>?> obtenerUsuario() async {
-    try {
-      final user = supabase.auth.currentUser;
-      if (user == null) {
-        print("No hay un usuario autenticado.");
-        return null;
-      }
-
-      print("✅ Usuario autenticado: ${user.email} - ID: ${user.id}");
-
-      final datos = await supabase
-          .from('usuarios')
-          .select('nombre_usuario, nombre, descripcion, imagen_perfil')
-          .eq('id', user.id)
-          .maybeSingle();
-
-      if (datos == null) {
-        print("No se encontraron datos para el usuario con ID: ${user.id}");
-        return null;
-      }
-
-      print("Datos obtenidos: $datos");
-      return datos as Map<String, dynamic>;
-    } catch (error) {
-      print("🔥 Error al obtener datos del usuario: $error");
+Future<Map<String, dynamic>?> obtenerUsuario() async {
+  try {
+    final user = supabase.auth.currentUser;
+    if (user == null) {
+      print("⛔ No hay un usuario autenticado.");
       return null;
     }
+
+    print("✅ Usuario autenticado: ${user.email} - ID: ${user.id}");
+
+    final datos = await supabase
+        .from('usuarios')
+        .select('id, nombre_usuario, nombre, descripcion, imagen_perfil, imagen_portada') // 🔹 Asegurar que 'id' está presente
+        .eq('id', user.id)
+        .maybeSingle();
+
+    if (datos == null) {
+      print("⚠️ No se encontraron datos para el usuario con ID: ${user.id}");
+      return null;
+    }
+
+    print("📌 Datos obtenidos: $datos");
+    return datos as Map<String, dynamic>;
+  } catch (error) {
+    print("🔥 Error al obtener datos del usuario: $error");
+    return null;
   }
+}
 
   Future<bool> actualizarUsuario(Map<String, dynamic> nuevosDatos) async {
     try {

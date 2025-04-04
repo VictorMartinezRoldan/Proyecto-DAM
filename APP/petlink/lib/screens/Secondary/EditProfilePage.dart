@@ -1,13 +1,15 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:petlink/screens/UserPage.dart';
 import 'package:petlink/services/supabase_auth.dart';
 import 'package:petlink/themes/customColors.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class EditProfilePage extends StatefulWidget {
+  const EditProfilePage({super.key});
+
   @override
   State<EditProfilePage> createState() => _EditProfilePageState();
 }
@@ -16,105 +18,386 @@ class _EditProfilePageState extends State<EditProfilePage> {
   late var custom = Theme.of(context).extension<CustomColors>()!; // EXTRAER TEMA DE LA APP CUSTOM
   late var tema = Theme.of(context).colorScheme; // EXTRAER TEMA DE LA APP
 
-  File? _imagenPortada; // VARIABLE PARA LA IMAGEN DE PORTADA
-  File? _imagenPerfil; // VARIABLE PARA LA IMAGEN DE PERFIL
-  final TextEditingController _controladorNombre = TextEditingController(text: "Usuario");
-  final TextEditingController _controladorDescripcion = TextEditingController(text: "Descripción corta del usuario.");
+  final SupabaseAuthService authService = SupabaseAuthService();
+  Map<String, dynamic>? datosUser;
 
-  final ImagePicker _seleccion = ImagePicker(); // INICIALIZAR EL IMAGE PICKER
+  File? _imagenPortada;
+  File? _imagenPerfil;
+  late TextEditingController _controladorNombre;
+  late TextEditingController _controladorDescripcion;
 
-  Future<void> _seleccionarImagen(bool esPortada) async {
-    final imagenSeleccionada = await _seleccion.pickImage(
-      source: ImageSource.gallery,
-    );
+  final ImagePicker _seleccion = ImagePicker();
+  bool _cargando = false;
 
-    if (imagenSeleccionada != null) {
+  @override
+  void initState() {
+    super.initState();
+    _controladorNombre = TextEditingController();
+    _controladorDescripcion = TextEditingController();
+    _cargarUsuario();
+  }
+
+  Future<void> _cargarUsuario() async {
+    setState(() {
+      _cargando = true;
+    });
+
+    final datos = await authService.obtenerUsuario();
+    if (datos != null) {
       setState(() {
-        if (esPortada) {
-          _imagenPortada = File(imagenSeleccionada.path);
-        } else {
-          _imagenPerfil = File(imagenSeleccionada.path);
-        }
+        datosUser = datos;
+        _controladorNombre.text = datosUser?['nombre'] ?? "";
+        _controladorDescripcion.text = datosUser?['descripcion'] ?? "";
+        _cargando = false;
       });
+    } else {
+      setState(() {
+        _cargando = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error al cargar datos del usuario')),
+      );
     }
   }
 
-  void _guardarPerfil() {
-    // Logica
+  Future<void> _seleccionarImagen(bool esPortada) async {
+    try {
+      final imagenSeleccionada = await _seleccion.pickImage(
+        source: ImageSource.gallery,
+        imageQuality: 70,
+      );
+
+      if (imagenSeleccionada != null) {
+        setState(() {
+          if (esPortada) {
+            _imagenPortada = File(imagenSeleccionada.path);
+          } else {
+            _imagenPerfil = File(imagenSeleccionada.path);
+          }
+        });
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Error al seleccionar la imagen')));
+    }
   }
 
-  
+  Future<void> _guardarPerfil() async {
+    if (_controladorNombre.text.isEmpty) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('El nombre no puede estar vacío')));
+      return;
+    }
+
+    setState(() {
+      _cargando = true;
+    });
+
+    final messenger = ScaffoldMessenger.of(
+      context,
+    ); // VARIABLE ANTES DEL AWAIT PARA QUE NO DE PROBLEMAS DE CONTEXTO
+
+    try {
+      final supabase = Supabase.instance.client;
+      final userId = datosUser?['id'];
+
+      if (userId == null) {
+        throw Exception('ID de usuario no disponible');
+      }
+
+      // Preparar datos para actualizar
+      Map<String, dynamic> updateData = {
+        'nombre': _controladorNombre.text,
+        'descripcion': _controladorDescripcion.text,
+      };
+
+      // SUBIR IMAGEN DE PERFIL ACTUALIZADA
+      // SE SUBEN AL BUCKET PERFILES_USUARIO CON UNA CARPETA PARA CADA USUARIO
+      if (_imagenPerfil != null) {
+        final imagenPerfilPath =
+            'perfiles_usuario/$userId/perfil_${DateTime.now().millisecondsSinceEpoch}.jpg';
+
+        await supabase.storage
+            .from('imagenes')
+            .upload(
+              imagenPerfilPath,
+              _imagenPerfil!,
+              fileOptions: const FileOptions(
+                cacheControl: '3600',
+                upsert: false,
+              ),
+            );
+
+        final imagenPerfilUrl = supabase.storage
+            .from('imagenes')
+            .getPublicUrl(imagenPerfilPath);
+        updateData['imagen_perfil'] = imagenPerfilUrl;
+      }
+
+      // SUBIR IMAGEN DE PORTADA ACTUALIZADA
+      // SE SUBEN AL BUCKET PORTADAS_USUARIO CON UNA CARPETA PARA CADA USUARIO
+      if (_imagenPortada != null) {
+        final imagenPortadaPath =
+            'portadas_usuario/$userId/portada_${DateTime.now().millisecondsSinceEpoch}.jpg';
+
+        await supabase.storage
+            .from('imagenes')
+            .upload(
+              imagenPortadaPath,
+              _imagenPortada!,
+              fileOptions: const FileOptions(
+                cacheControl: '3600',
+                upsert: false,
+              ),
+            );
+
+        final imagenPortadaUrl = supabase.storage
+            .from('imagenes')
+            .getPublicUrl(imagenPortadaPath);
+        updateData['imagen_portada'] = imagenPortadaUrl;
+      }
+
+      // ACTUALIZAR LOS DATOS EN LA BD
+      final response =
+          await supabase
+              .from('usuarios')
+              .update(updateData)
+              .eq('id', userId)
+              .select();
+
+      if (response.isEmpty) {
+        throw Exception('Error al actualizar los datos del usuario');
+      }
+
+      setState(() {
+        _cargando = false;
+      });
+
+      messenger.showSnackBar(
+        SnackBar(content: Text('Perfil actualizado correctamente')),
+      );
+
+      Navigator.pop(context, true); // TRUE PARA INDICAR QUE SE HICIERON CAMBIOS
+    } catch (e) {
+      setState(() {
+        _cargando = false;
+      });
+      messenger.showSnackBar(
+        SnackBar(content: Text('Error al guardar el perfil: ${e.toString()}')),
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    _controladorNombre.dispose();
+    _controladorDescripcion.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    custom = Theme.of(context).extension<CustomColors>()!;
+    tema = Theme.of(context).colorScheme;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text("Editar Perfil"),
+        title: Text(
+          'Editar Perfil',
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pop(context),
+        ),
         actions: [
-          TextButton(
-            onPressed: _guardarPerfil,
-            child: Text("Guardar", style: TextStyle(color: Colors.blue, fontSize: 18)),
-          )
+          _cargando
+              ? Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Center(
+                  child: CircularProgressIndicator(color: custom.colorEspecial),
+                ),
+              )
+              : TextButton.icon(
+                onPressed: _guardarPerfil,
+                icon: Icon(LineAwesomeIcons.save, color: custom.colorEspecial),
+                label: Text(
+                  "Guardar",
+                  style: TextStyle(color: custom.colorEspecial, fontSize: 16),
+                ),
+              ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Stack(
-              children: [
-                GestureDetector(
-                  onTap: () => _seleccionarImagen(true),
-                  child: Container(
-                    height: 150,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.grey[300],
-                      image: _imagenPortada != null
-                          ? DecorationImage(image: FileImage(_imagenPortada!), fit: BoxFit.cover)
-                          : null,
+      body:
+          _cargando && datosUser == null
+              ? Center(child: CircularProgressIndicator())
+              : SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Stack(
+                      alignment: Alignment.center,
+                      clipBehavior: Clip.none,
+                      children: [
+                        GestureDetector(
+                          onTap: () => _seleccionarImagen(true),
+                          child: Container(
+                            height: 200,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: tema.surface,
+                              image:
+                                  _imagenPortada != null
+                                      ? DecorationImage(
+                                        image: FileImage(_imagenPortada!),
+                                        fit: BoxFit.cover,
+                                      )
+                                      : DecorationImage(
+                                        image: CachedNetworkImageProvider(
+                                          datosUser?['imagen_portada'] ??
+                                              'https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png',
+                                        ),
+                                        fit: BoxFit.cover,
+                                      ),
+                            ),
+                            child: Container(
+                              color: Colors.black.withOpacity(0.3),
+                              child: Center(
+                                child: Icon(
+                                  LineAwesomeIcons.camera,
+                                  size: 40,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          bottom: -50,
+                          child: GestureDetector(
+                            onTap: () => _seleccionarImagen(false),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: tema.surface,
+                                  width: 4,
+                                ),
+                              ),
+                              child: Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  CircleAvatar(
+                                    radius: 50,
+                                    backgroundColor: custom.contenedor,
+                                    backgroundImage:
+                                        _imagenPerfil != null
+                                            ? FileImage(_imagenPerfil!)
+                                            : CachedNetworkImageProvider(
+                                                  datosUser?['imagen_perfil'] ??
+                                                      'https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png',
+                                                )
+                                                as ImageProvider,
+                                  ),
+                                  Container(
+                                    width: 100,
+                                    height: 100,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.black.withOpacity(0.3),
+                                    ),
+                                    child: Icon(
+                                      LineAwesomeIcons.camera,
+                                      size: 30,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    child: _imagenPortada == null
-                        ? Icon(Icons.camera_alt, size: 50, color: Colors.white)
-                        : null,
-                  ),
-                ),
-                Positioned(
-                  bottom: -30,
-                  left: 20,
-                  child: GestureDetector(
-                    onTap: () => _seleccionarImagen(false),
-                    child: CircleAvatar(
-                      radius: 40,
-                      backgroundColor: Colors.white,
-                      child: CircleAvatar(
-                        radius: 38,
-                        backgroundImage: _imagenPerfil != null
-                            ? FileImage(_imagenPerfil!)
-                            : AssetImage("assets/profile_placeholder.png") as ImageProvider,
+                    SizedBox(height: 60),
+                    Padding(
+                      padding: EdgeInsets.all(20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _construirTextos(
+                            controller: _controladorNombre,
+                            label: 'Nombre',
+                            icon: LineAwesomeIcons.user,
+                          ),
+                          SizedBox(height: 15),
+                          _construirTextos(
+                            controller: _controladorDescripcion,
+                            label: 'Descripción',
+                            icon: LineAwesomeIcons.info_circle,
+                            maxLines: 3,
+                          ),
+                          SizedBox(height: 20),
+                          Container(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              onPressed: _cargando ? null : _guardarPerfil,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: custom.colorEspecial,
+                                foregroundColor: custom.contenedor,
+                                padding: EdgeInsets.symmetric(vertical: 15),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                              child:
+                                  _cargando
+                                      ? CircularProgressIndicator(
+                                        color: custom.contenedor,
+                                      )
+                                      : Text(
+                                        'Guardar Cambios',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
-            SizedBox(height: 40),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                children: [
-                  TextField(
-                    controller: _controladorNombre,
-                    decoration: InputDecoration(labelText: "Nombre"),
-                  ),
-                  SizedBox(height: 10),
-                  TextField(
-                    controller: _controladorDescripcion,
-                    maxLines: 3,
-                    decoration: InputDecoration(labelText: "Descripción"),
-                  ),
-                ],
               ),
-            ),
-          ],
+    );
+  }
+
+  Widget _construirTextos({
+    required TextEditingController controller,
+    required String label,
+    required IconData icon,
+    int maxLines = 1,
+  }) {
+    return TextField(
+      controller: controller,
+      maxLines: maxLines,
+      decoration: InputDecoration(
+        labelText: label,
+        prefixIcon: Icon(icon, color: custom.colorEspecial),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(color: tema.outline),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(color: custom.colorEspecial, width: 2),
+        ),
+        contentPadding: EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: maxLines > 1 ? 16 : 0,
         ),
       ),
     );
