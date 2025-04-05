@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petlink/components/menuLateral.dart';
 
 // CLASES
 import 'package:petlink/components/publicacionStyle.dart';
@@ -13,13 +14,10 @@ class PetSocialPage extends StatefulWidget {
 }
 
 class _PetSocialPageState extends State<PetSocialPage> {
-  late var custom = Theme.of(context).extension<CustomColors>()!; // EXTRAER TEMA DE LA APP CUSTOM
-  late var tema = Theme.of(context).colorScheme; // EXTRAER TEMA DE LA APP
-
   static List<PublicacionStyle> publicaciones = []; // LISTA DE PUBLICACIONES (PublicacionStyle) [LISTVIEW]
 
   // MÉTODO QUE LLAMA AL MÉTODO DE PUBLICACIONES PARA SOLICITAR PUBLICACIONES Y LAS AÑADE A LA LISTA DEL LISTVIEW
-  void refrescar() async {
+  Future<void> refrescar() async {
     List<Publicacion> datos = await Publicacion.solicitarPublicaciones(3); // NUMERO DE PUBLICACIONES QUE SE PIDEN
     for (Publicacion publicacion in datos){
       var indice = publicaciones.length;
@@ -37,6 +35,8 @@ class _PetSocialPageState extends State<PetSocialPage> {
 
   @override
   Widget build(BuildContext context) {
+    late var custom = Theme.of(context).extension<CustomColors>()!; // EXTRAER TEMA DE LA APP CUSTOM
+    late var tema = Theme.of(context).colorScheme; // EXTRAER TEMA DE LA APP
     return Scaffold(
       appBar: AppBar(
         leading: Row(
@@ -56,13 +56,6 @@ class _PetSocialPageState extends State<PetSocialPage> {
           ],
         ),
         leadingWidth: 60,
-        actions: [
-          IconButton(
-            onPressed: (){
-              refrescar();
-            }, 
-            icon: Icon(Icons.refresh))
-        ],
         foregroundColor: custom.colorEspecial,
         backgroundColor: tema.surface,
         shadowColor: custom.sombraContenedor,
@@ -80,11 +73,18 @@ class _PetSocialPageState extends State<PetSocialPage> {
         centerTitle: true,
       ),
       body: SafeArea(
-        child: ListView.builder(
-          itemCount: publicaciones.length,
-          itemBuilder: (context, index) => publicaciones[index],
-        )
+        child: RefreshIndicator(
+          backgroundColor: tema.surface,
+          color: custom.colorEspecial,
+          displacement: 5,
+          onRefresh: refrescar,
+          child: ListView.builder(
+            itemCount: publicaciones.length,
+            itemBuilder: (context, index) => publicaciones[index],
+          ),
+        ),
       ),
+      endDrawer: MenuLateral(),
     );
   }
 }

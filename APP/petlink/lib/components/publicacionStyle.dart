@@ -197,15 +197,10 @@ class _PublicacionStyleState extends State<PublicacionStyle> {
                     });
                   },
                   // UN TAP --> VISUALIZADOR DE IMÁGENES
-                  onTap: () async {
-                    await precacheImage(
-                      CachedNetworkImageProvider(imageProvider.url),
-                      context,
-                    );
+                  onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (_) => PhotoViewer(publicacion: publi),
+                      MaterialPageRoute(builder: (_) => PhotoViewer(publicacion: publi),
                       ),
                     ).then((_){
                       setState(() {

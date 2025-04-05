@@ -14,10 +14,6 @@ class PagesManager extends StatefulWidget {
 
 // CONTROLA LAS PAGINAS DE RED SOCIAL
 class _PagesManagerState extends State<PagesManager> {
-  // ATRIBUTOS
-  late var custom = Theme.of(context).extension<CustomColors>()!; // EXTRAER TEMA DE LA APP CUSTOM
-  late var tema = Theme.of(context).colorScheme; // EXTRAER TEMA DE LA APP
-
   // Permite controlar la navegación dentro de un PageView
   final PageController _pageController = PageController();
   
@@ -82,6 +78,9 @@ class _PagesManagerState extends State<PagesManager> {
   // INTERFAZ
   @override
   Widget build(BuildContext context) {
+    // ATRIBUTOS
+    late var custom = Theme.of(context).extension<CustomColors>()!; // EXTRAER TEMA DE LA APP CUSTOM
+    late var tema = Theme.of(context).colorScheme; // EXTRAER TEMA DE LA APP
     return Scaffold(
       body: PageView(
         controller: _pageController,

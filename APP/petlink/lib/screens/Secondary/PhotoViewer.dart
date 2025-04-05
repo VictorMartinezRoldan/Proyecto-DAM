@@ -143,6 +143,7 @@ class _PhotoViewerState extends State<PhotoViewer> {
           child: Hero(
             tag: widget.publicacion.urlImagen,
             child: PhotoView(
+              minScale: PhotoViewComputedScale.contained,
               imageProvider: CachedNetworkImageProvider(widget.publicacion.urlImagen),
             ),
           ),
