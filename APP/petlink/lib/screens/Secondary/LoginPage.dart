@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:petlink/components/blueButton.dart';
 import 'package:petlink/components/myTextField.dart';
 import 'package:petlink/components/myTextFieldPassword.dart';
+import 'package:petlink/services/supabase_auth.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginPage extends StatelessWidget {
@@ -12,6 +13,7 @@ class LoginPage extends StatelessWidget {
       final response = await Supabase.instance.client.auth.signInWithPassword(email: email, password: password);
       if (response.user != null) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Login exitoso')));
+        SupabaseAuthService().obtenerUsuario();
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error: $e')));

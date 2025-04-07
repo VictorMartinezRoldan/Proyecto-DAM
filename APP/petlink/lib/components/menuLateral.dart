@@ -1,11 +1,18 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:petlink/components/cardSettingsStyle.dart';
+import 'package:petlink/services/supabase_auth.dart';
 import 'package:petlink/themes/customColors.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-class MenuLateral extends StatelessWidget {
+class MenuLateral extends StatefulWidget {
   const MenuLateral({super.key});
 
+  @override
+  State<MenuLateral> createState() => _MenuLateralState();
+}
+
+class _MenuLateralState extends State<MenuLateral> {
   @override
   Widget build(BuildContext context) {
     late var custom = Theme.of(context).extension<CustomColors>()!; // EXTRAER TEMA DE LA APP CUSTOM
@@ -48,11 +55,14 @@ class MenuLateral extends StatelessWidget {
                     child: CircleAvatar(
                       backgroundColor: custom.contenedor,
                       radius: 60,
-                      //backgroundImage: CachedNetworkImageProvider("https://umiaxicevvhttszjoavu.supabase.co/storage/v1/object/public/imagenes/perfiles_usuario/profile6.png"),
-                      child: Icon(Icons.person,size: 50,color: custom.colorEspecial,),
+                      backgroundImage: (SupabaseAuthService.isLogin.value) ? CachedNetworkImageProvider(SupabaseAuthService.imagenPerfil) : null,
+                      child: (!SupabaseAuthService.isLogin.value) ? Icon(Icons.person,size: 50,color: custom.colorEspecial,) : null,
                     ),
                   ),
-                  Text("NOMBRE", style: TextStyle(fontSize: 20)),
+                  Text(
+                    (SupabaseAuthService.isLogin.value) ? SupabaseAuthService.nombre : "NOMBRE", 
+                    style: TextStyle(fontSize: 20)
+                  ),
                   IntrinsicWidth(
                     child: Container(
                       margin: EdgeInsets.only(top: 10),
@@ -71,7 +81,7 @@ class MenuLateral extends StatelessWidget {
                           Icon(Icons.pets, size: 18, color: custom.contenedor),
                           SizedBox(width: 5),
                           Text(
-                            "ID_USUARIO",
+                            (SupabaseAuthService.isLogin.value) ? SupabaseAuthService.nombreUsuario : "ID_USUARIO", 
                             style: TextStyle(color: custom.contenedor),
                           ),
                         ],
@@ -93,19 +103,31 @@ class MenuLateral extends StatelessWidget {
                   SizedBox(height: 20),
                   CardSettingsStyle(Icons.settings, "AJUSTES", "Ir a ajustes"),
                   SizedBox(height: 40),
-                  Container(
-                    alignment: Alignment.center,
+                  SizedBox(
                     width: double.infinity,
-                    padding: EdgeInsets.symmetric(vertical: 30),
-                    decoration: BoxDecoration(
-                      color: Colors.redAccent,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Text(
-                      "CERRAR SESION",
-                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                    child: TextButton(
+                      onPressed: () async {
+                        try {
+                          await Supabase.instance.client.auth.signOut();
+                          setState(() {
+                            SupabaseAuthService.isLogin.value = false;
+                          });
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Sesión cerrada')));
+                        } catch (e){
+                          // ERROR DE CIERRE DE SESIÓN
+                        }
+                      }, 
+                      child: Text("CERRAR SESION", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+                      style: TextButton.styleFrom(
+                        padding: EdgeInsets.symmetric(vertical: 30),
+                        backgroundColor: Colors.redAccent,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)
+                        )
+                      ),
                     ),
                   ),
+                  
                 ],
               ),
             ),

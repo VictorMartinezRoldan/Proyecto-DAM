@@ -66,7 +66,7 @@ Future<void> _register(BuildContext context, String email, String password) asyn
       backgroundColor: Color.fromRGBO(0, 16, 42, 1),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        foregroundColor: tema.surface),
+        foregroundColor: Colors.white),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -124,11 +124,8 @@ class _CardsettingsStyleState extends State<CardSettingsStyle> {
                   trackOutlineColor: WidgetStateProperty.all(custom.colorEspecial.withValues(alpha: 0.2)),
                 )
               else
-                IconButton(
-                  icon: Icon(LineAwesomeIcons.arrow_right, color: custom.colorEspecial),
-                  onPressed: () {
-                  },
-                ),
+                Icon(LineAwesomeIcons.arrow_right, color: custom.colorEspecial),
+              SizedBox(width: 7)
             ],
           ),
         ),

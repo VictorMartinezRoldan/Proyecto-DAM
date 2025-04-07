@@ -27,7 +27,7 @@ class _MyTextFieldPasswordState extends State<MyTextFieldPassword> {
     return TextField(
       controller: widget.controller, // Asignar controlador si existe
       obscureText: !passVisibleState,
-      style: TextStyle(color: tema.primary),
+      style: TextStyle(color: Colors.black),
       decoration: InputDecoration(
         filled: true,
         fillColor: fondo,

@@ -26,17 +26,19 @@ class _UserPageState extends State<UserPage> {
   @override
   void initState() {
     super.initState();
-    _cargarUsuario();
+    SupabaseAuthService.isLogin.addListener(reconstruir);
   }
 
-  Future<void> _cargarUsuario() async {
-    final datos = await authService.obtenerUsuario();
-    if (datos != null) {
-      setState(() {
-        datosUser = datos;
-      });
-      await _cargarPublicaciones(); // CARGAR PUBLICACIONES DESPUES DE OBTENER EL USUARIO
-    }
+  @override
+  void dispose() {
+    super.dispose();
+    SupabaseAuthService.isLogin.removeListener(reconstruir); // IMPORTANTE
+  }
+
+  void reconstruir() async{
+    setState(() {
+      // RECONSTRUIMOS
+    });
   }
 
   Future<void> _cargarPublicaciones() async {
@@ -74,6 +76,10 @@ class _UserPageState extends State<UserPage> {
   Widget build(BuildContext context) {
     custom = Theme.of(context).extension<CustomColors>()!;
     tema = Theme.of(context).colorScheme;
+    print("DATOS:");
+    print("--> ${SupabaseAuthService.nombre}");
+    print("--> ${SupabaseAuthService.nombreUsuario}");
+    print("--> ${SupabaseAuthService.descripcion}");
 
     return Scaffold(
       appBar: AppBar(
@@ -108,8 +114,7 @@ class _UserPageState extends State<UserPage> {
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: CachedNetworkImageProvider(
-                        datosUser?['imagen_portada'] ??
-                            'https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png',
+                        (SupabaseAuthService.isLogin.value) ? SupabaseAuthService.imagenPortada : 'https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png'
                       ),
                       fit: BoxFit.cover,
                     ),
@@ -136,17 +141,17 @@ class _UserPageState extends State<UserPage> {
                 Positioned(
                   bottom: -30,
                   child: Container(
+                    padding: EdgeInsets.all(4),
+                    margin: EdgeInsets.only(bottom: 15),
                     decoration: BoxDecoration(
+                      color: custom.colorEspecial,
                       shape: BoxShape.circle,
-                      border: Border.all(color: Colors.white, width: 4),
                     ),
                     child: CircleAvatar(
-                      radius: 50,
-                      backgroundColor: Colors.transparent,
-                      backgroundImage: CachedNetworkImageProvider(
-                        datosUser?['imagen_perfil'] ??
-                            'https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png',
-                      ),
+                      backgroundColor: custom.contenedor,
+                      radius: 60,
+                      backgroundImage: (SupabaseAuthService.isLogin.value) ? CachedNetworkImageProvider(SupabaseAuthService.imagenPerfil) : null,
+                      child: (!SupabaseAuthService.isLogin.value) ? Icon(Icons.person,size: 50,color: custom.colorEspecial,) : null,
                     ),
                   ),
                 ),
@@ -154,7 +159,7 @@ class _UserPageState extends State<UserPage> {
             ),
             SizedBox(height: 30),
             Text(
-              datosUser?['nombre'] ?? 'Cargando...',
+              (SupabaseAuthService.isLogin.value) ? SupabaseAuthService.nombre : 'Nombre no disponible',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             Row(
@@ -163,7 +168,7 @@ class _UserPageState extends State<UserPage> {
                 Icon(Icons.pets, size: 18, color: custom.colorEspecial),
                 SizedBox(width: 8),
                 Text(
-                  '${datosUser?['nombre_usuario'] ?? 'usuario'}',
+                  (SupabaseAuthService.isLogin.value) ? SupabaseAuthService.nombreUsuario : 'Nombre de usuario no disponible',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
@@ -173,8 +178,7 @@ class _UserPageState extends State<UserPage> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 30),
               child: Text(
-                datosUser?['descripcion'] ??
-                    'Información no disponible. Por favor, actualiza tu perfil.',
+                (SupabaseAuthService.isLogin.value) ? SupabaseAuthService.descripcion : 'Descripción no disponible',
                 textAlign: TextAlign.left,
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
               ),
@@ -187,7 +191,7 @@ class _UserPageState extends State<UserPage> {
                   MaterialPageRoute(builder: (context) => EditProfilePage()),
                 );
                 if (result == true) {
-                  _cargarUsuario(); // RECARGAR DATOS SI SE ACTUALIZO EL PERFIL
+                  setState(() {}); // RECARGAR DATOS SI SE ACTUALIZO EL PERFIL
                 }
               },
               icon: Icon(Icons.edit, color: custom.colorEspecial),

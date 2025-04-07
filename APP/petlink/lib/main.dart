@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:petlink/screens/PagesManager.dart';
+import 'package:petlink/services/supabase_auth.dart';
 import 'package:petlink/themes/themeProvider.dart';
 import 'package:provider/provider.dart' as provider;
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SupabaseAuthService().obtenerUsuario();
     return provider.ChangeNotifierProvider(
       create: (_) => ThemeProvider(),
       child: provider.Consumer<ThemeProvider>(

@@ -1,9 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:petlink/components/menuLateral.dart';
 
 // CLASES
 import 'package:petlink/components/publicacionStyle.dart';
 import 'package:petlink/entidades/publicacion.dart';
+import 'package:petlink/services/supabase_auth.dart';
 import 'package:petlink/themes/customColors.dart';
 
 class PetSocialPage extends StatefulWidget {
@@ -31,6 +33,19 @@ class _PetSocialPageState extends State<PetSocialPage> {
   void initState(){
     super.initState();
     refrescar(); // EN LA CONSTRUCCIÓN REFRESCA CON NUEVAS IMÁGENES
+    SupabaseAuthService.isLogin.addListener(reconstruir);
+  }
+
+  void reconstruir() async{
+    setState(() {
+      // RECONSTRUIMOS
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    SupabaseAuthService.isLogin.removeListener(reconstruir); // IMPORTANTE
   }
 
   @override
@@ -50,7 +65,8 @@ class _PetSocialPageState extends State<PetSocialPage> {
               ),
               child: CircleAvatar(
                 backgroundColor: custom.contenedor,
-                child: Icon(Icons.person, color: custom.colorEspecial),
+                backgroundImage: (SupabaseAuthService.isLogin.value) ? CachedNetworkImageProvider(SupabaseAuthService.imagenPerfil) : null,
+                child: (!SupabaseAuthService.isLogin.value) ? Icon(Icons.person,size: 25,color: custom.colorEspecial,) : null,
               )
             )
           ],

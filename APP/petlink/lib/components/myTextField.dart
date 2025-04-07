@@ -10,11 +10,10 @@ class MyTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     late var custom = Theme.of(context).extension<CustomColors>()!; // EXTRAER TEMA DE LA APP CUSTOM
     late var tema = Theme.of(context).colorScheme; // EXTRAER TEMA DE LA APP
-    
     final fondo = Color.fromARGB(255, 230, 230, 230);
     return TextField(
       controller: controller, // Asignar controlador si existe
-      style: TextStyle(color: tema.primary),
+      style: TextStyle(color: Colors.black),
       decoration: InputDecoration(
         filled: true,
         fillColor: fondo,

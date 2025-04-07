@@ -34,30 +34,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
     super.initState();
     _controladorNombre = TextEditingController();
     _controladorDescripcion = TextEditingController();
-    _cargarUsuario();
-  }
-
-  Future<void> _cargarUsuario() async {
-    setState(() {
-      _cargando = true;
-    });
-
-    final datos = await authService.obtenerUsuario();
-    if (datos != null) {
-      setState(() {
-        datosUser = datos;
-        _controladorNombre.text = datosUser?['nombre'] ?? "";
-        _controladorDescripcion.text = datosUser?['descripcion'] ?? "";
-        _cargando = false;
-      });
-    } else {
-      setState(() {
-        _cargando = false;
-      });
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error al cargar datos del usuario')),
-      );
-    }
   }
 
   Future<void> _seleccionarImagen(bool esPortada) async {
@@ -201,6 +177,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
   Widget build(BuildContext context) {
     custom = Theme.of(context).extension<CustomColors>()!;
     tema = Theme.of(context).colorScheme;
+
+    _controladorNombre.text = SupabaseAuthService.nombre;
+    _controladorDescripcion.text = SupabaseAuthService.descripcion;
 
     return Scaffold(
       appBar: AppBar(
