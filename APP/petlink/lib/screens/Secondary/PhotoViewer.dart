@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart'; // PARA MOSTRAR LA IMAGEN DESDE CACHÉ
 import 'package:petlink/entidades/publicacion.dart';
+import 'package:petlink/entidades/seguridad.dart';
 import 'package:photo_view/photo_view.dart'; // EL VISOR DE IMÁGENES
 import 'package:permission_handler/permission_handler.dart'; // PARA SOLICITAR PERMISOS PARA GUARDAR LA IMAGEN
 import 'package:flutter_file_downloader/flutter_file_downloader.dart'; // PARA DESCARGAR LA IMAGEN
@@ -168,15 +169,19 @@ class _PhotoViewerState extends State<PhotoViewer> {
                     child: Row(
                       children: [
                         IconButton(
-                          onPressed: () {
-                            setState(() {
-                              widget.publicacion.liked = !widget.publicacion.liked;
-                              if (widget.publicacion.liked) {
-                                widget.publicacion.likes++;
-                              } else {
-                                widget.publicacion.likes--;
-                              }
-                            });
+                          onPressed: () async {
+                            if (await Seguridad.canInteract(context)){
+                              setState(() {
+                                widget.publicacion.liked = !widget.publicacion.liked;
+                                if (widget.publicacion.liked) {
+                                  widget.publicacion.likes++;
+                                  Publicacion.darLike(widget.publicacion.id.toString());
+                                } else {
+                                  widget.publicacion.likes--;
+                                  Publicacion.quitarLike(widget.publicacion.id.toString());
+                                }
+                              });
+                            }
                           },
                           icon: (!widget.publicacion.liked)
                             ? Icon(Icons.favorite_border_rounded, size: 25, color: Colors.white,)

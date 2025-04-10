@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:petlink/components/cardSettingsStyle.dart';
+import 'package:petlink/screens/Secondary/AuthController.dart';
 import 'package:petlink/services/supabase_auth.dart';
 import 'package:petlink/themes/customColors.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -17,6 +18,8 @@ class _MenuLateralState extends State<MenuLateral> {
   Widget build(BuildContext context) {
     late var custom = Theme.of(context).extension<CustomColors>()!; // EXTRAER TEMA DE LA APP CUSTOM
     late var tema = Theme.of(context).colorScheme; // EXTRAER TEMA DE LA APP
+    bool isLogin = SupabaseAuthService.isLogin.value; // Para saber si está la sesión iniciada o no
+    
     return SafeArea(
       child: Container(
         width: 325,
@@ -55,13 +58,17 @@ class _MenuLateralState extends State<MenuLateral> {
                     child: CircleAvatar(
                       backgroundColor: custom.contenedor,
                       radius: 60,
-                      backgroundImage: (SupabaseAuthService.isLogin.value) ? CachedNetworkImageProvider(SupabaseAuthService.imagenPerfil) : null,
-                      child: (!SupabaseAuthService.isLogin.value) ? Icon(Icons.person,size: 50,color: custom.colorEspecial,) : null,
+                      backgroundImage: (isLogin) ? CachedNetworkImageProvider(SupabaseAuthService.imagenPerfil) : null, // Muestra la imagen de perfil del usuario
+                      child: (!isLogin) ? Icon(Icons.person,size: 50,color: custom.colorEspecial,) : null,
                     ),
                   ),
-                  Text(
-                    (SupabaseAuthService.isLogin.value) ? SupabaseAuthService.nombre : "NOMBRE", 
-                    style: TextStyle(fontSize: 20)
+                  // El nombre solo es visible si está login
+                  Visibility(
+                    visible: isLogin,
+                    child: Text(
+                      SupabaseAuthService.nombre, 
+                      style: TextStyle(fontSize: 20)
+                    ),
                   ),
                   IntrinsicWidth(
                     child: Container(
@@ -81,9 +88,11 @@ class _MenuLateralState extends State<MenuLateral> {
                           Icon(Icons.pets, size: 18, color: custom.contenedor),
                           SizedBox(width: 5),
                           Text(
-                            (SupabaseAuthService.isLogin.value) ? SupabaseAuthService.nombreUsuario : "ID_USUARIO", 
+                            (isLogin) ? SupabaseAuthService.nombreUsuario : "PETLINK",
                             style: TextStyle(color: custom.contenedor),
                           ),
+                          SizedBox(width: 5),
+                          (!isLogin) ? Icon(Icons.pets, size: 18, color: custom.contenedor) : SizedBox.shrink()
                         ],
                       ),
                     ),
@@ -92,42 +101,52 @@ class _MenuLateralState extends State<MenuLateral> {
                   CardSettingsStyle(
                     Icons.person,
                     "MI PERFIL",
-                    "Ir a mi perfil",
+                    (isLogin) ? "Ir a mi perfil" : "Inicia sesión para ver tu perfil",
                   ),
                   SizedBox(height: 20),
                   CardSettingsStyle(
                     Icons.pets,
                     "MASCOTAS",
-                    "Ver o agregar tus mascotas",
+                    (isLogin) ? "Ver o agregar tus mascotas" : "Inicia sesión para ver o agregar tus mascotas",
                   ),
                   SizedBox(height: 20),
                   CardSettingsStyle(Icons.settings, "AJUSTES", "Ir a ajustes"),
                   SizedBox(height: 40),
                   SizedBox(
                     width: double.infinity,
+                    // LOGIN == CERRAR SESION / NO LOGIN == INICIAR SESION
                     child: TextButton(
                       onPressed: () async {
-                        try {
-                          await Supabase.instance.client.auth.signOut();
-                          setState(() {
-                            SupabaseAuthService.isLogin.value = false;
-                          });
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Sesión cerrada')));
-                        } catch (e){
-                          // ERROR DE CIERRE DE SESIÓN
+                        if (isLogin){
+                          try {
+                            await Supabase.instance.client.auth.signOut();
+                            setState(() {
+                              SupabaseAuthService.isLogin.value = false;
+                            });
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Sesión cerrada')));
+                          } catch (e){
+                            // ERROR DE CIERRE DE SESIÓN
+                          }
+                        } else {
+                          Navigator.pop(context);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => AuthController()),
+                          );
                         }
-                      }, 
-                      child: Text("CERRAR SESION", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+                      },
                       style: TextButton.styleFrom(
                         padding: EdgeInsets.symmetric(vertical: 30),
-                        backgroundColor: Colors.redAccent,
+                        backgroundColor: (isLogin) ? Colors.redAccent : custom.colorEspecial,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)
                         )
-                      ),
+                      ), 
+                      child: Text(
+                        (isLogin) ? "CERRAR SESION" : "INICIAR SESION", 
+                        style: TextStyle(fontWeight: FontWeight.bold, color: (isLogin) ? Colors.white : custom.contenedor)),
                     ),
                   ),
-                  
                 ],
               ),
             ),

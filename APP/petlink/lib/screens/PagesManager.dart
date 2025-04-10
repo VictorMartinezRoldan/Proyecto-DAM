@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petlink/entidades/seguridad.dart';
 import 'package:petlink/screens/NewPostPage.dart';
 import 'package:petlink/screens/PetSocialPage.dart';
 import 'package:petlink/screens/PetWikiPage.dart';
@@ -125,11 +126,13 @@ class _PagesManagerState extends State<PagesManager> {
           BottomNavigationBarItem(icon: Icon(Icons.person), label: ""),               // 4
         ],
 
-        onTap: (value) {
+        onTap: (value) async {
           // PUBLICAR Y CAMARA SE GESTIONARARAN CON UN:
           // Navigator.push()
           if (value == 2){
-            gotoNewPostPage();
+            if(await Seguridad.canInteract(context)){
+              gotoNewPostPage();
+            }
           } else if (value == 3) {
             // ACCION CAMARA (IA)
           } else {

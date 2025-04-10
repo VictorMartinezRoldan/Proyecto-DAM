@@ -1,5 +1,7 @@
 import 'dart:io' as io;
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:petlink/services/supabase_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:image_picker/image_picker.dart';
@@ -132,15 +134,14 @@ class _NewPostPageState extends State<NewPostPage> {
                             children: [
                               CircleAvatar(
                                 radius: 22,
-                                backgroundColor: custom.colorEspecial,
-                                child: Icon(Icons.person, color: custom.contenedor),
+                                backgroundImage: CachedNetworkImageProvider(SupabaseAuthService.imagenPerfil),
                               ),
                               SizedBox(width: 12),
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("NOMBRE"),
+                                    Text(SupabaseAuthService.nombre),
                                     SizedBox(height: 1),
                                     IntrinsicWidth(
                                       child: Container(
@@ -158,7 +159,7 @@ class _NewPostPageState extends State<NewPostPage> {
                                           children: [
                                             Icon(Icons.pets, size: 18, color: custom.contenedor),
                                             SizedBox(width: 5),
-                                            Text("ID_USUARIO", style: TextStyle(color: custom.contenedor))
+                                            Text(SupabaseAuthService.nombreUsuario, style: TextStyle(color: custom.contenedor))
                                           ],
                                         ),
                                       ),

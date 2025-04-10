@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:petlink/components/dialogoInformacion.dart';
+import 'package:petlink/components/dialogoPregunta.dart';
+import 'package:petlink/screens/Secondary/AuthController.dart';
+import 'package:petlink/services/supabase_auth.dart';
+import 'package:petlink/themes/themeProvider.dart';
+import 'package:provider/provider.dart';
 
 class Seguridad {
   static List<String> badWordsSpanish = [
@@ -108,5 +113,30 @@ class Seguridad {
       return true;
     }
   }
-}
 
+  // Si no está login no puede dar like... comentar... publicar..., eso se controla aquí
+  static Future<bool> canInteract(BuildContext context) async{
+    // ¡Ups! Para comentar, dar likes o publicar, inicia sesión o crea una cuenta.
+    if (SupabaseAuthService.isLogin.value){
+      return true; // PUEDE PUBLICARs
+    } else {
+      bool? result = await showDialog<bool>(
+        context: context, 
+        builder: (context) => DialogoPregunta(
+          imagen: Image.asset("assets/perros_dialogos/info_triste_${(Provider.of<ThemeProvider>(context).isLightMode) ? "light" : "dark"}.png"),
+          titulo: "Inicia sesión para continuar", 
+          texto: "Para comentar, dar likes o publicar, inicia sesión o crea una cuenta", 
+          textoBtn1: "Más tarde", 
+          textoBtn2: "Vamos a ello"
+        )
+      );
+      if (result == true){
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => AuthController()),
+        );
+      }
+      return false; // NO PUEDE
+    }
+  }
+}

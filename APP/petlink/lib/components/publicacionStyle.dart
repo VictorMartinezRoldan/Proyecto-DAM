@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:ui' as ui; // PARA TRABAJAR CON IMÁGENES Y CALCULAR SU ALTURA
 import 'dart:io'; // PARA CONTROLAR EL DISPOSITIVO
 import 'package:cached_network_image/cached_network_image.dart'; // DESCARGA CON CACHÉ
+import 'package:petlink/entidades/seguridad.dart';
 
 // CLASES
 import 'package:petlink/themes/customColors.dart';
@@ -187,14 +188,17 @@ class _PublicacionStyleState extends State<PublicacionStyle> {
                 margin: EdgeInsets.only(left: 25, right: 25),
                 child: GestureDetector(
                   // DOUBLE TAP --> ANIMACIÓN LIKE
-                  onDoubleTap: () {
-                    likeKey.currentState?.onDoubleTap();
-                    setState(() {
-                      if (!publi.liked){
-                        publi.liked = true;
-                        publi.likes++;
-                      }
-                    });
+                  onDoubleTap: () async{
+                    if (await Seguridad.canInteract(context)){
+                      likeKey.currentState?.onDoubleTap();
+                      setState(() {
+                        if (!publi.liked){
+                          publi.liked = true;
+                          publi.likes++;
+                          Publicacion.darLike(publi.id.toString());
+                        }
+                      });
+                    }
                   },
                   // UN TAP --> VISUALIZADOR DE IMÁGENES
                   onTap: () {
@@ -255,15 +259,21 @@ class _PublicacionStyleState extends State<PublicacionStyle> {
                     Row(
                       children: [
                         IconButton(
-                          onPressed: () {
-                            setState(() {
-                              publi.liked = !publi.liked;
-                              if (publi.liked) {
-                                publi.likes++;
-                              } else {
-                                publi.likes--;
-                              }
-                            });
+                          onPressed: () async {
+                            // Primero comprueba que está login con su respectivo diálogo, si puede entonces suma el like a nivel local
+                            // Y bien puede guardar el like en la BD o borrarlo de la BD
+                            if (await Seguridad.canInteract(context)){
+                              setState(() {
+                                publi.liked = !publi.liked;
+                                if (publi.liked) {
+                                  publi.likes++;
+                                  Publicacion.darLike(publi.id.toString());
+                                } else {
+                                  publi.likes--;
+                                  Publicacion.quitarLike(publi.id.toString());
+                                }
+                              });
+                            }
                           },
                           icon: (!publi.liked)
                               ? Icon(Icons.favorite_border_rounded, size: 25)

@@ -28,9 +28,9 @@ class DialogoPregunta extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             (imagen != null) ? SizedBox(height:200, width: 200, child: imagen!) : SizedBox.shrink(),
-            Text(titulo, style: TextStyle(color: tema.primary, fontWeight: FontWeight.bold, fontSize: 25)),
+            Text(titulo, style: TextStyle(color: tema.primary, fontWeight: FontWeight.bold, fontSize: 25), textAlign: TextAlign.center),
             SizedBox(height: 15),
-            Text(texto, style: TextStyle(color: tema.primary, fontSize: 17)),
+            Text(texto, style: TextStyle(color: tema.primary, fontSize: 17), textAlign: TextAlign.center),
             SizedBox(height: 25),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

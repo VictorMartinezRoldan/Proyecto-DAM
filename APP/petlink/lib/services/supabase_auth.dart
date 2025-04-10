@@ -40,8 +40,6 @@ class SupabaseAuthService {
 
       // DATOS OBTENIDOS
       datos as Map<String, dynamic>;
-
-      SupabaseAuthService.isLogin.value = true;
       id = datos["id"];
       imagenPerfil = datos["imagen_perfil"];
       imagenPortada = datos["imagen_portada"];
@@ -49,6 +47,7 @@ class SupabaseAuthService {
       nombreUsuario = datos["nombre_usuario"];
       descripcion = datos["descripcion"];
       correo = datos["correo"];
+      SupabaseAuthService.isLogin.value = true;
       print("ID --> $id");
     } catch (error) {
       return null;

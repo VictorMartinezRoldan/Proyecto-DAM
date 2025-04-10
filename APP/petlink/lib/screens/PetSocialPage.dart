@@ -23,6 +23,9 @@ class _PetSocialPageState extends State<PetSocialPage> {
     List<Publicacion> datos = await Publicacion.solicitarPublicaciones(3); // NUMERO DE PUBLICACIONES QUE SE PIDEN
     for (Publicacion publicacion in datos){
       var indice = publicaciones.length;
+      if (!mounted) {
+        return;
+      }
       setState(() {
         publicaciones.add(PublicacionStyle(key: ValueKey(indice), publicacion: publicacion));
       });
@@ -36,9 +39,13 @@ class _PetSocialPageState extends State<PetSocialPage> {
     SupabaseAuthService.isLogin.addListener(reconstruir);
   }
 
+  // Cuando se reconstruye limpia las listas y publicaciones para recargarlas con los likes guardados
   void reconstruir() async{
+    publicaciones.clear();
+    Publicacion.publicacionesExistentes.clear();
     setState(() {
       // RECONSTRUIMOS
+      refrescar();
     });
   }
 
