@@ -195,7 +195,7 @@ class _PublicacionStyleState extends State<PublicacionStyle> {
                         if (!publi.liked){
                           publi.liked = true;
                           publi.likes++;
-                          Publicacion.darLike(publi.id.toString());
+                          Publicacion.darLike(context, publi.id.toString());
                         }
                       });
                     }
@@ -267,10 +267,10 @@ class _PublicacionStyleState extends State<PublicacionStyle> {
                                 publi.liked = !publi.liked;
                                 if (publi.liked) {
                                   publi.likes++;
-                                  Publicacion.darLike(publi.id.toString());
+                                  Publicacion.darLike(context, publi.id.toString());
                                 } else {
                                   publi.likes--;
-                                  Publicacion.quitarLike(publi.id.toString());
+                                  Publicacion.quitarLike(context, publi.id.toString());
                                 }
                               });
                             }

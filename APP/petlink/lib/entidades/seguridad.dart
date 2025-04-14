@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:petlink/components/dialogoInformacion.dart';
 import 'package:petlink/components/dialogoPregunta.dart';
@@ -5,6 +6,7 @@ import 'package:petlink/screens/Secondary/AuthController.dart';
 import 'package:petlink/services/supabase_auth.dart';
 import 'package:petlink/themes/themeProvider.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
 class Seguridad {
   static List<String> badWordsSpanish = [
@@ -137,6 +139,24 @@ class Seguridad {
         );
       }
       return false; // NO PUEDE
+    }
+  }
+
+  // Método para checkear si el usuario tiene conexión a internet
+  static Future<bool> comprobarConexion() async {
+    final conexion = await Connectivity().checkConnectivity();
+    if (conexion == ConnectionState.none) {
+      return false;
+    } else {
+      try {
+        final response = await http.get(Uri.parse('https://www.google.com')).timeout(Duration(seconds: 5));
+        if (response.statusCode == 200) {
+          return true;
+        }
+      } catch (e) {
+        // ERROR DE CONEXION
+      }
+      return false;
     }
   }
 }

@@ -1,8 +1,12 @@
+import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:petlink/entidades/seguridad.dart';
 import 'package:petlink/screens/NewPostPage.dart';
 import 'package:petlink/screens/PetSocialPage.dart';
 import 'package:petlink/screens/PetWikiPage.dart';
+import 'package:petlink/screens/Secondary/NetworkErrorPage.dart';
 import 'package:petlink/screens/UserPage.dart';
 import 'package:petlink/themes/customColors.dart';
 
@@ -19,6 +23,9 @@ class _PagesManagerState extends State<PagesManager> {
   final PageController _pageController = PageController();
   
   int _selectedIndex = 0;
+
+  late final StreamSubscription _connectionSub;
+
 
   // METODOS
   
@@ -37,10 +44,22 @@ class _PagesManagerState extends State<PagesManager> {
     );
   }
 
-  // LISTENER PARA CUANDO CAMBIA DE PANTALLA
   @override
   void initState() {
     super.initState();
+
+    // Listener para cuando el wifi o datos se activa / desactiva
+    _connectionSub = Connectivity().onConnectivityChanged.listen((result) async {
+      bool isConnected = await Seguridad.comprobarConexion();
+      if (!isConnected) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => NetworkErrorPage())
+        );
+      }
+    });
+
+    // LISTENER PARA CUANDO CAMBIA DE PANTALLA
     _pageController.addListener(() {
       int newIndex = _pageController.page!.round();
       if (newIndex != _selectedIndex) {

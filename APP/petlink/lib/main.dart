@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:petlink/screens/Secondary/NetworkErrorPage.dart';
 import 'package:petlink/screens/PagesManager.dart';
+import 'package:petlink/screens/StartingAnimation.dart';
 import 'package:petlink/services/supabase_auth.dart';
 import 'package:petlink/themes/themeProvider.dart';
 import 'package:provider/provider.dart' as provider;
@@ -33,7 +35,7 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             title: 'PETLINK',
             debugShowCheckedModeBanner: false,
-            home: PagesManager(), // Mostrar una pantalla de carga inicial
+            home: StartingAnimation(),
             theme: themeProvider.themeData,
           );
         },

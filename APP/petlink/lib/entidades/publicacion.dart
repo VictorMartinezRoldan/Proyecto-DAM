@@ -1,4 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:petlink/entidades/seguridad.dart';
+import 'package:petlink/screens/Secondary/NetworkErrorPage.dart';
 import 'package:petlink/services/supabase_auth.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:share_plus/share_plus.dart';
@@ -32,40 +35,52 @@ class Publicacion {
 
   // LISTA DE PUBLICACIONES CARGADAS PARA NO VOLVER A MOSTRAR
   static List<Publicacion> publicacionesExistentes = [];
-
   // MÉTODO QUE SOLICITA INFORMACIÓN ACERCA DE UNA PUBLICACIÓN
-  static Future<List<Publicacion>> solicitarPublicaciones(int num_publicaciones) async {
+  static Future<List<Publicacion>> solicitarPublicaciones(BuildContext context, int num_publicaciones) async {
     List<Publicacion> publicaciones = []; // LISTA DE PUBLICACIONES A ENVIAR
-    final supaClient = Supabase.instance.client;
-    final response = await supaClient.rpc(
-      'obtener_publicaciones_aleatorias', // LLAMAMOS A UNA FUNCIÓN DENTRO DE LA BD CON UNA CONSULTA AVANZADA
-      params: {'limit_count': num_publicaciones, 'usuario_uid' : (SupabaseAuthService.isLogin.value) ? SupabaseAuthService.id : null}
-    );
+    try {
+      final supaClient = Supabase.instance.client;
+      final response = await supaClient.rpc(
+        'obtener_publicaciones_aleatorias', // LLAMAMOS A UNA FUNCIÓN DENTRO DE LA BD CON UNA CONSULTA AVANZADA
+        params: {'limit_count': num_publicaciones, 'usuario_uid' : (SupabaseAuthService.isLogin.value) ? SupabaseAuthService.id : null}
+      );
 
-    if (response == null || response.isEmpty) {
-      return publicaciones; // DEVUELVE LAS PUBLICACIONES VACÍAS
-    } else {
-      // SI HAY DATOS, BUCLE POR CADA PUBLICACIÓN RECIBIDA
-      for (int i = 0; i < response.length; i++) {
-        var datos = response[i]; // EXTRAIGO LA INFORMACIÓN
-        // CREO EL OBJETO
-        Publicacion newPubli = Publicacion(
-            id: datos["id"],
-            imagenPerfil: datos["imagen_perfil"],
-            nombre: datos["nombre"],
-            usuario: datos["usuario"],
-            texto: datos["texto"],
-            fecha: datos["fecha_publicacion"],
-            urlImagen: datos["imagen_url"],
-            likes: datos["likes"],
-            liked: datos["liked"]
-        );
-        if (publicacionesExistentes.contains(newPubli)){
-          // YA EXISTE, NO SE METE
-        } else {
-          publicacionesExistentes.add(newPubli); // AÑADO AL HISTORIAL
-          publicaciones.add(newPubli); // AÑADO A LA LISTA DE PUBLICACIONES A ENVIAR
+      if (response == null || response.isEmpty) {
+        return publicaciones; // DEVUELVE LAS PUBLICACIONES VACÍAS
+      } else {
+        // SI HAY DATOS, BUCLE POR CADA PUBLICACIÓN RECIBIDA
+        for (int i = 0; i < response.length; i++) {
+          var datos = response[i]; // EXTRAIGO LA INFORMACIÓN
+          // CREO EL OBJETO
+          Publicacion newPubli = Publicacion(
+              id: datos["id"],
+              imagenPerfil: datos["imagen_perfil"],
+              nombre: datos["nombre"],
+              usuario: datos["usuario"],
+              texto: datos["texto"],
+              fecha: datos["fecha_publicacion"],
+              urlImagen: datos["imagen_url"],
+              likes: datos["likes"],
+              liked: datos["liked"]
+          );
+          if (publicacionesExistentes.contains(newPubli)){
+            // YA EXISTE, NO SE METE
+          } else {
+            publicacionesExistentes.add(newPubli); // AÑADO AL HISTORIAL
+            publicaciones.add(newPubli); // AÑADO A LA LISTA DE PUBLICACIONES A ENVIAR
+          }
         }
+        return publicaciones;
+      }
+    } catch (e) {
+      // SE A PRODUCIDO UN ERROR, PRIMERO COMPROBAMOS DE QUE HAYA CONEXIÓN
+      bool isConnected = await Seguridad.comprobarConexion();
+      if (!isConnected){
+        // Si no tiene conexión a internet...
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => NetworkErrorPage())
+        );
       }
       return publicaciones;
     }
@@ -92,7 +107,7 @@ Descubre, comparte y aprende sobre todas las razas.
   }
 
   // Metodo para guardar Likes en la BD
-  static Future<void> darLike(String id_publi) async {
+  static Future<void> darLike(BuildContext context, String id_publi) async {
     final supaClient = Supabase.instance.client;
     try {
       final response = await supaClient.from('likes')
@@ -102,11 +117,18 @@ Descubre, comparte y aprende sobre todas las razas.
       });
     } catch (e) {
       // ERROR AL DAR LIKE
+      bool isConnected = await Seguridad.comprobarConexion();
+      if (!isConnected) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => NetworkErrorPage())
+        );
+      }
     }
   }
 
   // Metodo para borrar Likes en la BD
-  static Future<void> quitarLike(String id_publi) async {
+  static Future<void> quitarLike(BuildContext context, String id_publi) async {
     final supaClient = Supabase.instance.client;
     try {
       final response = await supaClient.from('likes')
@@ -117,6 +139,13 @@ Descubre, comparte y aprende sobre todas las razas.
       });
     } catch (e) {
       // ERROR AL QUITAR EL LIKE
+      bool isConnected = await Seguridad.comprobarConexion();
+      if (!isConnected) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => NetworkErrorPage())
+        );
+      }
     }
   }
 

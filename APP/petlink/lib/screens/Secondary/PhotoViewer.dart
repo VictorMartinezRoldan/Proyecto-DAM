@@ -175,10 +175,10 @@ class _PhotoViewerState extends State<PhotoViewer> {
                                 widget.publicacion.liked = !widget.publicacion.liked;
                                 if (widget.publicacion.liked) {
                                   widget.publicacion.likes++;
-                                  Publicacion.darLike(widget.publicacion.id.toString());
+                                  Publicacion.darLike(context, widget.publicacion.id.toString());
                                 } else {
                                   widget.publicacion.likes--;
-                                  Publicacion.quitarLike(widget.publicacion.id.toString());
+                                  Publicacion.quitarLike(context, widget.publicacion.id.toString());
                                 }
                               });
                             }

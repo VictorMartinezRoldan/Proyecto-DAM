@@ -7,6 +7,7 @@ import 'package:petlink/components/publicacionStyle.dart';
 import 'package:petlink/entidades/publicacion.dart';
 import 'package:petlink/services/supabase_auth.dart';
 import 'package:petlink/themes/customColors.dart';
+import 'package:provider/provider.dart';
 
 class PetSocialPage extends StatefulWidget {
   const PetSocialPage({super.key});
@@ -20,7 +21,7 @@ class _PetSocialPageState extends State<PetSocialPage> {
 
   // MÉTODO QUE LLAMA AL MÉTODO DE PUBLICACIONES PARA SOLICITAR PUBLICACIONES Y LAS AÑADE A LA LISTA DEL LISTVIEW
   Future<void> refrescar() async {
-    List<Publicacion> datos = await Publicacion.solicitarPublicaciones(3); // NUMERO DE PUBLICACIONES QUE SE PIDEN
+    List<Publicacion> datos = await Publicacion.solicitarPublicaciones(context, 3); // NUMERO DE PUBLICACIONES QUE SE PIDEN
     for (Publicacion publicacion in datos){
       var indice = publicaciones.length;
       if (!mounted) {
