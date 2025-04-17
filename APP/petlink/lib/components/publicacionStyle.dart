@@ -175,6 +175,7 @@ class _PublicacionStyleState extends State<PublicacionStyle> {
 
               // --------------------------------------------------------------------------------------
               // TEXTO DE LA PUBLICACIÓN
+              if (publi.texto.isNotEmpty)
               Container(
                 margin: EdgeInsets.only(left: 25, bottom: 20, right: 25),
                 child: Text(publi.texto),

@@ -145,6 +145,7 @@ class _PhotoViewerState extends State<PhotoViewer> {
             tag: widget.publicacion.urlImagen,
             child: PhotoView(
               minScale: PhotoViewComputedScale.contained,
+              maxScale: PhotoViewComputedScale.covered * 1.5,
               imageProvider: CachedNetworkImageProvider(widget.publicacion.urlImagen),
             ),
           ),

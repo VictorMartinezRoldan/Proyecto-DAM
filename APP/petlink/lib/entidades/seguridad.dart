@@ -1,5 +1,9 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:petlink/components/dialogoInformacion.dart';
 import 'package:petlink/components/dialogoPregunta.dart';
 import 'package:petlink/screens/Secondary/AuthController.dart';
@@ -158,5 +162,16 @@ class Seguridad {
       }
       return false;
     }
+  }
+
+  // Método para comprimir imágenes
+  static Future<Uint8List?> comprimirImagen(File imagen) async {
+    final Uint8List? imagenComprimida = await FlutterImageCompress.compressWithFile(
+      imagen.path,
+      quality: 60,
+      format: CompressFormat.jpeg
+    );
+
+    return imagenComprimida;
   }
 }

@@ -1,3 +1,7 @@
+import 'dart:io';
+import 'dart:math';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:petlink/entidades/seguridad.dart';
@@ -14,7 +18,7 @@ class Publicacion {
   final String nombre;
   final String usuario;
   final String texto;
-  final String fecha; // FORMATEAR
+  final String fecha;
   final String urlImagen;
   int likes;
   bool liked = false;
@@ -147,6 +151,57 @@ Descubre, comparte y aprende sobre todas las razas.
         );
       }
     }
+  }
+
+  static Future<bool> publicar(String texto, File imagen, BuildContext context) async {
+    final supabase = Supabase.instance.client;
+
+    // COMPRIMIR IMAGEN
+    Uint8List? imgComprimida = await Seguridad.comprimirImagen(imagen);
+    
+    // Si no funciona no quiero subirla :)
+    if (imgComprimida == null){
+      return false;
+    }
+
+    // NOMBRE ÚNICO, IMPOSIBLE DE SER IGUAL QUE OTRO
+    final nombreArchivo = "publicaciones/img_${DateTime.now().millisecondsSinceEpoch}${Random().nextInt(99999)}.jpg";
+
+    try {
+      // SUBO LA IMAGEN AL STORANGE
+      await supabase.storage.from("imagenes")
+      .uploadBinary(
+        nombreArchivo,
+        imgComprimida,
+        fileOptions: FileOptions(
+          contentType: "image/jpeg",
+          upsert: false
+        )
+      );
+
+      // OBTENGO LA URL DE LA IMAGEN
+      final url = await supabase.storage.from("imagenes")
+        .getPublicUrl(nombreArchivo);
+      
+      // SUBO LA PUBLICACIÓN
+      await supabase.from("publicaciones")
+        .insert({
+          'id_usuario' : SupabaseAuthService.id,
+          'texto' : texto,
+          'imagen_url' : url
+        });
+    } catch (e) {
+      print('❌ Error al subir imagen: $e');
+      bool isConnected = await Seguridad.comprobarConexion();
+      if (!isConnected) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => NetworkErrorPage())
+        );
+      }
+    }
+    
+    return true;
   }
 
   // SOBRESCRIBO EL HASHCODE PARA DEFINIR CUANDO 2 PUBLICACIONES SON IGUALES

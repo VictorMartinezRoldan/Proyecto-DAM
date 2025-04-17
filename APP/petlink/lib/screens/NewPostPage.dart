@@ -1,6 +1,7 @@
 import 'dart:io' as io;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:petlink/entidades/publicacion.dart';
 import 'package:petlink/services/supabase_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:photo_view/photo_view.dart';
@@ -33,17 +34,30 @@ class _NewPostPageState extends State<NewPostPage> {
   io.File? _imagen;
   final ImagePicker _picker = ImagePicker();
 
+  bool _pickerActivo = false; // Decláralo en tu clase
   // Método para abrir galería o cámara y guardar la imagen
   Future<void> _seleccionarImagen(bool camara) async {
-    final XFile? imagenSeleccionada = await _picker.pickImage(source: (camara) ? ImageSource.camera : ImageSource.gallery);
-    if (imagenSeleccionada != null) {
-      setState(() {
-        _imagen = io.File(imagenSeleccionada.path);
-        isImageOk = true;
-      });
+    if (_pickerActivo) return; // ya está corriendo
+
+    _pickerActivo = true;
+
+    try {
+      final XFile? imagenSeleccionada = await _picker.pickImage(
+        source: camara ? ImageSource.camera : ImageSource.gallery,
+      );
+
+      if (imagenSeleccionada != null) {
+        setState(() {
+          _imagen = io.File(imagenSeleccionada.path);
+          isImageOk = true;
+        });
+      }
+    } catch (e) {
+      print('❌ Error al seleccionar imagen: $e');
+    } finally {
+      _pickerActivo = false; // libera el bloqueo
     }
   }
-
   // ESTILO TEXTFIELD
   final estiloBorde = OutlineInputBorder(
     borderRadius: BorderRadius.circular(15),
@@ -275,6 +289,7 @@ class _NewPostPageState extends State<NewPostPage> {
                                     tag: _imagen!.path,
                                     child: PhotoView(
                                       minScale: PhotoViewComputedScale.contained,
+                                      maxScale: PhotoViewComputedScale.covered * 1.5,
                                       imageProvider: FileImage(_imagen!),
                                     ),
                                   ),
@@ -360,18 +375,20 @@ class _NewPostPageState extends State<NewPostPage> {
                             if (respuesta != null && respuesta == true){
                               if (await _comprobar()){
                                 // LOGICA PARA SUBIR LA PUBLICACIÓN
-      
-                                // DIALOGO EXITO
-                                await showDialog(
-                                  context: context, 
-                                  builder: (context) => DialogoInformacion(
-                                    imagen: Image.asset("assets/perros_dialogos/info_feliz_${(isLightMode) ? "light" : "dark"}.png"),
-                                    titulo: "¡Guau, publicado!", 
-                                    texto: "Tu peludo acaba de\nhacerse famoso", 
-                                    textoBtn: "Volver"
-                                  ),
-                                );
-                                Navigator.pop(context);
+                                bool resultado = await Publicacion.publicar(_textController.text, _imagen!, context);
+                                if (resultado) {
+                                  // DIALOGO EXITO
+                                  await showDialog(
+                                    context: context, 
+                                    builder: (context) => DialogoInformacion(
+                                      imagen: Image.asset("assets/perros_dialogos/info_feliz_${(isLightMode) ? "light" : "dark"}.png"),
+                                      titulo: "¡Guau, publicado!", 
+                                      texto: "Tu peludo acaba de\nhacerse famoso", 
+                                      textoBtn: "Volver"
+                                    ),
+                                  );
+                                  Navigator.pop(context);
+                                }
                               } else {
                                 // DIALOGO ERROR
                                 showDialog(
