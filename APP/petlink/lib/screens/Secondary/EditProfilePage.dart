@@ -19,7 +19,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
   late var tema = Theme.of(context).colorScheme; // EXTRAER TEMA DE LA APP
 
   final SupabaseAuthService authService = SupabaseAuthService();
-  Map<String, dynamic>? datosUser;
 
   File? _imagenPortada;
   File? _imagenPerfil;
@@ -77,7 +76,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
     try {
       final supabase = Supabase.instance.client;
-      final userId = datosUser?['id'];
+      final userId = SupabaseAuthService.id; // ID DEL USUARIO AUTENTICADO
 
       if (userId == null) {
         throw Exception('ID de usuario no disponible');
@@ -147,6 +146,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
         throw Exception('Error al actualizar los datos del usuario');
       }
 
+      // ACTUALIZAR LOS DATOS EN SUPABASEAUTH
+      await authService.obtenerUsuario();
+
       setState(() {
         _cargando = false;
       });
@@ -211,7 +213,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         ],
       ),
       body:
-          _cargando && datosUser == null
+          _cargando
               ? Center(child: CircularProgressIndicator())
               : SingleChildScrollView(
                 child: Column(
@@ -235,14 +237,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                       )
                                       : DecorationImage(
                                         image: CachedNetworkImageProvider(
-                                          datosUser?['imagen_portada'] ??
-                                              'https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png',
+                                          (SupabaseAuthService.isLogin.value)
+                                              ? SupabaseAuthService.imagenPortada
+                                              : 'https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png',
                                         ),
                                         fit: BoxFit.cover,
                                       ),
                             ),
                             child: Container(
-                              color: Colors.black.withOpacity(0.3),
+                              color: Colors.black.withValues(alpha: 0.3),
                               child: Center(
                                 child: Icon(
                                   LineAwesomeIcons.camera,
@@ -275,8 +278,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                         _imagenPerfil != null
                                             ? FileImage(_imagenPerfil!)
                                             : CachedNetworkImageProvider(
-                                                  datosUser?['imagen_perfil'] ??
-                                                      'https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png',
+                                              SupabaseAuthService.imagenPerfil,
                                                 )
                                                 as ImageProvider,
                                   ),
@@ -285,7 +287,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     height: 100,
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
-                                      color: Colors.black.withOpacity(0.3),
+                                      color: Colors.black.withValues(alpha: 0.3),
                                     ),
                                     child: Icon(
                                       LineAwesomeIcons.camera,

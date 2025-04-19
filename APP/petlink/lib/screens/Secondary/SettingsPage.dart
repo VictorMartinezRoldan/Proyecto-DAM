@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:petlink/themes/customColors.dart';
 import 'package:petlink/components/cardSettingsStyle.dart';
-import 'package:provider/provider.dart'; // IMPORTAR PROVIDER
-import 'package:petlink/themes/themeProvider.dart'; // IMPORTAR THEME PROVIDER
+import 'package:provider/provider.dart';
+import 'package:petlink/themes/themeProvider.dart';
+import 'package:petlink/screens/Secondary/Settings/AccountInformationPage.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -50,11 +51,17 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ),
               const SizedBox(height: 15),
-              CardSettingsStyle(
+                CardSettingsStyle(
                 Icons.person,
                 "Información de la cuenta",
                 "Datos personales y acceso",
-              ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AccountInformationPage()),
+                  );
+                },
+                ),
               const SizedBox(height: 15),
               CardSettingsStyle(
                 Icons.language,

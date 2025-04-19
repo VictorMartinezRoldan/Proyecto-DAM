@@ -129,7 +129,7 @@ class _UserPageState extends State<UserPage> {
                       color: tema.surface,
                       boxShadow: [
                         BoxShadow(
-                          color: tema.surface.withOpacity(1.0),
+                          color: tema.surface.withValues(alpha: 1.0),
                           spreadRadius: 40,
                           blurRadius: 30,
                           offset: Offset(0, -1),
