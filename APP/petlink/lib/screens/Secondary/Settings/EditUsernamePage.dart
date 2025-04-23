@@ -5,6 +5,7 @@ import 'package:petlink/themes/customColors.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:petlink/themes/themeProvider.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditUsernamePage extends StatefulWidget {
   const EditUsernamePage({super.key});
@@ -142,7 +143,7 @@ class _EditUsernamePageState extends State<EditUsernamePage> {
         ),
         const SizedBox(height: 16),
         Text(
-          'Actualiza tu nombre de usuario',
+          AppLocalizations.of(context)!.editUsernameTitle,
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -151,7 +152,7 @@ class _EditUsernamePageState extends State<EditUsernamePage> {
         ),
         const SizedBox(height: 12),
         Text(
-          'Elige un nombre único para nuestra comunidad',
+          AppLocalizations.of(context)!.editUsernameTitleDesc,
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 16),
         ),
@@ -167,7 +168,7 @@ class _EditUsernamePageState extends State<EditUsernamePage> {
         Padding(
           padding: const EdgeInsets.only(left: 8.0, bottom: 8),
           child: Text(
-            'Nuevo nombre de usuario',
+            AppLocalizations.of(context)!.editUsernameName,
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w500,
@@ -244,8 +245,8 @@ class _EditUsernamePageState extends State<EditUsernamePage> {
                   color: Colors.white,
                 ),
               )
-            : const Text(
-                'GUARDAR CAMBIOS',
+            : Text(
+                AppLocalizations.of(context)!.editUsernameSave,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -261,8 +262,8 @@ class _EditUsernamePageState extends State<EditUsernamePage> {
     return Center(
       child: TextButton(
         onPressed: _mostrarInfoUsuario,
-        child: const Text(
-          'Sobre los nombres de usuario',
+        child: Text(
+          AppLocalizations.of(context)!.editUsernameInfoTitle,
           style: TextStyle(fontSize: 14),
         ),
       ),
@@ -303,7 +304,7 @@ class _EditUsernamePageState extends State<EditUsernamePage> {
                       Image.asset(logo, width: 80, height: 80),
                       const SizedBox(height: 10),
                       Text(
-                        'Sobre los nombres de usuario',
+                        AppLocalizations.of(context)!.editUsernameInfoTitle,
                         style: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
@@ -319,8 +320,8 @@ class _EditUsernamePageState extends State<EditUsernamePage> {
                 ],
               ),
               const SizedBox(height: 24),
-              const Text(
-                'Tu nombre de usuario es tu identidad en PetLink. Recomendaciones:\n\n• Usa algo memorable\n• Incluye el nombre de tu mascota\n• Evita caracteres especiales\n• Mantenlo apropiado\n• Mínimo 5 caracteres\n• No uses espacios',
+              Text(
+                AppLocalizations.of(context)!.editUsernameInfoBody,
                 style: TextStyle(fontSize: 16, height: 1.6),
               ),
               const SizedBox(height: 24),

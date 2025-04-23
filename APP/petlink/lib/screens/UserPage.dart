@@ -7,6 +7,7 @@ import 'package:petlink/themes/customColors.dart';
 import 'package:petlink/services/supabase_auth.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({super.key});
@@ -76,15 +77,11 @@ class _UserPageState extends State<UserPage> {
   Widget build(BuildContext context) {
     custom = Theme.of(context).extension<CustomColors>()!;
     tema = Theme.of(context).colorScheme;
-    print("DATOS:");
-    print("--> ${SupabaseAuthService.nombre}");
-    print("--> ${SupabaseAuthService.nombreUsuario}");
-    print("--> ${SupabaseAuthService.descripcion}");
 
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Perfil',
+          AppLocalizations.of(context)!.profileTitle,
           style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -129,7 +126,7 @@ class _UserPageState extends State<UserPage> {
                       color: tema.surface,
                       boxShadow: [
                         BoxShadow(
-                          color: tema.surface.withValues(alpha: 1.0),
+                          color: tema.surface.withOpacity(1.0),
                           spreadRadius: 40,
                           blurRadius: 30,
                           offset: Offset(0, -1),
@@ -196,7 +193,7 @@ class _UserPageState extends State<UserPage> {
               },
               icon: Icon(Icons.edit, color: custom.colorEspecial),
               label: Text(
-                'Editar Perfil',
+                AppLocalizations.of(context)!.editProfile,
                 style: TextStyle(color: custom.colorEspecial),
               ),
               style: OutlinedButton.styleFrom(
@@ -213,7 +210,7 @@ class _UserPageState extends State<UserPage> {
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15),
                 child: Text(
-                  'Posts recientes',
+                  AppLocalizations.of(context)!.recentPosts,
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -241,8 +238,8 @@ class _UserPageState extends State<UserPage> {
   }
 
   Widget _buildPostGrid() {
-    if (userPosts.isEmpty) {
-      return Center(child: Text("No hay publicaciones aún."));
+    if (SupabaseAuthService.publicaciones.isEmpty) {
+      return Center(child: Text(AppLocalizations.of(context)!.noPublication));
     }
 
     return GridView.builder(
@@ -253,12 +250,12 @@ class _UserPageState extends State<UserPage> {
         crossAxisSpacing: 4,
         mainAxisSpacing: 4,
       ),
-      itemCount: userPosts.length,
+      itemCount: SupabaseAuthService.publicaciones.length,
       itemBuilder: (context, index) {
         return ClipRRect(
           borderRadius: BorderRadius.circular(8),
           child: Image(
-            image: CachedNetworkImageProvider(userPosts[index]),
+            image: CachedNetworkImageProvider(SupabaseAuthService.publicaciones[index]),
             fit: BoxFit.cover,
           ),
         );

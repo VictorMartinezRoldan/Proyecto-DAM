@@ -5,6 +5,7 @@ import 'package:petlink/screens/Secondary/Settings/EditUsernamePage.dart';
 import 'package:petlink/themes/customColors.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:petlink/services/supabase_auth.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AccountInformationPage extends StatefulWidget {
   const AccountInformationPage({super.key});
@@ -79,7 +80,7 @@ class _AccountInformationPageState extends State<AccountInformationPage> {
               
               // Texto principal
               Text(
-                'Información de la cuenta',
+                AppLocalizations.of(context)!.accountInformationTitle,
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -105,10 +106,10 @@ class _AccountInformationPageState extends State<AccountInformationPage> {
           
           // Texto secundario
           Text(
-            'Gestiona los detalles de tu cuenta',
+            AppLocalizations.of(context)!.accountInformationTitleDesc,
             style: TextStyle(
               fontSize: 14,
-              color: tema.onSurface.withValues(alpha: 0.6),
+              color: tema.onSurface.withOpacity(0.6),
             ),
           ),
           
@@ -136,7 +137,7 @@ class _AccountInformationPageState extends State<AccountInformationPage> {
         children: [
           _construirTarjetaOpcion(
             icon: LineAwesomeIcons.user,
-            titulo: 'Nombre de usuario',
+            titulo: AppLocalizations.of(context)!.accountInformationUsername,
             subtitulo: SupabaseAuthService.nombreUsuario,
             onTap: () => Navigator.push(
               context,
@@ -147,7 +148,7 @@ class _AccountInformationPageState extends State<AccountInformationPage> {
           const SizedBox(height: 16),
           _construirTarjetaOpcion(
             icon: LineAwesomeIcons.envelope,
-            titulo: 'Correo electrónico',
+            titulo: AppLocalizations.of(context)!.accountInformationEmail,
             subtitulo: SupabaseAuthService.correo,
             onTap: () => Navigator.push(
               context,
@@ -158,7 +159,7 @@ class _AccountInformationPageState extends State<AccountInformationPage> {
           const SizedBox(height: 16),
           _construirTarjetaOpcion(
             icon: LineAwesomeIcons.lock,
-            titulo: 'Contraseña',
+            titulo: AppLocalizations.of(context)!.accountInformationPassword,
             subtitulo: '••••••••',
             onTap: () => Navigator.push(
               context,

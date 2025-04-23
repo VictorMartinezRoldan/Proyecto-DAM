@@ -1,0 +1,524 @@
+{
+  "@@locale": "en",
+
+  "profileTitle": "Profile",
+  "@profileTitle": {
+    "description": "Title of the profile page",
+    "context": "profile_page"
+  },
+  "editProfile": "Edit Profile",
+  "@editProfile": {
+    "description": "Button to edit the profile",
+    "context": "profile_page"
+  },
+  "recentPosts": "Recent Posts",
+  "@recentPosts": {
+    "description": "Text to view recent posts",
+    "context": "profile_page"
+  },
+  "noPublication": "No posts yet.",
+  "@noPublication": {
+    "description": "Text indicating there are no posts",
+    "context": "profile_page"
+  },
+
+
+
+
+  "editProfileTitle": "Edit Profile",
+  "@editProfileTitle": {
+    "description": "Title of the profile editing page",
+    "context": "profile_edit"
+  },
+  "save": "Save",
+  "@save": {
+    "description": "Save",
+    "context": "profile_edit"
+  },
+  "name": "Name",
+  "@name": {
+    "description": "Name",
+    "context": "profile_edit"
+  },
+  "description": "Description",
+  "@description": {
+    "description": "Description",
+    "context": "profile_edit"
+  },
+  "saveChanges": "Save Changes",
+  "@saveChanges": {
+    "description": "Save Changes",
+    "context": "profile_edit"
+  },
+
+
+
+
+  "configTitle": "Settings",
+  "@configTitle": {
+    "description": "Title of the settings section",
+    "context": "settings_page"
+  },
+  "settingsAccountInformation": "Account Information",
+  "@settingsAccountInformation": {
+    "description": "Text for the account information section",
+    "context": "settings_page"
+  },
+  "settingsAccountInformationDesc": "Personal information and access",
+  "@settingsAccountInformationDesc": {
+    "description": "Text for the description of the account information section",
+    "context": "settings_page"
+  },
+  "settingsLanguage": "Language",
+  "@settingsLanguage": {
+    "description": "Text for the language section",
+    "context": "settings_page"
+  },
+  "settingsLanguageDesc": "Change the app''s language",
+  "@settingsLanguageDesc": {
+    "description": "Text for the description of the language section",
+    "context": "settings_page"
+  },
+  "personalizationTitle": "Personalization",
+  "@personalizationTitle": {
+    "description": "Title of the personalization section",
+    "context": "settings_page"
+  },
+  "settingsDarkMode": "Dark Mode",
+  "@settingsDarkMode": {
+    "description": "Text for the dark mode section",
+    "context": "settings_page"
+  },
+  "settingsDarkModeDesc": "Change the app''s theme",
+  "@settingsDarkModeDesc": {
+    "description": "Text for the description of the dark mode section",
+    "context": "settings_page"
+  },
+  "notificationTitle": "Notifications",
+  "@notificationTitle": {
+    "description": "Title of the notifications section",
+    "context": "settings_page"
+  },
+  "settingsNotificationPreferences": "Notification Preferences",
+  "@settingsNotificationPreferences": {
+    "description": "Text for the notification preferences section",
+    "context": "settings_page"
+  },
+  "settingsNotificationPreferencesDesc": "Configure alerts and reminders",
+  "@settingsNotificationPreferencesDesc": {
+    "description": "Text for the description of the notification preferences section",
+    "context": "settings_page"
+  },
+  "securityTitle": "Privacy and Security",
+  "@securityTitle": {
+    "description": "Title of the privacy and security section",
+    "context": "settings_page"
+  },
+  "settingsPrivacy": "Account Privacy",
+  "@settingsPrivacy": {
+    "description": "Text for the privacy section",
+    "context": "settings_page"
+  },
+  "settingsPrivacyDesc": "Control who can see your information",
+  "@settingsPrivacyDesc": {
+    "description": "Text for the description of the privacy section",
+    "context": "settings_page"
+  },
+  "settingsSecurity": "Security",
+  "@settingsSecurity": {
+    "description": "Text for the security section",
+    "context": "settings_page"
+  },
+  "settingsSecurityDesc": "Protect your account and personal data",
+  "@settingsSecurityDesc": {
+    "description": "Text for the description of the security section",
+    "context": "settings_page"
+  },
+  "settingsLogout": "Log Out",
+  "@settingsLogout": {
+    "description": "Text for the log out section",
+    "context": "settings_page"
+  },
+  "settingsLogoutDesc": "Sign out of your account",
+  "@settingsLogoutDesc": {
+    "description": "Text for the description of the log out section",
+    "context": "settings_page"
+  },
+
+
+
+
+  "accountInformationTitle": "Account Information",
+  "@accountInformationTitle": {
+    "description": "Title of the account information section",
+    "context": "accountinformation_page"
+  },
+  "accountInformationTitleDesc": "Manage your account details",
+  "@accountInformationTitleDesc": {
+    "description": "Description of the account information section",
+    "context": "accountinformation_page"
+  },
+  "accountInformationUsername": "Username",
+  "@accountInformationUsername": {
+    "description": "Text for the account information section (username)",
+    "context": "accountinformation_page"
+  },
+  "accountInformationEmail": "Email",
+  "@accountInformationEmail": {
+    "description": "Text for the account information section (email)",
+    "context": "accountinformation_page"
+  },
+  "accountInformationPassword": "Password",
+  "@accountInformationPassword": {
+    "description": "Text for the account information section (password)",
+    "context": "accountinformation_page"
+  },
+
+
+
+  "editUsernameTitle": "Update Your Username",
+  "@editUsernameTitle": {
+    "description": "Title of the username editing section",
+    "context": "editusername_page"
+  },
+  "editUsernameTitleDesc": "Choose a unique name for our community",
+  "@editUsernameTitleDesc": {
+    "description": "Description of the username editing section",
+    "context": "editusername_page"
+  },
+  "editUsernameName": "New Username",
+  "@editUsernameName": {
+    "description": "Text for the username field",
+    "context": "editusername_page"
+  },
+  "editUsernameSave": "SAVE CHANGES",
+  "@editUsernameSave": {
+    "description": "Text for the save changes button",
+    "context": "editusername_page"
+  },
+  "editUsernameInfoTitle": "About Usernames",
+  "@editUsernameInfoTitle": {
+    "description": "Title of the link and modal with information about usernames",
+    "context": "editusername_page"
+  },
+  "editUsernameInfoBody": "Your username is your identity on PetLink. Recommendations:\n\n• Use something memorable\n• Include your pet''s name\n• Avoid special characters\n• Keep it appropriate\n• Minimum 5 characters\n• No spaces",
+  "@editUsernameInfoBody": {
+    "description": "Informative text inside the modal explaining recommendations for choosing a username",
+    "context": "editusername_page"
+  },
+
+
+
+  "editEmailTitle": "Update Your Email",
+  "@editEmailTitle": {
+    "description": "Main title on the email editing screen",
+    "context": "editemail_page"
+  },
+  "editEmailTitleDesc": "Enter your current email and the new email to update",
+  "@editEmailTitleDesc": {
+    "description": "Explanatory subtitle on the email editing screen",
+    "context": "editemail_page"
+  },
+  "editEmailCurrentLabel": "Current Email",
+  "@editEmailCurrentLabel": {
+    "description": "Label for the current email field",
+    "context": "editemail_page"
+  },
+  "editEmailNewLabel": "New Email",
+  "@editEmailNewLabel": {
+    "description": "Label for the new email field",
+    "context": "editemail_page"
+  },
+  "editEmailNewHint": "e.g., user@example.com",
+  "@editEmailNewHint": {
+    "description": "Example text for the new email",
+    "context": "editemail_page"
+  },
+  "editEmailConfirmLabel": "Confirm New Email",
+  "@editEmailConfirmLabel": {
+    "description": "Label for the confirm new email field",
+    "context": "editemail_page"
+  },
+  "editEmailConfirmHint": "Confirm your new email",
+  "@editEmailConfirmHint": {
+    "description": "Example text in the email confirmation field",
+    "context": "editemail_page"
+  },
+  "editEmailButtonSave": "UPDATE EMAIL",
+  "@editEmailButtonSave": {
+    "description": "Text for the button that saves email changes",
+    "context": "editemail_page"
+  },
+
+
+
+
+
+
+  "editPasswordTitle": "Change Password",
+  "@editPasswordTitle": {
+    "description": "Main title of the password change screen",
+    "context": "editpassword_page"
+  },
+  "editPasswordTitleDesc": "Enter your current password and the new password you want to use",
+  "@editPasswordTitleDesc": {
+    "description": "Explanatory subtitle on the password change screen",
+    "context": "editpassword_page"
+  },
+  "editPasswordCurrentLabel": "Current Password",
+  "@editPasswordCurrentLabel": {
+    "description": "Label for the current password field",
+    "context": "editpassword_page"
+  },
+  "editPasswordCurrentHint": "Enter your current password",
+  "@editPasswordCurrentHint": {
+    "description": "Example text in the current password field",
+    "context": "editpassword_page"
+  },
+  "editPasswordNewLabel": "New Password",
+  "@editPasswordNewLabel": {
+    "description": "Label for the new password field",
+    "context": "editpassword_page"
+  },
+  "editPasswordNewHint": "Enter your new password",
+  "@editPasswordNewHint": {
+    "description": "Example text in the new password field",
+    "context": "editpassword_page"
+  },
+  "editPasswordConfirmLabel": "Confirm New Password",
+  "@editPasswordConfirmLabel": {
+    "description": "Label for the confirm new password field",
+    "context": "editpassword_page"
+  },
+  "editPasswordConfirmHint": "Confirm your new password",
+  "@editPasswordConfirmHint": {
+    "description": "Example text in the confirm new password field",
+    "context": "editpassword_page"
+  },
+  "editPasswordButtonSave": "CHANGE PASSWORD",
+  "@editPasswordButtonSave": {
+    "description": "Text for the button to confirm the password change",
+    "context": "editpassword_page"
+  },
+
+
+
+
+  "editPasswordStrengthIndicatorLabel": "Password Strength",
+  "@editPasswordStrengthIndicatorLabel": {
+    "description": "Label displayed next to the password strength indicator",
+    "context": "indicator_password_strength_component"
+  },
+  "editPasswordStrengthIndicatorLabelWeak": "Weak",
+  "@editPasswordStrengthIndicatorLabelWeak": {
+    "description": "Label for weak password strength",
+    "context": "indicator_password_strength_component"
+  },
+  "editPasswordStrengthIndicatorLabelMedium": "Medium",
+  "@editPasswordStrengthIndicatorLabelMedium": {
+    "description": "Label for medium password strength",
+    "context": "indicator_password_strength_component"
+  },
+  "editPasswordStrengthIndicatorLabelStrong": "Strong",
+  "@editPasswordStrengthIndicatorLabelStrong": {
+    "description": "Label for strong password strength",
+    "context": "indicator_password_strength_component"
+  },
+
+
+  "selectLanguageTitle": "Select Your Language",
+  "@selectLanguageTitle": {
+    "description": "Title of the language selection page",
+    "context": "selectlanguage_page"
+  },
+  "selectLanguageTitleDesc": "You can change the language at any time",
+  "@selectLanguageTitleDesc": {
+    "description": "Description of the language selection page",
+    "context": "selectlanguage_page"
+  },
+  "selectLanguageButtonSave": "SAVE LANGUAGE",
+  "@selectLanguageButtonSave": {
+    "description": "Text for the button to save the selected language",
+    "context": "selectlanguage_page"
+  },
+
+
+
+
+
+  "newPostTitleDesc": "Share something about your four-legged friend...",
+  "@newPostTitleDesc": {
+    "description": "Description container for the new post page",
+    "context": "newpost_page"
+  },
+  "newPostImageDesc": "Upload a photo of your adorable pup here",
+  "@newPostImageDesc": {
+    "description": "Image container description for the new post page",
+    "context": "newpost_page"
+  },
+  "newPostCameraDesc": "Open the camera",
+  "@newPostCameraDesc": {
+    "description": "Camera container description for the new post page",
+    "context": "newpost_page"
+  },
+  "newPostButtonCancel": "CANCEL",
+  "@newPostButtonCancel": {
+    "description": "Text for the cancel button on the new post page",
+    "context": "newpost_page"
+  },
+  "newPostButtonPublish": "PUBLISH",
+  "@newPostButtonPublish": {
+    "description": "Text for the publish button on the new post page",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderTitle": "Woof! Reminder",
+  "@newPostButtonDialogReminderTitle": {
+    "description": "Title of the post reminder alert button",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderDesc": "Please ensure that the images you share are related to dogs only.\n\nThank you for helping us keep this doggy social network pawsome!",
+  "@newPostButtonDialogReminderDesc": {
+    "description": "Description of the post reminder alert button",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderButtonConfirm": "Got it",
+  "@newPostButtonDialogReminderButtonConfirm": {
+    "description": "Text for the confirmation button of the post reminder alert",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderConfirmExitTitle": "Confirmation",
+  "@newPostButtonDialogReminderConfirmExitTitle": {
+    "description": "Title of the exit confirmation alert",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderConfirmExitTitleDesc": "Do you want to exit?",
+  "@newPostButtonDialogReminderConfirmExitTitleDesc": {
+    "description": "Description of the exit confirmation alert",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderConfirmExitYes": "Yes",
+  "@newPostButtonDialogReminderConfirmExitYes": {
+    "description": "Text for the exit confirmation alert",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderConfirmExitNo": "No",
+  "@newPostButtonDialogReminderConfirmExitNo": {
+    "description": "Text for the exit confirmation alert",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogConfirmTitle": "Confirmation",
+  "@newPostButtonDialogConfirmTitle": {
+    "description": "Title of the post confirmation button",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogConfirmTitleDesc": "Do you want to publish the photo?",
+  "@newPostButtonDialogConfirmTitleDesc": {
+    "description": "Description of the post confirmation button",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogConfirmButtonCancel": "No",
+  "@newPostButtonDialogConfirmButtonCancel": {
+    "description": "Text for the cancel button of the post confirmation alert",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogConfirmButtonPublish": "Yes",
+  "@newPostButtonDialogConfirmButtonPublish": {
+    "description": "Text for the publish button of the post confirmation alert",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogPublishedTitle": "Woof, Published!",
+  "@newPostButtonDialogPublishedTitle": {
+    "description": "Title of the successful post button",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogPublishedTitleDesc": "Your furry friend just\nbecame famous",
+  "@newPostButtonDialogPublishedTitleDesc": {
+    "description": "Description of the successful post button",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogPublishedReturn": "Back",
+  "@newPostButtonDialogPublishedReturn": {
+    "description": "Text for the return button after publishing",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogErrorTitle": "Oops... Something''s Missing",
+  "@newPostButtonDialogErrorTitle": {
+    "description": "Title of the post error button",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogErrorTitleDesc": "Check the fields in red\nto continue",
+  "@newPostButtonDialogErrorTitleDesc": {
+    "description": "Description of the post error button",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogErrorReturn": "Let''s do this",
+  "@newPostButtonDialogErrorReturn": {
+    "description": "Text for the return button after an error",
+    "context": "newpost_page"
+  },
+
+
+
+
+
+
+
+
+
+  "lateralMenuProfileTitle": "MY PROFILE",
+  "@lateralMenuProfileTitle": {
+    "description": "Profile button title in the lateral menu",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuProfileTitleDesc": "Go to my profile",
+  "@lateralMenuProfileTitleDesc": {
+    "description": "Description of the profile button in the lateral menu",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuProfileLogOutTitleDesc": "Log in to view your profile",
+  "@lateralMenuProfileLogOutTitleDesc": {
+    "description": "Description of the disconnected profile button in the lateral menu",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuPetsTitle": "PETS",
+  "@lateralMenuPetsTitle": {
+    "description": "Pets button title in the lateral menu",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuPetsTitleDesc": "View or add your pets",
+  "@lateralMenuPetsTitleDesc": {
+    "description": "Description of the pets button in the lateral menu",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuPetsLogOutTitleDesc": "Log in to view or add your pets",
+  "@lateralMenuPetsLogOutTitleDesc": {
+    "description": "Description of the disconnected pets button in the lateral menu",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuSettingsTitle": "SETTINGS",
+  "@lateralMenuSettingsTitle": {
+    "description": "Settings button title in the lateral menu",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuSettingsTitleDesc": "Go to settings",
+  "@lateralMenuSettingsTitleDesc": {
+    "description": "Description of the settings button in the lateral menu",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuLogOut": "LOG OUT",
+  "@lateralMenuLogOut": {
+    "description": "Text of the log out button in the lateral menu",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuLogIn": "LOG IN",
+  "@lateralMenuLogIn": {
+    "description": "Text of the log in button in the lateral menu",
+    "context": "lateralmenu_component"
+  }
+
+
+
+
+
+
+}

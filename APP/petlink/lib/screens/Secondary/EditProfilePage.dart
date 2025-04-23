@@ -6,6 +6,7 @@ import 'package:petlink/services/supabase_auth.dart';
 import 'package:petlink/themes/customColors.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({super.key});
@@ -186,7 +187,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Editar Perfil',
+          AppLocalizations.of(context)!.editProfileTitle,
           style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -206,7 +207,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 onPressed: _guardarPerfil,
                 icon: Icon(LineAwesomeIcons.save, color: custom.colorEspecial),
                 label: Text(
-                  "Guardar",
+                  AppLocalizations.of(context)!.save,
                   style: TextStyle(color: custom.colorEspecial, fontSize: 16),
                 ),
               ),
@@ -245,7 +246,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                       ),
                             ),
                             child: Container(
-                              color: Colors.black.withValues(alpha: 0.3),
+                              color: Colors.black.withOpacity(0.3),
                               child: Center(
                                 child: Icon(
                                   LineAwesomeIcons.camera,
@@ -287,7 +288,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     height: 100,
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
-                                      color: Colors.black.withValues(alpha: 0.3),
+                                      color: Colors.black.withOpacity(0.3),
                                     ),
                                     child: Icon(
                                       LineAwesomeIcons.camera,
@@ -310,13 +311,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         children: [
                           _construirTextos(
                             controller: _controladorNombre,
-                            label: 'Nombre',
+                            label: AppLocalizations.of(context)!.name,
                             icon: LineAwesomeIcons.user,
                           ),
                           SizedBox(height: 15),
                           _construirTextos(
                             controller: _controladorDescripcion,
-                            label: 'Descripción',
+                            label: AppLocalizations.of(context)!.description,
                             icon: LineAwesomeIcons.info_circle,
                             maxLines: 3,
                           ),
@@ -339,7 +340,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                         color: custom.contenedor,
                                       )
                                       : Text(
-                                        'Guardar Cambios',
+                                        AppLocalizations.of(context)!.saveChanges,
                                         style: TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold,

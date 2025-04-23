@@ -6,6 +6,7 @@ import 'package:petlink/services/supabase_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // CLASES
 import 'package:petlink/components/dialogoInformacion.dart';
@@ -75,9 +76,9 @@ class _NewPostPageState extends State<NewPostPage> {
         context: context,
         builder: (context) => DialogoInformacion(
           imagen: Image.asset("assets/perros_dialogos/info_feliz_${(Provider.of<ThemeProvider>(context).isLightMode) ? "light" : "dark"}.png"),
-          titulo: "¡Guau! Recordatorio",
-          texto: "Por favor, asegúrate de que las imágenes que compartas estén relacionadas solo con perritos.\n\n¡Gracias por ayudarnos a mantener esta red social de perritos!",
-          textoBtn: "Entendido"
+          titulo: AppLocalizations.of(context)!.newPostButtonDialogReminderTitle,
+          texto: AppLocalizations.of(context)!.newPostButtonDialogReminderDesc,
+          textoBtn: AppLocalizations.of(context)!.newPostButtonDialogReminderButtonConfirm,
         ),
       );
     });
@@ -201,7 +202,7 @@ class _NewPostPageState extends State<NewPostPage> {
                               border: estiloBorde,
                               enabledBorder: estiloBorde,
                               disabledBorder: estiloBorde,
-                              hintText: "Cuenta algo sobre tu colega de cuatro patas...",
+                              hintText: AppLocalizations.of(context)!.newPostTitleDesc,
                               hintStyle: TextStyle(color: (isTextOk) ? custom.textoSuave : Colors.red),
                             ),
                             onTap: () {
@@ -245,7 +246,7 @@ class _NewPostPageState extends State<NewPostPage> {
                                           SizedBox(height: 20),
                                           SizedBox(
                                             width: 200,
-                                            child: Text("Sube aquí una foto de tu adorable perrito o perrita", textAlign: TextAlign.center, style: TextStyle(color: (isImageOk) ? custom.textoSuave : Colors.red, fontWeight: FontWeight.bold),)
+                                            child: Text(AppLocalizations.of(context)!.newPostImageDesc, textAlign: TextAlign.center, style: TextStyle(color: (isImageOk) ? custom.textoSuave : Colors.red, fontWeight: FontWeight.bold),)
                                           ),
                                         ],
                                       ),
@@ -260,7 +261,7 @@ class _NewPostPageState extends State<NewPostPage> {
                                     onPressed: (){
                                       _seleccionarImagen(true);
                                     },
-                                    label: Text("Abrir la cámara", style: TextStyle(fontWeight: FontWeight.bold)),
+                                    label: Text(AppLocalizations.of(context)!.newPostCameraDesc, style: TextStyle(fontWeight: FontWeight.bold)),
                                     icon: Icon(Icons.camera_alt_rounded),
                                     style: TextButton.styleFrom(
                                       minimumSize: Size(50, 50),
@@ -341,10 +342,10 @@ class _NewPostPageState extends State<NewPostPage> {
                               context: context, 
                               builder: (context) => DialogoPregunta(
                                 imagen: Image.asset("assets/perros_dialogos/preg_triste_${(isLightMode) ? "light" : "dark"}.png"),
-                                titulo: "Confirmación", 
-                                texto: "¿Quieres salir?",
-                                textoBtn1: "Si",
-                                textoBtn2: "No",
+                                titulo: AppLocalizations.of(context)!.newPostButtonDialogReminderConfirmExitTitle, 
+                                texto: AppLocalizations.of(context)!.newPostButtonDialogReminderConfirmExitTitleDesc,
+                                textoBtn1: AppLocalizations.of(context)!.newPostButtonDialogReminderConfirmExitYes,
+                                textoBtn2: AppLocalizations.of(context)!.newPostButtonDialogReminderConfirmExitNo,
                               ),
                             );
                             if (respuesta != null && respuesta == false){
@@ -355,7 +356,7 @@ class _NewPostPageState extends State<NewPostPage> {
                             backgroundColor: custom.fondoSuave,
                             padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15)
                           ),
-                          child: Text("CANCELAR", style: TextStyle(color: custom.textoSuave, fontWeight: FontWeight.bold)),
+                          child: Text(AppLocalizations.of(context)!.newPostButtonCancel, style: TextStyle(color: custom.textoSuave, fontWeight: FontWeight.bold)),
                         ),
                         SizedBox(width: 55),
                         // BOTON PUBLICAR
@@ -366,10 +367,10 @@ class _NewPostPageState extends State<NewPostPage> {
                               context: context, 
                               builder: (context) => DialogoPregunta(
                                 imagen: Image.asset("assets/perros_dialogos/preg_feliz_${(isLightMode) ? "light" : "dark"}.png"),
-                                titulo: "Confirmación", 
-                                texto: "¿Quieres publicar la foto?",
-                                textoBtn1: "No",
-                                textoBtn2: "Publicar",
+                                titulo: AppLocalizations.of(context)!.newPostButtonDialogConfirmTitle, 
+                                texto: AppLocalizations.of(context)!.newPostButtonDialogConfirmTitleDesc,
+                                textoBtn1: AppLocalizations.of(context)!.newPostButtonDialogConfirmButtonCancel,
+                                textoBtn2: AppLocalizations.of(context)!.newPostButtonDialogConfirmButtonPublish,
                               ),
                             );
                             if (respuesta != null && respuesta == true){
@@ -382,9 +383,9 @@ class _NewPostPageState extends State<NewPostPage> {
                                     context: context, 
                                     builder: (context) => DialogoInformacion(
                                       imagen: Image.asset("assets/perros_dialogos/info_feliz_${(isLightMode) ? "light" : "dark"}.png"),
-                                      titulo: "¡Guau, publicado!", 
-                                      texto: "Tu peludo acaba de\nhacerse famoso", 
-                                      textoBtn: "Volver"
+                                      titulo: AppLocalizations.of(context)!.newPostButtonDialogPublishedTitle, 
+                                      texto: AppLocalizations.of(context)!.newPostButtonDialogPublishedTitleDesc, 
+                                      textoBtn: AppLocalizations.of(context)!.newPostButtonDialogPublishedReturn,
                                     ),
                                   );
                                   Navigator.pop(context);
@@ -395,9 +396,9 @@ class _NewPostPageState extends State<NewPostPage> {
                                   context: context, 
                                   builder: (context) => DialogoInformacion(
                                     imagen: Image.asset("assets/perros_dialogos/info_triste_${(isLightMode) ? "light" : "dark"}.png"),
-                                    titulo: "Ups.. falta algo", 
-                                    texto: "Revisa los campos en rojo\npara poder continuar", 
-                                    textoBtn: "Vamos a ello"),
+                                    titulo: AppLocalizations.of(context)!.newPostButtonDialogErrorTitle, 
+                                    texto: AppLocalizations.of(context)!.newPostButtonDialogErrorTitleDesc, 
+                                    textoBtn: AppLocalizations.of(context)!.newPostButtonDialogErrorReturn),
                                 );
                               }
                             }
@@ -407,7 +408,7 @@ class _NewPostPageState extends State<NewPostPage> {
                             foregroundColor: custom.contenedor,
                             padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15)
                           ),
-                          child: Text("PUBLICAR", style: TextStyle(fontWeight: FontWeight.bold))
+                          child: Text(AppLocalizations.of(context)!.newPostButtonPublish, style: TextStyle(fontWeight: FontWeight.bold))
                         )
                       ],
                     ),

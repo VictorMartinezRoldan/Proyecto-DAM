@@ -5,6 +5,7 @@ import 'package:petlink/screens/Secondary/AuthController.dart';
 import 'package:petlink/services/supabase_auth.dart';
 import 'package:petlink/themes/customColors.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MenuLateral extends StatefulWidget {
   const MenuLateral({super.key});
@@ -100,17 +101,17 @@ class _MenuLateralState extends State<MenuLateral> {
                   SizedBox(height: 30),
                   CardSettingsStyle(
                     Icons.person,
-                    "MI PERFIL",
-                    (isLogin) ? "Ir a mi perfil" : "Inicia sesión para ver tu perfil",
+                    AppLocalizations.of(context)!.lateralMenuProfileTitle,
+                    (isLogin) ? AppLocalizations.of(context)!.lateralMenuProfileTitleDesc : AppLocalizations.of(context)!.lateralMenuProfileLogOutTitleDesc,
                   ),
                   SizedBox(height: 20),
                   CardSettingsStyle(
                     Icons.pets,
-                    "MASCOTAS",
-                    (isLogin) ? "Ver o agregar tus mascotas" : "Inicia sesión para ver o agregar tus mascotas",
+                    AppLocalizations.of(context)!.lateralMenuPetsTitle,
+                    (isLogin) ? AppLocalizations.of(context)!.lateralMenuPetsTitleDesc : AppLocalizations.of(context)!.lateralMenuPetsLogOutTitleDesc,
                   ),
                   SizedBox(height: 20),
-                  CardSettingsStyle(Icons.settings, "AJUSTES", "Ir a ajustes"),
+                  CardSettingsStyle(Icons.settings, AppLocalizations.of(context)!.lateralMenuSettingsTitle, AppLocalizations.of(context)!.lateralMenuSettingsTitleDesc),
                   SizedBox(height: 40),
                   SizedBox(
                     width: double.infinity,
@@ -143,7 +144,7 @@ class _MenuLateralState extends State<MenuLateral> {
                         )
                       ), 
                       child: Text(
-                        (isLogin) ? "CERRAR SESION" : "INICIAR SESION", 
+                        (isLogin) ? AppLocalizations.of(context)!.lateralMenuLogOut : AppLocalizations.of(context)!.lateralMenuLogIn, 
                         style: TextStyle(fontWeight: FontWeight.bold, color: (isLogin) ? Colors.white : custom.contenedor)),
                     ),
                   ),

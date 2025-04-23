@@ -5,6 +5,7 @@ import 'package:petlink/themes/customColors.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:petlink/themes/themeProvider.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditEmailPage extends StatefulWidget {
   const EditEmailPage({super.key});
@@ -169,17 +170,20 @@ class _EditEmailPageState extends State<EditEmailPage> {
         Icon(
           Icons.email_outlined,
           size: 70,
-          color: custom.colorEspecial.withValues(alpha: 0.8),
+          color: custom.colorEspecial?.withOpacity(0.8),
         ),
         const SizedBox(height: 16),
         Text(
-          'Actualiza tu correo electrónico',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          AppLocalizations.of(context)!.editEmailTitle,
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 12),
         Text(
-          'Ingresa tu correo actual y el nuevo correo para actualizar',
+          AppLocalizations.of(context)!.editEmailTitleDesc,
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 16),
         ),
@@ -194,7 +198,7 @@ class _EditEmailPageState extends State<EditEmailPage> {
         Padding(
           padding: const EdgeInsets.only(left: 8.0, bottom: 8),
           child: Text(
-            'Correo electrónico actual',
+            AppLocalizations.of(context)!.editEmailCurrentLabel,
             style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
           ),
         ),
@@ -222,7 +226,6 @@ class _EditEmailPageState extends State<EditEmailPage> {
                 vertical: 16,
               ),
               prefixIcon: const Icon(Icons.email_rounded),
-              hintText: 'Tu correo actual',
               hintStyle: TextStyle(
                 color: tema.onBackground.withValues(alpha: 0.4),
               ),
@@ -240,7 +243,7 @@ class _EditEmailPageState extends State<EditEmailPage> {
         Padding(
           padding: const EdgeInsets.only(left: 8.0, bottom: 8),
           child: Text(
-            'Nuevo correo electrónico',
+            AppLocalizations.of(context)!.editEmailNewLabel,
             style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
           ),
         ),
@@ -267,7 +270,7 @@ class _EditEmailPageState extends State<EditEmailPage> {
                 vertical: 16,
               ),
               prefixIcon: const Icon(Icons.alternate_email_rounded),
-              hintText: 'ej: usuario@example.com',
+              hintText: AppLocalizations.of(context)!.editEmailNewHint,
               hintStyle: TextStyle(
                 color: tema.onBackground.withValues(alpha: 0.4),
               ),
@@ -285,7 +288,7 @@ class _EditEmailPageState extends State<EditEmailPage> {
         Padding(
           padding: const EdgeInsets.only(left: 8.0, bottom: 8),
           child: Text(
-            'Confirmar nuevo correo',
+            AppLocalizations.of(context)!.editEmailConfirmLabel,
             style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
           ),
         ),
@@ -312,7 +315,7 @@ class _EditEmailPageState extends State<EditEmailPage> {
                 vertical: 16,
               ),
               prefixIcon: const Icon(Icons.alternate_email_rounded),
-              hintText: 'Confirma tu nuevo correo',
+              hintText: AppLocalizations.of(context)!.editEmailConfirmHint,
               hintStyle: TextStyle(
                 color: tema.onBackground.withValues(alpha: 0.4),
               ),
@@ -346,8 +349,8 @@ class _EditEmailPageState extends State<EditEmailPage> {
                     color: Colors.white,
                   ),
                 )
-                : const Text(
-                  'ACTUALIZAR CORREO',
+                : Text(
+                  AppLocalizations.of(context)!.editEmailButtonSave,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

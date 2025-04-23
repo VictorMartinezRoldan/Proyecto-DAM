@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:petlink/screens/Secondary/Settings/SelectLanguagePage.dart';
 import 'package:petlink/themes/customColors.dart';
 import 'package:petlink/components/cardSettingsStyle.dart';
 import 'package:provider/provider.dart';
 import 'package:petlink/themes/themeProvider.dart';
 import 'package:petlink/screens/Secondary/Settings/AccountInformationPage.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -42,7 +44,7 @@ class _SettingsPageState extends State<SettingsPage> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Configuración",
+                  AppLocalizations.of(context)!.configTitle,
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontSize: 20,
@@ -53,8 +55,8 @@ class _SettingsPageState extends State<SettingsPage> {
               const SizedBox(height: 15),
                 CardSettingsStyle(
                 Icons.person,
-                "Información de la cuenta",
-                "Datos personales y acceso",
+                AppLocalizations.of(context)!.settingsAccountInformation,
+                AppLocalizations.of(context)!.settingsAccountInformationDesc,
                 onTap: () {
                   Navigator.push(
                     context,
@@ -65,14 +67,20 @@ class _SettingsPageState extends State<SettingsPage> {
               const SizedBox(height: 15),
               CardSettingsStyle(
                 Icons.language,
-                "Idioma",
-                "Cambia el idioma de la aplicación",
+                AppLocalizations.of(context)!.settingsLanguage,
+                AppLocalizations.of(context)!.settingsLanguageDesc,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SelectLanguagePage()),
+                  );
+                },
               ),
               const SizedBox(height: 20),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Personalización",
+                  AppLocalizations.of(context)!.personalizationTitle,
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontSize: 20,
@@ -83,8 +91,8 @@ class _SettingsPageState extends State<SettingsPage> {
               const SizedBox(height: 15),
               CardSettingsStyle(
                 Icons.brightness_6,
-                "Modo Oscuro",
-                "Cambia el tema de la aplicación",
+                AppLocalizations.of(context)!.settingsDarkMode,
+                AppLocalizations.of(context)!.settingsDarkModeDesc,
                 isSwitch: true,
                 onSwitchChanged: _toggleTheme,
               ),
@@ -92,7 +100,7 @@ class _SettingsPageState extends State<SettingsPage> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Notificaciones",
+                  AppLocalizations.of(context)!.notificationTitle,
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontSize: 20,
@@ -103,14 +111,14 @@ class _SettingsPageState extends State<SettingsPage> {
               const SizedBox(height: 15),
               CardSettingsStyle(
                 Icons.notifications,
-                "Preferencias de notificaciones",
-                "Configura alertas y recordatorios",
+                AppLocalizations.of(context)!.settingsNotificationPreferences,
+                AppLocalizations.of(context)!.settingsNotificationPreferencesDesc,
               ),
               const SizedBox(height: 20),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Privacidad y Seguridad",
+                  AppLocalizations.of(context)!.securityTitle,
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontSize: 20,
@@ -121,20 +129,21 @@ class _SettingsPageState extends State<SettingsPage> {
               const SizedBox(height: 15),
               CardSettingsStyle(
                 Icons.lock,
-                "Privacidad de la cuenta",
-                "Controla tus datos y permisos",
+                AppLocalizations.of(context)!.settingsPrivacy,
+                AppLocalizations.of(context)!.settingsPrivacyDesc,
               ),
               const SizedBox(height: 15),
               CardSettingsStyle(
                 Icons.security,
-                "Seguridad",
-                "Protege tu cuenta",
+                AppLocalizations.of(context)!.settingsSecurity,
+                AppLocalizations.of(context)!.settingsSecurityDesc,
               ),
               const SizedBox(height: 15),
               CardSettingsStyle(
                 Icons.logout,
-                "Cerrar Sesión",
-                "Salir de la aplicación",
+                AppLocalizations.of(context)!.settingsLogout,
+                AppLocalizations.of(context)!.settingsLogoutDesc,
+
               ),
             ],
           ),

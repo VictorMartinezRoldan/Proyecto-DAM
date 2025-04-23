@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class IndicadorFuerzaPassword extends StatelessWidget {
   final String password;
@@ -52,7 +53,7 @@ class IndicadorFuerzaPassword extends StatelessWidget {
       children: [
         const SizedBox(height: 8),
         Text(
-          'Seguridad de la contraseña:',
+          AppLocalizations.of(context)!.editPasswordStrengthIndicatorLabel,
           style: TextStyle(
             fontSize: 12,
             color: defaultTextColor,
@@ -77,10 +78,10 @@ class IndicadorFuerzaPassword extends StatelessWidget {
             const SizedBox(width: 8),
             Text(
               strength == 'weak' 
-                  ? 'Débil' 
+                  ? AppLocalizations.of(context)!.editPasswordStrengthIndicatorLabelWeak 
                   : strength == 'medium' 
-                      ? 'Media' 
-                      : 'Fuerte',
+                      ? AppLocalizations.of(context)!.editPasswordStrengthIndicatorLabelMedium 
+                      : AppLocalizations.of(context)!.editPasswordStrengthIndicatorLabelStrong,
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.bold,

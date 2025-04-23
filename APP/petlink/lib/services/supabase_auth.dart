@@ -11,6 +11,7 @@ class SupabaseAuthService {
   static String nombreUsuario = "";
   static String correo = "";
   static String descripcion = "";
+  static List<String> publicaciones = [];
 
   Future<void> obtenerUsuario() async {
     try {
@@ -49,6 +50,9 @@ class SupabaseAuthService {
       correo = datos["correo"];
       SupabaseAuthService.isLogin.value = true;
       print("ID --> $id");
+
+      await obtenerPublicaciones();
+
     } catch (error) {
       return null;
     }
@@ -73,6 +77,37 @@ class SupabaseAuthService {
       return true;
     } catch (error) {
       return false;
+    }
+  }
+
+    Future<void> obtenerPublicaciones() async {
+
+     try {
+      if (id.isEmpty) {
+        print("⛔ ID de usuario no disponible");
+        return;
+      }
+
+      final response = await supabase
+          .from('publicaciones')
+          .select('imagen_url')
+          .eq('id_usuario', id);
+
+      print("📡 Respuesta de publicaciones: $response");
+
+      if (response.isNotEmpty) {
+        publicaciones = response
+            .map((post) => post['imagen_url'] as String?)
+            .whereType<String>()
+            .toList();
+        print("✅ Publicaciones cargadas: ${publicaciones.length}");
+      } else {
+        publicaciones = [];
+        print("⚠️ No hay publicaciones para este usuario.");
+      }
+    } catch (e) {
+      publicaciones = [];
+      print("❌ Error obteniendo publicaciones: $e");
     }
   }
 

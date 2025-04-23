@@ -4,6 +4,7 @@ import 'package:petlink/components/mensajeSnackbar.dart';
 import 'package:petlink/services/supabase_auth.dart';
 import 'package:petlink/themes/customColors.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditPasswordPage extends StatefulWidget {
   const EditPasswordPage({super.key});
@@ -161,7 +162,7 @@ class _EditPasswordPageState extends State<EditPasswordPage> {
         ),
         const SizedBox(height: 16),
         Text(
-          'Cambiar contraseña',
+          AppLocalizations.of(context)!.editPasswordTitle,
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -170,7 +171,7 @@ class _EditPasswordPageState extends State<EditPasswordPage> {
         ),
         const SizedBox(height: 12),
         Text(
-          'Ingresa tu contraseña actual y la nueva contraseña que deseas usar',
+          AppLocalizations.of(context)!.editPasswordTitleDesc,
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 16),
         ),
@@ -185,7 +186,7 @@ class _EditPasswordPageState extends State<EditPasswordPage> {
         Padding(
           padding: const EdgeInsets.only(left: 8.0, bottom: 8),
           child: Text(
-            'Contraseña actual',
+            AppLocalizations.of(context)!.editPasswordCurrentLabel,
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w500,
@@ -230,7 +231,7 @@ class _EditPasswordPageState extends State<EditPasswordPage> {
                   });
                 },
               ),
-              hintText: 'Ingresa tu contraseña actual',
+              hintText: AppLocalizations.of(context)!.editPasswordCurrentHint,
               hintStyle: TextStyle(
                 color: tema.onBackground.withValues(alpha: 0.4),
               ),
@@ -248,7 +249,7 @@ class _EditPasswordPageState extends State<EditPasswordPage> {
         Padding(
           padding: const EdgeInsets.only(left: 8.0, bottom: 8),
           child: Text(
-            'Nueva contraseña',
+            AppLocalizations.of(context)!.editPasswordNewLabel,
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w500,
@@ -294,7 +295,7 @@ class _EditPasswordPageState extends State<EditPasswordPage> {
                   });
                 },
               ),
-              hintText: 'Ingresa tu nueva contraseña',
+              hintText: AppLocalizations.of(context)!.editPasswordNewHint,
               hintStyle: TextStyle(
                 color: tema.onBackground.withValues(alpha: 0.4),
               ),
@@ -315,7 +316,7 @@ class _EditPasswordPageState extends State<EditPasswordPage> {
         Padding(
           padding: const EdgeInsets.only(left: 8.0, bottom: 8),
           child: Text(
-            'Confirmar nueva contraseña',
+            AppLocalizations.of(context)!.editPasswordConfirmLabel,
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w500,
@@ -360,7 +361,7 @@ class _EditPasswordPageState extends State<EditPasswordPage> {
                   });
                 },
               ),
-              hintText: 'Confirma tu nueva contraseña',
+              hintText: AppLocalizations.of(context)!.editPasswordConfirmHint,
               hintStyle: TextStyle(
                 color: tema.onBackground.withValues(alpha: 0.4),
               ),
@@ -393,8 +394,8 @@ class _EditPasswordPageState extends State<EditPasswordPage> {
                   color: Colors.white,
                 ),
               )
-            : const Text(
-                'CAMBIAR CONTRASEÑA',
+            : Text(
+                AppLocalizations.of(context)!.editPasswordButtonSave,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
