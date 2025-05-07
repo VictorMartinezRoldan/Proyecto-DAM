@@ -50,6 +50,41 @@
     "description": "Save Changes",
     "context": "profile_edit"
   },
+  "editProfileFront": "Select cover image",
+"@editProfileFront": {
+  "description": "Select cover image",
+  "context": "profile_edit"
+},
+"editProfileProfile": "Select profile image",
+"@editProfileProfile": {
+  "description": "Select profile image",
+  "context": "profile_edit"
+},
+"editProfileGallery": "Gallery",
+"@editProfileGallery": {
+  "description": "Text description for selecting from gallery",
+  "context": "profile_edit"
+},
+"editProfileCamera": "Camera",
+"@editProfileCamera": {
+  "description": "Text description for selecting from camera",
+  "context": "profile_edit"
+},
+"editProfileImage": "Default images",
+"@editProfileImage": {
+  "description": "Text description for selecting default images",
+  "context": "profile_edit"
+},
+"editProfileCancel": "Cancel",
+"@editProfileCancel": {
+  "description": "Text description for cancel",
+  "context": "profile_edit"
+},
+"editProfileNotAvailable": "No images available",
+"@editProfileNotAvailable": {
+  "description": "Text description for no images available",
+  "context": "profile_edit"
+},
 
 
 
