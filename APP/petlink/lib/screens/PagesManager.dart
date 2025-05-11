@@ -6,6 +6,7 @@ import 'package:petlink/entidades/seguridad.dart';
 import 'package:petlink/screens/NewPostPage.dart';
 import 'package:petlink/screens/PetSocialPage.dart';
 import 'package:petlink/screens/PetWikiPage.dart';
+import 'package:petlink/screens/PetlinkCamera.dart';
 import 'package:petlink/screens/Secondary/NetworkErrorPage.dart';
 import 'package:petlink/screens/UserPage.dart';
 import 'package:petlink/themes/customColors.dart';
@@ -153,7 +154,10 @@ class _PagesManagerState extends State<PagesManager> {
               gotoNewPostPage();
             }
           } else if (value == 3) {
-            // ACCION CAMARA (IA)
+              Navigator.push(
+                context, 
+                MaterialPageRoute(builder: (context) => PetlinkCamera())
+              );
           } else {
             _onItemTapped(value); // CAMBIAR DE VENTANA CON ANIMACIÓN
           }

@@ -145,6 +145,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 AppLocalizations.of(context)!.settingsLogoutDesc,
 
               ),
+              const SizedBox(height: 15)
             ],
           ),
         ),

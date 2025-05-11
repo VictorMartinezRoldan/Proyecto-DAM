@@ -22,14 +22,17 @@ class _SelectLanguagePageState extends State<SelectLanguagePage> {
 
   // Mapa de idiomas con nombre y el emoji de bandera
   final Map<String, Map<String, dynamic>> _idiomas = {
-    'es': {'nombre': 'Español', 'bandera': '🇪🇸'},
-    'en': {'nombre': 'English', 'bandera': '🇬🇧'},
-    'fr': {'nombre': 'Français', 'bandera': '🇫🇷'},
-    'de': {'nombre': 'Deutsch', 'bandera': '🇩🇪'},
-    'it': {'nombre': 'Italiano', 'bandera': '🇮🇹'},
-    'pt': {'nombre': 'Português', 'bandera': '🇧🇷'},
-    'ru': {'nombre': 'Русский', 'bandera': '🇷🇺'},
-    'zh': {'nombre': '中文', 'bandera': '🇨🇳'},
+    'es': {'nombre': 'Español', 'bandera': '🇪🇸'},   // ESPAÑOL
+    'en': {'nombre': 'English', 'bandera': '🇬🇧'},   // INGLÉS
+    'fr': {'nombre': 'Français', 'bandera': '🇫🇷'},  // FRANCÉS
+    'zh': {'nombre': '中文', 'bandera': '🇨🇳'},      // CHINO
+    'ja': {'nombre': '日本語', 'bandera': '🇯🇵'},     // JAPONÉS
+    'it': {'nombre': 'Italiano', 'bandera': '🇮🇹'},  // ITALIANO
+    'pt': {'nombre': 'Português', 'bandera': '🇧🇷'}, // PORTUGUÉS
+    'de': {'nombre': 'Deutsch', 'bandera': '🇩🇪'},   // ALEMÁN
+    'ru': {'nombre': 'Русский', 'bandera': '🇷🇺'},   // RUSO
+    'hi': {'nombre': 'हिन्दी', 'bandera': '🇮🇳'},      // Hindi
+    'ar': {'nombre': 'عربي', 'bandera': '🇸🇦'},     // Árabe (Arabia Saudita)
   };
 
   // Método para guardar el idioma seleccionado

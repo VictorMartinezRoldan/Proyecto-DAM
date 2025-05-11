@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:petlink/components/cardSettingsStyle.dart';
 import 'package:petlink/screens/Secondary/AuthController.dart';
+import 'package:petlink/screens/Secondary/SettingsPage.dart';
+import 'package:petlink/screens/UserPage.dart';
 import 'package:petlink/services/supabase_auth.dart';
 import 'package:petlink/themes/customColors.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -102,7 +104,10 @@ class _MenuLateralState extends State<MenuLateral> {
                   CardSettingsStyle(
                     Icons.person,
                     AppLocalizations.of(context)!.lateralMenuProfileTitle,
-                    (isLogin) ? AppLocalizations.of(context)!.lateralMenuProfileTitleDesc : AppLocalizations.of(context)!.lateralMenuProfileLogOutTitleDesc,
+                    (isLogin) ? AppLocalizations.of(context)!.lateralMenuProfileTitleDesc : AppLocalizations.of(context)!.lateralMenuProfileLogOutTitleDesc, onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => UserPage()));
+                    },
                   ),
                   SizedBox(height: 20),
                   CardSettingsStyle(
@@ -111,7 +116,11 @@ class _MenuLateralState extends State<MenuLateral> {
                     (isLogin) ? AppLocalizations.of(context)!.lateralMenuPetsTitleDesc : AppLocalizations.of(context)!.lateralMenuPetsLogOutTitleDesc,
                   ),
                   SizedBox(height: 20),
-                  CardSettingsStyle(Icons.settings, AppLocalizations.of(context)!.lateralMenuSettingsTitle, AppLocalizations.of(context)!.lateralMenuSettingsTitleDesc),
+                  // Botón de ajustes
+                  CardSettingsStyle(Icons.settings, AppLocalizations.of(context)!.lateralMenuSettingsTitle, AppLocalizations.of(context)!.lateralMenuSettingsTitleDesc, onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsPage()));
+                  },),
                   SizedBox(height: 40),
                   SizedBox(
                     width: double.infinity,

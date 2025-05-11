@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:petlink/screens/Secondary/NetworkErrorPage.dart';
 import 'package:petlink/screens/PagesManager.dart';
@@ -39,6 +40,7 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
+  static final cameras = availableCameras(); // Recoge información sobre las cámaras disponibles, proceso un poco lento.
   const MyApp({super.key});
 
   @override
