@@ -16,13 +16,16 @@ class EsquinasCamara extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
+    return AnimatedPositioned(
+      duration: Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
       left: x,
       top: y,
-      child: Container(
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
         width: width,
         height: height,
-        
         child: CustomPaint(
           painter: EsquinasPainter(),
         ),

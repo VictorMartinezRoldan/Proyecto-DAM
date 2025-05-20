@@ -2,8 +2,6 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:petlink/screens/Secondary/NetworkErrorPage.dart';
-import 'package:petlink/screens/PagesManager.dart';
 import 'package:petlink/screens/StartingAnimation.dart';
 import 'package:petlink/services/supabase_auth.dart';
 import 'package:petlink/themes/themeProvider.dart';

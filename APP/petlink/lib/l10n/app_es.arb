@@ -456,7 +456,7 @@
     "description": "Texto del botón cancelar de la alerta de confirmación de publicación",
     "context": "newpost_page"
   },
-  "newPostButtonDialogConfirmButtonPublish": "No",
+  "newPostButtonDialogConfirmButtonPublish": "Publicar",
   "@newPostButtonDialogConfirmButtonPublish": {
     "description": "Texto del botón publicar de la alerta de confirmación de publicación",
     "context": "newpost_page"

@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';                          // Para usar la cámara nativa de flutter
 import 'package:permission_handler/permission_handler.dart';  // Para pedir permisos de cámara manualmente
@@ -7,12 +8,16 @@ import 'package:lottie/lottie.dart';                          // Para animacione
 import 'dart:io';                                             // Trabajar con archivos
 import 'package:image/image.dart' as img;                     // Para procesamiento de imágenes
 import 'package:flutter/foundation.dart';                     // Para usar compute y procesos pesados en segundo plano
+import 'dart:isolate';
 
 // CLASES
-import 'package:petlink/components/dialogoPregunta.dart';
 import 'package:petlink/main.dart';
+import 'package:petlink/procesos_pesados/proceso_modelo_yolo.dart';
 import 'package:petlink/themes/customColors.dart';
+import 'package:petlink/components/dialogoPregunta.dart';
 import 'package:petlink/components/EsquinasCamara.dart';
+import 'package:tflite_flutter/tflite_flutter.dart';
+import 'package:petlink/components/dialogoInformacion.dart';
 
 // Método separado
 
@@ -54,6 +59,12 @@ class _PetlinkCameraState extends State<PetlinkCamera> {
     FlashMode.always : Icons.flash_on,
     FlashMode.torch : Icons.sunny
   };
+
+  // COORDENADAS Y DIMENSIONES DETECTOR PERRO
+  double caja_eje_x = 30;
+  double caja_eje_y = 130;
+  double caja_anchura = 330;
+  double caja_altura = 400;
 
   // MÉTODOS
 
@@ -138,12 +149,71 @@ class _PetlinkCameraState extends State<PetlinkCamera> {
     setState(() {}); // Para refrescar el icono en pantalla
   }
 
+  // Método que crea un Isolate (Hilo separado, más aislado y seguro, no comparte memoria y se comunican solo por mensajes)
+  // Y este lo que hace es hacer una predicción con 'YOLOv5' en busca de un perro en la imagen y devuelve unas coordenadas
+  // traducidas de la posición del perro.
+  Future<void> buscarPerro(String imagePath) async {
+    // CARGA EL MODELO
+    Interpreter modeloYolo = await Interpreter.fromAsset('assets/IA/yolo/yolov5.tflite');
+    print("✅ MODELO YOLO CARGADO");
+
+    final puertoReceptor = ReceivePort(); // Puerto receptor
+
+    // Crea isolate y ejecuta la función
+    Isolate.spawn(procesoYOLO, [
+      puertoReceptor.sendPort, // Puerto de envío
+      modeloYolo, // Modelo de YOLO
+      imagePath, // Ruta de la imagen
+      _cameraController.value.previewSize!.width, // Ancho de vista previa de la cámara
+      _cameraController.value.previewSize!.height // Alto de vista previa de la cámara
+    ]);
+
+    // Se pone en segundo plano a la espera de resultado por parte del método
+    puertoReceptor.listen((resultado) async {
+      setState(() {
+        _searchAnimationVisible = false;
+      });
+      await Future.delayed(Duration(milliseconds: 600));
+      setState(() {
+        try {
+          // Intenta establecer los nuevos valores
+          caja_eje_x = resultado['x']!;
+          caja_eje_y = resultado['y']!;
+          caja_anchura = resultado['w']!;
+          caja_altura = resultado['h']!;
+          print('🐶 Perro detectado: x=$caja_eje_x, y=$caja_eje_y, w=$caja_anchura, h=$caja_altura');
+        } catch (e) {
+          // NO SE A ENCONTRADO UN PERRO
+        } finally {
+          // CONTROL DE ANIMACIONES POSTERIORES
+        }
+      });
+    });
+  }
+
   // -------------------------------------------------------
 
   @override
   void initState() {
     super.initState();
-    _initializeCamera();
+    // Mensaje de aviso de que es una versión Beta
+    WidgetsBinding.instance.addPostFrameCallback((_) async{
+      await Future.delayed(Duration(milliseconds: 500));
+      var custom = Theme.of(context).extension<CustomColors>()!; // EXTRAER TEMA DE LA APP CUSTOM
+      await showDialog(
+        context: context,
+        builder: (context) => DialogoInformacion(
+          titulo: "AVISO: Versión Beta",
+          texto: "La función de reconocimiento de raza mediante inteligencia artificial se encuentra en fase de desarrollo y mejora. Debido a esto, los resultados pueden no ser precisos.\n\n"
+                "MODO DE USO:\n"
+                "Analiza solo un perro a la vez, asegúrate de que el perro esté centrado en el recuadro y utiliza una imagen clara, bien iluminada, ya sea tomada con la cámara o seleccionada desde tu galería.\n\n"
+                "Agradecemos tu comprensión mientras seguimos mejorando esta funcionalidad.",
+          textoBtn: "Aceptar y continuar",
+          icono: Icon(Icons.info_outline, color: custom.colorEspecial, size: 60),
+        ),
+      );
+      _initializeCamera();
+    });
   }
 
   @override
@@ -212,10 +282,10 @@ class _PetlinkCameraState extends State<PetlinkCamera> {
                 ),
               ),
               EsquinasCamara(
-                x: 30, 
-                y: 130, 
-                width: 330, 
-                height: 400
+                x: caja_eje_x, 
+                y: caja_eje_y, 
+                width: caja_anchura, 
+                height: caja_altura
               ),
               // BOTÓN DE FLASH
               if (imagen == null)
@@ -251,7 +321,7 @@ class _PetlinkCameraState extends State<PetlinkCamera> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20)
                   ),
-                  child: Text("AI Camera")
+                  child: Text("AI Camera", style: TextStyle(color: Colors.black),)
                 )
               ),
               // ANIMACIÓN DE BUSCAR (LA LUPA)
@@ -320,7 +390,11 @@ class _PetlinkCameraState extends State<PetlinkCamera> {
                     builder: (context) => Container(color: Colors.white),
                   );
                 }
-                imagen = await _cameraController.takePicture();
+                try {
+                  imagen = await _cameraController.takePicture();
+                } catch (e){
+                  print("ERROR DE CÁMARA");
+                }
                 setState(() {
                   player.play(AssetSource("audios/HacerFoto.mp3"));
                 });
@@ -334,6 +408,10 @@ class _PetlinkCameraState extends State<PetlinkCamera> {
                   }),
                 );
                 if (_selectedCameraIndex == 1) await compute(flipImage, imagen!.path);
+                Future.delayed(
+                  Duration(seconds: 1),
+                  () => buscarPerro(imagen!.path),
+                );
               },
               child: Container(
                 width: 80,
@@ -372,6 +450,7 @@ class _PetlinkCameraState extends State<PetlinkCamera> {
                           _searchAnimationVisible = true;
                         }),
                       );
+                      buscarPerro(imagen!.path);
                     } else {
                     }
                   } finally {

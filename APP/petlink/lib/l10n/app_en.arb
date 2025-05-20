@@ -456,7 +456,7 @@
     "description": "Text for the cancel button of the post confirmation alert",
     "context": "newpost_page"
   },
-  "newPostButtonDialogConfirmButtonPublish": "Yes",
+  "newPostButtonDialogConfirmButtonPublish": "Post",
   "@newPostButtonDialogConfirmButtonPublish": {
     "description": "Text for the publish button of the post confirmation alert",
     "context": "newpost_page"

@@ -56,6 +56,7 @@ dependencies:
   camera: ^0.11.1
   audioplayers: ^6.4.0
   lottie: ^3.3.1
+  tflite_flutter: ^0.11.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -96,6 +97,7 @@ flutter:
      - assets/perros_dialogos/
      - assets/audios/
      - assets/animaciones/
+     - assets/IA/yolo/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

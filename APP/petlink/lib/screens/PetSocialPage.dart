@@ -7,7 +7,6 @@ import 'package:petlink/components/publicacionStyle.dart';
 import 'package:petlink/entidades/publicacion.dart';
 import 'package:petlink/services/supabase_auth.dart';
 import 'package:petlink/themes/customColors.dart';
-import 'package:provider/provider.dart';
 
 class PetSocialPage extends StatefulWidget {
   const PetSocialPage({super.key});
@@ -109,6 +108,7 @@ class _PetSocialPageState extends State<PetSocialPage> {
         ),
       ),
       endDrawer: MenuLateral(),
+      //drawer: Drawer(),
     );
   }
 }

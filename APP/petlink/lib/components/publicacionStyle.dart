@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'dart:ui' as ui; // PARA TRABAJAR CON IMÁGENES Y CALCULAR SU ALTURA
 import 'dart:io'; // PARA CONTROLAR EL DISPOSITIVO
 import 'package:cached_network_image/cached_network_image.dart'; // DESCARGA CON CACHÉ
+import 'package:lottie/lottie.dart';
 import 'package:petlink/entidades/seguridad.dart';
 
 // CLASES
 import 'package:petlink/themes/customColors.dart';
 import 'package:petlink/entidades/publicacion.dart';
 import 'package:petlink/screens/Secondary/PhotoViewer.dart';
-import 'package:petlink/components/animacionLike.dart';
 
 class PublicacionStyle extends StatefulWidget {
   final Publicacion publicacion;
@@ -18,8 +18,10 @@ class PublicacionStyle extends StatefulWidget {
   State<PublicacionStyle> createState() => _PublicacionStyleState();
 }
 
-class _PublicacionStyleState extends State<PublicacionStyle> { 
-  final GlobalKey<AnimacionLikeState> likeKey = GlobalKey(); // Key para la animación de like
+class _PublicacionStyleState extends State<PublicacionStyle> with TickerProviderStateMixin{ 
+  late AnimationController _likeDoubleTapController = AnimationController(vsync: this); // Controlador para animación de like del doble toque
+  late AnimationController _likeButtonController = AnimationController(vsync: this);
+  bool isLikeAnimationVisible = false;
 
   // Atributos para la imagen
   double? imageHeight; // Altura de la imagen cargada
@@ -67,6 +69,19 @@ class _PublicacionStyleState extends State<PublicacionStyle> {
     } else {
       return 'Hace ${diferencia.inDays} día${diferencia.inDays == 1 ? '' : 's'}';
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    final publi = widget.publicacion; 
+    _likeButtonController.addStatusListener((status) {
+    if (status == AnimationStatus.completed) {
+        setState(() {
+          isLikeAnimationVisible = false;
+        });
+      }
+    });
   }
 
   @override
@@ -191,7 +206,7 @@ class _PublicacionStyleState extends State<PublicacionStyle> {
                   // DOUBLE TAP --> ANIMACIÓN LIKE
                   onDoubleTap: () async{
                     if (await Seguridad.canInteract(context)){
-                      likeKey.currentState?.onDoubleTap();
+                      _likeDoubleTapController.forward(from: 0.0); // Reproducir animación
                       setState(() {
                         if (!publi.liked){
                           publi.liked = true;
@@ -244,7 +259,18 @@ class _PublicacionStyleState extends State<PublicacionStyle> {
                           ),
                         ),
                       ),
-                      AnimacionLike(key: likeKey), // ANIMACION LIKE
+                      // Animación like
+                      Lottie.asset(
+                        "assets/animaciones/like_doubleTap.json",
+                        width: 200,
+                        height: 200,
+                        repeat: false,
+                        animate: false,
+                        onLoaded: (composition) {
+                          _likeDoubleTapController.duration = composition.duration;
+                        },
+                        controller: _likeDoubleTapController
+                      )
                     ],
                   ),
                 ),
@@ -253,34 +279,66 @@ class _PublicacionStyleState extends State<PublicacionStyle> {
               // --------------------------------------------------------------------------------------
               // LIKES Y COMENTARIOS
               Container(
-                margin: EdgeInsets.only(left: 25, bottom: 10, top: 2, right: 25),
+                margin: EdgeInsets.only(left: 25, right: 25),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
                       children: [
-                        IconButton(
-                          onPressed: () async {
-                            // Primero comprueba que está login con su respectivo diálogo, si puede entonces suma el like a nivel local
-                            // Y bien puede guardar el like en la BD o borrarlo de la BD
-                            if (await Seguridad.canInteract(context)){
-                              setState(() {
-                                publi.liked = !publi.liked;
-                                if (publi.liked) {
-                                  publi.likes++;
-                                  Publicacion.darLike(context, publi.id.toString());
-                                } else {
-                                  publi.likes--;
-                                  Publicacion.quitarLike(context, publi.id.toString());
+                        Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            IconButton(
+                              onPressed: () async {
+                                // Primero comprueba que está login con su respectivo diálogo, si puede entonces suma el like a nivel local
+                                // Y bien puede guardar el like en la BD o borrarlo de la BD
+                                if (await Seguridad.canInteract(context)){
+                                  setState(() {
+                                    // No like --> LIKE
+                                    if (!publi.liked) {
+                                      isLikeAnimationVisible = true;
+                                      _likeButtonController.forward(from: 0.0);
+                                      publi.liked = true;
+                                      publi.likes++;
+                                      Publicacion.darLike(context, publi.id.toString());
+                                    } else {
+                                      // LIKE --> No Like
+                                      publi.liked = false;
+                                      publi.likes--;
+                                      Publicacion.quitarLike(context, publi.id.toString());
+                                    }
+                                  });
                                 }
-                              });
-                            }
-                          },
-                          icon: (!publi.liked)
-                              ? Icon(Icons.favorite_border_rounded, size: 25)
-                              : Icon(Icons.favorite_rounded, size: 25, color: Colors.redAccent,)
+                              },
+                              icon: (!publi.liked)
+                                  ? Icon(Icons.favorite_border_rounded, size: 25)
+                                  : Icon(Icons.favorite_rounded, size: 25, color: Colors.redAccent),
+                              splashColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                            ),
+                            Visibility(
+                              visible: isLikeAnimationVisible,
+                              maintainSize: true,
+                              maintainAnimation: true,
+                              maintainState: true,
+                              child: Lottie.asset(
+                                "assets/animaciones/like_button.json",
+                                width: 65,
+                                height: 65,
+                                repeat: false,
+                                animate: false,
+                                controller: _likeButtonController,
+                                onLoaded: (composition) {
+                                  _likeButtonController.duration = composition.duration;
+                                },
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 50),
+                              child: Text(publi.likes.toString(), style: TextStyle(color: ((!publi.liked) ? tema.primary : Colors.redAccent), fontSize: 16),)
+                            ), // NUM LIKES
+                          ],
                         ),
-                        Text(publi.likes.toString(), style: TextStyle(color: ((!publi.liked) ? tema.primary : Colors.redAccent), fontSize: 16),), // NUM LIKES
                         SizedBox(width: 20),
                         // COMENTARIOS
                         IconButton(
@@ -288,6 +346,8 @@ class _PublicacionStyleState extends State<PublicacionStyle> {
                             print("COMENTARIO");
                           },
                           icon: Icon(Icons.chat_bubble_outline_rounded, size: 25),
+                          splashColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
                         ),
                         Text("46", style: TextStyle(fontSize: 16)), // NUM COMENTARIOS
                       ],
