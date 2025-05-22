@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'dart:ui' as ui; // PARA TRABAJAR CON IMÁGENES Y CALCULAR SU ALTURA
 import 'dart:io'; // PARA CONTROLAR EL DISPOSITIVO
 import 'package:cached_network_image/cached_network_image.dart'; // DESCARGA CON CACHÉ
+import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:petlink/entidades/seguridad.dart';
+import 'package:petlink/screens/Secondary/ComentariosPage.dart';
 
 // CLASES
 import 'package:petlink/themes/customColors.dart';
@@ -12,7 +14,8 @@ import 'package:petlink/screens/Secondary/PhotoViewer.dart';
 
 class PublicacionStyle extends StatefulWidget {
   final Publicacion publicacion;
-  const PublicacionStyle({super.key, required this.publicacion});
+  final bool isComentariosPage;
+  const PublicacionStyle({super.key, required this.publicacion, this.isComentariosPage = false});
 
   @override
   State<PublicacionStyle> createState() => _PublicacionStyleState();
@@ -66,17 +69,18 @@ class _PublicacionStyleState extends State<PublicacionStyle> with TickerProvider
       return 'Hace ${diferencia.inMinutes} minuto${diferencia.inMinutes == 1 ? '' : 's'}';
     } else if (diferencia.inHours < 24) {
       return 'Hace ${diferencia.inHours} hora${diferencia.inHours == 1 ? '' : 's'}';
-    } else {
+    } else if (diferencia.inDays <= 30) {
       return 'Hace ${diferencia.inDays} día${diferencia.inDays == 1 ? '' : 's'}';
+    } else {
+      return DateFormat.yMMMMd().format(fecha);
     }
   }
 
   @override
   void initState() {
     super.initState();
-    final publi = widget.publicacion; 
     _likeButtonController.addStatusListener((status) {
-    if (status == AnimationStatus.completed) {
+      if (status == AnimationStatus.completed) {
         setState(() {
           isLikeAnimationVisible = false;
         });
@@ -107,11 +111,12 @@ class _PublicacionStyleState extends State<PublicacionStyle> with TickerProvider
       children: [
         // CONTENEDOR PRINCIPAL
         Container(
-          margin: EdgeInsets.all(15),
+          margin: EdgeInsets.all((!widget.isComentariosPage) ? 15 : 0),
           decoration: BoxDecoration(
             color: custom.contenedor,
             borderRadius: BorderRadius.circular(40),
             boxShadow: [
+              if (!widget.isComentariosPage)
               BoxShadow(
                 color: custom.sombraContenedor,
                 blurRadius: 10,
@@ -131,7 +136,7 @@ class _PublicacionStyleState extends State<PublicacionStyle> with TickerProvider
                   bottom: 10,
                   left: 25,
                   top: 20,
-                  right: 25,
+                  right: 10,
                 ),
                 child: Row(
                   children: [
@@ -149,7 +154,7 @@ class _PublicacionStyleState extends State<PublicacionStyle> with TickerProvider
                           // NOMBRE Y FECHA
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [Text(publi.nombre), Text(haceCuanto)],
+                            children: [Text(publi.nombre), Text(haceCuanto, style: TextStyle(color: Colors.grey.shade500),)],
                           ),
                           SizedBox(height: 1),
                           // USUARIO CON CONTENEDOR
@@ -279,7 +284,7 @@ class _PublicacionStyleState extends State<PublicacionStyle> with TickerProvider
               // --------------------------------------------------------------------------------------
               // LIKES Y COMENTARIOS
               Container(
-                margin: EdgeInsets.only(left: 25, right: 25),
+                margin: EdgeInsets.only(left: 25, right: 25, bottom: 8, top: 5),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -323,8 +328,8 @@ class _PublicacionStyleState extends State<PublicacionStyle> with TickerProvider
                               maintainState: true,
                               child: Lottie.asset(
                                 "assets/animaciones/like_button.json",
-                                width: 65,
-                                height: 65,
+                                width: 50,
+                                height: 50,
                                 repeat: false,
                                 animate: false,
                                 controller: _likeButtonController,
@@ -339,16 +344,19 @@ class _PublicacionStyleState extends State<PublicacionStyle> with TickerProvider
                             ), // NUM LIKES
                           ],
                         ),
+                        if (!widget.isComentariosPage)
                         SizedBox(width: 20),
+                        if (!widget.isComentariosPage)
                         // COMENTARIOS
                         IconButton(
                           onPressed: () {
-                            print("COMENTARIO");
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => ComentariosPage(publicacion: publi),));
                           },
                           icon: Icon(Icons.chat_bubble_outline_rounded, size: 25),
                           splashColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                         ),
+                        if (!widget.isComentariosPage)
                         Text("46", style: TextStyle(fontSize: 16)), // NUM COMENTARIOS
                       ],
                     ),

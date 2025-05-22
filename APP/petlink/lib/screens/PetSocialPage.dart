@@ -1,11 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:petlink/components/menuLateral.dart';
 
 // CLASES
+import 'package:petlink/services/supabase_auth.dart';
+import 'package:petlink/components/menuLateral.dart';
 import 'package:petlink/components/publicacionStyle.dart';
 import 'package:petlink/entidades/publicacion.dart';
-import 'package:petlink/services/supabase_auth.dart';
 import 'package:petlink/themes/customColors.dart';
 
 class PetSocialPage extends StatefulWidget {
@@ -94,6 +94,7 @@ class _PetSocialPageState extends State<PetSocialPage> {
           ),
         ),
         centerTitle: true,
+        scrolledUnderElevation: 0,
       ),
       body: SafeArea(
         child: RefreshIndicator(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
@@ -20,6 +21,7 @@ class Provideridioma with ChangeNotifier {
       // Guardar el nuevo idioma en SharedPreferences
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString('idioma', nuevoLocale.languageCode);
+      Intl.defaultLocale = nuevoLocale.toString(); // Cambiar idioma de Intl para la fecha de las publicaciones
       notifyListeners();
     }
   }

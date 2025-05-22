@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart'; // PARA MOSTRAR LA IMAGEN DESDE CACHÉ
+import 'package:lottie/lottie.dart';
 import 'package:petlink/entidades/publicacion.dart';
 import 'package:petlink/entidades/seguridad.dart';
 import 'package:photo_view/photo_view.dart'; // EL VISOR DE IMÁGENES
@@ -16,7 +17,10 @@ class PhotoViewer extends StatefulWidget {
   State<PhotoViewer> createState() => _PhotoViewerState();
 }
 
-class _PhotoViewerState extends State<PhotoViewer> {
+class _PhotoViewerState extends State<PhotoViewer> with TickerProviderStateMixin {
+  late AnimationController _likeButtonController = AnimationController(vsync: this);
+  bool isLikeAnimationVisible = false;
+
   // MÉTODO PARA PEDIR PERMISOS
   Future<bool> pedirPermisos() async {
     final status = await Permission.storage.request();
@@ -39,6 +43,18 @@ class _PhotoViewerState extends State<PhotoViewer> {
       onDownloadCompleted: (path) => mostrarMensaje(context, "Imagen guardada", 200),
       onDownloadError: (errorMessage) => mostrarMensaje(context, "Error al guardarla", 200),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _likeButtonController.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        setState(() {
+          isLikeAnimationVisible = false;
+        });
+      }
+    });
   }
 
   @override
@@ -169,27 +185,62 @@ class _PhotoViewerState extends State<PhotoViewer> {
                     visible: !soloTexfield,
                     child: Row(
                       children: [
-                        IconButton(
-                          onPressed: () async {
-                            if (await Seguridad.canInteract(context)){
-                              setState(() {
-                                widget.publicacion.liked = !widget.publicacion.liked;
-                                if (widget.publicacion.liked) {
-                                  widget.publicacion.likes++;
-                                  Publicacion.darLike(context, widget.publicacion.id.toString());
-                                } else {
-                                  widget.publicacion.likes--;
-                                  Publicacion.quitarLike(context, widget.publicacion.id.toString());
+                        // BOTÓN LIKE
+                        Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            IconButton(
+                              onPressed: () async {
+                                // Primero comprueba que está login con su respectivo diálogo, si puede entonces suma el like a nivel local
+                                // Y bien puede guardar el like en la BD o borrarlo de la BD
+                                if (await Seguridad.canInteract(context)){
+                                  setState(() {
+                                    // No like --> LIKE
+                                    if (!widget.publicacion.liked) {
+                                      isLikeAnimationVisible = true;
+                                      _likeButtonController.forward(from: 0.0);
+                                      widget.publicacion.liked = true;
+                                      widget.publicacion.likes++;
+                                      Publicacion.darLike(context, widget.publicacion.id.toString());
+                                    } else {
+                                      // LIKE --> No Like
+                                      widget.publicacion.liked = false;
+                                      widget.publicacion.likes--;
+                                      Publicacion.quitarLike(context, widget.publicacion.id.toString());
+                                    }
+                                  });
                                 }
-                              });
-                            }
-                          },
-                          icon: (!widget.publicacion.liked)
-                            ? Icon(Icons.favorite_border_rounded, size: 25, color: Colors.white,)
-                            : Icon(Icons.favorite_rounded, size: 25, color: Colors.redAccent,)
-                          ),
-                          Text(widget.publicacion.likes.toString(), style: TextStyle(color: ((!widget.publicacion.liked) ? Colors.white : Colors.redAccent), fontSize: 16),), // NUM LIKES
-                          SizedBox(width: 20),  
+                              },
+                              icon: (!widget.publicacion.liked)
+                                  ? Icon(Icons.favorite_border_rounded, size: 25, color: Colors.white)
+                                  : Icon(Icons.favorite_rounded, size: 25, color: Colors.redAccent),
+                              splashColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                            ),
+                            Visibility(
+                              visible: isLikeAnimationVisible,
+                              maintainSize: true,
+                              maintainAnimation: true,
+                              maintainState: true,
+                              child: Lottie.asset(
+                                "assets/animaciones/like_button.json",
+                                width: 50,
+                                height: 50,
+                                repeat: false,
+                                animate: false,
+                                controller: _likeButtonController,
+                                onLoaded: (composition) {
+                                  _likeButtonController.duration = composition.duration;
+                                },
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 50),
+                              child: Text(widget.publicacion.likes.toString(), style: TextStyle(color: ((!widget.publicacion.liked) ? Colors.white : Colors.redAccent), fontSize: 16),)
+                            ), // NUM LIKES
+                          ],
+                        ),
+                        SizedBox(width: 20),  
                       ],
                     ),
                   ),
@@ -197,7 +248,7 @@ class _PhotoViewerState extends State<PhotoViewer> {
                   Expanded(
                     child: TextField(
                       keyboardType: TextInputType.multiline,
-                      maxLines: (soloTexfield) ? null : 1,
+                      maxLines: (soloTexfield) ? 10 : 1,
                       minLines: 1,
                       cursorColor: Colors.white,
                       style: TextStyle(color: Colors.white),

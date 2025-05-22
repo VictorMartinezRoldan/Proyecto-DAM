@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';                          // Para usar la cámara nativa de flutter
 import 'package:permission_handler/permission_handler.dart';  // Para pedir permisos de cámara manualmente
@@ -9,6 +8,7 @@ import 'dart:io';                                             // Trabajar con ar
 import 'package:image/image.dart' as img;                     // Para procesamiento de imágenes
 import 'package:flutter/foundation.dart';                     // Para usar compute y procesos pesados en segundo plano
 import 'dart:isolate';
+import 'package:tflite_flutter/tflite_flutter.dart';
 
 // CLASES
 import 'package:petlink/main.dart';
@@ -16,7 +16,6 @@ import 'package:petlink/procesos_pesados/proceso_modelo_yolo.dart';
 import 'package:petlink/themes/customColors.dart';
 import 'package:petlink/components/dialogoPregunta.dart';
 import 'package:petlink/components/EsquinasCamara.dart';
-import 'package:tflite_flutter/tflite_flutter.dart';
 import 'package:petlink/components/dialogoInformacion.dart';
 
 // Método separado
