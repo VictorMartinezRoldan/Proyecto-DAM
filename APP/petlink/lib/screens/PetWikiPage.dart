@@ -38,7 +38,7 @@ class _PetWikiPageState extends State<PetWikiPage> {
             }).toList();
       });
     } catch (e) {
-      MensajeSnackbar.mostrarError(context, 'Error al cargar las razas: $e');
+      debugPrint('Error al cargar las razas: $e');
     }
   }
 

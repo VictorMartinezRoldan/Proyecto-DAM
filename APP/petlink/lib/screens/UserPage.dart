@@ -17,6 +17,7 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
+
   late var custom = Theme.of(context).extension<CustomColors>()!; // EXTRAER TEMA DE LA APP CUSTOM
   late var tema = Theme.of(context).colorScheme; // EXTRAER TEMA DE LA APP
 
@@ -25,10 +26,20 @@ class _UserPageState extends State<UserPage> {
   List<String> userPosts = [];
 
   @override
-  void initState() {
-    super.initState();
-    SupabaseAuthService.isLogin.addListener(reconstruir);
+void initState() {
+  super.initState();
+  SupabaseAuthService.isLogin.addListener(reconstruir);
+
+  // Verificar si el usuario esta logueado, y si no lo esta llevarle al inicio de sesión
+  if (!SupabaseAuthService.isLogin.value) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => AuthController()),
+      );
+    });
   }
+}
+
 
   @override
   void dispose() {
