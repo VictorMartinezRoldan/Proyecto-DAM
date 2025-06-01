@@ -389,6 +389,17 @@ class _NewPostPageState extends State<NewPostPage> {
                                     ),
                                   );
                                   Navigator.pop(context);
+                                } else {
+                                  // DIALOGO ERROR (NO SE PUDO PUBLICAR)
+                                  await showDialog(
+                                    context: context, 
+                                    builder: (context) => DialogoInformacion(
+                                      imagen: Image.asset("assets/perros_dialogos/info_triste_${(isLightMode) ? "light" : "dark"}.png"),
+                                      titulo: "No se pudo publicar",
+                                      texto: "Ocurrió un error al intentar publicar tu comentario. Por favor, inténtalo de nuevo más tarde.",
+                                      textoBtn: "Aceptar",
+                                    ),
+                                  );
                                 }
                               } else {
                                 // DIALOGO ERROR

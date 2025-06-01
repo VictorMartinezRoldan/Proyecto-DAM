@@ -53,6 +53,7 @@ class _PagesManagerState extends State<PagesManager> {
     _connectionSub = Connectivity().onConnectivityChanged.listen((result) async {
       bool isConnected = await Seguridad.comprobarConexion();
       if (!isConnected) {
+        if (!mounted) return;
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => NetworkErrorPage())

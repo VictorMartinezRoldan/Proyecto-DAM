@@ -56,9 +56,10 @@ dependencies:
   line_awesome_flutter: ^2.0.0 # ICONOS APP
   flutter_launcher_icons: ^0.14.3 # ICONOS APP
   marquee: ^2.2.3 # TEXTO EN MOVIMIENTO PARA LA WIKI
-
-  # Esta dependencia la tienes en publicacion.dart, no se si la utilizas Victor
-  flutter_cache_manager: ^3.4.1 
+  flutter_cache_manager: ^3.4.1 # PARTE DE COMPARTIR PUBLICACIONES
+  path_provider: ^2.1.5 # PARA PEDIR CARPETA TEMPORAL PARA GUARDAR PUBLICACIONES
+  visibility_detector: ^0.4.0+2 # PARA DETECTAR CUANDO CARGAR NUEVOS COMENTARIOS
+  flutter_keyboard_visibility: ^6.0.0 # PARA DETECTAR CUANDO NO ESTÁ EL TECLADO EN COMENTARIOS PAGE
 
   # SIN UTILIZAR PERO ÚTILES A FUTURO (PRESCINDIBLES)
   video_compress: ^3.1.4 # PARA COMPRIMIR VIDEOS

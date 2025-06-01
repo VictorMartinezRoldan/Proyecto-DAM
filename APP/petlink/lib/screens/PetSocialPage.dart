@@ -1,5 +1,7 @@
+// BIBLIOTECAS
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 // CLASES
 import 'package:petlink/services/supabase_auth.dart';
@@ -17,6 +19,7 @@ class PetSocialPage extends StatefulWidget {
 
 class _PetSocialPageState extends State<PetSocialPage> {
   static List<PublicacionStyle> publicaciones = []; // LISTA DE PUBLICACIONES (PublicacionStyle) [LISTVIEW]
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>(); // Para control endDrawer
 
   // MÉTODO QUE LLAMA AL MÉTODO DE PUBLICACIONES PARA SOLICITAR PUBLICACIONES Y LAS AÑADE A LA LISTA DEL LISTVIEW
   Future<void> refrescar() async {
@@ -60,25 +63,40 @@ class _PetSocialPageState extends State<PetSocialPage> {
     late var custom = Theme.of(context).extension<CustomColors>()!; // EXTRAER TEMA DE LA APP CUSTOM
     late var tema = Theme.of(context).colorScheme; // EXTRAER TEMA DE LA APP
     return Scaffold(
+      key: scaffoldKey,
       appBar: AppBar(
         leading: Row(
           children: [
-            SizedBox(width: 15),
-            Container(
-              padding: EdgeInsets.all(2),
-              decoration: BoxDecoration(
-                color: custom.colorEspecial,
-                shape: BoxShape.circle
-              ),
-              child: CircleAvatar(
-                backgroundColor: custom.contenedor,
-                backgroundImage: (SupabaseAuthService.isLogin.value) ? CachedNetworkImageProvider(SupabaseAuthService.imagenPerfil) : null,
-                child: (!SupabaseAuthService.isLogin.value) ? Icon(Icons.person,size: 25,color: custom.colorEspecial,) : null,
-              )
+            SizedBox(width: 10),
+            IconButton(
+              onPressed: () {}, 
+              icon: Icon(LineAwesomeIcons.crown, size: 30)
             )
-          ],
+          ]
         ),
-        leadingWidth: 60,
+        leadingWidth: 80,
+        actions: [
+          GestureDetector(
+            onTap: () => scaffoldKey.currentState?.openEndDrawer(),
+            child: Row(
+              children: [
+                Container(
+                  padding: EdgeInsets.all(2),
+                  decoration: BoxDecoration(
+                    color: custom.colorEspecial,
+                    shape: BoxShape.circle
+                  ),
+                  child: CircleAvatar(
+                    backgroundColor: custom.contenedor,
+                    backgroundImage: (SupabaseAuthService.isLogin.value) ? CachedNetworkImageProvider(SupabaseAuthService.imagenPerfil) : null,
+                    child: (!SupabaseAuthService.isLogin.value) ? Icon(Icons.person,size: 25,color: custom.colorEspecial,) : null,
+                  )
+                ),
+                SizedBox(width: 15),
+              ],
+            ),
+          ),
+        ],
         foregroundColor: custom.colorEspecial,
         backgroundColor: tema.surface,
         shadowColor: custom.sombraContenedor,
@@ -109,7 +127,6 @@ class _PetSocialPageState extends State<PetSocialPage> {
         ),
       ),
       endDrawer: MenuLateral(),
-      //drawer: Drawer(),
     );
   }
 }

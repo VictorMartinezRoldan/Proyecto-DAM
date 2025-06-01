@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -173,5 +174,10 @@ class Seguridad {
     );
 
     return imagenComprimida;
+  }
+
+  // Método para generar un ID único (Posibilidad de repetición 0.12% / 1.000.000 de personas al mismo tiempo)
+  static int generarID() {
+    return (DateTime.now().microsecondsSinceEpoch + Random().nextInt(99999) + SupabaseAuthService.id.hashCode).abs();
   }
 }

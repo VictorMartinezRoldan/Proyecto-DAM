@@ -1,11 +1,14 @@
+// BIBLIOTECAS
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart'; // PARA MOSTRAR LA IMAGEN DESDE CACHÉ
-import 'package:lottie/lottie.dart';
-import 'package:petlink/entidades/publicacion.dart';
-import 'package:petlink/entidades/seguridad.dart';
+import 'package:petlink/components/mensajeSnackbar.dart';
 import 'package:photo_view/photo_view.dart'; // EL VISOR DE IMÁGENES
 import 'package:permission_handler/permission_handler.dart'; // PARA SOLICITAR PERMISOS PARA GUARDAR LA IMAGEN
 import 'package:flutter_file_downloader/flutter_file_downloader.dart'; // PARA DESCARGAR LA IMAGEN
+
+// CLASES
+import 'package:petlink/entidades/publicacion.dart';
+import 'package:petlink/screens/Secondary/ComentariosPage.dart';
 
 class PhotoViewer extends StatefulWidget {
   final Publicacion publicacion;
@@ -18,8 +21,6 @@ class PhotoViewer extends StatefulWidget {
 }
 
 class _PhotoViewerState extends State<PhotoViewer> with TickerProviderStateMixin {
-  late AnimationController _likeButtonController = AnimationController(vsync: this);
-  bool isLikeAnimationVisible = false;
 
   // MÉTODO PARA PEDIR PERMISOS
   Future<bool> pedirPermisos() async {
@@ -34,32 +35,25 @@ class _PhotoViewerState extends State<PhotoViewer> with TickerProviderStateMixin
   void guardarImagen(BuildContext context, String url) {
     if (pedirPermisos() == false) {
       if(pedirPermisos() == false) {
-        mostrarMensaje(context, "Se necesitan permisos", 270);
+        MensajeSnackbar.mostrarError(context, "Se necesitan permisos");
         return;
       }
     }
     FileDownloader.downloadFile(
       url: url,
-      onDownloadCompleted: (path) => mostrarMensaje(context, "Imagen guardada", 200),
-      onDownloadError: (errorMessage) => mostrarMensaje(context, "Error al guardarla", 200),
+      onDownloadCompleted: (path) => MensajeSnackbar.mostrarExito(context, "Imagen guardada"),
+      onDownloadError: (errorMessage) => MensajeSnackbar.mostrarError(context, "Error al guardarla")
     );
   }
 
   @override
   void initState() {
     super.initState();
-    _likeButtonController.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        setState(() {
-          isLikeAnimationVisible = false;
-        });
-      }
-    });
+    ComentariosPage.focusScopeError = FocusScopeNode(); // REINICIAR ARBOL DE FocusScope
   }
 
   @override
   Widget build(BuildContext context) {
-    bool soloTexfield = (MediaQuery.of(context).viewInsets.bottom != 0);
     return Scaffold(
       extendBodyBehindAppBar: true, // El appBar se fusiona con el body no hace margin
       extendBody: true,
@@ -77,6 +71,8 @@ class _PhotoViewerState extends State<PhotoViewer> with TickerProviderStateMixin
             onSelected: (value) {
               if (value == "DESCARGA") {
                 guardarImagen(context, widget.publicacion.urlImagen);
+              } else if (value == "COMPARTIR") {
+                Publicacion.compartir(widget.publicacion);
               }
             },
             itemBuilder:
@@ -86,11 +82,21 @@ class _PhotoViewerState extends State<PhotoViewer> with TickerProviderStateMixin
                     child: Row(
                       children: [
                         Icon(Icons.save_alt_rounded),
-                        SizedBox(width: 7),
+                        SizedBox(width: 10),
                         Text("Guardar", style: TextStyle(color: Colors.white)),
                       ],
                     ),
                   ),
+                  PopupMenuItem(
+                    value: "COMPARTIR",
+                    child: Row(
+                      children: [
+                        Icon(Icons.share),
+                        SizedBox(width: 10),
+                        Text("Compartir", style: TextStyle(color: Colors.white)),
+                      ],
+                    ),
+                  )
                 ],
           ),
         ],
@@ -151,11 +157,7 @@ class _PhotoViewerState extends State<PhotoViewer> with TickerProviderStateMixin
       body: Center(
         child: GestureDetector(
           onTap: () {
-            if (soloTexfield) {
-              FocusScope.of(context).unfocus(); // Esconder el teclado
-            } else {
-              Navigator.pop(context); // Volver
-            }
+            Navigator.pop(context); // Volver
           },
           child: Hero(
             tag: widget.publicacion.urlImagen,
@@ -166,165 +168,6 @@ class _PhotoViewerState extends State<PhotoViewer> with TickerProviderStateMixin
             ),
           ),
         ),
-      ),
-      bottomNavigationBar: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom, // Esto levanta el container
-          ),
-          child: IntrinsicHeight(
-            child: Container(
-              padding: EdgeInsets.all(10),
-              color: Colors.black54,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                // PRINCIPAL
-                children: [
-                  Visibility(
-                    visible: !soloTexfield,
-                    child: Row(
-                      children: [
-                        // BOTÓN LIKE
-                        Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            IconButton(
-                              onPressed: () async {
-                                // Primero comprueba que está login con su respectivo diálogo, si puede entonces suma el like a nivel local
-                                // Y bien puede guardar el like en la BD o borrarlo de la BD
-                                if (await Seguridad.canInteract(context)){
-                                  setState(() {
-                                    // No like --> LIKE
-                                    if (!widget.publicacion.liked) {
-                                      isLikeAnimationVisible = true;
-                                      _likeButtonController.forward(from: 0.0);
-                                      widget.publicacion.liked = true;
-                                      widget.publicacion.likes++;
-                                      Publicacion.darLike(context, widget.publicacion.id.toString());
-                                    } else {
-                                      // LIKE --> No Like
-                                      widget.publicacion.liked = false;
-                                      widget.publicacion.likes--;
-                                      Publicacion.quitarLike(context, widget.publicacion.id.toString());
-                                    }
-                                  });
-                                }
-                              },
-                              icon: (!widget.publicacion.liked)
-                                  ? Icon(Icons.favorite_border_rounded, size: 25, color: Colors.white)
-                                  : Icon(Icons.favorite_rounded, size: 25, color: Colors.redAccent),
-                              splashColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                            ),
-                            Visibility(
-                              visible: isLikeAnimationVisible,
-                              maintainSize: true,
-                              maintainAnimation: true,
-                              maintainState: true,
-                              child: Lottie.asset(
-                                "assets/animaciones/like_button.json",
-                                width: 50,
-                                height: 50,
-                                repeat: false,
-                                animate: false,
-                                controller: _likeButtonController,
-                                onLoaded: (composition) {
-                                  _likeButtonController.duration = composition.duration;
-                                },
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 50),
-                              child: Text(widget.publicacion.likes.toString(), style: TextStyle(color: ((!widget.publicacion.liked) ? Colors.white : Colors.redAccent), fontSize: 16),)
-                            ), // NUM LIKES
-                          ],
-                        ),
-                        SizedBox(width: 20),  
-                      ],
-                    ),
-                  ),
-                  
-                  Expanded(
-                    child: TextField(
-                      keyboardType: TextInputType.multiline,
-                      maxLines: (soloTexfield) ? 10 : 1,
-                      minLines: 1,
-                      cursorColor: Colors.white,
-                      style: TextStyle(color: Colors.white),
-                      decoration: InputDecoration(
-                        hintText: "Escribir comentario...",
-                        hintStyle: TextStyle(color: Colors.white),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white, width: 1)
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white, width: 1)
-                        ),
-                        disabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white, width: 1)
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  // BOTON ENVIAR
-                  Visibility(
-                    visible: soloTexfield,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: IconButton(
-                        onPressed: (){}, 
-                        icon: Icon(Icons.send, color: Colors.black),
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        style: IconButton.styleFrom(
-                          backgroundColor: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                  // COMPARTIR
-                  Visibility(
-                    visible: !soloTexfield,
-                    child: IconButton(
-                      onPressed: (){
-                        Publicacion.compartir(widget.publicacion);
-                      }, 
-                      icon: Icon(Icons.share, size: 25,),
-                      color: Colors.white,
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  // MÉTODO PARA CREAR Y MOSTRAR UN SNACKBAR PERSONALIZADO PARA ERRORES Y CONFIRMACIÓN DE DESCARGA
-  void mostrarMensaje(BuildContext context, String texto, double size) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        width: size,
-        content: Align(
-          alignment: Alignment.center,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(Icons.pets, color: Colors.black),
-              SizedBox(width: 10),
-              Flexible(
-                child: Text(texto, style: TextStyle(color: Colors.black)),
-              ),
-            ],
-          ),
-        ),
-        backgroundColor: Colors.white,
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        duration: Duration(seconds: 2),
       ),
     );
   }

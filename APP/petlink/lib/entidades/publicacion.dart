@@ -1,15 +1,16 @@
-import 'dart:io';
-import 'dart:math';
-import 'dart:typed_data';
-
+// BIBLIOTECAS
 import 'package:flutter/material.dart';
+import 'dart:io';
+import 'dart:typed_data';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:path_provider/path_provider.dart';
+
+// CLASES
 import 'package:petlink/entidades/seguridad.dart';
 import 'package:petlink/screens/Secondary/NetworkErrorPage.dart';
 import 'package:petlink/services/supabase_auth.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:share_plus/share_plus.dart';
-import 'package:path_provider/path_provider.dart';
 
 class Publicacion {
   // ATRIBUTOS DE LAS PUBLICACIONES
@@ -20,6 +21,7 @@ class Publicacion {
   final String texto;
   final String fecha;
   final String urlImagen;
+  int numComentarios;
   int likes;
   bool liked = false;
   // comentarios
@@ -34,11 +36,13 @@ class Publicacion {
     required this.fecha,
     required this.urlImagen,
     required this.likes,
-    required this.liked
+    required this.liked,
+    required this.numComentarios
   });
 
   // LISTA DE PUBLICACIONES CARGADAS PARA NO VOLVER A MOSTRAR
   static List<Publicacion> publicacionesExistentes = [];
+  
   // MÉTODO QUE SOLICITA INFORMACIÓN ACERCA DE UNA PUBLICACIÓN
   static Future<List<Publicacion>> solicitarPublicaciones(BuildContext context, int num_publicaciones) async {
     List<Publicacion> publicaciones = []; // LISTA DE PUBLICACIONES A ENVIAR
@@ -65,7 +69,8 @@ class Publicacion {
               fecha: datos["fecha_publicacion"],
               urlImagen: datos["imagen_url"],
               likes: datos["likes"],
-              liked: datos["liked"]
+              liked: datos["liked"],
+              numComentarios: datos["num_comentarios"]
           );
           if (publicacionesExistentes.contains(newPubli)){
             // YA EXISTE, NO SE METE
@@ -80,6 +85,7 @@ class Publicacion {
       // SE A PRODUCIDO UN ERROR, PRIMERO COMPROBAMOS DE QUE HAYA CONEXIÓN
       bool isConnected = await Seguridad.comprobarConexion();
       if (!isConnected){
+        if (!context.mounted) return publicaciones;
         // Si no tiene conexión a internet...
         Navigator.pushReplacement(
           context,
@@ -114,7 +120,7 @@ Descubre, comparte y aprende sobre todas las razas.
   static Future<void> darLike(BuildContext context, String id_publi) async {
     final supaClient = Supabase.instance.client;
     try {
-      final response = await supaClient.from('likes')
+      await supaClient.from('likes_publicaciones')
         .insert({
           'id_usuario' : SupabaseAuthService.id,
           'id_publicacion' : id_publi
@@ -135,7 +141,7 @@ Descubre, comparte y aprende sobre todas las razas.
   static Future<void> quitarLike(BuildContext context, String id_publi) async {
     final supaClient = Supabase.instance.client;
     try {
-      final response = await supaClient.from('likes')
+      await supaClient.from('likes_publicaciones')
         .delete()
         .match({
           'id_usuario' : SupabaseAuthService.id,
@@ -145,6 +151,7 @@ Descubre, comparte y aprende sobre todas las razas.
       // ERROR AL QUITAR EL LIKE
       bool isConnected = await Seguridad.comprobarConexion();
       if (!isConnected) {
+        if (!context.mounted) return;
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => NetworkErrorPage())
@@ -165,7 +172,7 @@ Descubre, comparte y aprende sobre todas las razas.
     }
 
     // NOMBRE ÚNICO, IMPOSIBLE DE SER IGUAL QUE OTRO
-    final nombreArchivo = "publicaciones/img_${DateTime.now().millisecondsSinceEpoch}${Random().nextInt(99999)}.jpg";
+    final nombreArchivo = "publicaciones/img_${Seguridad.generarID()}.jpg";
 
     try {
       // SUBO LA IMAGEN AL STORANGE
@@ -190,18 +197,19 @@ Descubre, comparte y aprende sobre todas las razas.
           'texto' : texto,
           'imagen_url' : url
         });
+        return true;
     } catch (e) {
       print('❌ Error al subir imagen: $e');
       bool isConnected = await Seguridad.comprobarConexion();
       if (!isConnected) {
+        if (!context.mounted) return false;
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => NetworkErrorPage())
         );
       }
+      return false;
     }
-    
-    return true;
   }
 
   // SOBRESCRIBO EL HASHCODE PARA DEFINIR CUANDO 2 PUBLICACIONES SON IGUALES
