@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:petlink/screens/Secondary/AuthController.dart';
 import 'package:petlink/screens/Secondary/EditProfilePage.dart';
+import 'package:petlink/screens/Secondary/LoginPage.dart';
+import 'package:petlink/screens/Secondary/RegisterPage.dart';
 import 'package:petlink/screens/Secondary/SettingsPage.dart';
 import 'package:petlink/themes/customColors.dart';
 import 'package:petlink/services/supabase_auth.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+import 'package:petlink/themes/themeProvider.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({super.key});
@@ -29,15 +33,6 @@ class _UserPageState extends State<UserPage> {
 void initState() {
   super.initState();
   SupabaseAuthService.isLogin.addListener(reconstruir);
-
-  // Verificar si el usuario esta logueado, y si no lo esta llevarle al inicio de sesión
-  if (!SupabaseAuthService.isLogin.value) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => AuthController()),
-      );
-    });
-  }
 }
 
 
@@ -88,6 +83,13 @@ void initState() {
   Widget build(BuildContext context) {
     custom = Theme.of(context).extension<CustomColors>()!;
     tema = Theme.of(context).colorScheme;
+
+    // Si no esta logueado se muestra el widget usuarionologueado
+  if (!SupabaseAuthService.isLogin.value) {
+    return Scaffold(
+      body: usuarioNoLogueado(context),
+    );
+  }
 
     return Scaffold(
       appBar: AppBar(
@@ -234,17 +236,6 @@ void initState() {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => AuthController()),
-          );
-        },
-        backgroundColor: custom.colorEspecial,
-        splashColor: custom.contenedor,
-        child: Icon(Icons.person_add),
-      ),
     );
   }
 
@@ -274,3 +265,106 @@ void initState() {
     );
   }
 }
+
+Widget usuarioNoLogueado(BuildContext context) {
+  final custom = Theme.of(context).extension<CustomColors>()!;
+  final tema = Theme.of(context).colorScheme;
+  final logo = "assets/logos/petlink_${(Provider.of<ThemeProvider>(context).isLightMode) ? "black" : "grey"}.png";
+
+  return Center(
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 32.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // Imagen o logo decorativo
+          Image.asset(
+            logo,
+            height: 100,
+            fit: BoxFit.contain,
+          ),
+          SizedBox(height: 24),
+          Text(
+            '¡Bienvenid@ a PetLink!',
+            style: TextStyle(
+              fontSize: 26,
+              fontWeight: FontWeight.bold,
+              color: tema.primary,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 12),
+          Text(
+            'Para ver tu perfil y tus publicaciones, inicia sesión en tu cuenta.',
+            style: TextStyle(
+              fontSize: 16,
+              color: tema.onSurface.withOpacity(0.7),
+            ),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 32),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              onPressed: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => LoginPage()),
+                );
+              },
+              icon: Icon(Icons.login, color: tema.onPrimary),
+              label: Text(
+                'Iniciar sesión',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: tema.onPrimary,
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: custom.colorEspecial,
+                padding: EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                elevation: 3,
+              ),
+            ),
+          ),
+          SizedBox(height: 16),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              onPressed: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => RegisterPage()),
+                );
+              },
+              icon: Icon(Icons.person_add, color: custom.colorEspecial),
+              label: Text(
+                'Crear cuenta nueva',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: custom.colorEspecial,
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: custom.contenedor,
+                padding: EdgeInsets.symmetric(vertical: 16),
+                side: BorderSide(
+                  color: custom.colorEspecial,
+                  width: 1.5,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                elevation: 3,
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+

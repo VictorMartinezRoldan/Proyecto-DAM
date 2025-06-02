@@ -111,4 +111,22 @@ class SupabaseAuthService {
     }
   }
 
+  Future<bool> esPerfilCompletado() async {
+    try {
+      final user = Supabase.instance.client.auth.currentUser;
+      if (user != null) {
+        final response = await Supabase.instance.client
+            .from('usuarios')
+            .select('perfil_completado')
+            .eq('id', user.id)
+            .single();
+        
+        return response['perfil_completado'] ?? false;
+      }
+    } catch (e) {
+      print('Error al verificar perfil: $e');
+    }
+    return false;
+  }
+
 }
