@@ -4,7 +4,9 @@ import 'package:petlink/themes/customColors.dart';
 class MyTextField extends StatelessWidget {
   final String hintString;
   final TextEditingController? controller; // Nuevo parámetro opcional
-  const MyTextField({super.key, required this.hintString, this.controller});
+  final int? maxLength;
+  
+  const MyTextField({super.key, required this.hintString, this.controller, this.maxLength});
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +15,7 @@ class MyTextField extends StatelessWidget {
     final fondo = Color.fromARGB(255, 230, 230, 230);
     return TextField(
       controller: controller, // Asignar controlador si existe
+      maxLength: maxLength,
       style: TextStyle(color: Colors.black),
       decoration: InputDecoration(
         filled: true,

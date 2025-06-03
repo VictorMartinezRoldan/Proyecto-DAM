@@ -138,7 +138,11 @@ class _LoginPageState extends State<LoginPage> {
         },
       ),
     ),
+    resizeToAvoidBottomInset: false,
       child: SingleChildScrollView(
+        padding: EdgeInsets.only(
+    bottom: MediaQuery.of(context).viewInsets.bottom,
+  ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

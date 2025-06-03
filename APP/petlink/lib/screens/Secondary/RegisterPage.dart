@@ -47,6 +47,12 @@ class _RegisterPageState extends State<RegisterPage> {
         data: {'idiomaPreferido': idioma},
       );
 
+      // Verificar si el usuario ya existe
+      if (response.user != null && response.user!.identities!.isEmpty) {
+        MensajeSnackbar.mostrarError(context, 'Este correo electrónico ya está registrado. Por favor, inicia sesión o restablece tu contraseña.');
+        return;
+      }
+
       // Si se registra correctamente llevar a la pagina de verificacion de la cuenta
       if (response.user != null) {
         Navigator.push(context,
@@ -146,6 +152,7 @@ class _RegisterPageState extends State<RegisterPage> {
         },
       ),
     ),
+    resizeToAvoidBottomInset: false,
       child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,

@@ -8,6 +8,7 @@ class LoginRegisterLayout extends StatelessWidget {
   final double contentHeightFactor;
   final String? imagenFondo;
   final PreferredSizeWidget? appBar;
+  final bool resizeToAvoidBottomInset;
 
   const LoginRegisterLayout({
     Key? key,
@@ -16,6 +17,7 @@ class LoginRegisterLayout extends StatelessWidget {
     this.contentHeightFactor = 0.70,
     this.imagenFondo = 'assets/imagenFondoPerro.png',
     this.appBar,
+    this.resizeToAvoidBottomInset = true,
   }) : super(key: key);
 
   @override
@@ -29,10 +31,10 @@ class LoginRegisterLayout extends StatelessWidget {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
         // Solo si hay appbar
         extendBodyBehindAppBar: appBar != null,
         appBar: appBar,
+        resizeToAvoidBottomInset: resizeToAvoidBottomInset,
         body: Stack(
           children: [
             // Imagen de fondo
