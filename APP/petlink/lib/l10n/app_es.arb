@@ -542,7 +542,7 @@
     "description": "Texto del botón de cerrar sesión en el menú lateral",
     "context": "lateralmenu_component"
   },
-  "lateralMenuLogIn": "CERRAR SESIÓN",
+  "lateralMenuLogIn": "INICIAR SESIÓN",
   "@lateralMenuLogIn": {
     "description": "Texto del botón de iniciar sesión en el menú lateral",
     "context": "lateralmenu_component"

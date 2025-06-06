@@ -2,6 +2,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:petlink/components/menuLateral.dart';
+import 'package:petlink/screens/Secondary/LoginPage.dart';
 import 'package:provider/provider.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
@@ -12,7 +13,6 @@ import 'package:petlink/components/publicacionStyle.dart';
 import 'package:petlink/entidades/comentario.dart';
 import 'package:petlink/components/comentarioStyle.dart';
 import 'package:petlink/entidades/seguridad.dart';
-import 'package:petlink/screens/Secondary/AuthController.dart';
 import 'package:petlink/services/supabase_auth.dart';
 import 'package:petlink/themes/customColors.dart';
 import 'package:petlink/themes/themeProvider.dart';
@@ -22,6 +22,7 @@ class ComentariosPage extends StatefulWidget {
   const ComentariosPage({super.key, required this.publicacion});
 
   static FocusScopeNode focusScopeError = FocusScopeNode(); // Rama historial focusScope
+  static String propietario = "";
 
   @override
   State<ComentariosPage> createState() => _ComentariosPageState();
@@ -43,9 +44,15 @@ class _ComentariosPageState extends State<ComentariosPage> with SingleTickerProv
 
   List<ComentarioStyle> comentarios = []; // Lista que guarda los comentarios con estilo
 
-  bool respondiendo = false; // Para saber si estoy respondiendo para mostrar _hintText o "Escribe tu comentario aquí"
+  bool respondiendo = false; // Para saber si estoy respondiendo para mostrar _hintText o "Escribe tu comentario aquí" y toda la funcionalidad para responder
 
   String _hintText = "";
+
+  late Comentario _comentarioPadre;
+  late String _nombreUsuarioRespondido;
+  late String _uuidUsuarioRespondido;
+
+  Key reBuild = UniqueKey();
   
   // MÉTODOS
 
@@ -56,7 +63,11 @@ class _ComentariosPageState extends State<ComentariosPage> with SingleTickerProv
   }
 
   // Método que se ejecuta en el botón "Responder" de comentarioStyle
-  void onResponder(String usuario) {
+  void onResponder(String usuario, Comentario comentarioPadre, String uuidUsuarioRespondido) {
+    // ASIGNAMOS LA INFORMACIÓN NECESARIA PARA RESPONDER
+    _comentarioPadre = comentarioPadre; 
+    _uuidUsuarioRespondido = uuidUsuarioRespondido;
+    _nombreUsuarioRespondido = usuario;
     setState(() {
       respondiendo = true;
       _hintText = "Dile algo a $usuario...";
@@ -65,21 +76,55 @@ class _ComentariosPageState extends State<ComentariosPage> with SingleTickerProv
   }
 
   void onEliminar(ComentarioStyle comentario) async {
-    setState(() {
-      comentarios.remove(comentario);
-      widget.publicacion.numComentarios--;
-    });
-    await Comentario.eliminarComentario(context, comentario.comentario.idComentario);
+    if (comentario.isRespuesta) {
+      setState(() {
+        comentario.comentarioPadre.respuestas.remove(comentario);
+        comentario.comentarioPadre.numRespuestas--;
+        reBuild = UniqueKey();
+      });
+      try {
+        await Comentario.eliminarRespuesta(context, comentario.comentario.idRespuesta!);
+      } catch (e) {}
+    } else {
+      setState(() {
+        comentarios.remove(comentario);
+        widget.publicacion.numComentarios--;
+      });
+      await Comentario.eliminarComentario(context, comentario.comentario.idComentario);
+    }
   }
+
+  void onVerRespuestas(Comentario comentarioPadre) async {
+    final int numeroRespuestas = 5;  // NÚMERO DE RESPUESTAS A CONSULTAR
+
+    if (!mounted) return;
+    // Solicitamos respuestas
+    final respuestas = await Comentario.solicitarRespuestas(context, comentarioPadre.idComentario, comentarioPadre.indiceRespuestas, numeroRespuestas);
+    
+    // Recorremos las respuestas
+    for (Comentario respuesta in respuestas) {
+      comentarioPadre.respuestas.add(
+        ComentarioStyle(
+          comentarioPadre: comentarioPadre,
+          comentario: respuesta,
+          onResponder: onResponder, 
+          onEliminar: onEliminar,
+          onVerRespuestas: onVerRespuestas,
+          isRespuesta: true,
+        )
+      );
+    }
+    comentarioPadre.indiceRespuestas += respuestas.length;
+  }
+
+  // --------------------------------------------------------------------------------------------------------------
 
   // MÉTODO QUE LLAMA AL MÉTODO DE COMENTARIOS PARA SOLICITAR COMENTARIOS Y LAS AÑADE A LA LISTA DEL LISTVIEW
   Future<void> solicitarComentarios() async {
 
-    print("NUEVA SOLICITUD");
-
     consultando = true;
 
-    final int numeroComentarios = 2; // NÚMERO DE COMENTARIOS A CONSULTAR
+    final int numeroComentarios = 5; // NÚMERO DE COMENTARIOS A CONSULTAR
 
     // Si hay comentarios y si el número de comentarios de la publicación es mayor al número existente de comentarios cargados...
     if (widget.publicacion.numComentarios > 0 && widget.publicacion.numComentarios > comentarios.length) {
@@ -98,12 +143,13 @@ class _ComentariosPageState extends State<ComentariosPage> with SingleTickerProv
         // CREO EL OBJETO
         Comentario newComentario = Comentario(
           idComentario: datos["id_comentario"], 
-          imagenPerfil: datos["imagen_perfil"], 
+          imagenPerfil: datos["imagen_perfil"],
+          uuid: datos["uuid"],
           nombre: datos["nombre"],
           usuario: datos["usuario"],
           texto: datos["texto"],
           fecha: datos["fecha_comentario"],
-          numRespuestas: 0, // CAMBIAR
+          numRespuestas: datos["num_respuestas"],
           likes: datos["likes"], 
           liked: datos["liked"]
         );
@@ -137,16 +183,17 @@ class _ComentariosPageState extends State<ComentariosPage> with SingleTickerProv
               Comentario ultimoComentario = Comentario(
                 idComentario: datos["id_comentario"], 
                 imagenPerfil: datos["imagen_perfil"], 
+                uuid: datos["uuid"],
                 nombre: datos["nombre"],
                 usuario: datos["usuario"],
                 texto: datos["texto"],
                 fecha: datos["fecha_comentario"],
-                numRespuestas: 0, // CAMBIAR
+                numRespuestas: datos["num_respuestas"],
                 likes: datos["likes"], 
                 liked: datos["liked"]
               );
               setState(() {
-                comentarios.insert(0, ComentarioStyle(comentario: ultimoComentario, onResponder: onResponder, onEliminar: onEliminar));
+                comentarios.insert(0, ComentarioStyle(comentario: ultimoComentario, onResponder: onResponder, onEliminar: onEliminar, onVerRespuestas: onVerRespuestas, comentarioPadre: ultimoComentario));
               });
             }
             indiceComentarios += cantidad; // Incrementamos el índice
@@ -159,7 +206,13 @@ class _ComentariosPageState extends State<ComentariosPage> with SingleTickerProv
               widget.publicacion.numComentarios = nuevoNumComentarios; // Actualizamos el número de comentarios
             });
           }
-        }        
+        }
+        
+        // LÓGICA DE CARGAR LAS RESPUESTAS
+
+        if (datos["num_respuestas"] > 0) {
+          onVerRespuestas(newComentario);
+        }
       }
       // Solo recorre la colección si no está vacía, recuerdo que si se han detectado nuevos comentarios esta se vacía.
       if (newComentarios.isNotEmpty) {
@@ -169,10 +222,17 @@ class _ComentariosPageState extends State<ComentariosPage> with SingleTickerProv
             return;
           }
           setState(() {
-            comentarios.add(ComentarioStyle(comentario: comentario, onResponder: onResponder, onEliminar: onEliminar));
+            comentarios.add(ComentarioStyle(comentario: comentario, onResponder: onResponder, onEliminar: onEliminar, onVerRespuestas: onVerRespuestas, comentarioPadre: comentario));
           });
         }
         indiceComentarios += newComentarios.length;
+      }
+
+      // Si no se han cargado nunca antes comentarios, y al solicitar nuevos comentarios no hay más, entonces se entiende que se han borrado todos.
+      if (comentarios.isEmpty && newComentarios.isEmpty) {
+        setState(() {
+          widget.publicacion.numComentarios = 0;
+        });
       }
     }
     // No hay comentarios, no se solicita información a la BD o ya no hay más comentarios que cargar
@@ -191,10 +251,106 @@ class _ComentariosPageState extends State<ComentariosPage> with SingleTickerProv
           return;
         } else {
           reiniciarFocus();
-          respondiendo = false;
+          if (controladorComentario.text.isEmpty) {
+            respondiendo = false;
+          }
         }
       }
     });
+
+    ComentariosPage.propietario = widget.publicacion.usuario;
+  }
+
+  // LOGICA COMENTAR // RESPONDER
+
+  void subirComentarioRespuesta() async {
+    if (controladorComentario.text.isNotEmpty && await Seguridad.validate(context, controladorComentario.text)) {
+      int id = Seguridad.generarID();
+
+      if (!context.mounted) return;
+      if (respondiendo) {
+        // RESPUESTA
+        if (!mounted) return;
+        bool resultado = await Comentario.responder(context, id, _comentarioPadre.idComentario, controladorComentario.text, _uuidUsuarioRespondido);
+        
+        if (resultado) {
+          Comentario nuevaRespuesta = Comentario(
+            idRespuesta: id,
+            idComentario: _comentarioPadre.idComentario, 
+            uuid: SupabaseAuthService.id, 
+            imagenPerfil: SupabaseAuthService.imagenPerfil, 
+            nombre: SupabaseAuthService.nombre,
+            usuario: SupabaseAuthService.nombreUsuario,
+            texto: controladorComentario.text,
+            fecha: DateTime.now().toUtc().toString(),
+            likes: 0, 
+            numRespuestas: 0, 
+            liked: false,
+            usuarioRespondido: _nombreUsuarioRespondido
+          );
+          
+          setState(() {
+            ComentarioStyle comentario = comentarios.firstWhere((comentario) => comentario.comentario.idComentario == _comentarioPadre.idComentario);
+            comentario.comentarioPadre.respuestas.insert(0, 
+              ComentarioStyle(
+                comentario: nuevaRespuesta,
+                onResponder: onResponder,
+                onEliminar: onEliminar,
+                onVerRespuestas: onVerRespuestas,
+                comentarioPadre: _comentarioPadre,
+                isRespuesta: true,
+              )
+            );
+            comentario.expandirRespuestas = true;
+            comentario.comentarioPadre.indiceRespuestas++;
+            comentario.comentarioPadre.numRespuestas++;
+            reBuild = UniqueKey(); // FORZAMOS RECONSTRUCCIÓN
+          });
+        }
+        // ------------------------------------------------
+        controladorComentario.clear(); // Limpiar TextField
+        reiniciarFocus(); // Quitar focus y reiniciar el arbol de FocusScope
+        // ------------------------------------------------
+      } else {
+        // ---------------------------------------------------------------------------------------
+        // COMENTARIO
+        if (!mounted) return;
+        Comentario.comentar(context, id, widget.publicacion.id, controladorComentario.text);
+
+        // Simular el comentario subido, localmente
+        Comentario nuevoComentario = Comentario(
+          idComentario: id,
+          imagenPerfil: SupabaseAuthService.imagenPerfil,
+          uuid: SupabaseAuthService.id,
+          nombre: SupabaseAuthService.nombre,
+          usuario: SupabaseAuthService.nombreUsuario,
+          texto: controladorComentario.text,
+          fecha: DateTime.now().toUtc().toString(),
+          likes: 0,
+          numRespuestas: 0,
+          liked: false,
+          esNuevo: true
+        );
+        // Añadir el comentario al principio
+        setState(() {
+          widget.publicacion.numComentarios++;
+          comentarios.insert(0, ComentarioStyle(
+            key: ValueKey(id),
+            comentario: nuevoComentario,
+            onResponder: onResponder,
+            onEliminar: onEliminar,
+            onVerRespuestas: onVerRespuestas,
+            comentarioPadre: nuevoComentario, 
+          ));
+        });
+        // ------------------------------------------------
+        controladorComentario.clear(); // Limpiar TextField
+        reiniciarFocus(); // Quitar focus y reiniciar el arbol de FocusScope
+        // ------------------------------------------------
+      }
+      if (!mounted) return;
+      FocusScope.of(context).unfocus();
+    }
   }
   
   @override
@@ -263,7 +419,12 @@ class _ComentariosPageState extends State<ComentariosPage> with SingleTickerProv
                   child: Column(
                     children: [
                       PublicacionStyle(publicacion: publi, isComentariosPage: true, onTapComentariosPage: () => reiniciarFocus()),
-                      ...comentarios, // Listar todos los comentarios de la lista
+                      Column(
+                        key: reBuild,
+                        children: [
+                          ...comentarios, // Listar todos los comentarios de la lista
+                        ],
+                      ),
                       if (publi.numComentarios == 0 && comentarios.isEmpty)
                       Padding(
                         padding: EdgeInsets.only(
@@ -390,42 +551,7 @@ class _ComentariosPageState extends State<ComentariosPage> with SingleTickerProv
                             padding: const EdgeInsets.only(left: 10),
                             child: IconButton(
                               onPressed: () async {
-                                if (controladorComentario.text.isNotEmpty && await Seguridad.validate(context, controladorComentario.text)) {
-                                  int id = Seguridad.generarID();
-
-                                  if (!context.mounted) return;
-
-                                  // Subir comentario
-                                  Comentario.comentar(context, id, publi.id, controladorComentario.text);
-                                  
-                                  // Simular el comentario subido, localmente
-                                  Comentario nuevoComentario = Comentario(
-                                    idComentario: id,
-                                    imagenPerfil: SupabaseAuthService.imagenPerfil,
-                                    nombre: SupabaseAuthService.nombre,
-                                    usuario: SupabaseAuthService.nombreUsuario,
-                                    texto: controladorComentario.text,
-                                    fecha: DateTime.now().toUtc().toString(),
-                                    likes: 0,
-                                    numRespuestas: 0,
-                                    liked: false,
-                                    esNuevo: true
-                                  );
-                                  // ------------------------------------------------
-                                  reiniciarFocus(); // Quitar focus y reiniciar el arbol de FocusScope
-                                  controladorComentario.clear(); // Limpiar TextField
-                                  // ------------------------------------------------
-                                  // Añadir el comentario al principio
-                                  setState(() {
-                                    publi.numComentarios++;
-                                    comentarios.insert(0, ComentarioStyle(
-                                      key: ValueKey(id),
-                                      comentario: nuevoComentario,
-                                      onResponder: onResponder,
-                                      onEliminar: onEliminar,
-                                    ));
-                                  });
-                                }
+                                subirComentarioRespuesta();
                               },
                               icon: Icon(Icons.pets, color: custom.contenedor),
                               padding: EdgeInsets.zero,
@@ -451,41 +577,7 @@ class _ComentariosPageState extends State<ComentariosPage> with SingleTickerProv
                           padding: const EdgeInsets.only(top: 10),
                           child: TextButton(
                             onPressed: () async {
-                                if (controladorComentario.text.isNotEmpty && await Seguridad.validate(context, controladorComentario.text)) {
-                                int id = Seguridad.generarID();
-
-                                if (!context.mounted) return;
-                                // Subir comentario
-                                Comentario.comentar(context, id, publi.id, controladorComentario.text);
-
-                                // Simular el comentario subido, localmente
-                                Comentario nuevoComentario = Comentario(
-                                  idComentario: id,
-                                  imagenPerfil: SupabaseAuthService.imagenPerfil,
-                                  nombre: SupabaseAuthService.nombre,
-                                  usuario: SupabaseAuthService.nombreUsuario,
-                                  texto: controladorComentario.text,
-                                  fecha: DateTime.now().toUtc().toString(),
-                                  likes: 0,
-                                  numRespuestas: 0,
-                                  liked: false,
-                                  esNuevo: true
-                                );
-                                // ------------------------------------------------
-                                reiniciarFocus(); // Quitar focus y reiniciar el arbol de FocusScope
-                                controladorComentario.clear(); // Limpiar TextField
-                                // ------------------------------------------------
-                                // Añadir el comentario al principio
-                                setState(() {
-                                  publi.numComentarios++;
-                                  comentarios.insert(0, ComentarioStyle(
-                                    key: ValueKey(id),
-                                    comentario: nuevoComentario,
-                                    onResponder: onResponder,
-                                    onEliminar: onEliminar,
-                                  ));
-                                });
-                              }
+                              subirComentarioRespuesta();
                             }, 
                             style: TextButton.styleFrom(
                               backgroundColor: (controladorComentario.text.isNotEmpty) ? custom.colorEspecial : custom.colorEspecial.withAlpha(150),
@@ -520,7 +612,7 @@ class _ComentariosPageState extends State<ComentariosPage> with SingleTickerProv
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => AuthController()),
+                  MaterialPageRoute(builder: (context) => LoginPage()),
                 );
               }, 
               style: TextButton.styleFrom(

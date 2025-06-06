@@ -1,7 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:petlink/components/cardSettingsStyle.dart';
-import 'package:petlink/screens/Secondary/AuthController.dart';
+import 'package:petlink/screens/Secondary/LoginPage.dart';
 import 'package:petlink/screens/Secondary/SettingsPage.dart';
 import 'package:petlink/screens/UserPage.dart';
 import 'package:petlink/services/supabase_auth.dart';
@@ -141,7 +141,7 @@ class _MenuLateralState extends State<MenuLateral> {
                           Navigator.pop(context);
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => AuthController()),
+                            MaterialPageRoute(builder: (context) => LoginPage()),
                           );
                         }
                       },

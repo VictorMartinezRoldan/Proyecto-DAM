@@ -93,6 +93,13 @@ class _PublicacionStyleState extends State<PublicacionStyle> with TickerProvider
   }
 
   @override
+  void dispose() {
+    _likeDoubleTapController.dispose();
+    _likeButtonController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
 
     // PUBLICACION

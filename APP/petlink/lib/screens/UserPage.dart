@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import 'package:petlink/screens/Secondary/AuthController.dart';
 import 'package:petlink/screens/Secondary/EditProfilePage.dart';
 import 'package:petlink/screens/Secondary/LoginPage.dart';
 import 'package:petlink/screens/Secondary/RegisterPage.dart';

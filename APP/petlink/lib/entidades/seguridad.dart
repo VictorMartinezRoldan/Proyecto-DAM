@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:petlink/components/dialogoInformacion.dart';
 import 'package:petlink/components/dialogoPregunta.dart';
-import 'package:petlink/screens/Secondary/AuthController.dart';
+import 'package:petlink/screens/Secondary/LoginPage.dart';
 import 'package:petlink/services/supabase_auth.dart';
 import 'package:petlink/themes/themeProvider.dart';
 import 'package:provider/provider.dart';
@@ -140,7 +140,7 @@ class Seguridad {
       if (result == true){
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => AuthController()),
+          MaterialPageRoute(builder: (context) => LoginPage()),
         );
       }
       return false; // NO PUEDE
