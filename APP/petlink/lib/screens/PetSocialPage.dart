@@ -1,7 +1,7 @@
 // BIBLIOTECAS
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:petlink/entidades/seguridad.dart';
 
 // CLASES
 import 'package:petlink/services/supabase_auth.dart';
@@ -9,6 +9,7 @@ import 'package:petlink/components/menuLateral.dart';
 import 'package:petlink/components/publicacionStyle.dart';
 import 'package:petlink/entidades/publicacion.dart';
 import 'package:petlink/themes/customColors.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 class PetSocialPage extends StatefulWidget {
   const PetSocialPage({super.key});
@@ -20,10 +21,19 @@ class PetSocialPage extends StatefulWidget {
 class _PetSocialPageState extends State<PetSocialPage> {
   static List<PublicacionStyle> publicaciones = []; // LISTA DE PUBLICACIONES (PublicacionStyle) [LISTVIEW]
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>(); // Para control endDrawer
+  Set<int> publicacionesVistas = {}; // PARA CONTROLAR LAS PUBLICACIONES YA VISTAS EN EL DETECTOR Y HACER LLAMADAS ÚNICAS
+  bool solicitando = false;
+  bool isFinal = false;
+  // ---------------------------------
+  // ---------------------------------
+  int numeroPublicaciones = 10;
+  // ---------------------------------
+  // ---------------------------------
 
   // MÉTODO QUE LLAMA AL MÉTODO DE PUBLICACIONES PARA SOLICITAR PUBLICACIONES Y LAS AÑADE A LA LISTA DEL LISTVIEW
   Future<void> refrescar() async {
-    List<Publicacion> datos = await Publicacion.solicitarPublicaciones(context, 3); // NUMERO DE PUBLICACIONES QUE SE PIDEN
+    solicitando = true;
+    List<Publicacion> datos = await Publicacion.solicitarPublicaciones(context, numeroPublicaciones); // NUMERO DE PUBLICACIONES QUE SE PIDEN
     for (Publicacion publicacion in datos){
       var indice = publicaciones.length;
       if (!mounted) {
@@ -33,7 +43,12 @@ class _PetSocialPageState extends State<PetSocialPage> {
         publicaciones.add(PublicacionStyle(key: ValueKey(indice), publicacion: publicacion));
       });
     }
+    solicitando = false;
+    if (datos.isEmpty) {
+      isFinal = true;
+    }
   }
+
 
   @override
   void initState(){
@@ -43,9 +58,12 @@ class _PetSocialPageState extends State<PetSocialPage> {
   }
 
   // Cuando se reconstruye limpia las listas y publicaciones para recargarlas con los likes guardados
-  void reconstruir() async{
+  Future<void> reconstruir() async{
+    isFinal = false;
+    solicitando = false;
+    publicacionesVistas.clear();
     publicaciones.clear();
-    Publicacion.publicacionesExistentes.clear();
+    Publicacion.idPublicacionesExistentes.clear();
     setState(() {
       // RECONSTRUIMOS
       refrescar();
@@ -70,7 +88,7 @@ class _PetSocialPageState extends State<PetSocialPage> {
             SizedBox(width: 10),
             IconButton(
               onPressed: () {}, 
-              icon: Icon(LineAwesomeIcons.crown, size: 30)
+              icon: Icon(Icons.notifications_none_rounded, size: 30)
             )
           ]
         ),
@@ -119,10 +137,29 @@ class _PetSocialPageState extends State<PetSocialPage> {
           backgroundColor: tema.surface,
           color: custom.colorEspecial,
           displacement: 5,
-          onRefresh: refrescar,
+          onRefresh: reconstruir,
           child: ListView.builder(
             itemCount: publicaciones.length,
-            itemBuilder: (context, index) => publicaciones[index],
+            itemBuilder: (context, index) {
+              return Column(
+                children: [
+                  VisibilityDetector(
+                    key: Key("publicacion_${Seguridad.generarID()}"), 
+                    child: publicaciones[index], 
+                    onVisibilityChanged: (info) {
+                      if (info.visibleFraction > 0.7) {
+                        if (!publicacionesVistas.contains(index)) {
+                          publicacionesVistas.add(index);
+                          if (index + 1 > (publicaciones.length - 3) && !solicitando && !isFinal) {
+                            refrescar();
+                          }
+                        }
+                      }
+                    }
+                  )
+                ],
+              );
+            }
           ),
         ),
       ),

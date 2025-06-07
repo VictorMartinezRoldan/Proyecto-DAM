@@ -8,6 +8,7 @@ import 'package:lottie/lottie.dart';
 // CLASES
 import 'package:petlink/entidades/seguridad.dart';
 import 'package:petlink/screens/Secondary/ComentariosPage.dart';
+import 'package:petlink/screens/UserPage.dart';
 import 'package:petlink/themes/customColors.dart';
 import 'package:petlink/entidades/publicacion.dart';
 import 'package:petlink/screens/Secondary/PhotoViewer.dart';
@@ -65,16 +66,16 @@ class _PublicacionStyleState extends State<PublicacionStyle> with TickerProvider
     final diferencia = ahora.difference(fecha);
 
     if (diferencia.inMinutes < 1) {
-      return 'Hace unos segundos';
+      return '1 segundo';
     } else if (diferencia.inMinutes < 60) {
-      return 'Hace ${diferencia.inMinutes} minuto${diferencia.inMinutes == 1 ? '' : 's'}';
+      return '${diferencia.inMinutes} minuto${diferencia.inMinutes == 1 ? '' : 's'}';
     } else if (diferencia.inHours < 24) {
-      return 'Hace ${diferencia.inHours} hora${diferencia.inHours == 1 ? '' : 's'}';
+      return '${diferencia.inHours} hora${diferencia.inHours == 1 ? '' : 's'}';
     } else if (diferencia.inDays <= 30) {
-      return 'Hace ${diferencia.inDays} día${diferencia.inDays == 1 ? '' : 's'}';
+      return '${diferencia.inDays} día${diferencia.inDays == 1 ? '' : 's'}';
     } else if (diferencia.inDays < 365) {
       final meses = (diferencia.inDays / 30).floor();
-      return 'Hace $meses mes${meses == 1 ? '' : 'es'}';
+      return '$meses mes${meses == 1 ? '' : 'es'}';
     } else {
       return DateFormat.yMMMMd().format(fecha);
     }
@@ -164,58 +165,61 @@ class _PublicacionStyleState extends State<PublicacionStyle> with TickerProvider
                     top: 20,
                     right: 10,
                   ),
-                  child: Row(
-                    children: [
-                      // IMAGEN DE PERFIL
-                      CircleAvatar(
-                        radius: 22,
-                        backgroundColor: Colors.grey.shade200,
-                        backgroundImage: CachedNetworkImageProvider(publi.imagenPerfil),
-                      ),
-                      SizedBox(width: 12),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // NOMBRE Y FECHA
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [Text(publi.nombre), Text(haceCuanto, style: TextStyle(color: Colors.grey.shade500),)],
-                            ),
-                            SizedBox(height: 1),
-                            // USUARIO CON CONTENEDOR
-                            IntrinsicWidth(
-                              child: Container(
-                                padding: EdgeInsets.only(
-                                  left: 8,
-                                  right: 8,
-                                  bottom: 1,
-                                  top: 1,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: custom.colorEspecial,
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.pets,
-                                      size: 18,
-                                      color: custom.contenedor,
-                                    ),
-                                    SizedBox(width: 5),
-                                    Text(
-                                      publi.usuario,
-                                      style: TextStyle(color: custom.contenedor),
-                                    ),
-                                  ],
+                  child: GestureDetector(
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => UserPage())),
+                    child: Row(
+                      children: [
+                        // IMAGEN DE PERFIL
+                        CircleAvatar(
+                          radius: 22,
+                          backgroundColor: Colors.grey.shade200,
+                          backgroundImage: CachedNetworkImageProvider(publi.imagenPerfil),
+                        ),
+                        SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // NOMBRE Y FECHA
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [Text(publi.nombre), Text(haceCuanto, style: TextStyle(color: Colors.grey.shade500),)],
+                              ),
+                              SizedBox(height: 1),
+                              // USUARIO CON CONTENEDOR
+                              IntrinsicWidth(
+                                child: Container(
+                                  padding: EdgeInsets.only(
+                                    left: 8,
+                                    right: 8,
+                                    bottom: 1,
+                                    top: 1,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: custom.colorEspecial,
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.pets,
+                                        size: 18,
+                                        color: custom.contenedor,
+                                      ),
+                                      SizedBox(width: 5),
+                                      Text(
+                                        publi.usuario,
+                                        style: TextStyle(color: custom.contenedor),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
           

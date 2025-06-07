@@ -83,9 +83,11 @@ class _NetworkErrorPageState extends State<NetworkErrorPage> {
                     )
                   );
                   bool isConnected = await Seguridad.comprobarConexion(); // Checkea la conexión
+                  if (!context.mounted) return;
                   Navigator.pop(context);
                   // Diálogo en base al estado de la conexión
                   if (isConnected) {
+                    if (!context.mounted) return;
                     showDialog(
                       context: context, 
                       barrierDismissible: false,
@@ -109,12 +111,14 @@ class _NetworkErrorPageState extends State<NetworkErrorPage> {
                       )
                     );
                     await Future.delayed(Duration(milliseconds: 500));
+                    if (!context.mounted) return;
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (context) => PagesManager()),
                       (Route<dynamic> route) => false
                     );
                   } else {
+                    if (!context.mounted) return;
                     showDialog(
                       context: context, 
                       barrierDismissible: false,
@@ -138,6 +142,7 @@ class _NetworkErrorPageState extends State<NetworkErrorPage> {
                       )
                     );
                     await Future.delayed(Duration(milliseconds: 1200));
+                    if (!context.mounted) return;
                     Navigator.pop(context);
                   }
                 },

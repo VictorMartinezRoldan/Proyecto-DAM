@@ -15,6 +15,7 @@ import 'package:petlink/services/supabase_auth.dart';
 class Publicacion {
   // ATRIBUTOS DE LAS PUBLICACIONES
   final int id;
+  final String uuidPubli;
   final String imagenPerfil;
   final String nombre;
   final String usuario;
@@ -29,6 +30,7 @@ class Publicacion {
   // CONSTRUCTOR 
   Publicacion({
     required this.id,
+    required this.uuidPubli,
     required this.imagenPerfil,
     required this.nombre,
     required this.usuario,
@@ -41,16 +43,19 @@ class Publicacion {
   });
 
   // LISTA DE PUBLICACIONES CARGADAS PARA NO VOLVER A MOSTRAR
-  static List<Publicacion> publicacionesExistentes = [];
+  static List<int> idPublicacionesExistentes = [];
   
   // MÉTODO QUE SOLICITA INFORMACIÓN ACERCA DE UNA PUBLICACIÓN
-  static Future<List<Publicacion>> solicitarPublicaciones(BuildContext context, int num_publicaciones) async {
+  static Future<List<Publicacion>> solicitarPublicaciones(BuildContext context, int numPublicaciones) async {
     List<Publicacion> publicaciones = []; // LISTA DE PUBLICACIONES A ENVIAR
     try {
       final supaClient = Supabase.instance.client;
       final response = await supaClient.rpc(
         'obtener_publicaciones_aleatorias', // LLAMAMOS A UNA FUNCIÓN DENTRO DE LA BD CON UNA CONSULTA AVANZADA
-        params: {'limit_count': num_publicaciones, 'usuario_uid' : (SupabaseAuthService.isLogin.value) ? SupabaseAuthService.id : null}
+        params: {
+          'excluidas': idPublicacionesExistentes,
+          'limit_count': numPublicaciones, 
+          'usuario_uid' : (SupabaseAuthService.isLogin.value) ? SupabaseAuthService.id : null}
       );
 
       if (response == null || response.isEmpty) {
@@ -62,6 +67,7 @@ class Publicacion {
           // CREO EL OBJETO
           Publicacion newPubli = Publicacion(
               id: datos["id"],
+              uuidPubli: datos["uuid"],
               imagenPerfil: datos["imagen_perfil"],
               nombre: datos["nombre"],
               usuario: datos["usuario"],
@@ -72,12 +78,12 @@ class Publicacion {
               liked: datos["liked"],
               numComentarios: datos["num_comentarios"]
           );
-          if (publicacionesExistentes.contains(newPubli)){
-            // YA EXISTE, NO SE METE
-          } else {
-            publicacionesExistentes.add(newPubli); // AÑADO AL HISTORIAL
-            publicaciones.add(newPubli); // AÑADO A LA LISTA DE PUBLICACIONES A ENVIAR
-          }
+
+
+          idPublicacionesExistentes.add(newPubli.id); // AÑADO AL HISTORIAL
+          publicaciones.add(newPubli); // AÑADO A LA LISTA DE PUBLICACIONES A ENVIAR
+          
+          // idPublicacionesExistentes.contains(newPubli.id)
         }
         return publicaciones;
       }
@@ -117,18 +123,19 @@ Descubre, comparte y aprende sobre todas las razas.
   }
 
   // Metodo para guardar Likes en la BD
-  static Future<void> darLike(BuildContext context, String id_publi) async {
+  static Future<void> darLike(BuildContext context, String idPubli) async {
     final supaClient = Supabase.instance.client;
     try {
       await supaClient.from('likes_publicaciones')
         .insert({
           'id_usuario' : SupabaseAuthService.id,
-          'id_publicacion' : id_publi
+          'id_publicacion' : idPubli
       });
     } catch (e) {
       // ERROR AL DAR LIKE
       bool isConnected = await Seguridad.comprobarConexion();
       if (!isConnected) {
+        if (!context.mounted) return;
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => NetworkErrorPage())
@@ -138,14 +145,14 @@ Descubre, comparte y aprende sobre todas las razas.
   }
 
   // Metodo para borrar Likes en la BD
-  static Future<void> quitarLike(BuildContext context, String id_publi) async {
+  static Future<void> quitarLike(BuildContext context, String idPubli) async {
     final supaClient = Supabase.instance.client;
     try {
       await supaClient.from('likes_publicaciones')
         .delete()
         .match({
           'id_usuario' : SupabaseAuthService.id,
-          'id_publicacion' : id_publi
+          'id_publicacion' : idPubli
       });
     } catch (e) {
       // ERROR AL QUITAR EL LIKE

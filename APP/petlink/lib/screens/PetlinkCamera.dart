@@ -88,6 +88,7 @@ class _PetlinkCameraState extends State<PetlinkCamera> {
     } catch (e) {
       print("Error al inicializar la cámara: $e");
       // Si da error muestra el diálogo diciendo que necesita permisos para continuar
+      if (!mounted) return;
       bool respuesta = await Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => DialogoPregunta(
@@ -101,6 +102,7 @@ class _PetlinkCameraState extends State<PetlinkCamera> {
       );
       if (respuesta != null) {
         if (respuesta == false){
+          if (!mounted) return;
           Navigator.pop(context); // Vuelve para la pantalla principal
         } else {
           // Vuelve a pedir permisos si el usuario decide dar permisos.
@@ -108,6 +110,7 @@ class _PetlinkCameraState extends State<PetlinkCamera> {
           // Si no se consigue dar permisos o el sistema bloquea volver a pedir permisos redirige a ajustes de la aplicación
           // donde el cliente puede dar permisos
           if (statusCamera.isDenied || statusCamera.isPermanentlyDenied) {
+            if (!mounted) return;
             Navigator.pop(context);
             openAppSettings();
           } else {
@@ -198,6 +201,7 @@ class _PetlinkCameraState extends State<PetlinkCamera> {
     // Mensaje de aviso de que es una versión Beta
     WidgetsBinding.instance.addPostFrameCallback((_) async{
       await Future.delayed(Duration(milliseconds: 500));
+      if (!mounted) return;
       var custom = Theme.of(context).extension<CustomColors>()!; // EXTRAER TEMA DE LA APP CUSTOM
       await showDialog(
         context: context,
@@ -243,225 +247,229 @@ class _PetlinkCameraState extends State<PetlinkCamera> {
     }
 
     // DISEÑO DE LA INTERFAZ
-    return Scaffold(
-      backgroundColor: Colors.black,
-      extendBody: true,
-      extendBodyBehindAppBar: (!_isCameraInitialized),
-      appBar: AppBar(
-        title: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(Icons.pets),
-            SizedBox(width: 10),
-            Text("PETLINK", style: TextStyle(fontWeight: FontWeight.bold)),
-            SizedBox(width: 10),
-            Icon(Icons.pets),
-          ],
-        ),
-        centerTitle: true,
+    return PopScope( // PROHIBIR VOLVER HASTA QUE SE CONSTRUYA CORRECTAMENTE LA CÁMARA O VUELVA DE FORMA SEGURA
+      canPop: _isCameraInitialized,
+      child: Scaffold(
         backgroundColor: Colors.black,
-        foregroundColor: Colors.white
-      ),
-      body: !_isCameraInitialized
-          ? Center(child: CircularProgressIndicator(color: custom.colorEspecial)) : 
-          Stack(
+        extendBody: true,
+        extendBodyBehindAppBar: (!_isCameraInitialized),
+        appBar: AppBar(
+          title: Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Transform.scale(
-                scale: previewRatio / deviceRatio,
-                child: Center(
-                  child: AspectRatio(
-                    aspectRatio: previewRatio,
-                    // Gira la imagen en el eje X para que se vea más natural
-                    child: Transform.flip(
-                      flipX: (_selectedCameraIndex == 1) ? true : false,
-                      child: (imagen == null) ? 
-                      CameraPreview(_cameraController) : Image.file(File(imagen!.path))
-                    ),
-                  ),
-                ),
-              ),
-              EsquinasCamara(
-                x: caja_eje_x, 
-                y: caja_eje_y, 
-                width: caja_anchura, 
-                height: caja_altura
-              ),
-              // BOTÓN DE FLASH
-              if (imagen == null)
-              Positioned(
-                top: 20,
-                left: 10,
-                child: IconButton(
-                  onPressed: () {
-                    cambiarFlash();
-                  }, 
-                  icon: Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: Colors.black38,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(flashIcons[_cameraController.value.flashMode], color: Colors.white),
-                  )
-                ),
-              ),
-              // TEXTO DE IA
-              if (imagen == null)
-              Positioned(
-                right: 20,
-                top: 33,
-                child: Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 5
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20)
-                  ),
-                  child: Text("AI Camera", style: TextStyle(color: Colors.black),)
-                )
-              ),
-              // ANIMACIÓN DE BUSCAR (LA LUPA)
-              AnimatedOpacity(
-                opacity: _searchAnimationVisible ? 1 : 0,
-                duration: Duration(seconds: 1),
-                child: Center(
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: 120),
-                    child: Lottie.asset(
-                      'assets/animaciones/buscando.json',
-                      width: 150,
-                      height: 150,
-                      repeat: true,
-                      animate: true,
-                    ),
-                  ),
-                ),
-              )
+              Icon(Icons.pets),
+              SizedBox(width: 10),
+              Text("PETLINK", style: TextStyle(fontWeight: FontWeight.bold)),
+              SizedBox(width: 10),
+              Icon(Icons.pets),
             ],
           ),
-      // CONTROLES INFERIORES DE LA CÁMARA (GIRAR CÁMARA / TOMAR FOTO / IMAGEN GALERÍA)
-      bottomNavigationBar: (!_isCameraInitialized || imagen != null) ? SizedBox.shrink() : Container(
-        margin: EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: 30
+          centerTitle: true,
+          backgroundColor: Colors.black,
+          foregroundColor: Colors.white
         ),
-        height: 120,
-        decoration: BoxDecoration(
-          color: Colors.black54,
-          borderRadius: BorderRadius.circular(40)
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Container(
-              width: 60,
-              height: 60,
-              decoration: BoxDecoration(
-                color: Colors.grey.withAlpha(50),
-                shape: BoxShape.circle,
-              ),
-              // CAMBIAR CAMARA (TRASERA / DELANTERA)
-              child: IconButton(
-                onPressed: () async {
-                  if (_selectedCameraIndex == 0) {
-                    _selectedCameraIndex = 1;
-                  } else {
-                    _selectedCameraIndex = 0;
-                  }
-                  await _cameraController.setFlashMode(FlashMode.off);
-                  setState(() {
-                    _isCameraInitialized = false;
-                    _initializeCamera();
-                  });
-                }, 
-                icon: Icon(Icons.cameraswitch, color: Colors.white, size: 40))
-            ),
-            // HACER FOTO
-            GestureDetector(
-              onTap: () async {
-                AudioPlayer player = AudioPlayer();
-                if (_selectedCameraIndex == 1 && _cameraController.value.flashMode == FlashMode.always){
-                  showDialog(
-                    context: context,
-                    builder: (context) => Container(color: Colors.white),
-                  );
-                }
-                try {
-                  imagen = await _cameraController.takePicture();
-                } catch (e){
-                  print("ERROR DE CÁMARA");
-                }
-                setState(() {
-                  player.play(AssetSource("audios/HacerFoto.mp3"));
-                });
-                if (_selectedCameraIndex == 1 && _cameraController.value.flashMode == FlashMode.always){
-                  Navigator.pop(context);
-                }
-                Future.delayed(
-                  Duration(milliseconds: 600),
-                  () => setState(() {
-                    _searchAnimationVisible = true;
-                  }),
-                );
-                if (_selectedCameraIndex == 1) await compute(flipImage, imagen!.path);
-                Future.delayed(
-                  Duration(seconds: 1),
-                  () => buscarPerro(imagen!.path),
-                );
-              },
-              child: Container(
-                width: 80,
-                height: 80,
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: Colors.white,
-                    width: 4
+        body: !_isCameraInitialized
+            ? Center(child: CircularProgressIndicator(color: custom.colorEspecial)) : 
+            Stack(
+              children: [
+                Transform.scale(
+                  scale: previewRatio / deviceRatio,
+                  child: Center(
+                    child: AspectRatio(
+                      aspectRatio: previewRatio,
+                      // Gira la imagen en el eje X para que se vea más natural
+                      child: Transform.flip(
+                        flipX: (_selectedCameraIndex == 1) ? true : false,
+                        child: (imagen == null) ? 
+                        CameraPreview(_cameraController) : Image.file(File(imagen!.path))
+                      ),
+                    ),
+                  ),
+                ),
+                EsquinasCamara(
+                  x: caja_eje_x, 
+                  y: caja_eje_y, 
+                  width: caja_anchura, 
+                  height: caja_altura
+                ),
+                // BOTÓN DE FLASH
+                if (imagen == null)
+                Positioned(
+                  top: 20,
+                  left: 10,
+                  child: IconButton(
+                    onPressed: () {
+                      cambiarFlash();
+                    }, 
+                    icon: Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: Colors.black38,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(flashIcons[_cameraController.value.flashMode], color: Colors.white),
+                    )
+                  ),
+                ),
+                // TEXTO DE IA
+                if (imagen == null)
+                Positioned(
+                  right: 20,
+                  top: 33,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 5
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20)
+                    ),
+                    child: Text("AI Camera", style: TextStyle(color: Colors.black),)
                   )
                 ),
-              ),
+                // ANIMACIÓN DE BUSCAR (LA LUPA)
+                AnimatedOpacity(
+                  opacity: _searchAnimationVisible ? 1 : 0,
+                  duration: Duration(seconds: 1),
+                  child: Center(
+                    child: Padding(
+                      padding: EdgeInsets.only(bottom: 120),
+                      child: Lottie.asset(
+                        'assets/animaciones/buscando.json',
+                        width: 150,
+                        height: 150,
+                        repeat: true,
+                        animate: true,
+                      ),
+                    ),
+                  ),
+                )
+              ],
             ),
-            // BOTÓN GALERÍA
-            Container(
-              width: 60,
-              height: 60,
-              decoration: BoxDecoration(
-                color: Colors.grey.withAlpha(50),
-                borderRadius: BorderRadius.circular(15)
-              ),
-              child: IconButton(
-                onPressed: () async {
-                  if (_isPickingImage) return; // Evita llamadas múltiples
-                  _isPickingImage = true;
-                  try {
-                    XFile? img = await ImagePicker().pickImage(source: ImageSource.gallery);
-                    if (img != null){
-                      setState(() {
-                        imagen = img;
-                      });
-                      Future.delayed(
-                        Duration(milliseconds: 600),
-                        () => setState(() {
-                          _searchAnimationVisible = true;
-                        }),
-                      );
-                      buscarPerro(imagen!.path);
+        // CONTROLES INFERIORES DE LA CÁMARA (GIRAR CÁMARA / TOMAR FOTO / IMAGEN GALERÍA)
+        bottomNavigationBar: (!_isCameraInitialized || imagen != null) ? SizedBox.shrink() : Container(
+          margin: EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 30
+          ),
+          height: 120,
+          decoration: BoxDecoration(
+            color: Colors.black54,
+            borderRadius: BorderRadius.circular(40)
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Container(
+                width: 60,
+                height: 60,
+                decoration: BoxDecoration(
+                  color: Colors.grey.withAlpha(50),
+                  shape: BoxShape.circle,
+                ),
+                // CAMBIAR CAMARA (TRASERA / DELANTERA)
+                child: IconButton(
+                  onPressed: () async {
+                    if (_selectedCameraIndex == 0) {
+                      _selectedCameraIndex = 1;
                     } else {
+                      _selectedCameraIndex = 0;
                     }
-                  } finally {
-                    _isPickingImage = false;
-                  }
-                }, 
-                icon: Icon(Icons.photo_library_rounded, color: Colors.white, size: 32)
+                    await _cameraController.setFlashMode(FlashMode.off);
+                    setState(() {
+                      _isCameraInitialized = false;
+                      _initializeCamera();
+                    });
+                  }, 
+                  icon: Icon(Icons.cameraswitch, color: Colors.white, size: 40))
               ),
-            ),
-          ],
-        ),
-      )
+              // HACER FOTO
+              GestureDetector(
+                onTap: () async {
+                  AudioPlayer player = AudioPlayer();
+                  if (_selectedCameraIndex == 1 && _cameraController.value.flashMode == FlashMode.always){
+                    showDialog(
+                      context: context,
+                      builder: (context) => Container(color: Colors.white),
+                    );
+                  }
+                  try {
+                    imagen = await _cameraController.takePicture();
+                  } catch (e){
+                    print("ERROR DE CÁMARA");
+                  }
+                  setState(() {
+                    player.play(AssetSource("audios/HacerFoto.mp3"));
+                  });
+                  if (_selectedCameraIndex == 1 && _cameraController.value.flashMode == FlashMode.always){
+                    if (!context.mounted) return;
+                    Navigator.pop(context);
+                  }
+                  Future.delayed(
+                    Duration(milliseconds: 600),
+                    () => setState(() {
+                      _searchAnimationVisible = true;
+                    }),
+                  );
+                  if (_selectedCameraIndex == 1) await compute(flipImage, imagen!.path);
+                  Future.delayed(
+                    Duration(seconds: 1),
+                    () => buscarPerro(imagen!.path),
+                  );
+                },
+                child: Container(
+                  width: 80,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: Colors.white,
+                      width: 4
+                    )
+                  ),
+                ),
+              ),
+              // BOTÓN GALERÍA
+              Container(
+                width: 60,
+                height: 60,
+                decoration: BoxDecoration(
+                  color: Colors.grey.withAlpha(50),
+                  borderRadius: BorderRadius.circular(15)
+                ),
+                child: IconButton(
+                  onPressed: () async {
+                    if (_isPickingImage) return; // Evita llamadas múltiples
+                    _isPickingImage = true;
+                    try {
+                      XFile? img = await ImagePicker().pickImage(source: ImageSource.gallery);
+                      if (img != null){
+                        setState(() {
+                          imagen = img;
+                        });
+                        Future.delayed(
+                          Duration(milliseconds: 600),
+                          () => setState(() {
+                            _searchAnimationVisible = true;
+                          }),
+                        );
+                        buscarPerro(imagen!.path);
+                      } else {
+                      }
+                    } finally {
+                      _isPickingImage = false;
+                    }
+                  }, 
+                  icon: Icon(Icons.photo_library_rounded, color: Colors.white, size: 32)
+                ),
+              ),
+            ],
+          ),
+        )
+      ),
     );
   }
 }

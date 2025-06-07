@@ -35,6 +35,13 @@ class ComentarioStyleState extends State<ComentarioStyle> with TickerProviderSta
   late final AnimationController _likeButtonController = AnimationController(vsync: this);
   late final AnimationController _scaleAnimation = AnimationController(vsync: this, duration: Duration(milliseconds: 600));
 
+  late bool isPropietario = ComentariosPage.propietario == widget.comentario.usuario;
+
+  String acortarNombreUsuario(String texto, int maxCaracteres) {
+    if (texto.length <= maxCaracteres) return texto;
+    return '${texto.substring(0, maxCaracteres)}...';
+  }
+
   // Método para calcular el tiempo transcurrido desde la publicación. (FECHA)
   String tiempoTranscurrido(DateTime fecha) {
     final ahora = DateTime.now();
@@ -192,38 +199,49 @@ class ComentarioStyleState extends State<ComentarioStyle> with TickerProviderSta
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
+                          crossAxisAlignment: widget.isRespuesta ? CrossAxisAlignment.center : CrossAxisAlignment.start,
                           children: [
-                            Text(comentario.nombre, style: TextStyle(fontWeight: FontWeight.w500)),
-                            SizedBox(width: widget.isRespuesta ? 5 : 10),
-                            if (!widget.isRespuesta)
-                            Container(
-                              padding: EdgeInsets.only(
-                                left: 8,
-                                right: 8,
-                                bottom: 1,
-                                top: 1,
-                              ),
-                              decoration: BoxDecoration(
-                                color: custom.colorEspecial,
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: Row(
+                            Flexible(
+                              child: Wrap(
+                                crossAxisAlignment: WrapCrossAlignment.center,
                                 children: [
-                                  Icon(
-                                    Icons.pets,
-                                    size: 18,
-                                    color: custom.contenedor,
-                                  ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    comentario.usuario,
-                                    style: TextStyle(color: custom.contenedor),
+                                  IntrinsicWidth(child: Text(!widget.isRespuesta ? comentario.nombre : acortarNombreUsuario(comentario.nombre, (widget.isRespuesta && isPropietario) ? 8 : 12), style: TextStyle(fontWeight: FontWeight.w500))),
+                                  SizedBox(width: widget.isRespuesta ? 5 : 10),
+                                  if (!widget.isRespuesta)
+                                  IntrinsicWidth(
+                                    child: Container(
+                                      padding: EdgeInsets.only(
+                                        left: 8,
+                                        right: 8,
+                                        bottom: 1,
+                                        top: 1,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: custom.colorEspecial,
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.pets,
+                                            size: 18,
+                                            color: custom.contenedor,
+                                          ),
+                                          SizedBox(width: 5),
+                                          Text(
+                                            comentario.usuario,
+                                            style: TextStyle(color: custom.contenedor),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
+                            // NOMBRE DE USUARIO
                             SizedBox(width: (!widget.isRespuesta) ? 10 : 0),
-                            if (ComentariosPage.propietario == widget.comentario.usuario)
+                            if (isPropietario)
                             Container(
                               padding: EdgeInsets.symmetric(horizontal: 5),
                               decoration: BoxDecoration(
@@ -240,9 +258,9 @@ class ComentarioStyleState extends State<ComentarioStyle> with TickerProviderSta
                             SizedBox(width: 5),
                             if (widget.isRespuesta)
                             Icon(Icons.keyboard_double_arrow_right_sharp, size: 20, color: custom.colorEspecial),
-                            SizedBox(width: (ComentariosPage.propietario == widget.comentario.usuario) ? 5 : 8),
+                            SizedBox(width: (isPropietario) ? 5 : 8),
                             if (widget.isRespuesta)
-                            Text(comentario.usuarioRespondido!, style: TextStyle(fontWeight: FontWeight.w500)),
+                            Text(acortarNombreUsuario(comentario.usuarioRespondido!, isPropietario ? 8 : 12), style: TextStyle(fontWeight: FontWeight.w500)),
                           ],
                         ),
                         SizedBox(height: 7),
