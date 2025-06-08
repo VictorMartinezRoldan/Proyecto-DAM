@@ -129,4 +129,59 @@ class SupabaseAuthService {
     return false;
   }
 
+  Future<Map<String, dynamic>?> obtenerUsuarioPorId(String userId) async {
+    try {
+      final datos = await supabase
+          .from('usuarios')
+          .select(
+            'id, nombre_usuario, nombre, descripcion, imagen_perfil, imagen_portada, correo',
+          )
+          .eq('id', userId)
+          .maybeSingle();
+
+      if (datos == null) {
+        print("⚠️ No se encontraron datos para el usuario con ID: $userId");
+        return null;
+      }
+
+      print("📌 Datos de usuario obtenidos: $datos");
+      return datos as Map<String, dynamic>;
+
+    } catch (error) {
+      print("❌ Error obteniendo usuario: $error");
+      return null;
+    }
+  }
+
+  Future<List<String>> obtenerPublicacionesPorUsuario(String userId) async {
+    try {
+      if (userId.isEmpty) {
+        print("⛔ ID de usuario no disponible");
+        return [];
+      }
+
+      final response = await supabase
+          .from('publicaciones')
+          .select('imagen_url')
+          .eq('id_usuario', userId);
+
+      print("📡 Respuesta de publicaciones para usuario $userId: $response");
+
+      if (response.isNotEmpty) {
+        List<String> publicacionesUsuario = response
+            .map((post) => post['imagen_url'] as String?)
+            .whereType<String>()
+            .toList();
+        print("✅ Publicaciones cargadas: ${publicacionesUsuario.length}");
+        return publicacionesUsuario;
+      } else {
+        print("⚠️ No hay publicaciones para este usuario.");
+        return [];
+      }
+    } catch (e) {
+      print("❌ Error obteniendo publicaciones: $e");
+      return [];
+    }
+  }
+
 }

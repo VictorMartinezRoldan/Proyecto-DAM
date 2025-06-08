@@ -117,7 +117,8 @@ class _TarjetaRazaStyleState extends State<TarjetaRazaStyle> with TickerProvider
   void _verificarFavorito() async {
     final userId = SupabaseAuthService.id;
 
-    if (userId != null && userId.isNotEmpty) return;
+    // Verificar si el usuario es null o esta vacio
+    if (userId == null || userId.isEmpty) return;
 
     try {
       // Consulta a la BD
@@ -317,9 +318,8 @@ class _TarjetaRazaStyleState extends State<TarjetaRazaStyle> with TickerProvider
                                     decoration: BoxDecoration(
                                       gradient: LinearGradient(
                                         colors: [
-                                          tema.primaryContainer.withValues(
-                                            alpha: 0.2,
-                                          ),
+                                          tema.primaryContainer.withValues(alpha: 0.2),
+                                          tema.primaryContainer.withValues(alpha: 0.2),
                                         ],
                                       ),
                                       borderRadius: BorderRadius.circular(20),
@@ -338,14 +338,6 @@ class _TarjetaRazaStyleState extends State<TarjetaRazaStyle> with TickerProvider
                                             ),
                                           ),
                                           SizedBox(height: 8),
-                                          Text(
-                                            'Cargando...',
-                                            style: TextStyle(
-                                              color: tema.onSurfaceVariant,
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
                                         ],
                                       ),
                                     ),
