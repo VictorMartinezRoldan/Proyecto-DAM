@@ -59,6 +59,7 @@ class _PetlinkCameraState extends State<PetlinkCamera> {
   XFile? imagen;
   bool _isPickingImage = false; // Galería abierta o ya en uso
   bool _searchAnimationVisible = false; // Si muestra la animación de búsqueda
+  bool _tomandoFoto = false;
 
   // Para relacionar el modo de la cámara con un icono.
   final flashIcons = {
@@ -76,8 +77,16 @@ class _PetlinkCameraState extends State<PetlinkCamera> {
   // BUSCANDO RAZA
   bool buscandoRaza = false;
 
+  late Interpreter modeloYolo;
+  late Interpreter modeloRazas;
 
   // MÉTODOS
+
+  Future<void> _cargarModelos() async {
+    // CARGA EL MODELO
+    modeloYolo = await Interpreter.fromAsset('assets/IA/yolo/yolov5.tflite');
+    modeloRazas = await Interpreter.fromAsset('assets/IA/razas/detector.tflite');
+  }
 
 
   // MÉTODO PARA INICIALIZAR LA CAMARA
@@ -167,11 +176,6 @@ class _PetlinkCameraState extends State<PetlinkCamera> {
   // Y este lo que hace es hacer una predicción con 'YOLOv5' en busca de un perro en la imagen y devuelve unas coordenadas
   // traducidas de la posición del perro.
   Future<void> buscarPerro(String imagePath) async {
-    // CARGA EL MODELO
-    Interpreter modeloYolo = await Interpreter.fromAsset('assets/IA/yolo/yolov5.tflite');
-    Interpreter modeloRazas = await Interpreter.fromAsset('assets/IA/razas/detector.tflite');
-    print("✅ MODELOS CARGADOS");
-
     final puertoReceptorYolo = ReceivePort(); // Puerto receptor YOLO
     final puertoReceptorRazas = ReceivePort(); // Puerto receptor RAZAS
 
@@ -184,88 +188,91 @@ class _PetlinkCameraState extends State<PetlinkCamera> {
       _cameraController.value.previewSize!.height // Alto de vista previa de la cámara
     ]);
 
+    // RAZA
+    setState(() {
+      buscandoRaza = true;
+    });
+    
+    Isolate.spawn(procesoRazas, [
+      puertoReceptorRazas.sendPort, // Puerto de envío
+      modeloRazas, // Modelo de RAZAS
+      imagePath, // Ruta de la imagen
+    ]);
+
     // Se pone en segundo plano a la espera de resultado por parte del método
     puertoReceptorYolo.listen((resultado) async {
       setState(() {
         _searchAnimationVisible = false;
+        buscandoRaza = false;
       });
-      await Future.delayed(Duration(milliseconds: 600));
-      setState(() {
-        try {
+      try {
+        setState(() {
           // Intenta establecer los nuevos valores
           caja_eje_x = resultado['x']!;
           caja_eje_y = resultado['y']!;
           caja_anchura = resultado['w']!;
           caja_altura = resultado['h']!;
-          print('🐶 Perro detectado: x=$caja_eje_x, y=$caja_eje_y, w=$caja_anchura, h=$caja_altura');
-        } catch (e) {
-          // NO SE A ENCONTRADO UN PERRO
-        } finally {
-          // DETECTOR DE RAZAS
-          print("BUSCAR RAZA 🔎");
-          setState(() {
-            buscandoRaza = true;
-          });
-          
-          Isolate.spawn(procesoRazas, [
-            puertoReceptorRazas.sendPort, // Puerto de envío
-            modeloRazas, // Modelo de RAZAS
-            imagePath, // Ruta de la imagen
-          ]);
-
-          puertoReceptorRazas.listen((resultado) async {
-            int clase = resultado['classIndex'];
-            if (resultado is Map) {
-              final contenido = await rootBundle.loadString('assets/IA/razas/clases.txt');
-              final lineas = contenido.split('\n').map((e) => e.trim()).toList();
-              if (clase < 0 || clase >= lineas.length) {
-                throw RangeError("❌ Índice fuera de rango. El archivo tiene ${lineas.length} líneas.");
-              }
-              
-              print("Raza detectada: clase ${lineas[clase].trim()} con ${resultado['confidence'] * 100}%");
-            
-              try {
-                final respuesta = await Supabase.instance.client
-                  .from('perros')
-                  .select('*')
-                  .eq('raza', '${lineas[clase].trim()}');
-                if (respuesta.isEmpty) {
-                  throw Exception("Raza no encontrada");
-                } 
-                if (!mounted) return;
-                showDialog(context: context, builder: (context) => DialogoRaza(razaData: respuesta.first));
-              } catch (e) {
-                if (!mounted) return;
-                await showDialog(
-                  context: context, 
-                  builder: (context) => DialogoInformacion(
-                    imagen: Image.asset("assets/perros_dialogos/info_triste_${(Provider.of<ThemeProvider>(context).isLightMode) ? "light" : "dark"}.png"),
-                    titulo: "No hemos detectado la raza",
-                    texto: "Ocurrió un error al intentar detectar la raza del perro. Por favor, inténtalo de nuevo más tarde.",
-                    textoBtn: "Aceptar",
-                  ),
-                );
-                // ERROR
-                bool isConnected = await Seguridad.comprobarConexion();
-                if (!isConnected) {
-                  if (!mounted) return;
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => NetworkErrorPage())
-                  );
-                }
-              } finally {
-                setState(() {
-                  buscandoRaza = false;
-                  imagen = null;
-                });
-              }
+        });
+      } catch (e) {
+        // NO SE A ENCONTRADO UN PERRO
+      } finally {
+        await Future.delayed(Duration(seconds: 1));
+        // DETECTOR DE RAZAS
+        puertoReceptorRazas.listen((resultado) async {
+          int clase = resultado['classIndex'];
+          if (resultado is Map) {
+            final contenido = await rootBundle.loadString('assets/IA/razas/clases.txt');
+            final lineas = contenido.split('\n').map((e) => e.trim()).toList();
+            if (clase < 0 || clase >= lineas.length) {
+              throw RangeError("❌ Índice fuera de rango. El archivo tiene ${lineas.length} líneas.");
             }
-          });
-        }
-      });
+            
+            print("Raza detectada: clase ${lineas[clase].trim()} con ${resultado['confidence'] * 100}%");
+          
+            try {
+              final respuesta = await Supabase.instance.client
+                .from('perros')
+                .select('*')
+                .eq('raza', '${lineas[clase].trim()}'); 
+              if (respuesta.isEmpty) {
+                throw Exception("Raza no encontrada");
+              } 
+              if (!mounted) return;
+              await showDialog(context: context, builder: (context) => DialogoRaza(razaData: respuesta.first));
+            } catch (e) {
+              if (!mounted) return;
+              await showDialog(
+                context: context, 
+                builder: (context) => DialogoInformacion(
+                  imagen: Image.asset("assets/perros_dialogos/info_triste_${(Provider.of<ThemeProvider>(context).isLightMode) ? "light" : "dark"}.png"),
+                  titulo: "Raza no detectada",
+                  texto: "Ocurrió un error al intentar detectar la raza del perro. Por favor, inténtalo de nuevo más tarde.",
+                  textoBtn: "Aceptar",
+                ),
+              );
+              // ERROR
+              bool isConnected = await Seguridad.comprobarConexion();
+              if (!isConnected) {
+                if (!mounted) return;
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => NetworkErrorPage())
+                );
+              }
+            } finally {
+              setState(() {
+                imagen = null;
+                // RESTABLECEMOS LA CAJA
+                caja_eje_x = 30;
+                caja_eje_y = 130;
+                caja_anchura = 330;
+                caja_altura = 400;
+              });
+            }
+          }
+        });
+      }
     });
-
   }
 
   // -------------------------------------------------------
@@ -273,6 +280,7 @@ class _PetlinkCameraState extends State<PetlinkCamera> {
   @override
   void initState() {
     super.initState();
+    _cargarModelos();
     // Mensaje de aviso de que es una versión Beta
     WidgetsBinding.instance.addPostFrameCallback((_) async{
       await Future.delayed(Duration(milliseconds: 500));
@@ -306,7 +314,6 @@ class _PetlinkCameraState extends State<PetlinkCamera> {
   @override
   Widget build(BuildContext context) {
     late var custom = Theme.of(context).extension<CustomColors>()!; // EXTRAER TEMA DE LA APP CUSTOM
-    late var tema = Theme.of(context).colorScheme; // EXTRAER TEMA DE LA APP
 
     double deviceRatio = 0.00;
     double previewRatio = 0.00;
@@ -485,36 +492,42 @@ class _PetlinkCameraState extends State<PetlinkCamera> {
               // HACER FOTO
               GestureDetector(
                 onTap: () async {
-                  AudioPlayer player = AudioPlayer();
-                  if (_selectedCameraIndex == 1 && _cameraController.value.flashMode == FlashMode.always){
-                    showDialog(
-                      context: context,
-                      builder: (context) => Container(color: Colors.white),
-                    );
+                  if (!_tomandoFoto) {
+                    _tomandoFoto = true;
+                    AudioPlayer player = AudioPlayer();
+                    if (_selectedCameraIndex == 1 && _cameraController.value.flashMode == FlashMode.always){
+                      showDialog(
+                        context: context,
+                        builder: (context) => Container(color: Colors.white),
+                      );
+                    }
+                    try {
+                      imagen = await _cameraController.takePicture();
+                    } catch (e){
+                      print("ERROR DE CÁMARA");
+                    }
+                    if (imagen != null) {
+                      setState(() {
+                        player.play(AssetSource("audios/HacerFoto.mp3"));
+                      });
+                      if (_selectedCameraIndex == 1 && _cameraController.value.flashMode == FlashMode.always){
+                        if (!context.mounted) return;
+                        Navigator.pop(context);
+                      }
+                      Future.delayed(
+                        Duration(milliseconds: 600),
+                        () => setState(() {
+                          _searchAnimationVisible = true;
+                        }),
+                      );
+                      if (_selectedCameraIndex == 1) await compute(flipImage, imagen!.path);
+                      Future.delayed(
+                        Duration(seconds: 1),
+                        () => buscarPerro(imagen!.path),
+                      );
+                    }
+                    _tomandoFoto = false;
                   }
-                  try {
-                    imagen = await _cameraController.takePicture();
-                  } catch (e){
-                    print("ERROR DE CÁMARA");
-                  }
-                  setState(() {
-                    player.play(AssetSource("audios/HacerFoto.mp3"));
-                  });
-                  if (_selectedCameraIndex == 1 && _cameraController.value.flashMode == FlashMode.always){
-                    if (!context.mounted) return;
-                    Navigator.pop(context);
-                  }
-                  Future.delayed(
-                    Duration(milliseconds: 600),
-                    () => setState(() {
-                      _searchAnimationVisible = true;
-                    }),
-                  );
-                  if (_selectedCameraIndex == 1) await compute(flipImage, imagen!.path);
-                  Future.delayed(
-                    Duration(seconds: 1),
-                    () => buscarPerro(imagen!.path),
-                  );
                 },
                 child: Container(
                   width: 80,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:petlink/components/dialogoDisponibilidadFutura.dart';
 import 'package:petlink/components/mensajeSnackbar.dart';
 import 'package:petlink/screens/PagesManager.dart';
+import 'package:petlink/screens/Secondary/LoginPage.dart';
 import 'package:petlink/screens/Secondary/Settings/SelectLanguagePage.dart';
 import 'package:petlink/themes/customColors.dart';
 import 'package:petlink/components/cardSettingsStyle.dart';
@@ -19,12 +21,7 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  late var custom =
-      Theme.of(
-        context,
-      ).extension<CustomColors>()!; // EXTRAER TEMA DE LA APP CUSTOM
-  late var tema = Theme.of(context).colorScheme; // EXTRAER TEMA DE LA APP
-
+  
   void _toggleTheme(bool isDarkMode) {
     final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
     themeProvider.toggleTheme(); // CAMBIAR EL TEMA
@@ -34,6 +31,8 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     bool isLogin = SupabaseAuthService.isLogin.value;
+    late var custom =Theme.of(context,).extension<CustomColors>()!; // EXTRAER TEMA DE LA APP CUSTOM
+    late var tema = Theme.of(context).colorScheme; // EXTRAER TEMA DE LA APP
 
     return Scaffold(
       appBar: AppBar(
@@ -80,6 +79,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   ],
                 ),
               ),
+              if (isLogin)
               const SizedBox(height: 15),
               CardSettingsStyle(
                 Icons.language,
@@ -122,60 +122,50 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               const SizedBox(height: 15),
               CardSettingsStyle(
+                onTap: () async {
+                  await showDialog(context: context, builder: (context) => DialogoDisponibilidadFutura());
+                },
                 Icons.notifications,
                 AppLocalizations.of(context)!.settingsNotificationPreferences,
                 AppLocalizations.of(
                   context,
                 )!.settingsNotificationPreferencesDesc,
               ),
-              const SizedBox(height: 20),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  AppLocalizations.of(context)!.securityTitle,
-                  textAlign: TextAlign.left,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-              ),
-              const SizedBox(height: 15),
-              CardSettingsStyle(
-                Icons.lock,
-                AppLocalizations.of(context)!.settingsPrivacy,
-                AppLocalizations.of(context)!.settingsPrivacyDesc,
-              ),
-              const SizedBox(height: 15),
-              CardSettingsStyle(
-                Icons.security,
-                AppLocalizations.of(context)!.settingsSecurity,
-                AppLocalizations.of(context)!.settingsSecurityDesc,
-              ),
-              const SizedBox(height: 15),
-              // Logout, solo visible si el usuario esta logueado
-              Visibility(
-                visible: isLogin,
-                child: Column(
-                  children: [
-                    CardSettingsStyle(
-                      Icons.logout,
-                      AppLocalizations.of(context)!.settingsLogout,
-                      AppLocalizations.of(context)!.settingsLogoutDesc,
-                      onTap: () async {
-                        try {
-                          await Supabase.instance.client.auth.signOut();
-                          setState(() {
-                            SupabaseAuthService.isLogin.value = false;
-                          });
-
-                          Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder: (context) => PagesManager()),
-                            (route) => false,
-                          );
-                          MensajeSnackbar.mostrarInfo(context, 'Sesión cerrada');
-                        } catch (e) {
-                          MensajeSnackbar.mostrarError(context, 'Error al cerrar sesión');
-                        }
-                      },
-                    ),
-                  ],
+              const SizedBox(height: 40),
+              SizedBox(
+                width: double.infinity,
+                // LOGIN == CERRAR SESION / NO LOGIN == INICIAR SESION
+                child: TextButton(
+                  onPressed: () async {
+                    if (isLogin){
+                      try {
+                        await Supabase.instance.client.auth.signOut();
+                        setState(() {
+                          SupabaseAuthService.isLogin.value = false;
+                        });
+                        if (!context.mounted) return;
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Sesión cerrada')));
+                      } catch (e){
+                        // ERROR DE CIERRE DE SESIÓN
+                      }
+                    } else {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                      );
+                    }
+                  },
+                  style: TextButton.styleFrom(
+                    padding: EdgeInsets.symmetric(vertical: 30),
+                    backgroundColor: (isLogin) ? Colors.redAccent : custom.colorEspecial,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)
+                    )
+                  ), 
+                  child: Text(
+                    (isLogin) ? AppLocalizations.of(context)!.lateralMenuLogOut : AppLocalizations.of(context)!.lateralMenuLogIn, 
+                    style: TextStyle(fontWeight: FontWeight.bold, color: (isLogin) ? Colors.white : custom.contenedor)),
                 ),
               ),
               const SizedBox(height: 30),

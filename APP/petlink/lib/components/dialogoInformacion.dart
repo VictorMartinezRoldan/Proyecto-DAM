@@ -8,7 +8,8 @@ class DialogoInformacion extends StatelessWidget {
   final String textoBtn;
   final Color? ColorBtn;
   final Icon? icono;
-  const DialogoInformacion({super.key, this.imagen, required this.titulo, required this.texto, required this.textoBtn, this.ColorBtn, this.icono,});
+  final bool isOficialMessage;
+  const DialogoInformacion({super.key, this.imagen, required this.titulo, required this.texto, required this.textoBtn, this.ColorBtn, this.icono, this.isOficialMessage = false});
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +30,8 @@ class DialogoInformacion extends StatelessWidget {
             (imagen != null) ? SizedBox(height:200, width: 200, child: imagen!) : SizedBox.shrink(),
             (icono != null && imagen == null) ? icono! : SizedBox.shrink(),
             (icono != null && imagen == null) ? SizedBox(height: 10) : SizedBox.shrink(),
+            if (isOficialMessage)
+            SizedBox(height: 15),
             Text(titulo, style: TextStyle(color: tema.primary, fontWeight: FontWeight.bold, fontSize: 25)),
             SizedBox(height: 15),
             Text(texto, style: TextStyle(color: tema.primary, fontSize: 17), textAlign: TextAlign.center,),

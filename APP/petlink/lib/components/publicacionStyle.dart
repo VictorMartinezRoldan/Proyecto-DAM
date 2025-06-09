@@ -123,18 +123,20 @@ class _PublicacionStyleState extends State<PublicacionStyle> with TickerProvider
       children: [
         GestureDetector(
           onTap: () async {
-            // SI NO ES COMENTARIOS PAGE ABRE LA PÁGINA DE LOS COMENTARIOS
             if (!widget.isComentariosPage) {
-              await Navigator.push(context, MaterialPageRoute(builder: (context) => ComentariosPage(publicacion: publi)));
-              if (!mounted) return;
+              final wasMounted = mounted;
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ComentariosPage(publicacion: publi),
+                ),
+              );
+              if (!wasMounted || !mounted) return;
               setState(() {
-                // RECARGAR CAMBIOS
+                // refrescar
               });
             } else {
-              // Si estamos en comentariosPage:
-              if (widget.onTapComentariosPage != null) {
-                widget.onTapComentariosPage!();
-              }
+              widget.onTapComentariosPage?.call();
             }
           },
           // CONTENEDOR PRINCIPAL

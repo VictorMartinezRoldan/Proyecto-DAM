@@ -1,6 +1,7 @@
 // BIBLIOTECAS
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:petlink/components/dialogoDisponibilidadFutura.dart';
 import 'package:petlink/entidades/seguridad.dart';
 
 // CLASES
@@ -87,7 +88,9 @@ class _PetSocialPageState extends State<PetSocialPage> {
           children: [
             SizedBox(width: 10),
             IconButton(
-              onPressed: () {}, 
+              onPressed: () async {
+                await showDialog(context: context, builder: (context) => DialogoDisponibilidadFutura());
+              }, 
               icon: Icon(Icons.notifications_none_rounded, size: 30)
             )
           ]

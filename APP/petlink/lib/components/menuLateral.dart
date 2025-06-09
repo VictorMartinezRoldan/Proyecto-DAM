@@ -140,6 +140,7 @@ class _MenuLateralState extends State<MenuLateral> {
                             setState(() {
                               SupabaseAuthService.isLogin.value = false;
                             });
+                            if (!context.mounted) return;
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Sesión cerrada')));
                           } catch (e){
                             // ERROR DE CIERRE DE SESIÓN

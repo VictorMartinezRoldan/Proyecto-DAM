@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:petlink/entidades/seguridad.dart';
 import 'package:petlink/screens/PagesManager.dart';
 import 'package:petlink/screens/Secondary/NetworkErrorPage.dart';
-import 'package:petlink/themes/customColors.dart';
 import 'package:petlink/themes/themeProvider.dart';
 import 'package:provider/provider.dart';
 
@@ -92,12 +91,14 @@ class _StartingAnimationState extends State<StartingAnimation> with SingleTicker
 
                   // Redirección dependiendo de su estado de conexión
                   if (isConnected){
+                    if (!context.mounted) return;
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (context) => PagesManager()),
                       (Route<dynamic> route) => false
                     );
                   } else {
+                    if (!context.mounted) return;
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (context) => NetworkErrorPage()),
