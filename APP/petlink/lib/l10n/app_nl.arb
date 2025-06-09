@@ -1,0 +1,508 @@
+{
+  "@@locale": "nl",
+  "profileTitle": "Profiel",
+  "@profileTitle": {
+    "description": "Titel van de profielpagina",
+    "context": "profile_page"
+  },
+  "editProfile": "Bewerk profiel",
+  "@editProfile": {
+    "description": "Knop om het profiel te bewerken",
+    "context": "profile_page"
+  },
+  "recentPosts": "Recente berichten",
+  "@recentPosts": {
+    "description": "Tekst om recente berichten te bekijken",
+    "context": "profile_page"
+  },
+  "noPublication": "Nog geen berichten.",
+  "@noPublication": {
+    "description": "Tekst die aangeeft dat er geen berichten zijn",
+    "context": "profile_page"
+  },
+  "editProfileTitle": "Bewerk profiel",
+  "@editProfileTitle": {
+    "description": "Titel van de profielbewerkingspagina",
+    "context": "profile_edit"
+  },
+  "save": "Redden",
+  "@save": {
+    "description": "Redden",
+    "context": "profile_edit"
+  },
+  "name": "Naam",
+  "@name": {
+    "description": "Naam",
+    "context": "profile_edit"
+  },
+  "description": "Beschrijving",
+  "@description": {
+    "description": "Beschrijving",
+    "context": "profile_edit"
+  },
+  "saveChanges": "Bewaar wijzigingen",
+  "@saveChanges": {
+    "description": "Bewaar wijzigingen",
+    "context": "profile_edit"
+  },
+  "editProfileFront": "Selecteer Cover -afbeelding",
+  "@editProfileFront": {
+    "description": "Selecteer Cover -afbeelding",
+    "context": "profile_edit"
+  },
+  "editProfileProfile": "Selecteer profielafbeelding",
+  "@editProfileProfile": {
+    "description": "Selecteer profielafbeelding",
+    "context": "profile_edit"
+  },
+  "editProfileGallery": "Galerij",
+  "@editProfileGallery": {
+    "description": "Tekstbeschrijving voor het selecteren van Gallery",
+    "context": "profile_edit"
+  },
+  "editProfileCamera": "Camera",
+  "@editProfileCamera": {
+    "description": "Tekstbeschrijving voor het selecteren van camera",
+    "context": "profile_edit"
+  },
+  "editProfileImage": "Standaardafbeeldingen",
+  "@editProfileImage": {
+    "description": "Tekstbeschrijving voor het selecteren van standaardafbeeldingen",
+    "context": "profile_edit"
+  },
+  "editProfileCancel": "Annuleren",
+  "@editProfileCancel": {
+    "description": "Tekstbeschrijving voor annuleren",
+    "context": "profile_edit"
+  },
+  "editProfileNotAvailable": "Geen afbeeldingen beschikbaar",
+  "@editProfileNotAvailable": {
+    "description": "Tekstbeschrijving voor geen afbeeldingen beschikbaar",
+    "context": "profile_edit"
+  },
+  "configTitle": "Instellingen",
+  "@configTitle": {
+    "description": "Titel van het gedeelte Instellingen",
+    "context": "settings_page"
+  },
+  "settingsAccountInformation": "Accountinformatie",
+  "@settingsAccountInformation": {
+    "description": "Tekst voor de sectie Accountinformatie",
+    "context": "settings_page"
+  },
+  "settingsAccountInformationDesc": "Persoonlijke informatie en toegang",
+  "@settingsAccountInformationDesc": {
+    "description": "Tekst voor de beschrijving van de sectie Accountinformatie",
+    "context": "settings_page"
+  },
+  "settingsLanguage": "Taal",
+  "@settingsLanguage": {
+    "description": "Tekst voor het taalgedeelte",
+    "context": "settings_page"
+  },
+  "settingsLanguageDesc": "Verander de taal van de app",
+  "@settingsLanguageDesc": {
+    "description": "Tekst voor de beschrijving van het taalgedeelte",
+    "context": "settings_page"
+  },
+  "personalizationTitle": "Personalisatie",
+  "@personalizationTitle": {
+    "description": "Titel van het gedeelte Personalisatie",
+    "context": "settings_page"
+  },
+  "settingsDarkMode": "Donkere modus",
+  "@settingsDarkMode": {
+    "description": "Tekst voor de sectie Dark Mode",
+    "context": "settings_page"
+  },
+  "settingsDarkModeDesc": "Wijzig het thema van de app",
+  "@settingsDarkModeDesc": {
+    "description": "Tekst voor de beschrijving van de sectie Dark Mode",
+    "context": "settings_page"
+  },
+  "notificationTitle": "Meldingen",
+  "@notificationTitle": {
+    "description": "Titel van de sectie Meldingen",
+    "context": "settings_page"
+  },
+  "settingsNotificationPreferences": "Meldingsvoorkeuren",
+  "@settingsNotificationPreferences": {
+    "description": "Tekst voor de sectie Meldingsvoorkeuren",
+    "context": "settings_page"
+  },
+  "settingsNotificationPreferencesDesc": "Configureer waarschuwingen en herinneringen",
+  "@settingsNotificationPreferencesDesc": {
+    "description": "Tekst voor de beschrijving van de sectie Meldingsvoorkeuren",
+    "context": "settings_page"
+  },
+  "securityTitle": "Privacy en beveiliging",
+  "@securityTitle": {
+    "description": "Titel van de sectie Privacy and Security",
+    "context": "settings_page"
+  },
+  "settingsPrivacy": "Accountprivacy",
+  "@settingsPrivacy": {
+    "description": "Tekst voor het privacygedeelte",
+    "context": "settings_page"
+  },
+  "settingsPrivacyDesc": "Controle wie uw informatie kan zien",
+  "@settingsPrivacyDesc": {
+    "description": "Tekst voor de beschrijving van het privacygedeelte",
+    "context": "settings_page"
+  },
+  "settingsSecurity": "Beveiliging",
+  "@settingsSecurity": {
+    "description": "Tekst voor het beveiligingsgedeelte",
+    "context": "settings_page"
+  },
+  "settingsSecurityDesc": "Bescherm uw account en persoonlijke gegevens",
+  "@settingsSecurityDesc": {
+    "description": "Tekst voor de beschrijving van het beveiligingsgedeelte",
+    "context": "settings_page"
+  },
+  "settingsLogout": "Uitloggen",
+  "@settingsLogout": {
+    "description": "Tekst voor het uitloggedeelte",
+    "context": "settings_page"
+  },
+  "settingsLogoutDesc": "Meld u uit bij uw account",
+  "@settingsLogoutDesc": {
+    "description": "Tekst voor de beschrijving van het uitloggedeelte",
+    "context": "settings_page"
+  },
+  "accountInformationTitle": "Accountinformatie",
+  "@accountInformationTitle": {
+    "description": "Titel van de sectie Accountinformatie",
+    "context": "accountinformation_page"
+  },
+  "accountInformationTitleDesc": "Beheer uw accountgegevens",
+  "@accountInformationTitleDesc": {
+    "description": "Beschrijving van de sectie Accountinformatie",
+    "context": "accountinformation_page"
+  },
+  "accountInformationUsername": "Gebruikersnaam",
+  "@accountInformationUsername": {
+    "description": "Tekst voor de sectie Accountinformatie (gebruikersnaam)",
+    "context": "accountinformation_page"
+  },
+  "accountInformationEmail": "E -mail",
+  "@accountInformationEmail": {
+    "description": "Tekst voor de sectie Accountinformatie (e -mail)",
+    "context": "accountinformation_page"
+  },
+  "accountInformationPassword": "Wachtwoord",
+  "@accountInformationPassword": {
+    "description": "Tekst voor de sectie Accountinformatie (wachtwoord)",
+    "context": "accountinformation_page"
+  },
+  "editUsernameTitle": "Update uw gebruikersnaam",
+  "@editUsernameTitle": {
+    "description": "Titel van de sectie Gebruikersnaam bewerking",
+    "context": "editusername_page"
+  },
+  "editUsernameTitleDesc": "Kies een unieke naam voor onze community",
+  "@editUsernameTitleDesc": {
+    "description": "Beschrijving van de sectie Gebruikersnaam bewerking",
+    "context": "editusername_page"
+  },
+  "editUsernameName": "Nieuwe gebruikersnaam",
+  "@editUsernameName": {
+    "description": "Tekst voor het veld Gebruikersnaam",
+    "context": "editusername_page"
+  },
+  "editUsernameSave": "Bewaar wijzigingen",
+  "@editUsernameSave": {
+    "description": "Tekst voor de knop Opslaan wijzigingen",
+    "context": "editusername_page"
+  },
+  "editUsernameInfoTitle": "Over gebruikersnamen",
+  "@editUsernameInfoTitle": {
+    "description": "Titel van de link en modaal met informatie over gebruikersnamen",
+    "context": "editusername_page"
+  },
+  "editUsernameInfoBody": "Uw gebruikersnaam is uw identiteit op Petlink.Aanbevelingen:\n\n• Gebruik iets memorabels\n• Neem de naam van uw huisdier op\n• Vermijd speciale tekens\n• Houd het passend\n• Minimaal 5 tekens\n• Geen spaties",
+  "@editUsernameInfoBody": {
+    "description": "Informatieve tekst in de modale uitleg over aanbevelingen voor het kiezen van een gebruikersnaam",
+    "context": "editusername_page"
+  },
+  "editEmailTitle": "Update uw e -mail",
+  "@editEmailTitle": {
+    "description": "Hoofdtitel op het scherm E -mailbewerking",
+    "context": "editemail_page"
+  },
+  "editEmailTitleDesc": "Voer uw huidige e -mail en de nieuwe e -mail in om bij te werken",
+  "@editEmailTitleDesc": {
+    "description": "Verklarende ondertitel op het e -mailbewerkingsscherm",
+    "context": "editemail_page"
+  },
+  "editEmailCurrentLabel": "Huidige e -mail",
+  "@editEmailCurrentLabel": {
+    "description": "Label voor het huidige e -mailveld",
+    "context": "editemail_page"
+  },
+  "editEmailNewLabel": "Nieuwe e -mail",
+  "@editEmailNewLabel": {
+    "description": "Label voor het nieuwe e -mailveld",
+    "context": "editemail_page"
+  },
+  "editEmailNewHint": "bijv. User@example.com",
+  "@editEmailNewHint": {
+    "description": "Voorbeeld tekst voor de nieuwe e -mail",
+    "context": "editemail_page"
+  },
+  "editEmailConfirmLabel": "Bevestig nieuwe e -mail",
+  "@editEmailConfirmLabel": {
+    "description": "Label voor het veld Nieuw e -mail bevestigen",
+    "context": "editemail_page"
+  },
+  "editEmailConfirmHint": "Bevestig uw nieuwe e -mail",
+  "@editEmailConfirmHint": {
+    "description": "Voorbeeld tekst in het veld E -mailbevestiging",
+    "context": "editemail_page"
+  },
+  "editEmailButtonSave": "Update e -mail",
+  "@editEmailButtonSave": {
+    "description": "Tekst voor de knop die e -mailwijzigingen opslaat",
+    "context": "editemail_page"
+  },
+  "editPasswordTitle": "Wijzig het wachtwoord",
+  "@editPasswordTitle": {
+    "description": "Hoofdtitel van het scherm Wachtwoordwijziging",
+    "context": "editpassword_page"
+  },
+  "editPasswordTitleDesc": "Voer uw huidige wachtwoord in en het nieuwe wachtwoord dat u wilt gebruiken",
+  "@editPasswordTitleDesc": {
+    "description": "Verklarende ondertitel op het scherm Wachtwoordwijziging",
+    "context": "editpassword_page"
+  },
+  "editPasswordCurrentLabel": "Huidig ​​wachtwoord",
+  "@editPasswordCurrentLabel": {
+    "description": "Label voor het huidige wachtwoordveld",
+    "context": "editpassword_page"
+  },
+  "editPasswordCurrentHint": "Voer uw huidige wachtwoord in",
+  "@editPasswordCurrentHint": {
+    "description": "Voorbeeldtekst in het huidige wachtwoordveld",
+    "context": "editpassword_page"
+  },
+  "editPasswordNewLabel": "Nieuw wachtwoord",
+  "@editPasswordNewLabel": {
+    "description": "Label voor het nieuwe veld Wachtwoord",
+    "context": "editpassword_page"
+  },
+  "editPasswordNewHint": "Voer uw nieuwe wachtwoord in",
+  "@editPasswordNewHint": {
+    "description": "Voorbeeld tekst in het nieuwe wachtwoordveld",
+    "context": "editpassword_page"
+  },
+  "editPasswordConfirmLabel": "Bevestig nieuw wachtwoord",
+  "@editPasswordConfirmLabel": {
+    "description": "Label voor het veld Nieuw wachtwoord bevestigen",
+    "context": "editpassword_page"
+  },
+  "editPasswordConfirmHint": "Bevestig uw nieuwe wachtwoord",
+  "@editPasswordConfirmHint": {
+    "description": "Voorbeeld tekst in het veld Nieuw wachtwoord bevestigen",
+    "context": "editpassword_page"
+  },
+  "editPasswordButtonSave": "Wijzig het wachtwoord",
+  "@editPasswordButtonSave": {
+    "description": "Tekst voor de knop om de wachtwoordwijziging te bevestigen",
+    "context": "editpassword_page"
+  },
+  "editPasswordStrengthIndicatorLabel": "Wachtwoordsterkte",
+  "@editPasswordStrengthIndicatorLabel": {
+    "description": "Label weergegeven naast de wachtwoordsterkte -indicator",
+    "context": "indicator_password_strength_component"
+  },
+  "editPasswordStrengthIndicatorLabelWeak": "Zwak",
+  "@editPasswordStrengthIndicatorLabelWeak": {
+    "description": "Label voor een zwakke wachtwoordsterkte",
+    "context": "indicator_password_strength_component"
+  },
+  "editPasswordStrengthIndicatorLabelMedium": "Medium",
+  "@editPasswordStrengthIndicatorLabelMedium": {
+    "description": "Label voor middelgrote wachtwoordsterkte",
+    "context": "indicator_password_strength_component"
+  },
+  "editPasswordStrengthIndicatorLabelStrong": "Sterk",
+  "@editPasswordStrengthIndicatorLabelStrong": {
+    "description": "Label voor een sterke wachtwoordsterkte",
+    "context": "indicator_password_strength_component"
+  },
+  "selectLanguageTitle": "Selecteer uw taal",
+  "@selectLanguageTitle": {
+    "description": "Titel van de pagina met taalselectie",
+    "context": "selectlanguage_page"
+  },
+  "selectLanguageTitleDesc": "U kunt de taal op elk gewenst moment veranderen",
+  "@selectLanguageTitleDesc": {
+    "description": "Beschrijving van de pagina met taalselectie",
+    "context": "selectlanguage_page"
+  },
+  "selectLanguageButtonSave": "Bewaar taal",
+  "@selectLanguageButtonSave": {
+    "description": "Tekst voor de knop om de geselecteerde taal op te slaan",
+    "context": "selectlanguage_page"
+  },
+  "newPostTitleDesc": "Deel iets over je vierbenige vriend ...",
+  "@newPostTitleDesc": {
+    "description": "Beschrijving Container voor de nieuwe postpagina",
+    "context": "newpost_page"
+  },
+  "newPostImageDesc": "Upload hier een foto van uw schattige pup",
+  "@newPostImageDesc": {
+    "description": "Afbeeldingscontainer Beschrijving voor de nieuwe postpagina",
+    "context": "newpost_page"
+  },
+  "newPostCameraDesc": "Open de camera",
+  "@newPostCameraDesc": {
+    "description": "Camera -containerbeschrijving voor de nieuwe postpagina",
+    "context": "newpost_page"
+  },
+  "newPostButtonCancel": "ANNULEREN",
+  "@newPostButtonCancel": {
+    "description": "Tekst voor de knop Annuleren op de nieuwe postpagina",
+    "context": "newpost_page"
+  },
+  "newPostButtonPublish": "PUBLICEREN",
+  "@newPostButtonPublish": {
+    "description": "Tekst voor de knop Publiceren op de nieuwe postpagina",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderTitle": "Inslag!Herinnering",
+  "@newPostButtonDialogReminderTitle": {
+    "description": "Titel van de knop Post Reminder Alert",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderDesc": "Zorg ervoor dat de afbeeldingen die u deelt alleen gerelateerd is aan honden.\n\nBedankt dat je ons hebt geholpen dit doggy sociale netwerkpawsome te houden!",
+  "@newPostButtonDialogReminderDesc": {
+    "description": "Beschrijving van de knop Post Reminder Alert",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderButtonConfirm": "Ik heb het",
+  "@newPostButtonDialogReminderButtonConfirm": {
+    "description": "Tekst voor de bevestigingsknop van de waarschuwing voor postherinnering",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderConfirmExitTitle": "Bevestiging",
+  "@newPostButtonDialogReminderConfirmExitTitle": {
+    "description": "Titel van de exit -bevestigingswaarschuwing",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderConfirmExitTitleDesc": "Wilt u vertrekken?",
+  "@newPostButtonDialogReminderConfirmExitTitleDesc": {
+    "description": "Beschrijving van de exit -bevestigingswaarschuwing",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderConfirmExitYes": "Ja",
+  "@newPostButtonDialogReminderConfirmExitYes": {
+    "description": "Tekst voor de exit -bevestigingswaarschuwing",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderConfirmExitNo": "Nee",
+  "@newPostButtonDialogReminderConfirmExitNo": {
+    "description": "Tekst voor de exit -bevestigingswaarschuwing",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogConfirmTitle": "Bevestiging",
+  "@newPostButtonDialogConfirmTitle": {
+    "description": "Titel van de knop Postbevestiging",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogConfirmTitleDesc": "Wil je de foto publiceren?",
+  "@newPostButtonDialogConfirmTitleDesc": {
+    "description": "Beschrijving van de knop Postbevestiging",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogConfirmButtonCancel": "Nee",
+  "@newPostButtonDialogConfirmButtonCancel": {
+    "description": "Tekst voor de knop Annuleren van de postbevestigingswaarschuwing",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogConfirmButtonPublish": "Na",
+  "@newPostButtonDialogConfirmButtonPublish": {
+    "description": "Tekst voor de Publish -knop van de postbevestigingswaarschuwing",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogPublishedTitle": "Woof, gepubliceerd!",
+  "@newPostButtonDialogPublishedTitle": {
+    "description": "Titel van de succesvolle postknop",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogPublishedTitleDesc": "Je harige vriend gewoon\nwerd beroemd",
+  "@newPostButtonDialogPublishedTitleDesc": {
+    "description": "Beschrijving van de succesvolle postknop",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogPublishedReturn": "Rug",
+  "@newPostButtonDialogPublishedReturn": {
+    "description": "Tekst voor de terugkeerknop na het publiceren",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogErrorTitle": "Oeps ... er ontbreekt iets",
+  "@newPostButtonDialogErrorTitle": {
+    "description": "Titel van de knop Post Fout",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogErrorTitleDesc": "Controleer de velden in rood\ndoorgaan",
+  "@newPostButtonDialogErrorTitleDesc": {
+    "description": "Beschrijving van de knop Post Fout",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogErrorReturn": "Laten we dit doen",
+  "@newPostButtonDialogErrorReturn": {
+    "description": "Tekst voor de terug -terugknop na een fout",
+    "context": "newpost_page"
+  },
+  "lateralMenuProfileTitle": "Mijn profiel",
+  "@lateralMenuProfileTitle": {
+    "description": "Profielknop titel in het zijmenu",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuProfileTitleDesc": "Ga naar mijn profiel",
+  "@lateralMenuProfileTitleDesc": {
+    "description": "Beschrijving van de profielknop in het zijmenu",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuProfileLogOutTitleDesc": "Log in om uw profiel te bekijken",
+  "@lateralMenuProfileLogOutTitleDesc": {
+    "description": "Beschrijving van de knop Diskoppelde profiel in het zijmenu",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuPetsTitle": "Huisdieren",
+  "@lateralMenuPetsTitle": {
+    "description": "Titel met huisdieren in het zijmenu",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuPetsTitleDesc": "Bekijk of voeg uw huisdieren toe",
+  "@lateralMenuPetsTitleDesc": {
+    "description": "Beschrijving van de PETS -knop in het zijmenu",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuPetsLogOutTitleDesc": "Log in om uw huisdieren te bekijken of toe te voegen",
+  "@lateralMenuPetsLogOutTitleDesc": {
+    "description": "Beschrijving van de knop voor losgekoppelde huisdieren in het zijmenu",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuSettingsTitle": "INSTELLINGEN",
+  "@lateralMenuSettingsTitle": {
+    "description": "Instellingen knoptitel in het zijmenu",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuSettingsTitleDesc": "Ga naar de instellingen",
+  "@lateralMenuSettingsTitleDesc": {
+    "description": "Beschrijving van de knop Instellingen in het zijmenu",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuLogOut": "Uitloggen",
+  "@lateralMenuLogOut": {
+    "description": "Tekst van de uitlogknop in het zijmenu",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuLogIn": "Inloggen",
+  "@lateralMenuLogIn": {
+    "description": "Tekst van de inlogknop in het zijmenu",
+    "context": "lateralmenu_component"
+  }
+}

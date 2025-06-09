@@ -1,33 +1,35 @@
 {
   "@@locale": "de",
+
   "profileTitle": "Profil",
   "@profileTitle": {
-    "description": "Titel der Profilseite",
+    "description": "Title of the profile page",
     "context": "profile_page"
   },
   "editProfile": "Profil bearbeiten",
   "@editProfile": {
-    "description": "Schaltfläche zum Bearbeiten des Profils",
+    "description": "Button to edit the profile",
     "context": "profile_page"
   },
-  "recentPosts": "Letzte Beiträge",
+  "recentPosts": "Neueste Beiträge",
   "@recentPosts": {
-    "description": "Text, um die neuesten Beiträge anzuzeigen",
+    "description": "Text to view recent posts",
     "context": "profile_page"
   },
   "noPublication": "Noch keine Beiträge.",
   "@noPublication": {
-    "description": "Text, der angibt, dass es keine Beiträge gibt",
+    "description": "Text indicating there are no posts",
     "context": "profile_page"
   },
+
   "editProfileTitle": "Profil bearbeiten",
   "@editProfileTitle": {
-    "description": "Titel der Profilbearbeitungsseite",
+    "description": "Title of the profile editing page",
     "context": "profile_edit"
   },
   "save": "Speichern",
   "@save": {
-    "description": "Retten",
+    "description": "Save",
     "context": "profile_edit"
   },
   "name": "Name",
@@ -37,437 +39,481 @@
   },
   "description": "Beschreibung",
   "@description": {
-    "description": "Beschreibung",
+    "description": "Description",
     "context": "profile_edit"
   },
   "saveChanges": "Änderungen speichern",
   "@saveChanges": {
-    "description": "Änderungen speichern",
+    "description": "Save Changes",
     "context": "profile_edit"
   },
+  "editProfileFront": "Titelbild auswählen",
+  "@editProfileFront": {
+    "description": "Select cover image",
+    "context": "profile_edit"
+  },
+  "editProfileProfile": "Profilbild auswählen",
+  "@editProfileProfile": {
+    "description": "Select profile image",
+    "context": "profile_edit"
+  },
+  "editProfileGallery": "Galerie",
+  "@editProfileGallery": {
+    "description": "Text description for selecting from gallery",
+    "context": "profile_edit"
+  },
+  "editProfileCamera": "Kamera",
+  "@editProfileCamera": {
+    "description": "Text description for selecting from camera",
+    "context": "profile_edit"
+  },
+  "editProfileImage": "Standardbilder",
+  "@editProfileImage": {
+    "description": "Text description for selecting default images",
+    "context": "profile_edit"
+  },
+  "editProfileCancel": "Abbrechen",
+  "@editProfileCancel": {
+    "description": "Text description for cancel",
+    "context": "profile_edit"
+  },
+  "editProfileNotAvailable": "Keine Bilder verfügbar",
+  "@editProfileNotAvailable": {
+    "description": "Text description for no images available",
+    "context": "profile_edit"
+  },
+
   "configTitle": "Einstellungen",
   "@configTitle": {
-    "description": "Titel des Einstellungsabschnitts",
+    "description": "Title of the settings section",
     "context": "settings_page"
   },
   "settingsAccountInformation": "Kontoinformationen",
   "@settingsAccountInformation": {
-    "description": "Text für den Abschnitt \"Kontoinformationen\"",
+    "description": "Text for the account information section",
     "context": "settings_page"
   },
   "settingsAccountInformationDesc": "Persönliche Informationen und Zugriff",
   "@settingsAccountInformationDesc": {
-    "description": "Text für die Beschreibung des Abschnitt \"Kontoinformationen\"",
+    "description": "Text for the description of the account information section",
     "context": "settings_page"
   },
   "settingsLanguage": "Sprache",
   "@settingsLanguage": {
-    "description": "Text für den Sprachabschnitt",
+    "description": "Text for the language section",
     "context": "settings_page"
   },
-  "settingsLanguageDesc": "Ändern Sie die Sprache der App",
+  "settingsLanguageDesc": "App-Sprache ändern",
   "@settingsLanguageDesc": {
-    "description": "Text für die Beschreibung des Sprachabschnitts",
+    "description": "Text for the description of the language section",
     "context": "settings_page"
   },
   "personalizationTitle": "Personalisierung",
   "@personalizationTitle": {
-    "description": "Titel des Abschnitts Personalisierung",
+    "description": "Title of the personalization section",
     "context": "settings_page"
   },
   "settingsDarkMode": "Dunkler Modus",
   "@settingsDarkMode": {
-    "description": "Text für den Abschnitt Dark Modus",
+    "description": "Text for the dark mode section",
     "context": "settings_page"
   },
-  "settingsDarkModeDesc": "Ändern Sie das Thema der App",
+  "settingsDarkModeDesc": "App-Design ändern",
   "@settingsDarkModeDesc": {
-    "description": "Text für die Beschreibung des Abschnitts des Dunklen Modus",
+    "description": "Text for the description of the dark mode section",
     "context": "settings_page"
   },
   "notificationTitle": "Benachrichtigungen",
   "@notificationTitle": {
-    "description": "Titel des Benachrichtigungsabschnitts",
+    "description": "Title of the notifications section",
     "context": "settings_page"
   },
-  "settingsNotificationPreferences": "Benachrichtigungspräferenzen",
+  "settingsNotificationPreferences": "Benachrichtigungseinstellungen",
   "@settingsNotificationPreferences": {
-    "description": "Text für den Abschnitt \"Benachrichtigungseinstellungen\"",
+    "description": "Text for the notification preferences section",
     "context": "settings_page"
   },
-  "settingsNotificationPreferencesDesc": "Konfigurieren Sie Warnungen und Erinnerungen",
+  "settingsNotificationPreferencesDesc": "Benachrichtigungen und Erinnerungen konfigurieren",
   "@settingsNotificationPreferencesDesc": {
-    "description": "Text für die Beschreibung des Abschnitts Benachrichtigungseinstellungen",
+    "description": "Text for the description of the notification preferences section",
     "context": "settings_page"
   },
-  "securityTitle": "Privatsphäre und Sicherheit",
+  "securityTitle": "Datenschutz und Sicherheit",
   "@securityTitle": {
-    "description": "Titel des Abschnitts Datenschutz- und Sicherheitsabteilung",
+    "description": "Title of the privacy and security section",
     "context": "settings_page"
   },
-  "settingsPrivacy": "Konto Privatsphäre",
+  "settingsPrivacy": "Kontodatenschutz",
   "@settingsPrivacy": {
-    "description": "Text für den Datenschutzbereich",
+    "description": "Text for the privacy section",
     "context": "settings_page"
   },
-  "settingsPrivacyDesc": "Kontrollieren Sie, wer Ihre Informationen sehen kann",
+  "settingsPrivacyDesc": "Steuern, wer Ihre Informationen sehen kann",
   "@settingsPrivacyDesc": {
-    "description": "Text für die Beschreibung des Datenschutzabschnitts",
+    "description": "Text for the description of the privacy section",
     "context": "settings_page"
   },
   "settingsSecurity": "Sicherheit",
   "@settingsSecurity": {
-    "description": "Text für den Sicherheitsbereich",
+    "description": "Text for the security section",
     "context": "settings_page"
   },
-  "settingsSecurityDesc": "Schützen Sie Ihr Konto und Ihre personenbezogenen Daten",
+  "settingsSecurityDesc": "Schützen Sie Ihr Konto und Ihre persönlichen Daten",
   "@settingsSecurityDesc": {
-    "description": "Text für die Beschreibung des Sicherheitsabschnitts",
+    "description": "Text for the description of the security section",
     "context": "settings_page"
   },
-  "settingsLogout": "Melden Sie sich aus",
+  "settingsLogout": "Abmelden",
   "@settingsLogout": {
-    "description": "Text für den Abschnitt \"Anmeldeabschnitt\"",
+    "description": "Text for the log out section",
     "context": "settings_page"
   },
-  "settingsLogoutDesc": "Melden Sie sich aus Ihrem Konto an",
+  "settingsLogoutDesc": "Von Ihrem Konto abmelden",
   "@settingsLogoutDesc": {
-    "description": "Text für die Beschreibung des Abschnitts Anmeldeabschnitt",
+    "description": "Text for the description of the log out section",
     "context": "settings_page"
   },
+
   "accountInformationTitle": "Kontoinformationen",
   "@accountInformationTitle": {
-    "description": "Titel des Abschnitts Kontoinformationen",
+    "description": "Title of the account information section",
     "context": "accountinformation_page"
   },
-  "accountInformationTitleDesc": "Verwalten Sie Ihre Kontodetails",
+  "accountInformationTitleDesc": "Verwalten Sie Ihre Kontodaten",
   "@accountInformationTitleDesc": {
-    "description": "Beschreibung des Abschnitts Kontoinformationen",
+    "description": "Description of the account information section",
     "context": "accountinformation_page"
   },
   "accountInformationUsername": "Benutzername",
   "@accountInformationUsername": {
-    "description": "Text für den Abschnitt \"Kontoinformationen) (Benutzername)",
+    "description": "Text for the account information section (username)",
     "context": "accountinformation_page"
   },
   "accountInformationEmail": "E-Mail",
   "@accountInformationEmail": {
-    "description": "Text für den Abschnitt \"Kontoinformationen) (E -Mail)",
+    "description": "Text for the account information section (email)",
     "context": "accountinformation_page"
   },
   "accountInformationPassword": "Passwort",
   "@accountInformationPassword": {
-    "description": "Text für den Abschnitt \"Kontoinformationen) (Passwort)",
+    "description": "Text for the account information section (password)",
     "context": "accountinformation_page"
   },
-  "editUsernameTitle": "Aktualisieren Sie Ihren Benutzernamen",
+
+  "editUsernameTitle": "Benutzernamen aktualisieren",
   "@editUsernameTitle": {
-    "description": "Titel des Benutzernamen -Bearbeitungsabschnitts",
+    "description": "Title of the username editing section",
     "context": "editusername_page"
   },
-  "editUsernameTitleDesc": "Wählen Sie einen eindeutigen Namen für unsere Community",
+  "editUsernameTitleDesc": "Wählen Sie einen einzigartigen Namen für unsere Community",
   "@editUsernameTitleDesc": {
-    "description": "Beschreibung des Bearbeitungsabschnitts Benutzername",
+    "description": "Description of the username editing section",
     "context": "editusername_page"
   },
   "editUsernameName": "Neuer Benutzername",
   "@editUsernameName": {
-    "description": "Text für das Feld Benutzername",
+    "description": "Text for the username field",
     "context": "editusername_page"
   },
-  "editUsernameSave": "Änderungen speichern",
+  "editUsernameSave": "ÄNDERUNGEN SPEICHERN",
   "@editUsernameSave": {
-    "description": "Text für die Schaltfläche \"Änderungen speichern\"",
+    "description": "Text for the save changes button",
     "context": "editusername_page"
   },
   "editUsernameInfoTitle": "Über Benutzernamen",
   "@editUsernameInfoTitle": {
-    "description": "Titel des Links und Modal mit Informationen zu Benutzernamen",
+    "description": "Title of the link and modal with information about usernames",
     "context": "editusername_page"
   },
-  "editUsernameInfoBody": "Ihr Benutzername ist Ihre Identität auf Petlink.Empfehlungen:\n\n• Verwenden Sie etwas Denkwürdiges\n• Fügen Sie den Namen Ihres Haustieres hinzu\n• Vermeiden Sie Sonderzeichen\n• Halten Sie es angemessen\n• Mindestens 5 Zeichen\n• Keine Leerzeichen",
+  "editUsernameInfoBody": "Ihr Benutzername ist Ihre Identität auf PetLink. Empfehlungen:\n\n• Verwenden Sie etwas Einprägsames\n• Fügen Sie den Namen Ihres Haustiers hinzu\n• Vermeiden Sie Sonderzeichen\n• Halten Sie es angemessen\n• Mindestens 5 Zeichen\n• Keine Leerzeichen",
   "@editUsernameInfoBody": {
-    "description": "Informativer Text in den Modal -Erklärungsempfehlungen zur Auswahl eines Benutzernamens",
+    "description": "Informative text inside the modal explaining recommendations for choosing a username",
     "context": "editusername_page"
   },
-  "editEmailTitle": "Aktualisieren Sie Ihre E -Mail",
+
+  "editEmailTitle": "E-Mail aktualisieren",
   "@editEmailTitle": {
-    "description": "Haupttitel auf dem E -Mail -Bearbeitungsbildschirm",
+    "description": "Main title on the email editing screen",
     "context": "editemail_page"
   },
-  "editEmailTitleDesc": "Geben Sie Ihre aktuelle E -Mail und die neue E -Mail ein, um zu aktualisieren",
+  "editEmailTitleDesc": "Geben Sie Ihre aktuelle und neue E-Mail ein, um zu aktualisieren",
   "@editEmailTitleDesc": {
-    "description": "Erläuterung Untertitel auf dem Bildschirm E -Mail -Bearbeitungsbildschirm",
+    "description": "Explanatory subtitle on the email editing screen",
     "context": "editemail_page"
   },
-  "editEmailCurrentLabel": "Aktuelle E -Mail",
+  "editEmailCurrentLabel": "Aktuelle E-Mail",
   "@editEmailCurrentLabel": {
-    "description": "Beschriften Sie für das aktuelle E -Mail -Feld",
+    "description": "Label for the current email field",
     "context": "editemail_page"
   },
-  "editEmailNewLabel": "Neue E -Mail",
+  "editEmailNewLabel": "Neue E-Mail",
   "@editEmailNewLabel": {
-    "description": "Etikett für das neue E -Mail -Feld",
+    "description": "Label for the new email field",
     "context": "editemail_page"
   },
-  "editEmailNewHint": "z. B. user@example.com",
+  "editEmailNewHint": "z.B. benutzer@beispiel.com",
   "@editEmailNewHint": {
-    "description": "Beispieltext für die neue E -Mail",
+    "description": "Example text for the new email",
     "context": "editemail_page"
   },
-  "editEmailConfirmLabel": "Bestätigen Sie neue E -Mail",
+  "editEmailConfirmLabel": "Neue E-Mail bestätigen",
   "@editEmailConfirmLabel": {
-    "description": "Etikett für das Feld Neues E -Mail -Feld bestätigen",
+    "description": "Label for the confirm new email field",
     "context": "editemail_page"
   },
-  "editEmailConfirmHint": "Bestätigen Sie Ihre neue E -Mail",
+  "editEmailConfirmHint": "Neue E-Mail bestätigen",
   "@editEmailConfirmHint": {
-    "description": "Beispieltext im Feld E -Mail -Bestätigung",
+    "description": "Example text in the email confirmation field",
     "context": "editemail_page"
   },
-  "editEmailButtonSave": "E -Mail aktualisieren",
+  "editEmailButtonSave": "E-MAIL AKTUALISIEREN",
   "@editEmailButtonSave": {
-    "description": "Text für die Schaltfläche, mit der E -Mail -Änderungen gespeichert werden",
+    "description": "Text for the button that saves email changes",
     "context": "editemail_page"
   },
-  "editPasswordTitle": "Kennwort ändern",
+
+  "editPasswordTitle": "Passwort ändern",
   "@editPasswordTitle": {
-    "description": "Haupttitel des Bildschirms Passwort ändern",
+    "description": "Main title of the password change screen",
     "context": "editpassword_page"
   },
-  "editPasswordTitleDesc": "Geben Sie Ihr aktuelles Passwort und das neue Passwort ein, das Sie verwenden möchten",
+  "editPasswordTitleDesc": "Geben Sie Ihr aktuelles und neues Passwort ein",
   "@editPasswordTitleDesc": {
-    "description": "Erläuterung Untertitel auf dem Bildschirm Passwort ändern",
+    "description": "Explanatory subtitle on the password change screen",
     "context": "editpassword_page"
   },
   "editPasswordCurrentLabel": "Aktuelles Passwort",
   "@editPasswordCurrentLabel": {
-    "description": "Beschriften Sie für das aktuelle Kennwortfeld",
+    "description": "Label for the current password field",
     "context": "editpassword_page"
   },
-  "editPasswordCurrentHint": "Geben Sie Ihr aktuelles Passwort ein",
+  "editPasswordCurrentHint": "Aktuelles Passwort eingeben",
   "@editPasswordCurrentHint": {
-    "description": "Beispieltext im aktuellen Kennwortfeld",
+    "description": "Example text in the current password field",
     "context": "editpassword_page"
   },
   "editPasswordNewLabel": "Neues Passwort",
   "@editPasswordNewLabel": {
-    "description": "Etikett für das neue Kennwortfeld",
+    "description": "Label for the new password field",
     "context": "editpassword_page"
   },
-  "editPasswordNewHint": "Geben Sie Ihr neues Passwort ein",
+  "editPasswordNewHint": "Neues Passwort eingeben",
   "@editPasswordNewHint": {
-    "description": "Beispieltext im neuen Kennwortfeld",
+    "description": "Example text in the new password field",
     "context": "editpassword_page"
   },
   "editPasswordConfirmLabel": "Neues Passwort bestätigen",
   "@editPasswordConfirmLabel": {
-    "description": "Etikett für das Feld Neues Passwort bestätigen",
+    "description": "Label for the confirm new password field",
     "context": "editpassword_page"
   },
-  "editPasswordConfirmHint": "Bestätigen Sie Ihr neues Passwort",
+  "editPasswordConfirmHint": "Neues Passwort bestätigen",
   "@editPasswordConfirmHint": {
-    "description": "Beispieltext im Feld Neues Passwort bestätigen",
+    "description": "Example text in the confirm new password field",
     "context": "editpassword_page"
   },
-  "editPasswordButtonSave": "KENNWORT ÄNDERN",
+  "editPasswordButtonSave": "PASSWORT ÄNDERN",
   "@editPasswordButtonSave": {
-    "description": "Text für die Schaltfläche, um die Passwortänderung zu bestätigen",
+    "description": "Text for the button to confirm the password change",
     "context": "editpassword_page"
   },
+
   "editPasswordStrengthIndicatorLabel": "Passwortstärke",
   "@editPasswordStrengthIndicatorLabel": {
-    "description": "Etikett wird neben dem Kennwortstärkeindikator angezeigt",
+    "description": "Label displayed next to the password strength indicator",
     "context": "indicator_password_strength_component"
   },
   "editPasswordStrengthIndicatorLabelWeak": "Schwach",
   "@editPasswordStrengthIndicatorLabelWeak": {
-    "description": "Etikett für schwache Passwortstärke",
+    "description": "Label for weak password strength",
     "context": "indicator_password_strength_component"
   },
-  "editPasswordStrengthIndicatorLabelMedium": "Medium",
+  "editPasswordStrengthIndicatorLabelMedium": "Mittel",
   "@editPasswordStrengthIndicatorLabelMedium": {
-    "description": "Etikett für mittlere Passwortstärke",
+    "description": "Label for medium password strength",
     "context": "indicator_password_strength_component"
   },
   "editPasswordStrengthIndicatorLabelStrong": "Stark",
   "@editPasswordStrengthIndicatorLabelStrong": {
-    "description": "Etikett für starke Passwortstärke",
+    "description": "Label for strong password strength",
     "context": "indicator_password_strength_component"
   },
-  "selectLanguageTitle": "Wählen Sie Ihre Sprache aus",
+
+  "selectLanguageTitle": "Sprache auswählen",
   "@selectLanguageTitle": {
-    "description": "Titel der Sprachauswahlseite",
+    "description": "Title of the language selection page",
     "context": "selectlanguage_page"
   },
   "selectLanguageTitleDesc": "Sie können die Sprache jederzeit ändern",
   "@selectLanguageTitleDesc": {
-    "description": "Beschreibung der Sprachauswahlseite",
+    "description": "Description of the language selection page",
     "context": "selectlanguage_page"
   },
-  "selectLanguageButtonSave": "Sprache retten",
+  "selectLanguageButtonSave": "SPRACHE SPEICHERN",
   "@selectLanguageButtonSave": {
-    "description": "Text für die Schaltfläche zum Speichern der ausgewählten Sprache",
+    "description": "Text for the button to save the selected language",
     "context": "selectlanguage_page"
   },
-  "newPostTitleDesc": "Teile etwas über deinen vierbeinigen Freund ...",
+
+  "newPostTitleDesc": "Teile etwas über deinen vierbeinigen Freund...",
   "@newPostTitleDesc": {
-    "description": "Beschreibung Container für die neue Postseite",
+    "description": "Description container for the new post page",
     "context": "newpost_page"
   },
-  "newPostImageDesc": "Laden Sie hier ein Foto Ihres entzückenden Welpen hoch",
+  "newPostImageDesc": "Lade hier ein Foto deines süßen Hundes hoch",
   "@newPostImageDesc": {
-    "description": "Bildbehälter Beschreibung für die neue Beitragsseite",
+    "description": "Image container description for the new post page",
     "context": "newpost_page"
   },
-  "newPostCameraDesc": "Öffnen Sie die Kamera",
+  "newPostCameraDesc": "Kamera öffnen",
   "@newPostCameraDesc": {
-    "description": "Beschreibung der Kamera Container für die neue Postseite",
+    "description": "Camera container description for the new post page",
     "context": "newpost_page"
   },
-  "newPostButtonCancel": "STORNIEREN",
+  "newPostButtonCancel": "ABBRECHEN",
   "@newPostButtonCancel": {
-    "description": "Text für die Schaltfläche Abbrechen auf der neuen Postseite",
+    "description": "Text for the cancel button on the new post page",
     "context": "newpost_page"
   },
   "newPostButtonPublish": "VERÖFFENTLICHEN",
   "@newPostButtonPublish": {
-    "description": "Text für die Schaltfläche Veröffentlichung auf der neuen Postseite",
+    "description": "Text for the publish button on the new post page",
     "context": "newpost_page"
   },
-  "newPostButtonDialogReminderTitle": "Schuss!Erinnerung",
+  "newPostButtonDialogReminderTitle": "Wuff! Erinnerung",
   "@newPostButtonDialogReminderTitle": {
-    "description": "Titel der Post -Erinnerungs -Alarm -Taste",
+    "description": "Title of the post reminder alert button",
     "context": "newpost_page"
   },
-  "newPostButtonDialogReminderDesc": "Bitte stellen Sie sicher, dass die Bilder, die Sie teilen, nur mit Hunden zusammenhängen.\n\nVielen Dank, dass Sie uns dabei geholfen haben, diese Hundespanne zu halten!",
+  "newPostButtonDialogReminderDesc": "Bitte stelle sicher, dass die Bilder, die du teilst, nur Hunde zeigen.\n\nDanke, dass du hilfst, unser Hundesozialnetzwerk großartig zu halten!",
   "@newPostButtonDialogReminderDesc": {
-    "description": "Beschreibung der Post -Erinnerungs -Alarm -Taste",
+    "description": "Description of the post reminder alert button",
     "context": "newpost_page"
   },
-  "newPostButtonDialogReminderButtonConfirm": "Habe es",
+  "newPostButtonDialogReminderButtonConfirm": "Verstanden",
   "@newPostButtonDialogReminderButtonConfirm": {
-    "description": "Text für die Bestätigungstaste der Post -Erinnerung Alarm",
+    "description": "Text for the confirmation button of the post reminder alert",
     "context": "newpost_page"
   },
   "newPostButtonDialogReminderConfirmExitTitle": "Bestätigung",
   "@newPostButtonDialogReminderConfirmExitTitle": {
-    "description": "Titel der Exit -Bestätigungswarnung",
+    "description": "Title of the exit confirmation alert",
     "context": "newpost_page"
   },
-  "newPostButtonDialogReminderConfirmExitTitleDesc": "Möchten Sie verlassen?",
+  "newPostButtonDialogReminderConfirmExitTitleDesc": "Möchten Sie beenden?",
   "@newPostButtonDialogReminderConfirmExitTitleDesc": {
-    "description": "Beschreibung der Ausgangsbestätigungswarnung",
+    "description": "Description of the exit confirmation alert",
     "context": "newpost_page"
   },
   "newPostButtonDialogReminderConfirmExitYes": "Ja",
   "@newPostButtonDialogReminderConfirmExitYes": {
-    "description": "Text für die Bestätigungswarnung der Exit -Bestätigung",
+    "description": "Text for the exit confirmation alert",
     "context": "newpost_page"
   },
-  "newPostButtonDialogReminderConfirmExitNo": "NEIN",
+  "newPostButtonDialogReminderConfirmExitNo": "Nein",
   "@newPostButtonDialogReminderConfirmExitNo": {
-    "description": "Text für die Bestätigungswarnung der Exit -Bestätigung",
+    "description": "Text for the exit confirmation alert",
     "context": "newpost_page"
   },
-  "newPostButtonDialogConfirmTitle": "NEIN",
+  "newPostButtonDialogConfirmTitle": "Bestätigung",
   "@newPostButtonDialogConfirmTitle": {
-    "description": "Titel der Schaltfläche zur Postbestätigung",
+    "description": "Title of the post confirmation button",
     "context": "newpost_page"
   },
   "newPostButtonDialogConfirmTitleDesc": "Möchten Sie das Foto veröffentlichen?",
   "@newPostButtonDialogConfirmTitleDesc": {
-    "description": "Beschreibung der Schaltfläche zur Postbestätigung",
+    "description": "Description of the post confirmation button",
     "context": "newpost_page"
   },
-  "newPostButtonDialogConfirmButtonCancel": "NEIN",
+  "newPostButtonDialogConfirmButtonCancel": "Nein",
   "@newPostButtonDialogConfirmButtonCancel": {
-    "description": "Text für die Schaltfläche Abbrechen der Post -Bestätigungswarnung",
+    "description": "Text for the cancel button of the post confirmation alert",
     "context": "newpost_page"
   },
-  "newPostButtonDialogConfirmButtonPublish": "Ja",
+  "newPostButtonDialogConfirmButtonPublish": "Posten",
   "@newPostButtonDialogConfirmButtonPublish": {
-    "description": "Text für die Veröffentlichung der Schaltfläche zur Postbestätigungswarnung",
+    "description": "Text for the publish button of the post confirmation alert",
     "context": "newpost_page"
   },
-  "newPostButtonDialogPublishedTitle": "Woof, veröffentlicht!",
+  "newPostButtonDialogPublishedTitle": "Wuff, veröffentlicht!",
   "@newPostButtonDialogPublishedTitle": {
-    "description": "Titel des erfolgreichen Post -Taste",
+    "description": "Title of the successful post button",
     "context": "newpost_page"
   },
-  "newPostButtonDialogPublishedTitleDesc": "Dein pelziger Freund gerade\nwurde berühmt",
+  "newPostButtonDialogPublishedTitleDesc": "Dein pelziger Freund ist\njetzt berühmt",
   "@newPostButtonDialogPublishedTitleDesc": {
-    "description": "Beschreibung des erfolgreichen Post -Taste",
+    "description": "Description of the successful post button",
     "context": "newpost_page"
   },
   "newPostButtonDialogPublishedReturn": "Zurück",
   "@newPostButtonDialogPublishedReturn": {
-    "description": "Text für die Rückgabeschaltfläche nach dem Veröffentlichung",
+    "description": "Text for the return button after publishing",
     "context": "newpost_page"
   },
-  "newPostButtonDialogErrorTitle": "Hoppla ... etwas fehlt",
+  "newPostButtonDialogErrorTitle": "Ups... Etwas fehlt",
   "@newPostButtonDialogErrorTitle": {
-    "description": "Titel der Post -Fehlerschaltfläche",
+    "description": "Title of the post error button",
     "context": "newpost_page"
   },
-  "newPostButtonDialogErrorTitleDesc": "Überprüfen Sie die Felder rot\nweitermachen",
+  "newPostButtonDialogErrorTitleDesc": "Überprüfen Sie die roten Felder\num fortzufahren",
   "@newPostButtonDialogErrorTitleDesc": {
-    "description": "Beschreibung der Post -Fehler -Schaltfläche",
+    "description": "Description of the post error button",
     "context": "newpost_page"
   },
-  "newPostButtonDialogErrorReturn": "Lass das tun",
+  "newPostButtonDialogErrorReturn": "Los geht''s",
   "@newPostButtonDialogErrorReturn": {
-    "description": "Text für die Rückgabetaste nach einem Fehler",
+    "description": "Text for the return button after an error",
     "context": "newpost_page"
   },
-  "lateralMenuProfileTitle": "Mein Profil",
+
+  "lateralMenuProfileTitle": "MEIN PROFIL",
   "@lateralMenuProfileTitle": {
-    "description": "Profiltastentitel im seitlichen Menü",
+    "description": "Profile button title in the lateral menu",
     "context": "lateralmenu_component"
   },
-  "lateralMenuProfileTitleDesc": "In mein Profil gehen",
+  "lateralMenuProfileTitleDesc": "Zu meinem Profil",
   "@lateralMenuProfileTitleDesc": {
-    "description": "Beschreibung der Profiltaste im seitlichen Menü",
+    "description": "Description of the profile button in the lateral menu",
     "context": "lateralmenu_component"
   },
-  "lateralMenuProfileLogOutTitleDesc": "Melden Sie sich an, um Ihr Profil anzuzeigen",
+  "lateralMenuProfileLogOutTitleDesc": "Melden Sie sich an, um Ihr Profil zu sehen",
   "@lateralMenuProfileLogOutTitleDesc": {
-    "description": "Beschreibung der Schaltfläche \"getrenntem Profil im lateralen Menü\"",
+    "description": "Description of the disconnected profile button in the lateral menu",
     "context": "lateralmenu_component"
   },
-  "lateralMenuPetsTitle": "Haustiere",
+  "lateralMenuPetsTitle": "HAUSTIERE",
   "@lateralMenuPetsTitle": {
-    "description": "Pets -Taste -Titel im seitlichen Menü",
+    "description": "Pets button title in the lateral menu",
     "context": "lateralmenu_component"
   },
-  "lateralMenuPetsTitleDesc": "Zeigen oder fügen Sie Ihre Haustiere hinzu oder fügen Sie hinzu",
+  "lateralMenuPetsTitleDesc": "Ihre Haustiere ansehen oder hinzufügen",
   "@lateralMenuPetsTitleDesc": {
-    "description": "Beschreibung der PETS -Taste im seitlichen Menü",
+    "description": "Description of the pets button in the lateral menu",
     "context": "lateralmenu_component"
   },
-  "lateralMenuPetsLogOutTitleDesc": "Melden Sie sich an, um Ihre Haustiere anzuzeigen oder hinzuzufügen",
+  "lateralMenuPetsLogOutTitleDesc": "Melden Sie sich an, um Ihre Haustiere zu sehen oder hinzuzufügen",
   "@lateralMenuPetsLogOutTitleDesc": {
-    "description": "Beschreibung der Taste der nicht verbundenen Haustiere im lateralen Menü",
+    "description": "Description of the disconnected pets button in the lateral menu",
     "context": "lateralmenu_component"
   },
   "lateralMenuSettingsTitle": "EINSTELLUNGEN",
   "@lateralMenuSettingsTitle": {
-    "description": "Einstellungen Schaltfläche Titel im seitlichen Menü",
+    "description": "Settings button title in the lateral menu",
     "context": "lateralmenu_component"
   },
-  "lateralMenuSettingsTitleDesc": "Gehen Sie zu Einstellungen",
+  "lateralMenuSettingsTitleDesc": "Zu den Einstellungen",
   "@lateralMenuSettingsTitleDesc": {
-    "description": "Beschreibung der Schaltfläche Einstellungen im lateralen Menü",
+    "description": "Description of the settings button in the lateral menu",
     "context": "lateralmenu_component"
   },
-  "lateralMenuLogOut": "Melden Sie sich aus",
+  "lateralMenuLogOut": "ABMELDEN",
   "@lateralMenuLogOut": {
-    "description": "Text der Schaltfläche \"Anmeldeablagerung\" im seitlichen Menü",
+    "description": "Text of the log out button in the lateral menu",
     "context": "lateralmenu_component"
   },
-  "lateralMenuLogIn": "EINLOGGEN",
+  "lateralMenuLogIn": "ANMELDEN",
   "@lateralMenuLogIn": {
-    "description": "Text der Schaltfläche \"Anmelde in der Lokale im lateralen Menü\"",
+    "description": "Text of the log in button in the lateral menu",
     "context": "lateralmenu_component"
   }
 }

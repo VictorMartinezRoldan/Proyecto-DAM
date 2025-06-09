@@ -45,6 +45,41 @@
     "description": "Salva le modifiche",
     "context": "profile_edit"
   },
+  "editProfileFront": "Seleziona l''immagine di copertina",
+  "@editProfileFront": {
+    "description": "Seleziona l'immagine di copertina",
+    "context": "profile_edit"
+  },
+  "editProfileProfile": "Seleziona immagine del profilo",
+  "@editProfileProfile": {
+    "description": "Seleziona immagine del profilo",
+    "context": "profile_edit"
+  },
+  "editProfileGallery": "Galleria",
+  "@editProfileGallery": {
+    "description": "Descrizione del testo per la selezione dalla galleria",
+    "context": "profile_edit"
+  },
+  "editProfileCamera": "Telecamera",
+  "@editProfileCamera": {
+    "description": "Descrizione del testo per la selezione dalla fotocamera",
+    "context": "profile_edit"
+  },
+  "editProfileImage": "Immagini predefinite",
+  "@editProfileImage": {
+    "description": "Descrizione del testo per la selezione delle immagini predefinite",
+    "context": "profile_edit"
+  },
+  "editProfileCancel": "Cancellare",
+  "@editProfileCancel": {
+    "description": "Descrizione del testo per Annulla",
+    "context": "profile_edit"
+  },
+  "editProfileNotAvailable": "Nessuna immagine disponibile",
+  "@editProfileNotAvailable": {
+    "description": "Descrizione del testo per nessuna immagine disponibile",
+    "context": "profile_edit"
+  },
   "configTitle": "Impostazioni",
   "@configTitle": {
     "description": "Titolo della sezione Impostazioni",
@@ -52,12 +87,12 @@
   },
   "settingsAccountInformation": "Informazioni sull''account",
   "@settingsAccountInformation": {
-    "description": "Testo per la sezione Informazioni sull'account",
+    "description": "Testo per la sezione Informazioni sull''account",
     "context": "settings_page"
   },
   "settingsAccountInformationDesc": "Informazioni personali e accesso",
   "@settingsAccountInformationDesc": {
-    "description": "Testo per la descrizione della sezione Informazioni dell'account",
+    "description": "Testo per la descrizione della sezione Informazioni dell''account",
     "context": "settings_page"
   },
   "settingsLanguage": "Lingua",
@@ -137,27 +172,27 @@
   },
   "accountInformationTitle": "Informazioni sull''account",
   "@accountInformationTitle": {
-    "description": "Titolo della sezione Informazioni sull'account",
+    "description": "Titolo della sezione Informazioni sull''account",
     "context": "accountinformation_page"
   },
   "accountInformationTitleDesc": "Gestisci i dettagli del tuo account",
   "@accountInformationTitleDesc": {
-    "description": "Descrizione della sezione Informazioni sull'account",
+    "description": "Descrizione della sezione Informazioni sull''account",
     "context": "accountinformation_page"
   },
   "accountInformationUsername": "Nome utente",
   "@accountInformationUsername": {
-    "description": "Testo per la sezione Informazioni sull'account (nome utente)",
+    "description": "Testo per la sezione Informazioni sull''account (nome utente)",
     "context": "accountinformation_page"
   },
   "accountInformationEmail": "E-mail",
   "@accountInformationEmail": {
-    "description": "Testo per la sezione Informazioni sull'account (Email)",
+    "description": "Testo per la sezione Informazioni sull''account (Email)",
     "context": "accountinformation_page"
   },
   "accountInformationPassword": "Password",
   "@accountInformationPassword": {
-    "description": "Testo per la sezione Informazioni sull'account (password)",
+    "description": "Testo per la sezione Informazioni sull''account (password)",
     "context": "accountinformation_page"
   },
   "editUsernameTitle": "Aggiorna il tuo nome utente",
@@ -347,30 +382,30 @@
   },
   "newPostButtonDialogReminderButtonConfirm": "Fatto",
   "@newPostButtonDialogReminderButtonConfirm": {
-    "description": "Testo per il pulsante di conferma dell'avviso di promemoria post",
+    "description": "Testo per il pulsante di conferma dell''avviso di promemoria post",
     "context": "newpost_page"
   },
   "newPostButtonDialogReminderConfirmExitTitle": "Conferma",
   "@newPostButtonDialogReminderConfirmExitTitle": {
-    "description": "Titolo dell'avviso di conferma dell'uscita",
+    "description": "Titolo dell''avviso di conferma dell'uscita",
     "context": "newpost_page"
   },
   "newPostButtonDialogReminderConfirmExitTitleDesc": "Vuoi uscire?",
   "@newPostButtonDialogReminderConfirmExitTitleDesc": {
-    "description": "Descrizione dell'avviso di conferma dell'uscita",
+    "description": "Descrizione dell''avviso di conferma dell'uscita",
     "context": "newpost_page"
   },
   "newPostButtonDialogReminderConfirmExitYes": "SÌ",
   "@newPostButtonDialogReminderConfirmExitYes": {
-    "description": "Testo per l'avviso di conferma dell'uscita",
+    "description": "Testo per l''avviso di conferma dell'uscita",
     "context": "newpost_page"
   },
   "newPostButtonDialogReminderConfirmExitNo": "NO",
   "@newPostButtonDialogReminderConfirmExitNo": {
-    "description": "Testo per l'avviso di conferma dell'uscita",
+    "description": "Testo per l''avviso di conferma dell'uscita",
     "context": "newpost_page"
   },
-  "newPostButtonDialogConfirmTitle": "NO",
+  "newPostButtonDialogConfirmTitle": "Conferma",
   "@newPostButtonDialogConfirmTitle": {
     "description": "Titolo del pulsante di conferma post",
     "context": "newpost_page"
@@ -382,12 +417,12 @@
   },
   "newPostButtonDialogConfirmButtonCancel": "NO",
   "@newPostButtonDialogConfirmButtonCancel": {
-    "description": "Testo per il pulsante Annulla dell'avviso di conferma postale",
+    "description": "Testo per il pulsante Annulla dell''avviso di conferma postale",
     "context": "newpost_page"
   },
-  "newPostButtonDialogConfirmButtonPublish": "SÌ",
+  "newPostButtonDialogConfirmButtonPublish": "Inviare",
   "@newPostButtonDialogConfirmButtonPublish": {
-    "description": "Testo per il pulsante Publish dell'avviso di conferma post",
+    "description": "Testo per il pulsante Publish dell''avviso di conferma post",
     "context": "newpost_page"
   },
   "newPostButtonDialogPublishedTitle": "Woof, pubblicato!",

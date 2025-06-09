@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:petlink/components/dialogoPregunta.dart';
 import 'package:petlink/components/mensajeSnackbar.dart';
+import 'package:petlink/screens/PetWikiPage.dart';
+import 'package:petlink/screens/Secondary/PetWikiInformationPage.dart';
 import 'package:petlink/themes/customColors.dart';
 import 'package:petlink/services/supabase_auth.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -232,11 +234,19 @@ class _FavouriteBreedsPageState extends State<FavouriteBreedsPage> {
 
           // Boton para volver a explorar razas
           ElevatedButton.icon(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () {
+              Navigator.pop(context);
+              Future.microtask(() {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PetWikiPage()),
+                );
+              });
+            },
             icon: const Icon(
               Icons.explore,
               size: 20,
-              ),
+            ),
             label: const Text("Explorar Razas"),
             style: ElevatedButton.styleFrom(
               backgroundColor: custom.colorEspecial,
@@ -246,7 +256,7 @@ class _FavouriteBreedsPageState extends State<FavouriteBreedsPage> {
                 borderRadius: BorderRadius.circular(25),
               ),
             ),
-          ),
+          )
         ],
       ),
     );
@@ -288,6 +298,23 @@ class _FavouriteBreedsPageState extends State<FavouriteBreedsPage> {
             borderRadius: BorderRadius.circular(16),
             splashColor: custom.colorEspecial.withValues(alpha: 0.1),
             highlightColor: custom.colorEspecial.withValues(alpha: 0.05),
+            onTap: () async {
+              // Consulta a la base de datos para obtener los datos completos de la raza
+              final response = await supabase
+                  .from('perros')
+                  .select()
+                  .eq('raza', raza['nombre'].toString())
+                  .single();
+
+              if (!mounted) return;
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PetWikiInformationPage(razaData: response),
+                ),
+              );
+            },
             child: Ink(
               padding: const EdgeInsets.all(16),
               // Gradient para dar un efecto distinto a la tarjeta

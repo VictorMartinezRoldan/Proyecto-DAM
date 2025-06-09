@@ -3,6 +3,8 @@ import 'package:icons_plus/icons_plus.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:petlink/components/dialogoPregunta.dart';
 import 'package:petlink/components/mensajeSnackbar.dart';
+import 'package:petlink/entidades/publicacion.dart';
+import 'package:petlink/screens/Secondary/ComentariosPage.dart';
 import 'package:petlink/screens/Secondary/EditProfilePage.dart';
 import 'package:petlink/screens/Secondary/LoginPage.dart';
 import 'package:petlink/screens/Secondary/RegisterPage.dart';
@@ -28,7 +30,7 @@ class _UserPageState extends State<UserPage> {
 
   final SupabaseAuthService authService = SupabaseAuthService();
   Map<String, dynamic>? datosUser;
-  List<String> userPosts = [];
+  List<Publicacion> userPosts = [];
   bool esPerfilPropio = false;
   bool isLoading = true;
 
@@ -55,48 +57,50 @@ class _UserPageState extends State<UserPage> {
 
   // Inicializar perfil segun userId
   Future<void> _inicializarPerfil() async {
-    setState(() {
-      isLoading = true;
-    });
+  setState(() {
+    isLoading = true;
+  });
 
-    try {
-      // Si no hay userId, mostrar perfil del usuario logueado
-      if (widget.idUsuario == null) {
-        esPerfilPropio = true;
-        if (SupabaseAuthService.isLogin.value) {
+  try {
+    // Si no hay userId, mostrar perfil del usuario logueado
+    if (widget.idUsuario == null) {
+      esPerfilPropio = true;
+      if (SupabaseAuthService.isLogin.value) {
+        // Forzar actualizacion de las publicaciones
+        await authService.obtenerPublicaciones();
 
-          // Forzar actualizacion de las publicaciones
-          await authService.obtenerPublicaciones();
+        datosUser = {
+          'id': SupabaseAuthService.id,
+          'nombre': SupabaseAuthService.nombre,
+          'nombre_usuario': SupabaseAuthService.nombreUsuario,
+          'descripcion': SupabaseAuthService.descripcion,
+          'imagen_perfil': SupabaseAuthService.imagenPerfil,
+          'imagen_portada': SupabaseAuthService.imagenPortada,
+          'correo': SupabaseAuthService.correo,
+        };
 
-          datosUser = {
-            'id': SupabaseAuthService.id,
-            'nombre': SupabaseAuthService.nombre,
-            'nombre_usuario': SupabaseAuthService.nombreUsuario,
-            'descripcion': SupabaseAuthService.descripcion,
-            'imagen_perfil': SupabaseAuthService.imagenPerfil,
-            'imagen_portada': SupabaseAuthService.imagenPortada,
-            'correo': SupabaseAuthService.correo,
-          };
-          userPosts = SupabaseAuthService.publicaciones;
-        }
-      } else {
-        // Mostrar perfil de otro usuario
-        esPerfilPropio = widget.idUsuario == SupabaseAuthService.id;
-        datosUser = await authService.obtenerUsuarioPorId(widget.idUsuario!);
-        if (datosUser != null) {
-          userPosts = [""]; // CORREGIR AQUÍ ---------------------------------------------------------------------------------------------------------------------
-          // userPosts = await authService.obtenerPublicacionesPorUsuario(widget.idUsuario!); <== ANTES TENÍAS ESTO (Ahora tratas con Publicaciones)
-        }
+        // Obtener publicaciones como objetos Publicacion
+          userPosts = await authService.obtenerPublicacionesPorUsuario(context, SupabaseAuthService.id);
       }
-    } catch (e) {
-      if (!mounted) return;
-      MensajeSnackbar.mostrarError(context, 'Ocurrió un error al cargar el perfil');
-    } finally {
-      setState(() {
-        isLoading = false;
-      });
+    } else {
+
+      // Mostrar perfil de otro usuario
+      esPerfilPropio = widget.idUsuario == SupabaseAuthService.id;
+      datosUser = await authService.obtenerUsuarioPorId(widget.idUsuario!);
+      if (datosUser != null) {
+          userPosts = await authService.obtenerPublicacionesPorUsuario(context, widget.idUsuario!);
+      }
     }
+  } catch (e) {
+    if (!mounted) return;
+    MensajeSnackbar.mostrarError(context, 'Ocurrió un error al cargar el perfil');
+  } finally {
+    setState(() {
+      isLoading = false;
+    });
   }
+}
+
 
   Future<void> _eliminarPublicacionesSeleccionadas() async {
     // Mostrar diálogo de confirmación usando tu widget reutilizable
@@ -133,8 +137,7 @@ class _UserPageState extends State<UserPage> {
 
     try {
       // Obtener las urls de las publicaciones seleccionadas
-      List<String> urlsAEliminar =
-          _publicacionesSeleccionadas.map((index) => userPosts[index]).toList();
+      List<String> urlsAEliminar = _publicacionesSeleccionadas.map((index) => userPosts[index].urlImagen).toList();
 
       // Llamada al metodo de eliminacion
       bool exito = await authService.eliminarPublicacionesSeleccionadas(
@@ -512,6 +515,7 @@ class _UserPageState extends State<UserPage> {
               ),
               itemCount: userPosts.length,
               itemBuilder: (context, index) {
+                final publicacion = userPosts[index];
                 bool seleccionado = _publicacionesSeleccionadas.contains(index);
                 return GestureDetector(
                   onTap:
@@ -526,15 +530,23 @@ class _UserPageState extends State<UserPage> {
                             });
                           }
                           : () async {
-                            // Navegar a publicación
-                          },
+                            final result = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ComentariosPage(publicacion: publicacion),
+                            ),
+                          );
+                          if (result == true) {
+                            await _inicializarPerfil(); // Esto recarga los likes y el estado actualizado
+                          }
+                        },
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: Stack(
                           children: [
                             // Imagenes de las publicaciones
                             Image(
-                              image: CachedNetworkImageProvider(userPosts[index]),
+                              image: CachedNetworkImageProvider(publicacion.urlImagen),
                               fit: BoxFit.cover,
                               width: double.infinity,
                               height: double.infinity,

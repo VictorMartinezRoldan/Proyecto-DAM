@@ -1,0 +1,508 @@
+{
+  "@@locale": "ja",
+  "profileTitle": "プロフィール",
+  "@profileTitle": {
+    "description": "プロフィールページのタイトル",
+    "context": "profile_page"
+  },
+  "editProfile": "プロファイルを編集します",
+  "@editProfile": {
+    "description": "プロファイルを編集するボタン",
+    "context": "profile_page"
+  },
+  "recentPosts": "最近の投稿",
+  "@recentPosts": {
+    "description": "最近の投稿を表示するテキスト",
+    "context": "profile_page"
+  },
+  "noPublication": "まだ投稿はありません。",
+  "@noPublication": {
+    "description": "投稿がないことを示すテキスト",
+    "context": "profile_page"
+  },
+  "editProfileTitle": "プロファイルを編集します",
+  "@editProfileTitle": {
+    "description": "プロファイル編集ページのタイトル",
+    "context": "profile_edit"
+  },
+  "save": "保存",
+  "@save": {
+    "description": "保存",
+    "context": "profile_edit"
+  },
+  "name": "名前",
+  "@name": {
+    "description": "名前",
+    "context": "profile_edit"
+  },
+  "description": "説明",
+  "@description": {
+    "description": "説明",
+    "context": "profile_edit"
+  },
+  "saveChanges": "変更を保存します",
+  "@saveChanges": {
+    "description": "変更を保存します",
+    "context": "profile_edit"
+  },
+  "editProfileFront": "カバー画像を選択します",
+  "@editProfileFront": {
+    "description": "カバー画像を選択します",
+    "context": "profile_edit"
+  },
+  "editProfileProfile": "プロファイル画像を選択します",
+  "@editProfileProfile": {
+    "description": "プロファイル画像を選択します",
+    "context": "profile_edit"
+  },
+  "editProfileGallery": "ギャラリー",
+  "@editProfileGallery": {
+    "description": "ギャラリーから選択するためのテキストの説明",
+    "context": "profile_edit"
+  },
+  "editProfileCamera": "カメラ",
+  "@editProfileCamera": {
+    "description": "カメラから選択するためのテキストの説明",
+    "context": "profile_edit"
+  },
+  "editProfileImage": "デフォルトの画像",
+  "@editProfileImage": {
+    "description": "デフォルトの画像を選択するためのテキスト説明",
+    "context": "profile_edit"
+  },
+  "editProfileCancel": "キャンセル",
+  "@editProfileCancel": {
+    "description": "キャンセル用のテキスト説明",
+    "context": "profile_edit"
+  },
+  "editProfileNotAvailable": "利用可能な画像はありません",
+  "@editProfileNotAvailable": {
+    "description": "利用可能な画像なしのテキスト説明",
+    "context": "profile_edit"
+  },
+  "configTitle": "設定",
+  "@configTitle": {
+    "description": "設定セクションのタイトル",
+    "context": "settings_page"
+  },
+  "settingsAccountInformation": "アカウント情報",
+  "@settingsAccountInformation": {
+    "description": "アカウント情報セクションのテキスト",
+    "context": "settings_page"
+  },
+  "settingsAccountInformationDesc": "個人情報とアクセス",
+  "@settingsAccountInformationDesc": {
+    "description": "アカウント情報セクションの説明のテキスト",
+    "context": "settings_page"
+  },
+  "settingsLanguage": "言語",
+  "@settingsLanguage": {
+    "description": "言語セクションのテキスト",
+    "context": "settings_page"
+  },
+  "settingsLanguageDesc": "アプリの変更 ''言語",
+  "@settingsLanguageDesc": {
+    "description": "言語セクションの説明のテキスト",
+    "context": "settings_page"
+  },
+  "personalizationTitle": "パーソナライズ",
+  "@personalizationTitle": {
+    "description": "パーソナライズセクションのタイトル",
+    "context": "settings_page"
+  },
+  "settingsDarkMode": "ダークモード",
+  "@settingsDarkMode": {
+    "description": "ダークモードセクションのテキスト",
+    "context": "settings_page"
+  },
+  "settingsDarkModeDesc": "アプリを変更するテーマ",
+  "@settingsDarkModeDesc": {
+    "description": "ダークモードセクションの説明のテキスト",
+    "context": "settings_page"
+  },
+  "notificationTitle": "通知",
+  "@notificationTitle": {
+    "description": "通知セクションのタイトル",
+    "context": "settings_page"
+  },
+  "settingsNotificationPreferences": "通知設定",
+  "@settingsNotificationPreferences": {
+    "description": "通知設定セクションのテキスト",
+    "context": "settings_page"
+  },
+  "settingsNotificationPreferencesDesc": "アラートとリマインダーを構成します",
+  "@settingsNotificationPreferencesDesc": {
+    "description": "通知設定セクションの説明のテキスト",
+    "context": "settings_page"
+  },
+  "securityTitle": "プライバシーとセキュリティ",
+  "@securityTitle": {
+    "description": "プライバシーとセキュリティセクションのタイトル",
+    "context": "settings_page"
+  },
+  "settingsPrivacy": "アカウントプライバシー",
+  "@settingsPrivacy": {
+    "description": "プライバシーセクションのテキスト",
+    "context": "settings_page"
+  },
+  "settingsPrivacyDesc": "あなたの情報を見ることができる人を制御します",
+  "@settingsPrivacyDesc": {
+    "description": "プライバシーセクションの説明のテキスト",
+    "context": "settings_page"
+  },
+  "settingsSecurity": "安全",
+  "@settingsSecurity": {
+    "description": "セキュリティセクションのテキスト",
+    "context": "settings_page"
+  },
+  "settingsSecurityDesc": "アカウントと個人データを保護します",
+  "@settingsSecurityDesc": {
+    "description": "セキュリティセクションの説明のテキスト",
+    "context": "settings_page"
+  },
+  "settingsLogout": "ログアウト",
+  "@settingsLogout": {
+    "description": "ログアウトセクションのテキスト",
+    "context": "settings_page"
+  },
+  "settingsLogoutDesc": "アカウントからサインアウトします",
+  "@settingsLogoutDesc": {
+    "description": "ログアウトセクションの説明のテキスト",
+    "context": "settings_page"
+  },
+  "accountInformationTitle": "アカウント情報",
+  "@accountInformationTitle": {
+    "description": "アカウント情報セクションのタイトル",
+    "context": "accountinformation_page"
+  },
+  "accountInformationTitleDesc": "アカウントの詳細を管理します",
+  "@accountInformationTitleDesc": {
+    "description": "アカウント情報セクションの説明",
+    "context": "accountinformation_page"
+  },
+  "accountInformationUsername": "ユーザー名",
+  "@accountInformationUsername": {
+    "description": "アカウント情報セクションのテキスト（ユーザー名）",
+    "context": "accountinformation_page"
+  },
+  "accountInformationEmail": "メール",
+  "@accountInformationEmail": {
+    "description": "アカウント情報セクションのテキスト（電子メール）",
+    "context": "accountinformation_page"
+  },
+  "accountInformationPassword": "パスワード",
+  "@accountInformationPassword": {
+    "description": "アカウント情報セクションのテキスト（パスワード）",
+    "context": "accountinformation_page"
+  },
+  "editUsernameTitle": "ユーザー名を更新します",
+  "@editUsernameTitle": {
+    "description": "ユーザー名編集セクションのタイトル",
+    "context": "editusername_page"
+  },
+  "editUsernameTitleDesc": "コミュニティのユニークな名前を選択してください",
+  "@editUsernameTitleDesc": {
+    "description": "ユーザー名編集セクションの説明",
+    "context": "editusername_page"
+  },
+  "editUsernameName": "新しいユーザー名",
+  "@editUsernameName": {
+    "description": "ユーザー名フィールドのテキスト",
+    "context": "editusername_page"
+  },
+  "editUsernameSave": "変更を保存します",
+  "@editUsernameSave": {
+    "description": "保存変更ボタンのテキスト",
+    "context": "editusername_page"
+  },
+  "editUsernameInfoTitle": "ユーザー名について",
+  "@editUsernameInfoTitle": {
+    "description": "リンクのタイトルとユーザー名に関する情報を含むモーダル",
+    "context": "editusername_page"
+  },
+  "editUsernameInfoBody": "あなたのユーザー名はPetLinkのあなたの身元です。推奨事項：\n\n•記憶に残るものを使用します\n•ペットを含める '' name\n•特殊文字を避けてください\n•適切に保ちます\n•最低5文字\n•スペースなし",
+  "@editUsernameInfoBody": {
+    "description": "ユーザー名を選択するための推奨事項を説明するモーダル内の有益なテキスト",
+    "context": "editusername_page"
+  },
+  "editEmailTitle": "メールを更新します",
+  "@editEmailTitle": {
+    "description": "電子メール編集画面のメインタイトル",
+    "context": "editemail_page"
+  },
+  "editEmailTitleDesc": "現在のメールと新しい電子メールを入力して更新します",
+  "@editEmailTitleDesc": {
+    "description": "メール編集画面の説明サブタイトル",
+    "context": "editemail_page"
+  },
+  "editEmailCurrentLabel": "現在のメール",
+  "@editEmailCurrentLabel": {
+    "description": "現在の電子メールフィールドのラベル",
+    "context": "editemail_page"
+  },
+  "editEmailNewLabel": "新しいメール",
+  "@editEmailNewLabel": {
+    "description": "新しい電子メールフィールドのラベル",
+    "context": "editemail_page"
+  },
+  "editEmailNewHint": "たとえば、user@example.com",
+  "@editEmailNewHint": {
+    "description": "新しい電子メールのテキストの例",
+    "context": "editemail_page"
+  },
+  "editEmailConfirmLabel": "新しいメールを確認してください",
+  "@editEmailConfirmLabel": {
+    "description": "新しい電子メールフィールドを確認するためのラベル",
+    "context": "editemail_page"
+  },
+  "editEmailConfirmHint": "新しいメールを確認してください",
+  "@editEmailConfirmHint": {
+    "description": "メール確認フィールドのテキストの例",
+    "context": "editemail_page"
+  },
+  "editEmailButtonSave": "メールを更新します",
+  "@editEmailButtonSave": {
+    "description": "電子メールの変更を保存するボタンのテキスト",
+    "context": "editemail_page"
+  },
+  "editPasswordTitle": "パスワードを変更する",
+  "@editPasswordTitle": {
+    "description": "パスワード変更画面のメインタイトル",
+    "context": "editpassword_page"
+  },
+  "editPasswordTitleDesc": "現在のパスワードと使用する新しいパスワードを入力してください",
+  "@editPasswordTitleDesc": {
+    "description": "パスワード変更画面の説明サブタイトル",
+    "context": "editpassword_page"
+  },
+  "editPasswordCurrentLabel": "現在のパスワード",
+  "@editPasswordCurrentLabel": {
+    "description": "現在のパスワードフィールドのラベル",
+    "context": "editpassword_page"
+  },
+  "editPasswordCurrentHint": "現在のパスワードを入力してください",
+  "@editPasswordCurrentHint": {
+    "description": "現在のパスワードフィールドのテキストの例",
+    "context": "editpassword_page"
+  },
+  "editPasswordNewLabel": "新しいパスワード",
+  "@editPasswordNewLabel": {
+    "description": "新しいパスワードフィールドのラベル",
+    "context": "editpassword_page"
+  },
+  "editPasswordNewHint": "新しいパスワードを入力します",
+  "@editPasswordNewHint": {
+    "description": "新しいパスワードフィールドのテキストの例",
+    "context": "editpassword_page"
+  },
+  "editPasswordConfirmLabel": "新しいパスワードを確認します",
+  "@editPasswordConfirmLabel": {
+    "description": "新しいパスワードフィールドの確認ラベル",
+    "context": "editpassword_page"
+  },
+  "editPasswordConfirmHint": "新しいパスワードを確認してください",
+  "@editPasswordConfirmHint": {
+    "description": "新しいパスワードフィールドの確認テキストの例",
+    "context": "editpassword_page"
+  },
+  "editPasswordButtonSave": "パスワードを変更する",
+  "@editPasswordButtonSave": {
+    "description": "パスワードの変更を確認するボタンのテキスト",
+    "context": "editpassword_page"
+  },
+  "editPasswordStrengthIndicatorLabel": "パスワード強度",
+  "@editPasswordStrengthIndicatorLabel": {
+    "description": "パスワード強度インジケーターの横に表示されるラベル",
+    "context": "indicator_password_strength_component"
+  },
+  "editPasswordStrengthIndicatorLabelWeak": "弱い",
+  "@editPasswordStrengthIndicatorLabelWeak": {
+    "description": "パスワードの強さの弱いラベル",
+    "context": "indicator_password_strength_component"
+  },
+  "editPasswordStrengthIndicatorLabelMedium": "中くらい",
+  "@editPasswordStrengthIndicatorLabelMedium": {
+    "description": "中程度のパスワード強度のラベル",
+    "context": "indicator_password_strength_component"
+  },
+  "editPasswordStrengthIndicatorLabelStrong": "強い",
+  "@editPasswordStrengthIndicatorLabelStrong": {
+    "description": "強力なパスワード強度のラベル",
+    "context": "indicator_password_strength_component"
+  },
+  "selectLanguageTitle": "あなたの言語を選択します",
+  "@selectLanguageTitle": {
+    "description": "言語選択ページのタイトル",
+    "context": "selectlanguage_page"
+  },
+  "selectLanguageTitleDesc": "いつでも言語を変更できます",
+  "@selectLanguageTitleDesc": {
+    "description": "言語選択ページの説明",
+    "context": "selectlanguage_page"
+  },
+  "selectLanguageButtonSave": "言語を保存します",
+  "@selectLanguageButtonSave": {
+    "description": "選択した言語を保存するボタンのテキスト",
+    "context": "selectlanguage_page"
+  },
+  "newPostTitleDesc": "あなたの四本足の友達について何かを共有してください...",
+  "@newPostTitleDesc": {
+    "description": "新しい投稿ページの説明コンテナ",
+    "context": "newpost_page"
+  },
+  "newPostImageDesc": "ここに愛らしい子犬の写真をアップロードしてください",
+  "@newPostImageDesc": {
+    "description": "新しい投稿ページの画像コンテナの説明",
+    "context": "newpost_page"
+  },
+  "newPostCameraDesc": "カメラを開きます",
+  "@newPostCameraDesc": {
+    "description": "新しい投稿ページのカメラコンテナの説明",
+    "context": "newpost_page"
+  },
+  "newPostButtonCancel": "キャンセル",
+  "@newPostButtonCancel": {
+    "description": "新しい投稿ページのキャンセルボタンのテキスト",
+    "context": "newpost_page"
+  },
+  "newPostButtonPublish": "公開",
+  "@newPostButtonPublish": {
+    "description": "新しい投稿ページの公開ボタンのテキスト",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderTitle": "横糸！リマインダー",
+  "@newPostButtonDialogReminderTitle": {
+    "description": "投稿リマインダーアラートボタンのタイトル",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderDesc": "共有する画像が犬のみに関連していることを確認してください。\n\nこの犬のソーシャルネットワークを維持してくれてありがとう！",
+  "@newPostButtonDialogReminderDesc": {
+    "description": "投稿リマインダーアラートボタンの説明",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderButtonConfirm": "わかった",
+  "@newPostButtonDialogReminderButtonConfirm": {
+    "description": "投稿の確認ボタンのテキストリマインダーアラート",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderConfirmExitTitle": "確認",
+  "@newPostButtonDialogReminderConfirmExitTitle": {
+    "description": "出口確認アラートのタイトル",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderConfirmExitTitleDesc": "終了しますか？",
+  "@newPostButtonDialogReminderConfirmExitTitleDesc": {
+    "description": "出口確認アラートの説明",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderConfirmExitYes": "はい",
+  "@newPostButtonDialogReminderConfirmExitYes": {
+    "description": "出口確認アラートのテキスト",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderConfirmExitNo": "いいえ",
+  "@newPostButtonDialogReminderConfirmExitNo": {
+    "description": "出口確認アラートのテキスト",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogConfirmTitle": "確認",
+  "@newPostButtonDialogConfirmTitle": {
+    "description": "ポスト確認ボタンのタイトル",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogConfirmTitleDesc": "写真を公開しますか？",
+  "@newPostButtonDialogConfirmTitleDesc": {
+    "description": "確認確認ボタンの説明",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogConfirmButtonCancel": "いいえ",
+  "@newPostButtonDialogConfirmButtonCancel": {
+    "description": "ポスト確認アラートのキャンセルボタンのテキスト",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogConfirmButtonPublish": "役職",
+  "@newPostButtonDialogConfirmButtonPublish": {
+    "description": "ポスト確認アラートの公開ボタンのテキスト",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogPublishedTitle": "ウーフ、公開！",
+  "@newPostButtonDialogPublishedTitle": {
+    "description": "成功した投稿ボタンのタイトル",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogPublishedTitleDesc": "あなたの毛皮のような友達だけ\n有名になりました",
+  "@newPostButtonDialogPublishedTitleDesc": {
+    "description": "成功した投稿ボタンの説明",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogPublishedReturn": "戻る",
+  "@newPostButtonDialogPublishedReturn": {
+    "description": "公開後の戻りボタンのテキスト",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogErrorTitle": "おっと...何かが足りない",
+  "@newPostButtonDialogErrorTitle": {
+    "description": "ポストエラーボタンのタイトル",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogErrorTitleDesc": "赤のフィールドを確認してください\n続行する",
+  "@newPostButtonDialogErrorTitleDesc": {
+    "description": "ポストエラーボタンの説明",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogErrorReturn": "''これをしましょう",
+  "@newPostButtonDialogErrorReturn": {
+    "description": "エラー後に戻るボタンのテキスト",
+    "context": "newpost_page"
+  },
+  "lateralMenuProfileTitle": "私のプロフィール",
+  "@lateralMenuProfileTitle": {
+    "description": "ラテラルメニューのプロファイルボタンタイトル",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuProfileTitleDesc": "私のプロフィールに移動します",
+  "@lateralMenuProfileTitleDesc": {
+    "description": "ラテラルメニューのプロファイルボタンの説明",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuProfileLogOutTitleDesc": "ログインしてプロフィールを表示します",
+  "@lateralMenuProfileLogOutTitleDesc": {
+    "description": "ラテラルメニューの切断されたプロファイルボタンの説明",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuPetsTitle": "ペット",
+  "@lateralMenuPetsTitle": {
+    "description": "ラテラルメニューのペットボタンタイトル",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuPetsTitleDesc": "ペットを表示または追加します",
+  "@lateralMenuPetsTitleDesc": {
+    "description": "ラテラルメニューのペットボタンの説明",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuPetsLogOutTitleDesc": "ログインしてペットを表示または追加します",
+  "@lateralMenuPetsLogOutTitleDesc": {
+    "description": "外側メニューの切断されたペットボタンの説明",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuSettingsTitle": "設定",
+  "@lateralMenuSettingsTitle": {
+    "description": "ラテラルメニューの設定ボタンタイトル",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuSettingsTitleDesc": "設定に移動します",
+  "@lateralMenuSettingsTitleDesc": {
+    "description": "ラテラルメニューの[設定]ボタンの説明",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuLogOut": "ログアウト",
+  "@lateralMenuLogOut": {
+    "description": "ラテラルメニューのログアウトボタンのテキスト",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuLogIn": "ログイン",
+  "@lateralMenuLogIn": {
+    "description": "ラテラルメニューのログインボタンのテキスト",
+    "context": "lateralmenu_component"
+  }
+}

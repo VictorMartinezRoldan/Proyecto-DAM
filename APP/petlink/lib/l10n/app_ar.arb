@@ -1,0 +1,508 @@
+{
+  "@@locale": "ar",
+  "profileTitle": "حساب تعريفي",
+  "@profileTitle": {
+    "description": "عنوان صفحة الملف الشخصي",
+    "context": "profile_page"
+  },
+  "editProfile": "تحرير الملف الشخصي",
+  "@editProfile": {
+    "description": "زر لتحرير الملف الشخصي",
+    "context": "profile_page"
+  },
+  "recentPosts": "الوظائف الحديثة",
+  "@recentPosts": {
+    "description": "نص لعرض المنشورات الحديثة",
+    "context": "profile_page"
+  },
+  "noPublication": "لا وظائف حتى الآن.",
+  "@noPublication": {
+    "description": "نص يشير إلى عدم وجود منشورات",
+    "context": "profile_page"
+  },
+  "editProfileTitle": "تحرير الملف الشخصي",
+  "@editProfileTitle": {
+    "description": "عنوان صفحة تحرير الملف الشخصي",
+    "context": "profile_edit"
+  },
+  "save": "يحفظ",
+  "@save": {
+    "description": "يحفظ",
+    "context": "profile_edit"
+  },
+  "name": "اسم",
+  "@name": {
+    "description": "اسم",
+    "context": "profile_edit"
+  },
+  "description": "وصف",
+  "@description": {
+    "description": "وصف",
+    "context": "profile_edit"
+  },
+  "saveChanges": "حفظ التغييرات",
+  "@saveChanges": {
+    "description": "حفظ التغييرات",
+    "context": "profile_edit"
+  },
+  "editProfileFront": "حدد صورة الغلاف",
+  "@editProfileFront": {
+    "description": "حدد صورة الغلاف",
+    "context": "profile_edit"
+  },
+  "editProfileProfile": "حدد صورة الملف الشخصي",
+  "@editProfileProfile": {
+    "description": "حدد صورة الملف الشخصي",
+    "context": "profile_edit"
+  },
+  "editProfileGallery": "معرض",
+  "@editProfileGallery": {
+    "description": "وصف نص للاختيار من المعرض",
+    "context": "profile_edit"
+  },
+  "editProfileCamera": "آلة تصوير",
+  "@editProfileCamera": {
+    "description": "وصف النص للاختيار من الكاميرا",
+    "context": "profile_edit"
+  },
+  "editProfileImage": "الصور الافتراضية",
+  "@editProfileImage": {
+    "description": "وصف النص لتحديد الصور الافتراضية",
+    "context": "profile_edit"
+  },
+  "editProfileCancel": "يلغي",
+  "@editProfileCancel": {
+    "description": "وصف النص للإلغاء",
+    "context": "profile_edit"
+  },
+  "editProfileNotAvailable": "لا توجد صور متاحة",
+  "@editProfileNotAvailable": {
+    "description": "وصف نص لعدم وجود صور متوفرة",
+    "context": "profile_edit"
+  },
+  "configTitle": "إعدادات",
+  "@configTitle": {
+    "description": "عنوان قسم الإعدادات",
+    "context": "settings_page"
+  },
+  "settingsAccountInformation": "معلومات الحساب",
+  "@settingsAccountInformation": {
+    "description": "نص لقسم معلومات الحساب",
+    "context": "settings_page"
+  },
+  "settingsAccountInformationDesc": "المعلومات الشخصية والوصول",
+  "@settingsAccountInformationDesc": {
+    "description": "نص لوصف قسم معلومات الحساب",
+    "context": "settings_page"
+  },
+  "settingsLanguage": "لغة",
+  "@settingsLanguage": {
+    "description": "نص لقسم اللغة",
+    "context": "settings_page"
+  },
+  "settingsLanguageDesc": "تغيير لغة التطبيق",
+  "@settingsLanguageDesc": {
+    "description": "نص لوصف قسم اللغة",
+    "context": "settings_page"
+  },
+  "personalizationTitle": "التخصيص",
+  "@personalizationTitle": {
+    "description": "عنوان قسم التخصيص",
+    "context": "settings_page"
+  },
+  "settingsDarkMode": "الوضع المظلم",
+  "@settingsDarkMode": {
+    "description": "نص لقسم الوضع المظلم",
+    "context": "settings_page"
+  },
+  "settingsDarkModeDesc": "تغيير موضوع التطبيق",
+  "@settingsDarkModeDesc": {
+    "description": "نص لوصف قسم الوضع المظلم",
+    "context": "settings_page"
+  },
+  "notificationTitle": "إشعارات",
+  "@notificationTitle": {
+    "description": "عنوان قسم الإخطارات",
+    "context": "settings_page"
+  },
+  "settingsNotificationPreferences": "تفضيلات الإخطار",
+  "@settingsNotificationPreferences": {
+    "description": "نص لقسم تفضيلات الإخطار",
+    "context": "settings_page"
+  },
+  "settingsNotificationPreferencesDesc": "تكوين التنبيهات والتذكيرات",
+  "@settingsNotificationPreferencesDesc": {
+    "description": "نص وصف قسم تفضيلات الإخطار",
+    "context": "settings_page"
+  },
+  "securityTitle": "الخصوصية والأمن",
+  "@securityTitle": {
+    "description": "عنوان قسم الخصوصية والأمن",
+    "context": "settings_page"
+  },
+  "settingsPrivacy": "خصوصية الحساب",
+  "@settingsPrivacy": {
+    "description": "نص لقسم الخصوصية",
+    "context": "settings_page"
+  },
+  "settingsPrivacyDesc": "التحكم في من يمكنه رؤية معلوماتك",
+  "@settingsPrivacyDesc": {
+    "description": "نص وصف قسم الخصوصية",
+    "context": "settings_page"
+  },
+  "settingsSecurity": "حماية",
+  "@settingsSecurity": {
+    "description": "نص لقسم الأمان",
+    "context": "settings_page"
+  },
+  "settingsSecurityDesc": "حماية حسابك وبياناتك الشخصية",
+  "@settingsSecurityDesc": {
+    "description": "نص وصف قسم الأمان",
+    "context": "settings_page"
+  },
+  "settingsLogout": "تسجيل الخروج",
+  "@settingsLogout": {
+    "description": "نص قسم الخروج",
+    "context": "settings_page"
+  },
+  "settingsLogoutDesc": "تسجيل الخروج من حسابك",
+  "@settingsLogoutDesc": {
+    "description": "نص لوصف قسم الخروج",
+    "context": "settings_page"
+  },
+  "accountInformationTitle": "معلومات الحساب",
+  "@accountInformationTitle": {
+    "description": "عنوان قسم معلومات الحساب",
+    "context": "accountinformation_page"
+  },
+  "accountInformationTitleDesc": "إدارة تفاصيل حسابك",
+  "@accountInformationTitleDesc": {
+    "description": "وصف قسم معلومات الحساب",
+    "context": "accountinformation_page"
+  },
+  "accountInformationUsername": "اسم المستخدم",
+  "@accountInformationUsername": {
+    "description": "نص لقسم معلومات الحساب (اسم المستخدم)",
+    "context": "accountinformation_page"
+  },
+  "accountInformationEmail": "بريد إلكتروني",
+  "@accountInformationEmail": {
+    "description": "نص لقسم معلومات الحساب (البريد الإلكتروني)",
+    "context": "accountinformation_page"
+  },
+  "accountInformationPassword": "كلمة المرور",
+  "@accountInformationPassword": {
+    "description": "نص لقسم معلومات الحساب (كلمة المرور)",
+    "context": "accountinformation_page"
+  },
+  "editUsernameTitle": "قم بتحديث اسم المستخدم الخاص بك",
+  "@editUsernameTitle": {
+    "description": "عنوان قسم تحرير اسم المستخدم",
+    "context": "editusername_page"
+  },
+  "editUsernameTitleDesc": "اختر اسمًا فريدًا لمجتمعنا",
+  "@editUsernameTitleDesc": {
+    "description": "وصف قسم تحرير اسم المستخدم",
+    "context": "editusername_page"
+  },
+  "editUsernameName": "اسم مستخدم جديد",
+  "@editUsernameName": {
+    "description": "نص لحقل اسم المستخدم",
+    "context": "editusername_page"
+  },
+  "editUsernameSave": "حفظ التغييرات",
+  "@editUsernameSave": {
+    "description": "نص على زر حفظ التغييرات",
+    "context": "editusername_page"
+  },
+  "editUsernameInfoTitle": "حول أسماء المستخدمين",
+  "@editUsernameInfoTitle": {
+    "description": "عنوان الرابط والوسائط مع معلومات حول أسماء المستخدمين",
+    "context": "editusername_page"
+  },
+  "editUsernameInfoBody": "اسم المستخدم الخاص بك هو هويتك على Petlink.التوصيات:\n\n• استخدم شيئًا لا يُنسى\n• قم بتضمين اسم حيوانك الأليف\n• تجنب الشخصيات الخاصة\n• اجعله مناسبًا\n• الحد الأدنى 5 أحرف\n• لا توجد مسافات",
+  "@editUsernameInfoBody": {
+    "description": "نص إعلامي داخل الوسيط الذي يشرح التوصيات لاختيار اسم المستخدم",
+    "context": "editusername_page"
+  },
+  "editEmailTitle": "قم بتحديث بريدك الإلكتروني",
+  "@editEmailTitle": {
+    "description": "العنوان الرئيسي على شاشة تحرير البريد الإلكتروني",
+    "context": "editemail_page"
+  },
+  "editEmailTitleDesc": "أدخل بريدك الإلكتروني الحالي والبريد الإلكتروني الجديد للتحديث",
+  "@editEmailTitleDesc": {
+    "description": "الترجمة التفسيرية على شاشة تحرير البريد الإلكتروني",
+    "context": "editemail_page"
+  },
+  "editEmailCurrentLabel": "البريد الإلكتروني الحالي",
+  "@editEmailCurrentLabel": {
+    "description": "تسمية لحقل البريد الإلكتروني الحالي",
+    "context": "editemail_page"
+  },
+  "editEmailNewLabel": "بريد إلكتروني جديد",
+  "@editEmailNewLabel": {
+    "description": "تسمية لحقل البريد الإلكتروني الجديد",
+    "context": "editemail_page"
+  },
+  "editEmailNewHint": "على سبيل المثال ، user@example.com",
+  "@editEmailNewHint": {
+    "description": "مثال نص على البريد الإلكتروني الجديد",
+    "context": "editemail_page"
+  },
+  "editEmailConfirmLabel": "تأكيد بريد إلكتروني جديد",
+  "@editEmailConfirmLabel": {
+    "description": "تسمية لتأكيد حقل البريد الإلكتروني الجديد",
+    "context": "editemail_page"
+  },
+  "editEmailConfirmHint": "قم بتأكيد بريدك الإلكتروني الجديد",
+  "@editEmailConfirmHint": {
+    "description": "مثال نص في حقل تأكيد البريد الإلكتروني",
+    "context": "editemail_page"
+  },
+  "editEmailButtonSave": "تحديث البريد الإلكتروني",
+  "@editEmailButtonSave": {
+    "description": "نص على الزر الذي يحفظ تغييرات البريد الإلكتروني",
+    "context": "editemail_page"
+  },
+  "editPasswordTitle": "تغيير كلمة المرور",
+  "@editPasswordTitle": {
+    "description": "العنوان الرئيسي لشاشة تغيير كلمة المرور",
+    "context": "editpassword_page"
+  },
+  "editPasswordTitleDesc": "أدخل كلمة المرور الحالية وكلمة المرور الجديدة التي تريد استخدامها",
+  "@editPasswordTitleDesc": {
+    "description": "عنوان فرعي توضيحي على شاشة تغيير كلمة المرور",
+    "context": "editpassword_page"
+  },
+  "editPasswordCurrentLabel": "كلمة المرور الحالية",
+  "@editPasswordCurrentLabel": {
+    "description": "تسمية لحقل كلمة المرور الحالي",
+    "context": "editpassword_page"
+  },
+  "editPasswordCurrentHint": "أدخل كلمة المرور الحالية الخاصة بك",
+  "@editPasswordCurrentHint": {
+    "description": "مثال نص في حقل كلمة المرور الحالي",
+    "context": "editpassword_page"
+  },
+  "editPasswordNewLabel": "كلمة المرور الجديدة",
+  "@editPasswordNewLabel": {
+    "description": "تسمية لحقل كلمة المرور الجديد",
+    "context": "editpassword_page"
+  },
+  "editPasswordNewHint": "أدخل كلمة المرور الجديدة الخاصة بك",
+  "@editPasswordNewHint": {
+    "description": "مثال نص في حقل كلمة المرور الجديد",
+    "context": "editpassword_page"
+  },
+  "editPasswordConfirmLabel": "تأكيد كلمة مرور جديدة",
+  "@editPasswordConfirmLabel": {
+    "description": "تسمية لتأكيد حقل كلمة المرور الجديد",
+    "context": "editpassword_page"
+  },
+  "editPasswordConfirmHint": "قم بتأكيد كلمة المرور الجديدة الخاصة بك",
+  "@editPasswordConfirmHint": {
+    "description": "مثال نص في حقل تأكيد كلمة المرور الجديدة",
+    "context": "editpassword_page"
+  },
+  "editPasswordButtonSave": "تغيير كلمة المرور",
+  "@editPasswordButtonSave": {
+    "description": "نص على الزر لتأكيد تغيير كلمة المرور",
+    "context": "editpassword_page"
+  },
+  "editPasswordStrengthIndicatorLabel": "قوة كلمة المرور",
+  "@editPasswordStrengthIndicatorLabel": {
+    "description": "العلامة المعروضة بجوار مؤشر قوة كلمة المرور",
+    "context": "indicator_password_strength_component"
+  },
+  "editPasswordStrengthIndicatorLabelWeak": "ضعيف",
+  "@editPasswordStrengthIndicatorLabelWeak": {
+    "description": "تسمية لضعف قوة كلمة المرور",
+    "context": "indicator_password_strength_component"
+  },
+  "editPasswordStrengthIndicatorLabelMedium": "واسطة",
+  "@editPasswordStrengthIndicatorLabelMedium": {
+    "description": "تسمية لقوة كلمة المرور المتوسطة",
+    "context": "indicator_password_strength_component"
+  },
+  "editPasswordStrengthIndicatorLabelStrong": "قوي",
+  "@editPasswordStrengthIndicatorLabelStrong": {
+    "description": "تسمية لقوة كلمة المرور القوية",
+    "context": "indicator_password_strength_component"
+  },
+  "selectLanguageTitle": "حدد لغتك",
+  "@selectLanguageTitle": {
+    "description": "عنوان صفحة اختيار اللغة",
+    "context": "selectlanguage_page"
+  },
+  "selectLanguageTitleDesc": "يمكنك تغيير اللغة في أي وقت",
+  "@selectLanguageTitleDesc": {
+    "description": "وصف صفحة اختيار اللغة",
+    "context": "selectlanguage_page"
+  },
+  "selectLanguageButtonSave": "حفظ اللغة",
+  "@selectLanguageButtonSave": {
+    "description": "نص على الزر لحفظ اللغة المحددة",
+    "context": "selectlanguage_page"
+  },
+  "newPostTitleDesc": "شارك شيئًا عن صديقك ذو الأربعة أرجل ...",
+  "@newPostTitleDesc": {
+    "description": "الوصف حاوية لصفحة النشر الجديدة",
+    "context": "newpost_page"
+  },
+  "newPostImageDesc": "قم بتحميل صورة من جرو رائعتين هنا",
+  "@newPostImageDesc": {
+    "description": "وصف حاوية الصور للصفحة النشر الجديدة",
+    "context": "newpost_page"
+  },
+  "newPostCameraDesc": "افتح الكاميرا",
+  "@newPostCameraDesc": {
+    "description": "وصف حاوية الكاميرا للصفحة النشر الجديدة",
+    "context": "newpost_page"
+  },
+  "newPostButtonCancel": "يلغي",
+  "@newPostButtonCancel": {
+    "description": "نص على زر \"إلغاء\" في صفحة النشر الجديدة",
+    "context": "newpost_page"
+  },
+  "newPostButtonPublish": "نشر",
+  "@newPostButtonPublish": {
+    "description": "نص لزر النشر على صفحة النشر الجديدة",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderTitle": "حمة!تذكير",
+  "@newPostButtonDialogReminderTitle": {
+    "description": "عنوان زر تنبيه تذكير ما بعد",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderDesc": "يرجى التأكد من أن الصور التي تشاركها مرتبطة بالكلاب فقط.\n\nشكرا لك لمساعدتنا في الحفاظ على هذه الشبكة الاجتماعية المهووسين!",
+  "@newPostButtonDialogReminderDesc": {
+    "description": "وصف زر تنبيه التذكير",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderButtonConfirm": "فهمتها",
+  "@newPostButtonDialogReminderButtonConfirm": {
+    "description": "نص لزر التأكيد لتنبيه تذكير المنشور",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderConfirmExitTitle": "تأكيد",
+  "@newPostButtonDialogReminderConfirmExitTitle": {
+    "description": "عنوان تنبيه تأكيد الخروج",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderConfirmExitTitleDesc": "هل تريد الخروج؟",
+  "@newPostButtonDialogReminderConfirmExitTitleDesc": {
+    "description": "وصف تنبيه تأكيد الخروج",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderConfirmExitYes": "نعم",
+  "@newPostButtonDialogReminderConfirmExitYes": {
+    "description": "نص لتنبيه تأكيد الخروج",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderConfirmExitNo": "لا",
+  "@newPostButtonDialogReminderConfirmExitNo": {
+    "description": "نص لتنبيه تأكيد الخروج",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogConfirmTitle": "تأكيد",
+  "@newPostButtonDialogConfirmTitle": {
+    "description": "عنوان زر تأكيد النشر",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogConfirmTitleDesc": "هل تريد نشر الصورة؟",
+  "@newPostButtonDialogConfirmTitleDesc": {
+    "description": "وصف زر تأكيد النشر",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogConfirmButtonCancel": "لا",
+  "@newPostButtonDialogConfirmButtonCancel": {
+    "description": "نص لزر إلغاء تنبيه تأكيد المنشور",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogConfirmButtonPublish": "بريد",
+  "@newPostButtonDialogConfirmButtonPublish": {
+    "description": "نص لزر النشر لتنبيه تأكيد المنشور",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogPublishedTitle": "نحمة ، المنشورة!",
+  "@newPostButtonDialogPublishedTitle": {
+    "description": "عنوان زر النشر الناجح",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogPublishedTitleDesc": "صديقك الفروي فقط\nأصبحت مشهورة",
+  "@newPostButtonDialogPublishedTitleDesc": {
+    "description": "وصف زر النشر الناجح",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogPublishedReturn": "خلف",
+  "@newPostButtonDialogPublishedReturn": {
+    "description": "نص على زر الإرجاع بعد النشر",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogErrorTitle": "عفوًا ... شيء ما مفقود",
+  "@newPostButtonDialogErrorTitle": {
+    "description": "عنوان زر الخطأ",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogErrorTitleDesc": "تحقق من الحقول باللون الأحمر\nللمتابعة",
+  "@newPostButtonDialogErrorTitleDesc": {
+    "description": "وصف زر خطأ النشر",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogErrorReturn": "دعنا نفعل هذا",
+  "@newPostButtonDialogErrorReturn": {
+    "description": "نص على زر الإرجاع بعد خطأ",
+    "context": "newpost_page"
+  },
+  "lateralMenuProfileTitle": "ملفي الشخصي",
+  "@lateralMenuProfileTitle": {
+    "description": "عنوان زر الملف الشخصي في القائمة الجانبية",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuProfileTitleDesc": "انتقل إلى ملفي الشخصي",
+  "@lateralMenuProfileTitleDesc": {
+    "description": "وصف زر الملف الشخصي في القائمة الجانبية",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuProfileLogOutTitleDesc": "قم بتسجيل الدخول لعرض ملف التعريف الخاص بك",
+  "@lateralMenuProfileLogOutTitleDesc": {
+    "description": "وصف لزر ملف التعريف غير المتصل في القائمة الجانبية",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuPetsTitle": "حيوانات أليفة",
+  "@lateralMenuPetsTitle": {
+    "description": "عنوان زر الحيوانات الأليفة في القائمة الجانبية",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuPetsTitleDesc": "عرض أو أضف حيواناتك الأليفة",
+  "@lateralMenuPetsTitleDesc": {
+    "description": "وصف زر الحيوانات الأليفة في القائمة الجانبية",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuPetsLogOutTitleDesc": "قم بتسجيل الدخول لعرض حيواناتك الأليفة أو إضافة حيواناتك الأليفة",
+  "@lateralMenuPetsLogOutTitleDesc": {
+    "description": "وصف زر الحيوانات الأليفة غير المتصل في القائمة الجانبية",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuSettingsTitle": "إعدادات",
+  "@lateralMenuSettingsTitle": {
+    "description": "عنوان زر الإعدادات في القائمة الجانبية",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuSettingsTitleDesc": "انتقل إلى الإعدادات",
+  "@lateralMenuSettingsTitleDesc": {
+    "description": "وصف زر الإعدادات في القائمة الجانبية",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuLogOut": "تسجيل الخروج",
+  "@lateralMenuLogOut": {
+    "description": "نص زر الخروج في القائمة الجانبية",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuLogIn": "تسجيل الدخول",
+  "@lateralMenuLogIn": {
+    "description": "نص زر تسجيل الدخول في القائمة الجانبية",
+    "context": "lateralmenu_component"
+  }
+}

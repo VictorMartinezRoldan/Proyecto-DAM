@@ -45,6 +45,41 @@
     "description": "Enregistrer les modifications",
     "context": "profile_edit"
   },
+  "editProfileFront": "Sélectionner l''image de couverture",
+  "@editProfileFront": {
+    "description": "Sélectionner l''image de couverture",
+    "context": "profile_edit"
+  },
+  "editProfileProfile": "Sélectionner l''image du profil",
+  "@editProfileProfile": {
+    "description": "Sélectionner l''image du profil",
+    "context": "profile_edit"
+  },
+  "editProfileGallery": "Galerie",
+  "@editProfileGallery": {
+    "description": "Description du texte pour la sélection dans la galerie",
+    "context": "profile_edit"
+  },
+  "editProfileCamera": "Caméra",
+  "@editProfileCamera": {
+    "description": "Description du texte pour la sélection de la caméra",
+    "context": "profile_edit"
+  },
+  "editProfileImage": "Images par défaut",
+  "@editProfileImage": {
+    "description": "Description du texte pour la sélection des images par défaut",
+    "context": "profile_edit"
+  },
+  "editProfileCancel": "Annuler",
+  "@editProfileCancel": {
+    "description": "Description du texte pour annuler",
+    "context": "profile_edit"
+  },
+  "editProfileNotAvailable": "Pas d''images disponibles",
+  "@editProfileNotAvailable": {
+    "description": "Description du texte pour aucune image disponible",
+    "context": "profile_edit"
+  },
   "configTitle": "Paramètres",
   "@configTitle": {
     "description": "Titre de la section Paramètres",
@@ -147,7 +182,7 @@
   },
   "accountInformationUsername": "Nom d''utilisateur",
   "@accountInformationUsername": {
-    "description": "Texte de la section des informations du compte (nom d'utilisateur)",
+    "description": "Texte de la section des informations du compte (nom d''utilisateur)",
     "context": "accountinformation_page"
   },
   "accountInformationEmail": "E-mail",
@@ -162,17 +197,17 @@
   },
   "editUsernameTitle": "Mettez à jour votre nom d''utilisateur",
   "@editUsernameTitle": {
-    "description": "Titre de la section d'édition de nom d'utilisateur",
+    "description": "Titre de la section d'édition de nom d''utilisateur",
     "context": "editusername_page"
   },
   "editUsernameTitleDesc": "Choisissez un nom unique pour notre communauté",
   "@editUsernameTitleDesc": {
-    "description": "Description de la section d'édition de nom d'utilisateur",
+    "description": "Description de la section d'édition de nom d''utilisateur",
     "context": "editusername_page"
   },
   "editUsernameName": "Nouveau nom d''utilisateur",
   "@editUsernameName": {
-    "description": "Texte pour le champ de nom d'utilisateur",
+    "description": "Texte pour le champ de nom d''utilisateur",
     "context": "editusername_page"
   },
   "editUsernameSave": "Enregistrer les modifications",
@@ -182,12 +217,12 @@
   },
   "editUsernameInfoTitle": "Sur les noms d''utilisateur",
   "@editUsernameInfoTitle": {
-    "description": "Titre du lien et modal avec des informations sur les noms d'utilisateur",
+    "description": "Titre du lien et modal avec des informations sur les noms d''utilisateur",
     "context": "editusername_page"
   },
   "editUsernameInfoBody": "Votre nom d''utilisateur est votre identité sur Petlink.Recommandations:\n\n• Utilisez quelque chose de mémorable\n• Incluez le nom de votre animal\n• Évitez les caractères spéciaux\n• Gardez-le approprié\n• Minimum 5 caractères\n• Aucun espace",
   "@editUsernameInfoBody": {
-    "description": "Texte informatif à l'intérieur du modal expliquant les recommandations pour le choix d'un nom d'utilisateur",
+    "description": "Texte informatif à l''intérieur du modal expliquant les recommandations pour le choix d''un nom d''utilisateur",
     "context": "editusername_page"
   },
   "editEmailTitle": "Mettez à jour votre e-mail",
@@ -277,7 +312,7 @@
   },
   "editPasswordStrengthIndicatorLabel": "Force de mot de passe",
   "@editPasswordStrengthIndicatorLabel": {
-    "description": "Étiquette affichée à côté de l'indicateur de résistance du mot de passe",
+    "description": "Étiquette affichée à côté de l''indicateur de résistance du mot de passe",
     "context": "indicator_password_strength_component"
   },
   "editPasswordStrengthIndicatorLabelWeak": "Faible",
@@ -317,7 +352,7 @@
   },
   "newPostImageDesc": "Téléchargez une photo de votre adorable chiot ici",
   "@newPostImageDesc": {
-    "description": "Description du conteneur d'image pour la nouvelle page de publication",
+    "description": "Description du conteneur d''image pour la nouvelle page de publication",
     "context": "newpost_page"
   },
   "newPostCameraDesc": "Ouvrir la caméra",
@@ -347,30 +382,30 @@
   },
   "newPostButtonDialogReminderButtonConfirm": "J''ai compris",
   "@newPostButtonDialogReminderButtonConfirm": {
-    "description": "Texte pour le bouton de confirmation de l'alerte de rappel",
+    "description": "Texte pour le bouton de confirmation de l''alerte de rappel",
     "context": "newpost_page"
   },
   "newPostButtonDialogReminderConfirmExitTitle": "Confirmation",
   "@newPostButtonDialogReminderConfirmExitTitle": {
-    "description": "Titre de l'alerte de confirmation de sortie",
+    "description": "Titre de l''alerte de confirmation de sortie",
     "context": "newpost_page"
   },
   "newPostButtonDialogReminderConfirmExitTitleDesc": "Voulez-vous sortir?",
   "@newPostButtonDialogReminderConfirmExitTitleDesc": {
-    "description": "Description de l'alerte de confirmation de sortie",
+    "description": "Description de l''alerte de confirmation de sortie",
     "context": "newpost_page"
   },
   "newPostButtonDialogReminderConfirmExitYes": "Oui",
   "@newPostButtonDialogReminderConfirmExitYes": {
-    "description": "Texte pour l'alerte de confirmation de sortie",
+    "description": "Texte pour l''alerte de confirmation de sortie",
     "context": "newpost_page"
   },
   "newPostButtonDialogReminderConfirmExitNo": "Non",
   "@newPostButtonDialogReminderConfirmExitNo": {
-    "description": "Texte pour l'alerte de confirmation de sortie",
+    "description": "Texte pour l''alerte de confirmation de sortie",
     "context": "newpost_page"
   },
-  "newPostButtonDialogConfirmTitle": "Non",
+  "newPostButtonDialogConfirmTitle": "Confirmation",
   "@newPostButtonDialogConfirmTitle": {
     "description": "Titre du bouton de confirmation de la publication",
     "context": "newpost_page"
@@ -382,12 +417,12 @@
   },
   "newPostButtonDialogConfirmButtonCancel": "Non",
   "@newPostButtonDialogConfirmButtonCancel": {
-    "description": "Texte pour le bouton Annuler de l'alerte de confirmation de la publication",
+    "description": "Texte pour le bouton Annuler de l''alerte de confirmation de la publication",
     "context": "newpost_page"
   },
-  "newPostButtonDialogConfirmButtonPublish": "Oui",
+  "newPostButtonDialogConfirmButtonPublish": "Poste",
   "@newPostButtonDialogConfirmButtonPublish": {
-    "description": "Texte pour le bouton de publication de l'alerte de confirmation du post",
+    "description": "Texte pour le bouton de publication de l''alerte de confirmation du post",
     "context": "newpost_page"
   },
   "newPostButtonDialogPublishedTitle": "Woof, publié!",

@@ -86,17 +86,6 @@ class _SelectLanguagePageState extends State<SelectLanguagePage> {
                   const SizedBox(height: 32),
                   _construirBotonGuardar(),
                   const SizedBox(height: 20),
-
-                  // Boton para limpiar el idioma guardado (es para pruebas, se borrara mas adelante)
-                  ElevatedButton(
-                    onPressed: () async {
-                      await Provider.of<Provideridioma>(
-                        context,
-                        listen: false,
-                      ).limpiarIdiomaGuardado();
-                    },
-                    child: Text('Borrar idioma guardado (Debug)'),
-                  ),
                 ],
               ),
             ),

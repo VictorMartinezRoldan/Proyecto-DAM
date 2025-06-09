@@ -1,0 +1,508 @@
+{
+  "@@locale": "hi",
+  "profileTitle": "प्रोफ़ाइल",
+  "@profileTitle": {
+    "description": "प्रोफ़ाइल पृष्ठ का शीर्षक",
+    "context": "profile_page"
+  },
+  "editProfile": "प्रोफ़ाइल संपादित करें",
+  "@editProfile": {
+    "description": "प्रोफ़ाइल को संपादित करने के लिए बटन",
+    "context": "profile_page"
+  },
+  "recentPosts": "हाल के पोस्ट",
+  "@recentPosts": {
+    "description": "हाल के पोस्ट देखने के लिए पाठ",
+    "context": "profile_page"
+  },
+  "noPublication": "अब तक कोई पोस्ट नहीं।",
+  "@noPublication": {
+    "description": "पाठ यह दर्शाता है कि कोई पोस्ट नहीं हैं",
+    "context": "profile_page"
+  },
+  "editProfileTitle": "प्रोफ़ाइल संपादित करें",
+  "@editProfileTitle": {
+    "description": "प्रोफ़ाइल संपादन पृष्ठ का शीर्षक",
+    "context": "profile_edit"
+  },
+  "save": "बचाना",
+  "@save": {
+    "description": "बचाना",
+    "context": "profile_edit"
+  },
+  "name": "नाम",
+  "@name": {
+    "description": "नाम",
+    "context": "profile_edit"
+  },
+  "description": "विवरण",
+  "@description": {
+    "description": "विवरण",
+    "context": "profile_edit"
+  },
+  "saveChanges": "परिवर्तनों को सुरक्षित करें",
+  "@saveChanges": {
+    "description": "परिवर्तनों को सुरक्षित करें",
+    "context": "profile_edit"
+  },
+  "editProfileFront": "कवर छवि का चयन करें",
+  "@editProfileFront": {
+    "description": "कवर छवि का चयन करें",
+    "context": "profile_edit"
+  },
+  "editProfileProfile": "प्रोफ़ाइल छवि का चयन करें",
+  "@editProfileProfile": {
+    "description": "प्रोफ़ाइल छवि का चयन करें",
+    "context": "profile_edit"
+  },
+  "editProfileGallery": "गैलरी",
+  "@editProfileGallery": {
+    "description": "गैलरी से चयन के लिए पाठ विवरण",
+    "context": "profile_edit"
+  },
+  "editProfileCamera": "झगड़ा",
+  "@editProfileCamera": {
+    "description": "कैमरे से चयन करने के लिए पाठ विवरण",
+    "context": "profile_edit"
+  },
+  "editProfileImage": "डिफ़ॉल्ट चित्र",
+  "@editProfileImage": {
+    "description": "डिफ़ॉल्ट छवियों का चयन करने के लिए पाठ विवरण",
+    "context": "profile_edit"
+  },
+  "editProfileCancel": "रद्द करना",
+  "@editProfileCancel": {
+    "description": "रद्द करने के लिए पाठ विवरण",
+    "context": "profile_edit"
+  },
+  "editProfileNotAvailable": "कोई चित्र उपलब्ध नहीं है",
+  "@editProfileNotAvailable": {
+    "description": "कोई छवियों के लिए पाठ विवरण उपलब्ध नहीं है",
+    "context": "profile_edit"
+  },
+  "configTitle": "सेटिंग",
+  "@configTitle": {
+    "description": "सेटिंग्स अनुभाग का शीर्षक",
+    "context": "settings_page"
+  },
+  "settingsAccountInformation": "खाता संबंधी जानकारी",
+  "@settingsAccountInformation": {
+    "description": "खाता सूचना अनुभाग के लिए पाठ",
+    "context": "settings_page"
+  },
+  "settingsAccountInformationDesc": "व्यक्तिगत जानकारी और पहुंच",
+  "@settingsAccountInformationDesc": {
+    "description": "खाता सूचना अनुभाग के विवरण के लिए पाठ",
+    "context": "settings_page"
+  },
+  "settingsLanguage": "भाषा",
+  "@settingsLanguage": {
+    "description": "भाषा अनुभाग के लिए पाठ",
+    "context": "settings_page"
+  },
+  "settingsLanguageDesc": "ऐप की भाषा बदलें",
+  "@settingsLanguageDesc": {
+    "description": "भाषा अनुभाग के विवरण के लिए पाठ",
+    "context": "settings_page"
+  },
+  "personalizationTitle": "वैयक्तिकरण",
+  "@personalizationTitle": {
+    "description": "वैयक्तिकरण अनुभाग का शीर्षक",
+    "context": "settings_page"
+  },
+  "settingsDarkMode": "डार्क मोड",
+  "@settingsDarkMode": {
+    "description": "डार्क मोड अनुभाग के लिए पाठ",
+    "context": "settings_page"
+  },
+  "settingsDarkModeDesc": "ऐप का विषय बदलें",
+  "@settingsDarkModeDesc": {
+    "description": "डार्क मोड अनुभाग के विवरण के लिए पाठ",
+    "context": "settings_page"
+  },
+  "notificationTitle": "अधिसूचना",
+  "@notificationTitle": {
+    "description": "अधिसूचना अनुभाग का शीर्षक",
+    "context": "settings_page"
+  },
+  "settingsNotificationPreferences": "अधिसूचना प्राथमिकताएँ",
+  "@settingsNotificationPreferences": {
+    "description": "अधिसूचना वरीयता अनुभाग के लिए पाठ",
+    "context": "settings_page"
+  },
+  "settingsNotificationPreferencesDesc": "अलर्ट और रिमाइंडर कॉन्फ़िगर करें",
+  "@settingsNotificationPreferencesDesc": {
+    "description": "अधिसूचना वरीयताएँ अनुभाग के विवरण के लिए पाठ",
+    "context": "settings_page"
+  },
+  "securityTitle": "गोपनीयता और सुरक्षा",
+  "@securityTitle": {
+    "description": "गोपनीयता और सुरक्षा अनुभाग का शीर्षक",
+    "context": "settings_page"
+  },
+  "settingsPrivacy": "खाता गोपनीयता",
+  "@settingsPrivacy": {
+    "description": "गोपनीयता अनुभाग के लिए पाठ",
+    "context": "settings_page"
+  },
+  "settingsPrivacyDesc": "नियंत्रण कौन आपकी जानकारी देख सकता है",
+  "@settingsPrivacyDesc": {
+    "description": "गोपनीयता अनुभाग के विवरण के लिए पाठ",
+    "context": "settings_page"
+  },
+  "settingsSecurity": "सुरक्षा",
+  "@settingsSecurity": {
+    "description": "सुरक्षा अनुभाग के लिए पाठ",
+    "context": "settings_page"
+  },
+  "settingsSecurityDesc": "अपने खाते और व्यक्तिगत डेटा को सुरक्षित रखें",
+  "@settingsSecurityDesc": {
+    "description": "सुरक्षा अनुभाग के विवरण के लिए पाठ",
+    "context": "settings_page"
+  },
+  "settingsLogout": "लॉग आउट",
+  "@settingsLogout": {
+    "description": "लॉग आउट अनुभाग के लिए पाठ",
+    "context": "settings_page"
+  },
+  "settingsLogoutDesc": "अपने खाते से बाहर साइन आउट करें",
+  "@settingsLogoutDesc": {
+    "description": "लॉग आउट अनुभाग के विवरण के लिए पाठ",
+    "context": "settings_page"
+  },
+  "accountInformationTitle": "खाता संबंधी जानकारी",
+  "@accountInformationTitle": {
+    "description": "खाता सूचना अनुभाग का शीर्षक",
+    "context": "accountinformation_page"
+  },
+  "accountInformationTitleDesc": "अपने खाता विवरण प्रबंधित करें",
+  "@accountInformationTitleDesc": {
+    "description": "खाता सूचना अनुभाग का विवरण",
+    "context": "accountinformation_page"
+  },
+  "accountInformationUsername": "उपयोगकर्ता नाम",
+  "@accountInformationUsername": {
+    "description": "खाता सूचना अनुभाग के लिए पाठ (उपयोगकर्ता नाम)",
+    "context": "accountinformation_page"
+  },
+  "accountInformationEmail": "ईमेल",
+  "@accountInformationEmail": {
+    "description": "खाता सूचना अनुभाग के लिए पाठ (ईमेल)",
+    "context": "accountinformation_page"
+  },
+  "accountInformationPassword": "पासवर्ड",
+  "@accountInformationPassword": {
+    "description": "खाता सूचना अनुभाग के लिए पाठ (पासवर्ड)",
+    "context": "accountinformation_page"
+  },
+  "editUsernameTitle": "अपना उपयोगकर्ता नाम अपडेट करें",
+  "@editUsernameTitle": {
+    "description": "उपयोगकर्ता नाम संपादन अनुभाग का शीर्षक",
+    "context": "editusername_page"
+  },
+  "editUsernameTitleDesc": "हमारे समुदाय के लिए एक अनूठा नाम चुनें",
+  "@editUsernameTitleDesc": {
+    "description": "उपयोगकर्ता नाम संपादन अनुभाग का विवरण",
+    "context": "editusername_page"
+  },
+  "editUsernameName": "नया उपयोगकर्ता नाम",
+  "@editUsernameName": {
+    "description": "उपयोगकर्ता नाम क्षेत्र के लिए पाठ",
+    "context": "editusername_page"
+  },
+  "editUsernameSave": "परिवर्तनों को सुरक्षित करें",
+  "@editUsernameSave": {
+    "description": "परिवर्तन बटन के लिए पाठ",
+    "context": "editusername_page"
+  },
+  "editUsernameInfoTitle": "उपयोगकर्ता नाम के बारे में",
+  "@editUsernameInfoTitle": {
+    "description": "उपयोगकर्ता नाम के बारे में जानकारी के साथ लिंक और मोडल का शीर्षक",
+    "context": "editusername_page"
+  },
+  "editUsernameInfoBody": "आपका उपयोगकर्ता नाम पेटलिंक पर आपकी पहचान है।सिफारिशें:\n\n• कुछ यादगार का उपयोग करें\n• अपने पालतू जानवरों का नाम शामिल करें\n• विशेष पात्रों से बचें\n• इसे उचित रखें\n• न्यूनतम 5 वर्ण\n• कोई रिक्त स्थान",
+  "@editUsernameInfoBody": {
+    "description": "मोडल के अंदर जानकारीपूर्ण पाठ एक उपयोगकर्ता नाम चुनने के लिए सिफारिशें समझाना",
+    "context": "editusername_page"
+  },
+  "editEmailTitle": "अपना ईमेल अपडेट करें",
+  "@editEmailTitle": {
+    "description": "ईमेल संपादन स्क्रीन पर मुख्य शीर्षक",
+    "context": "editemail_page"
+  },
+  "editEmailTitleDesc": "अद्यतन करने के लिए अपना वर्तमान ईमेल और नया ईमेल दर्ज करें",
+  "@editEmailTitleDesc": {
+    "description": "ईमेल संपादन स्क्रीन पर व्याख्यात्मक उपशीर्षक",
+    "context": "editemail_page"
+  },
+  "editEmailCurrentLabel": "वर्तमान ईमेल",
+  "@editEmailCurrentLabel": {
+    "description": "वर्तमान ईमेल फ़ील्ड के लिए लेबल",
+    "context": "editemail_page"
+  },
+  "editEmailNewLabel": "नया ईमेल",
+  "@editEmailNewLabel": {
+    "description": "नए ईमेल फ़ील्ड के लिए लेबल",
+    "context": "editemail_page"
+  },
+  "editEmailNewHint": "जैसे, user@example.com",
+  "@editEmailNewHint": {
+    "description": "नए ईमेल के लिए उदाहरण पाठ",
+    "context": "editemail_page"
+  },
+  "editEmailConfirmLabel": "नई ईमेल की पुष्टि करें",
+  "@editEmailConfirmLabel": {
+    "description": "नए ईमेल फ़ील्ड की पुष्टि के लिए लेबल",
+    "context": "editemail_page"
+  },
+  "editEmailConfirmHint": "अपने नए ईमेल की पुष्टि करें",
+  "@editEmailConfirmHint": {
+    "description": "ईमेल पुष्टिकरण क्षेत्र में उदाहरण पाठ",
+    "context": "editemail_page"
+  },
+  "editEmailButtonSave": "अद्यतन ईमेल",
+  "@editEmailButtonSave": {
+    "description": "ईमेल परिवर्तनों को बचाने वाले बटन के लिए पाठ",
+    "context": "editemail_page"
+  },
+  "editPasswordTitle": "पासवर्ड बदलें",
+  "@editPasswordTitle": {
+    "description": "पासवर्ड परिवर्तन स्क्रीन का मुख्य शीर्षक",
+    "context": "editpassword_page"
+  },
+  "editPasswordTitleDesc": "अपना वर्तमान पासवर्ड और नया पासवर्ड दर्ज करें जिसे आप उपयोग करना चाहते हैं",
+  "@editPasswordTitleDesc": {
+    "description": "पासवर्ड परिवर्तन स्क्रीन पर व्याख्यात्मक उपशीर्षक",
+    "context": "editpassword_page"
+  },
+  "editPasswordCurrentLabel": "वर्तमान पासवर्ड",
+  "@editPasswordCurrentLabel": {
+    "description": "वर्तमान पासवर्ड फ़ील्ड के लिए लेबल",
+    "context": "editpassword_page"
+  },
+  "editPasswordCurrentHint": "अपने वर्तमान पासवर्ड को दर्ज करें",
+  "@editPasswordCurrentHint": {
+    "description": "वर्तमान पासवर्ड फ़ील्ड में उदाहरण पाठ",
+    "context": "editpassword_page"
+  },
+  "editPasswordNewLabel": "नया पासवर्ड",
+  "@editPasswordNewLabel": {
+    "description": "नए पासवर्ड फ़ील्ड के लिए लेबल",
+    "context": "editpassword_page"
+  },
+  "editPasswordNewHint": "अपना नया पासवर्ड दर्ज करें",
+  "@editPasswordNewHint": {
+    "description": "नए पासवर्ड फ़ील्ड में उदाहरण पाठ",
+    "context": "editpassword_page"
+  },
+  "editPasswordConfirmLabel": "नए पासवर्ड की पुष्टि करें",
+  "@editPasswordConfirmLabel": {
+    "description": "नए पासवर्ड फ़ील्ड की पुष्टि करने के लिए लेबल",
+    "context": "editpassword_page"
+  },
+  "editPasswordConfirmHint": "अपने नए पासवर्ड की पुष्टि करें",
+  "@editPasswordConfirmHint": {
+    "description": "उदाहरण के पाठ की पुष्टि नए पासवर्ड फ़ील्ड में",
+    "context": "editpassword_page"
+  },
+  "editPasswordButtonSave": "पासवर्ड बदलें",
+  "@editPasswordButtonSave": {
+    "description": "पासवर्ड परिवर्तन की पुष्टि करने के लिए बटन के लिए पाठ",
+    "context": "editpassword_page"
+  },
+  "editPasswordStrengthIndicatorLabel": "पासवर्ड की मजबूती",
+  "@editPasswordStrengthIndicatorLabel": {
+    "description": "पासवर्ड शक्ति संकेतक के बगल में प्रदर्शित लेबल",
+    "context": "indicator_password_strength_component"
+  },
+  "editPasswordStrengthIndicatorLabelWeak": "कमज़ोर",
+  "@editPasswordStrengthIndicatorLabelWeak": {
+    "description": "कमजोर पासवर्ड की ताकत के लिए लेबल",
+    "context": "indicator_password_strength_component"
+  },
+  "editPasswordStrengthIndicatorLabelMedium": "मध्यम",
+  "@editPasswordStrengthIndicatorLabelMedium": {
+    "description": "मध्यम पासवर्ड की ताकत के लिए लेबल",
+    "context": "indicator_password_strength_component"
+  },
+  "editPasswordStrengthIndicatorLabelStrong": "मज़बूत",
+  "@editPasswordStrengthIndicatorLabelStrong": {
+    "description": "मजबूत पासवर्ड शक्ति के लिए लेबल",
+    "context": "indicator_password_strength_component"
+  },
+  "selectLanguageTitle": "अपनी भाषा का चयन करें",
+  "@selectLanguageTitle": {
+    "description": "भाषा चयन पृष्ठ का शीर्षक",
+    "context": "selectlanguage_page"
+  },
+  "selectLanguageTitleDesc": "आप किसी भी समय भाषा बदल सकते हैं",
+  "@selectLanguageTitleDesc": {
+    "description": "भाषा चयन पृष्ठ का विवरण",
+    "context": "selectlanguage_page"
+  },
+  "selectLanguageButtonSave": "भाषा सहेजें",
+  "@selectLanguageButtonSave": {
+    "description": "चयनित भाषा को बचाने के लिए बटन के लिए पाठ",
+    "context": "selectlanguage_page"
+  },
+  "newPostTitleDesc": "अपने चार-पैर वाले दोस्त के बारे में कुछ साझा करें ...",
+  "@newPostTitleDesc": {
+    "description": "नए पोस्ट पेज के लिए विवरण कंटेनर",
+    "context": "newpost_page"
+  },
+  "newPostImageDesc": "यहां अपने आराध्य पिल्ला की एक तस्वीर अपलोड करें",
+  "@newPostImageDesc": {
+    "description": "नए पोस्ट पेज के लिए छवि कंटेनर विवरण",
+    "context": "newpost_page"
+  },
+  "newPostCameraDesc": "कैमरा खोलें",
+  "@newPostCameraDesc": {
+    "description": "नए पोस्ट पेज के लिए कैमरा कंटेनर विवरण",
+    "context": "newpost_page"
+  },
+  "newPostButtonCancel": "रद्द करना",
+  "@newPostButtonCancel": {
+    "description": "नए पोस्ट पेज पर रद्द करें बटन के लिए पाठ",
+    "context": "newpost_page"
+  },
+  "newPostButtonPublish": "प्रकाशित",
+  "@newPostButtonPublish": {
+    "description": "नए पोस्ट पेज पर प्रकाशित बटन के लिए पाठ",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderTitle": "Woof!अनुस्मारक",
+  "@newPostButtonDialogReminderTitle": {
+    "description": "पोस्ट रिमाइंडर अलर्ट बटन का शीर्षक",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderDesc": "कृपया सुनिश्चित करें कि आपके द्वारा साझा की गई छवियां केवल कुत्तों से संबंधित हैं।\n\nइस डॉगी सोशल नेटवर्क पाव्सोम को रखने में हमारी मदद करने के लिए धन्यवाद!",
+  "@newPostButtonDialogReminderDesc": {
+    "description": "पोस्ट रिमाइंडर अलर्ट बटन का विवरण",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderButtonConfirm": "समझ गया",
+  "@newPostButtonDialogReminderButtonConfirm": {
+    "description": "पोस्ट रिमाइंडर अलर्ट की पुष्टिकरण बटन के लिए पाठ",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderConfirmExitTitle": "पुष्टीकरण",
+  "@newPostButtonDialogReminderConfirmExitTitle": {
+    "description": "निकास पुष्टि अलर्ट का शीर्षक",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderConfirmExitTitleDesc": "क्या आपको बाहर निकलना है?",
+  "@newPostButtonDialogReminderConfirmExitTitleDesc": {
+    "description": "निकास पुष्टि अलर्ट का विवरण",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderConfirmExitYes": "हाँ",
+  "@newPostButtonDialogReminderConfirmExitYes": {
+    "description": "निकास पुष्टि अलर्ट के लिए पाठ",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderConfirmExitNo": "नहीं",
+  "@newPostButtonDialogReminderConfirmExitNo": {
+    "description": "निकास पुष्टि अलर्ट के लिए पाठ",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogConfirmTitle": "पुष्टीकरण",
+  "@newPostButtonDialogConfirmTitle": {
+    "description": "पोस्ट पुष्टिकरण बटन का शीर्षक",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogConfirmTitleDesc": "क्या आप फोटो प्रकाशित करना चाहते हैं?",
+  "@newPostButtonDialogConfirmTitleDesc": {
+    "description": "पोस्ट पुष्टिकरण बटन का विवरण",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogConfirmButtonCancel": "नहीं",
+  "@newPostButtonDialogConfirmButtonCancel": {
+    "description": "पोस्ट पुष्टिकरण अलर्ट के रद्द बटन के लिए पाठ",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogConfirmButtonPublish": "डाक",
+  "@newPostButtonDialogConfirmButtonPublish": {
+    "description": "पोस्ट पुष्टिकरण अलर्ट के प्रकाशित बटन के लिए पाठ",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogPublishedTitle": "Woof, प्रकाशित!",
+  "@newPostButtonDialogPublishedTitle": {
+    "description": "सफल पोस्ट बटन का शीर्षक",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogPublishedTitleDesc": "अपने प्यारे दोस्त बस\nप्रसिद्ध हो गया",
+  "@newPostButtonDialogPublishedTitleDesc": {
+    "description": "सफल पोस्ट बटन का विवरण",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogPublishedReturn": "पीछे",
+  "@newPostButtonDialogPublishedReturn": {
+    "description": "प्रकाशन के बाद वापसी बटन के लिए पाठ",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogErrorTitle": "उफ़ ... कुछ गायब है",
+  "@newPostButtonDialogErrorTitle": {
+    "description": "पोस्ट त्रुटि बटन का शीर्षक",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogErrorTitleDesc": "लाल रंग में फ़ील्ड की जाँच करें\nजारी रखने के लिए",
+  "@newPostButtonDialogErrorTitleDesc": {
+    "description": "पोस्ट त्रुटि बटन का विवरण",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogErrorReturn": "आओ इसे करें",
+  "@newPostButtonDialogErrorReturn": {
+    "description": "एक त्रुटि के बाद रिटर्न बटन के लिए पाठ",
+    "context": "newpost_page"
+  },
+  "lateralMenuProfileTitle": "मेरी प्रोफाइल",
+  "@lateralMenuProfileTitle": {
+    "description": "पार्श्व मेनू में प्रोफ़ाइल बटन शीर्षक",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuProfileTitleDesc": "मेरे प्रोफ़ाइल पर जाओ",
+  "@lateralMenuProfileTitleDesc": {
+    "description": "पार्श्व मेनू में प्रोफ़ाइल बटन का विवरण",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuProfileLogOutTitleDesc": "अपनी प्रोफ़ाइल देखने के लिए लॉग इन करें",
+  "@lateralMenuProfileLogOutTitleDesc": {
+    "description": "पार्श्व मेनू में डिस्कनेक्ट किए गए प्रोफ़ाइल बटन का विवरण",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuPetsTitle": "पालतू जानवर",
+  "@lateralMenuPetsTitle": {
+    "description": "पार्श्व मेनू में पालतू जानवर बटन शीर्षक",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuPetsTitleDesc": "अपने पालतू जानवरों को देखें या जोड़ें",
+  "@lateralMenuPetsTitleDesc": {
+    "description": "पार्श्व मेनू में पालतू जानवरों के बटन का विवरण",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuPetsLogOutTitleDesc": "अपने पालतू जानवरों को देखने या जोड़ने के लिए लॉग इन करें",
+  "@lateralMenuPetsLogOutTitleDesc": {
+    "description": "पार्श्व मेनू में डिस्कनेक्ट किए गए पालतू जानवरों का वर्णन",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuSettingsTitle": "सेटिंग",
+  "@lateralMenuSettingsTitle": {
+    "description": "पार्श्व मेनू में सेटिंग्स बटन शीर्षक",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuSettingsTitleDesc": "सेटिंग्स पर जाएं",
+  "@lateralMenuSettingsTitleDesc": {
+    "description": "पार्श्व मेनू में सेटिंग्स बटन का विवरण",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuLogOut": "लॉग आउट",
+  "@lateralMenuLogOut": {
+    "description": "पार्श्व मेनू में लॉग आउट बटन का पाठ",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuLogIn": "लॉग इन करें",
+  "@lateralMenuLogIn": {
+    "description": "पार्श्व मेनू में बटन में लॉग का पाठ",
+    "context": "lateralmenu_component"
+  }
+}

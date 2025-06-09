@@ -151,18 +151,22 @@ class Provideridioma with ChangeNotifier {
 
   // Mapear los codigos de los paises al idioma que corresponda
   String _mapearPaisAIdioma(String codigoPais) {
-    switch (codigoPais.toUpperCase()) {
-      case 'GB': case 'US': case 'AU': case 'CA': return 'en';
-      case 'FR': return 'fr';
-      case 'DE': return 'de';
-      case 'IT': return 'it';
-      case 'PT': case 'BR': return 'pt';
-      case 'RU': return 'ru';
-      case 'CN': return 'zh';
-      case 'ES': case 'MX': case 'AR': case 'CO': return 'es';
-      default: return 'es';
-    }
+  switch (codigoPais.toUpperCase()) {
+    case 'GB': case 'US': case 'AU': case 'CA': return 'en';
+    case 'FR': return 'fr';
+    case 'DE': return 'de';
+    case 'IT': return 'it';
+    case 'PT': case 'BR': return 'pt';
+    case 'RU': return 'ru';
+    case 'CN': return 'zh';
+    case 'JP': return 'ja';
+    case 'IN': return 'hi';
+    case 'SA': case 'EG': case 'AE': case 'MA': return 'ar';
+    case 'ES': case 'MX': case 'AR': case 'CO': return 'es';
+    default: return 'es';
   }
+}
+
 
   // Método para forzar nueva detección
   Future<void> redetectarIdioma() async {

@@ -1,0 +1,508 @@
+{
+  "@@locale": "pt",
+  "profileTitle": "Perfil",
+  "@profileTitle": {
+    "description": "Título da página de perfil",
+    "context": "profile_page"
+  },
+  "editProfile": "Editar perfil",
+  "@editProfile": {
+    "description": "Botão para editar o perfil",
+    "context": "profile_page"
+  },
+  "recentPosts": "Postagens recentes",
+  "@recentPosts": {
+    "description": "Texto para ver postagens recentes",
+    "context": "profile_page"
+  },
+  "noPublication": "Sem postagens ainda.",
+  "@noPublication": {
+    "description": "Texto indicando que não há postagens",
+    "context": "profile_page"
+  },
+  "editProfileTitle": "Editar perfil",
+  "@editProfileTitle": {
+    "description": "Título da página de edição do perfil",
+    "context": "profile_edit"
+  },
+  "save": "Salvar",
+  "@save": {
+    "description": "Salvar",
+    "context": "profile_edit"
+  },
+  "name": "Nome",
+  "@name": {
+    "description": "Nome",
+    "context": "profile_edit"
+  },
+  "description": "Descrição",
+  "@description": {
+    "description": "Descrição",
+    "context": "profile_edit"
+  },
+  "saveChanges": "Salvar alterações",
+  "@saveChanges": {
+    "description": "Salvar alterações",
+    "context": "profile_edit"
+  },
+  "editProfileFront": "Selecione a imagem da capa",
+  "@editProfileFront": {
+    "description": "Selecione a imagem da capa",
+    "context": "profile_edit"
+  },
+  "editProfileProfile": "Selecione a imagem do perfil",
+  "@editProfileProfile": {
+    "description": "Selecione a imagem do perfil",
+    "context": "profile_edit"
+  },
+  "editProfileGallery": "Galeria",
+  "@editProfileGallery": {
+    "description": "Descrição do texto para selecionar na galeria",
+    "context": "profile_edit"
+  },
+  "editProfileCamera": "Câmera",
+  "@editProfileCamera": {
+    "description": "Descrição do texto para selecionar da câmera",
+    "context": "profile_edit"
+  },
+  "editProfileImage": "Imagens padrão",
+  "@editProfileImage": {
+    "description": "Descrição do texto para selecionar imagens padrão",
+    "context": "profile_edit"
+  },
+  "editProfileCancel": "Cancelar",
+  "@editProfileCancel": {
+    "description": "Descrição do texto para cancelar",
+    "context": "profile_edit"
+  },
+  "editProfileNotAvailable": "Nenhuma imagem disponível",
+  "@editProfileNotAvailable": {
+    "description": "Descrição do texto sem imagens disponíveis",
+    "context": "profile_edit"
+  },
+  "configTitle": "Configurações",
+  "@configTitle": {
+    "description": "Título da seção de configurações",
+    "context": "settings_page"
+  },
+  "settingsAccountInformation": "Informações da conta",
+  "@settingsAccountInformation": {
+    "description": "Texto para a seção de informações da conta",
+    "context": "settings_page"
+  },
+  "settingsAccountInformationDesc": "Informações e acesso pessoais",
+  "@settingsAccountInformationDesc": {
+    "description": "Texto para a descrição da seção de informações da conta",
+    "context": "settings_page"
+  },
+  "settingsLanguage": "Linguagem",
+  "@settingsLanguage": {
+    "description": "Texto para a seção de idiomas",
+    "context": "settings_page"
+  },
+  "settingsLanguageDesc": "Alterar a linguagem do aplicativo",
+  "@settingsLanguageDesc": {
+    "description": "Texto para a descrição da seção de idiomas",
+    "context": "settings_page"
+  },
+  "personalizationTitle": "Personalização",
+  "@personalizationTitle": {
+    "description": "Título da seção de personalização",
+    "context": "settings_page"
+  },
+  "settingsDarkMode": "Modo escuro",
+  "@settingsDarkMode": {
+    "description": "Texto para a seção do modo escuro",
+    "context": "settings_page"
+  },
+  "settingsDarkModeDesc": "Altere o tema do aplicativo",
+  "@settingsDarkModeDesc": {
+    "description": "Texto para a descrição da seção do modo escuro",
+    "context": "settings_page"
+  },
+  "notificationTitle": "Notificações",
+  "@notificationTitle": {
+    "description": "Título da seção de notificações",
+    "context": "settings_page"
+  },
+  "settingsNotificationPreferences": "Preferências de notificação",
+  "@settingsNotificationPreferences": {
+    "description": "Texto para a seção Preferências de notificação",
+    "context": "settings_page"
+  },
+  "settingsNotificationPreferencesDesc": "Configure alertas e lembretes",
+  "@settingsNotificationPreferencesDesc": {
+    "description": "Texto para a descrição da seção Preferências de notificação",
+    "context": "settings_page"
+  },
+  "securityTitle": "Privacidade e segurança",
+  "@securityTitle": {
+    "description": "Título da seção de privacidade e segurança",
+    "context": "settings_page"
+  },
+  "settingsPrivacy": "Privacidade da conta",
+  "@settingsPrivacy": {
+    "description": "Texto para a seção de privacidade",
+    "context": "settings_page"
+  },
+  "settingsPrivacyDesc": "Controle quem pode ver sua informação",
+  "@settingsPrivacyDesc": {
+    "description": "Texto para a descrição da seção de privacidade",
+    "context": "settings_page"
+  },
+  "settingsSecurity": "Segurança",
+  "@settingsSecurity": {
+    "description": "Texto para a seção de segurança",
+    "context": "settings_page"
+  },
+  "settingsSecurityDesc": "Proteja sua conta e dados pessoais",
+  "@settingsSecurityDesc": {
+    "description": "Texto para a descrição da seção de segurança",
+    "context": "settings_page"
+  },
+  "settingsLogout": "Log Out",
+  "@settingsLogout": {
+    "description": "Texto para a seção de logout",
+    "context": "settings_page"
+  },
+  "settingsLogoutDesc": "Assine sua conta",
+  "@settingsLogoutDesc": {
+    "description": "Texto para a descrição da seção de logout",
+    "context": "settings_page"
+  },
+  "accountInformationTitle": "Informações da conta",
+  "@accountInformationTitle": {
+    "description": "Título da seção de informações da conta",
+    "context": "accountinformation_page"
+  },
+  "accountInformationTitleDesc": "Gerencie os detalhes da sua conta",
+  "@accountInformationTitleDesc": {
+    "description": "Descrição da seção de informações da conta",
+    "context": "accountinformation_page"
+  },
+  "accountInformationUsername": "Nome de usuário",
+  "@accountInformationUsername": {
+    "description": "Texto para a seção de informações da conta (nome de usuário)",
+    "context": "accountinformation_page"
+  },
+  "accountInformationEmail": "E-mail",
+  "@accountInformationEmail": {
+    "description": "Texto para a seção de informações da conta (email)",
+    "context": "accountinformation_page"
+  },
+  "accountInformationPassword": "Senha",
+  "@accountInformationPassword": {
+    "description": "Texto para a seção de informações da conta (senha)",
+    "context": "accountinformation_page"
+  },
+  "editUsernameTitle": "Atualize seu nome de usuário",
+  "@editUsernameTitle": {
+    "description": "Título da seção de edição de nome de usuário",
+    "context": "editusername_page"
+  },
+  "editUsernameTitleDesc": "Escolha um nome único para a nossa comunidade",
+  "@editUsernameTitleDesc": {
+    "description": "Descrição da seção de edição de nome de usuário",
+    "context": "editusername_page"
+  },
+  "editUsernameName": "Novo nome de usuário",
+  "@editUsernameName": {
+    "description": "Texto para o campo de nome de usuário",
+    "context": "editusername_page"
+  },
+  "editUsernameSave": "Salvar alterações",
+  "@editUsernameSave": {
+    "description": "Texto para o botão Salvar alterações",
+    "context": "editusername_page"
+  },
+  "editUsernameInfoTitle": "Sobre nomes de usuário",
+  "@editUsernameInfoTitle": {
+    "description": "Título do link e modal com informações sobre nomes de usuário",
+    "context": "editusername_page"
+  },
+  "editUsernameInfoBody": "Seu nome de usuário é sua identidade no PetLink.Recomendações:\n\n• Use algo memorável\n• Inclua o nome do seu animal de estimação\n• Evite caracteres especiais\n• Mantenha -o apropriado\n• Mínimo de 5 caracteres\n• Sem espaços",
+  "@editUsernameInfoBody": {
+    "description": "Texto informativo dentro do modal explicando recomendações para escolher um nome de usuário",
+    "context": "editusername_page"
+  },
+  "editEmailTitle": "Atualize seu e -mail",
+  "@editEmailTitle": {
+    "description": "Título principal na tela de edição de e -mail",
+    "context": "editemail_page"
+  },
+  "editEmailTitleDesc": "Digite seu e -mail atual e o novo email para atualizar",
+  "@editEmailTitleDesc": {
+    "description": "Legenda explicativa na tela de edição de email",
+    "context": "editemail_page"
+  },
+  "editEmailCurrentLabel": "Email atual",
+  "@editEmailCurrentLabel": {
+    "description": "Etiqueta para o campo de e -mail atual",
+    "context": "editemail_page"
+  },
+  "editEmailNewLabel": "Novo email",
+  "@editEmailNewLabel": {
+    "description": "Etiqueta para o novo campo de e -mail",
+    "context": "editemail_page"
+  },
+  "editEmailNewHint": "por exemplo, user@example.com",
+  "@editEmailNewHint": {
+    "description": "Exemplo de texto para o novo email",
+    "context": "editemail_page"
+  },
+  "editEmailConfirmLabel": "Confirme novo email",
+  "@editEmailConfirmLabel": {
+    "description": "Etiqueta para o campo de e -mail confirmado",
+    "context": "editemail_page"
+  },
+  "editEmailConfirmHint": "Confirme seu novo e -mail",
+  "@editEmailConfirmHint": {
+    "description": "Exemplo de texto no campo de confirmação de e -mail",
+    "context": "editemail_page"
+  },
+  "editEmailButtonSave": "Atualize email",
+  "@editEmailButtonSave": {
+    "description": "Texto para o botão que salva mudanças de e -mail",
+    "context": "editemail_page"
+  },
+  "editPasswordTitle": "Alterar a senha",
+  "@editPasswordTitle": {
+    "description": "Título principal da tela de alteração de senha",
+    "context": "editpassword_page"
+  },
+  "editPasswordTitleDesc": "Digite sua senha atual e a nova senha que você deseja usar",
+  "@editPasswordTitleDesc": {
+    "description": "Legenda explicativa na tela de alteração de senha",
+    "context": "editpassword_page"
+  },
+  "editPasswordCurrentLabel": "Senha atual",
+  "@editPasswordCurrentLabel": {
+    "description": "Etiqueta para o campo de senha atual",
+    "context": "editpassword_page"
+  },
+  "editPasswordCurrentHint": "Digite sua senha atual",
+  "@editPasswordCurrentHint": {
+    "description": "Exemplo de texto no campo de senha atual",
+    "context": "editpassword_page"
+  },
+  "editPasswordNewLabel": "Nova Senha",
+  "@editPasswordNewLabel": {
+    "description": "Etiqueta para o novo campo de senha",
+    "context": "editpassword_page"
+  },
+  "editPasswordNewHint": "Digite sua nova senha",
+  "@editPasswordNewHint": {
+    "description": "Exemplo de texto no novo campo de senha",
+    "context": "editpassword_page"
+  },
+  "editPasswordConfirmLabel": "Confirme nova senha",
+  "@editPasswordConfirmLabel": {
+    "description": "Etiqueta para o campo de senha confirmar novo",
+    "context": "editpassword_page"
+  },
+  "editPasswordConfirmHint": "Confirme sua nova senha",
+  "@editPasswordConfirmHint": {
+    "description": "Exemplo de texto no campo Confirmar Novo Senha",
+    "context": "editpassword_page"
+  },
+  "editPasswordButtonSave": "ALTERAR A SENHA",
+  "@editPasswordButtonSave": {
+    "description": "Texto para o botão para confirmar a alteração da senha",
+    "context": "editpassword_page"
+  },
+  "editPasswordStrengthIndicatorLabel": "Força de senha",
+  "@editPasswordStrengthIndicatorLabel": {
+    "description": "Etiqueta exibida ao lado do indicador de força de senha",
+    "context": "indicator_password_strength_component"
+  },
+  "editPasswordStrengthIndicatorLabelWeak": "Fraco",
+  "@editPasswordStrengthIndicatorLabelWeak": {
+    "description": "Etiqueta para força de senha fraca",
+    "context": "indicator_password_strength_component"
+  },
+  "editPasswordStrengthIndicatorLabelMedium": "Médio",
+  "@editPasswordStrengthIndicatorLabelMedium": {
+    "description": "Etiqueta para força de senha média",
+    "context": "indicator_password_strength_component"
+  },
+  "editPasswordStrengthIndicatorLabelStrong": "Forte",
+  "@editPasswordStrengthIndicatorLabelStrong": {
+    "description": "Rótulo para forte força de senha",
+    "context": "indicator_password_strength_component"
+  },
+  "selectLanguageTitle": "Selecione seu idioma",
+  "@selectLanguageTitle": {
+    "description": "Título da página de seleção de idiomas",
+    "context": "selectlanguage_page"
+  },
+  "selectLanguageTitleDesc": "Você pode mudar o idioma a qualquer momento",
+  "@selectLanguageTitleDesc": {
+    "description": "Descrição da página de seleção de idiomas",
+    "context": "selectlanguage_page"
+  },
+  "selectLanguageButtonSave": "Salvar linguagem",
+  "@selectLanguageButtonSave": {
+    "description": "Texto para o botão para salvar o idioma selecionado",
+    "context": "selectlanguage_page"
+  },
+  "newPostTitleDesc": "Compartilhe algo sobre seu amigo de quatro patas ...",
+  "@newPostTitleDesc": {
+    "description": "Descrição Contêiner para a nova página de postagem",
+    "context": "newpost_page"
+  },
+  "newPostImageDesc": "Carregue uma foto do seu filhote adorável aqui",
+  "@newPostImageDesc": {
+    "description": "Descrição do contêiner de imagem para a nova página de postagem",
+    "context": "newpost_page"
+  },
+  "newPostCameraDesc": "Abra a câmera",
+  "@newPostCameraDesc": {
+    "description": "Descrição do contêiner da câmera para a nova página de postagem",
+    "context": "newpost_page"
+  },
+  "newPostButtonCancel": "CANCELAR",
+  "@newPostButtonCancel": {
+    "description": "Texto para o botão Cancelar na nova página de postagem",
+    "context": "newpost_page"
+  },
+  "newPostButtonPublish": "PUBLICAR",
+  "@newPostButtonPublish": {
+    "description": "Texto para o botão de publicação na nova página de postagem",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderTitle": "Woof!Lembrete",
+  "@newPostButtonDialogReminderTitle": {
+    "description": "Título do botão de alerta de lembrete post",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderDesc": "Certifique -se de que as imagens que você compartilha estejam relacionadas apenas a cães.\n\nObrigado por nos ajudar a manter esta rede social de cachorrinho pawsome!",
+  "@newPostButtonDialogReminderDesc": {
+    "description": "Descrição do botão de alerta de lembrete post",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderButtonConfirm": "Entendi",
+  "@newPostButtonDialogReminderButtonConfirm": {
+    "description": "Texto para o botão de confirmação do alerta de lembrete postal",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderConfirmExitTitle": "Confirmação",
+  "@newPostButtonDialogReminderConfirmExitTitle": {
+    "description": "Título do alerta de confirmação de saída",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderConfirmExitTitleDesc": "Você quer sair?",
+  "@newPostButtonDialogReminderConfirmExitTitleDesc": {
+    "description": "Descrição do alerta de confirmação de saída",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderConfirmExitYes": "Sim",
+  "@newPostButtonDialogReminderConfirmExitYes": {
+    "description": "Texto para o alerta de confirmação de saída",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderConfirmExitNo": "Não",
+  "@newPostButtonDialogReminderConfirmExitNo": {
+    "description": "Texto para o alerta de confirmação de saída",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogConfirmTitle": "Confirmação",
+  "@newPostButtonDialogConfirmTitle": {
+    "description": "Título do botão de confirmação de postagem",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogConfirmTitleDesc": "Você quer publicar a foto?",
+  "@newPostButtonDialogConfirmTitleDesc": {
+    "description": "Descrição do botão de confirmação de postagem",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogConfirmButtonCancel": "Não",
+  "@newPostButtonDialogConfirmButtonCancel": {
+    "description": "Texto para o botão de cancelamento do alerta de confirmação de postagem",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogConfirmButtonPublish": "Publicar",
+  "@newPostButtonDialogConfirmButtonPublish": {
+    "description": "Texto para o botão de publicação do alerta de confirmação de postagem",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogPublishedTitle": "Woof, publicado!",
+  "@newPostButtonDialogPublishedTitle": {
+    "description": "Título do botão de postagem bem -sucedido",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogPublishedTitleDesc": "Seu amigo peludo apenas\ntornou -se famoso",
+  "@newPostButtonDialogPublishedTitleDesc": {
+    "description": "Descrição do botão de postagem bem -sucedido",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogPublishedReturn": "Voltar",
+  "@newPostButtonDialogPublishedReturn": {
+    "description": "Texto para o botão de retorno após publicar",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogErrorTitle": "Opa ... algo está faltando",
+  "@newPostButtonDialogErrorTitle": {
+    "description": "Título do botão de erro de postagem",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogErrorTitleDesc": "Verifique os campos em vermelho\npara continuar",
+  "@newPostButtonDialogErrorTitleDesc": {
+    "description": "Descrição do botão de erro de postagem",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogErrorReturn": "Vamos fazer isso",
+  "@newPostButtonDialogErrorReturn": {
+    "description": "Texto para o botão de retorno após um erro",
+    "context": "newpost_page"
+  },
+  "lateralMenuProfileTitle": "Meu perfil",
+  "@lateralMenuProfileTitle": {
+    "description": "Título do botão de perfil no menu lateral",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuProfileTitleDesc": "Vá para o meu perfil",
+  "@lateralMenuProfileTitleDesc": {
+    "description": "Descrição do botão de perfil no menu lateral",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuProfileLogOutTitleDesc": "Faça login para ver seu perfil",
+  "@lateralMenuProfileLogOutTitleDesc": {
+    "description": "Descrição do botão de perfil desconectado no menu lateral",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuPetsTitle": "Animais de estimação",
+  "@lateralMenuPetsTitle": {
+    "description": "Título do botão de animais de estimação no menu lateral",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuPetsTitleDesc": "Veja ou adicione seus animais de estimação",
+  "@lateralMenuPetsTitleDesc": {
+    "description": "Descrição do botão Pets no menu lateral",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuPetsLogOutTitleDesc": "Faça login para visualizar ou adicionar seus animais de estimação",
+  "@lateralMenuPetsLogOutTitleDesc": {
+    "description": "Descrição do botão Pets desconectados no menu lateral",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuSettingsTitle": "CONFIGURAÇÕES",
+  "@lateralMenuSettingsTitle": {
+    "description": "Configurações do título do botão no menu lateral",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuSettingsTitleDesc": "Vá para configurações",
+  "@lateralMenuSettingsTitleDesc": {
+    "description": "Descrição do botão de configurações no menu lateral",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuLogOut": "Log Out",
+  "@lateralMenuLogOut": {
+    "description": "Texto do botão Log Out no menu lateral",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuLogIn": "CONECTE-SE",
+  "@lateralMenuLogIn": {
+    "description": "Texto do botão de login no menu lateral",
+    "context": "lateralmenu_component"
+  }
+}

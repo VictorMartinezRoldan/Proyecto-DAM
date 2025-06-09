@@ -74,8 +74,15 @@ class MyApp extends StatelessWidget {
             Locale('fr'),
             Locale('de'),
             Locale('it'),
+            Locale('pt'),
+            Locale('ru'),
+            Locale('zh'),
+            Locale('ja'),
+            Locale('nl'),
+            Locale('hi'),
+            Locale('ar'),
           ],
-          
+
           // Opcional: Para manejar mejor el redimensionado de texto
           builder: (context, child) {
             return MediaQuery(

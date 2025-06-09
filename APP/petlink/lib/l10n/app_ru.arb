@@ -1,0 +1,508 @@
+{
+  "@@locale": "ru",
+  "profileTitle": "Профиль",
+  "@profileTitle": {
+    "description": "Название страницы профиля",
+    "context": "profile_page"
+  },
+  "editProfile": "Редактировать профиль",
+  "@editProfile": {
+    "description": "Кнопка для редактирования профиля",
+    "context": "profile_page"
+  },
+  "recentPosts": "Последние посты",
+  "@recentPosts": {
+    "description": "Текст для просмотра недавних сообщений",
+    "context": "profile_page"
+  },
+  "noPublication": "Пока нет постов.",
+  "@noPublication": {
+    "description": "Текст, указывающий, что нет сообщений",
+    "context": "profile_page"
+  },
+  "editProfileTitle": "Редактировать профиль",
+  "@editProfileTitle": {
+    "description": "Название страницы редактирования профиля",
+    "context": "profile_edit"
+  },
+  "save": "Сохранять",
+  "@save": {
+    "description": "Сохранять",
+    "context": "profile_edit"
+  },
+  "name": "Имя",
+  "@name": {
+    "description": "Имя",
+    "context": "profile_edit"
+  },
+  "description": "Описание",
+  "@description": {
+    "description": "Описание",
+    "context": "profile_edit"
+  },
+  "saveChanges": "Сохранить изменения",
+  "@saveChanges": {
+    "description": "Сохранить изменения",
+    "context": "profile_edit"
+  },
+  "editProfileFront": "Выберите изображение обложки",
+  "@editProfileFront": {
+    "description": "Выберите изображение обложки",
+    "context": "profile_edit"
+  },
+  "editProfileProfile": "Выберите изображение профиля",
+  "@editProfileProfile": {
+    "description": "Выберите изображение профиля",
+    "context": "profile_edit"
+  },
+  "editProfileGallery": "Галерея",
+  "@editProfileGallery": {
+    "description": "Текст описание для выбора из галереи",
+    "context": "profile_edit"
+  },
+  "editProfileCamera": "Камера",
+  "@editProfileCamera": {
+    "description": "Текстовое описание для выбора из камеры",
+    "context": "profile_edit"
+  },
+  "editProfileImage": "Изображения по умолчанию",
+  "@editProfileImage": {
+    "description": "Текст описание для выбора изображений по умолчанию",
+    "context": "profile_edit"
+  },
+  "editProfileCancel": "Отмена",
+  "@editProfileCancel": {
+    "description": "Текстовое описание для отмены",
+    "context": "profile_edit"
+  },
+  "editProfileNotAvailable": "Нет изображений",
+  "@editProfileNotAvailable": {
+    "description": "Текстовое описание без доступных изображений",
+    "context": "profile_edit"
+  },
+  "configTitle": "Настройки",
+  "@configTitle": {
+    "description": "Название раздела настроек",
+    "context": "settings_page"
+  },
+  "settingsAccountInformation": "Информация об учетной записи",
+  "@settingsAccountInformation": {
+    "description": "Текст для разделения информации об учетной записи",
+    "context": "settings_page"
+  },
+  "settingsAccountInformationDesc": "Личная информация и доступ",
+  "@settingsAccountInformationDesc": {
+    "description": "Текст для описания раздела информации об учетной записи",
+    "context": "settings_page"
+  },
+  "settingsLanguage": "Язык",
+  "@settingsLanguage": {
+    "description": "Текст для языкового раздела",
+    "context": "settings_page"
+  },
+  "settingsLanguageDesc": "Изменить язык приложения",
+  "@settingsLanguageDesc": {
+    "description": "Текст для описания языкового раздела",
+    "context": "settings_page"
+  },
+  "personalizationTitle": "Персонализация",
+  "@personalizationTitle": {
+    "description": "Название секции персонализации",
+    "context": "settings_page"
+  },
+  "settingsDarkMode": "Темный режим",
+  "@settingsDarkMode": {
+    "description": "Текст для раздела темного режима",
+    "context": "settings_page"
+  },
+  "settingsDarkModeDesc": "Изменить тему приложения",
+  "@settingsDarkModeDesc": {
+    "description": "Текст для описания раздела темного режима",
+    "context": "settings_page"
+  },
+  "notificationTitle": "Уведомления",
+  "@notificationTitle": {
+    "description": "Название раздела уведомлений",
+    "context": "settings_page"
+  },
+  "settingsNotificationPreferences": "Уведомления предпочтения",
+  "@settingsNotificationPreferences": {
+    "description": "Текст для раздела уведомлений",
+    "context": "settings_page"
+  },
+  "settingsNotificationPreferencesDesc": "Настройка оповещений и напоминаний",
+  "@settingsNotificationPreferencesDesc": {
+    "description": "Текст для описания раздела уведомлений",
+    "context": "settings_page"
+  },
+  "securityTitle": "Конфиденциальность и безопасность",
+  "@securityTitle": {
+    "description": "Название раздела конфиденциальности и безопасности",
+    "context": "settings_page"
+  },
+  "settingsPrivacy": "Конфиденциальность учетной записи",
+  "@settingsPrivacy": {
+    "description": "Текст для раздела конфиденциальности",
+    "context": "settings_page"
+  },
+  "settingsPrivacyDesc": "Контроль, кто может увидеть вашу информацию",
+  "@settingsPrivacyDesc": {
+    "description": "Текст для описания раздела конфиденциальности",
+    "context": "settings_page"
+  },
+  "settingsSecurity": "Безопасность",
+  "@settingsSecurity": {
+    "description": "Текст для секции безопасности",
+    "context": "settings_page"
+  },
+  "settingsSecurityDesc": "Защитите свою учетную запись и личные данные",
+  "@settingsSecurityDesc": {
+    "description": "Текст для описания раздела безопасности",
+    "context": "settings_page"
+  },
+  "settingsLogout": "Выходите из строя",
+  "@settingsLogout": {
+    "description": "Текст для разделения входа в систему",
+    "context": "settings_page"
+  },
+  "settingsLogoutDesc": "Выйдите из своего аккаунта",
+  "@settingsLogoutDesc": {
+    "description": "Текст для описания раздела входа в систему",
+    "context": "settings_page"
+  },
+  "accountInformationTitle": "Информация об учетной записи",
+  "@accountInformationTitle": {
+    "description": "Название раздела информации об учетной записи",
+    "context": "accountinformation_page"
+  },
+  "accountInformationTitleDesc": "Управляйте данными вашей учетной записи",
+  "@accountInformationTitleDesc": {
+    "description": "Описание раздела информации об учетной записи",
+    "context": "accountinformation_page"
+  },
+  "accountInformationUsername": "Имя пользователя",
+  "@accountInformationUsername": {
+    "description": "Текст для разделения информации об учетной записи (имя пользователя)",
+    "context": "accountinformation_page"
+  },
+  "accountInformationEmail": "Электронная почта",
+  "@accountInformationEmail": {
+    "description": "Текст для разделения информации об учетной записи (электронная почта)",
+    "context": "accountinformation_page"
+  },
+  "accountInformationPassword": "Пароль",
+  "@accountInformationPassword": {
+    "description": "Текст для разделения информации об учетной записи (пароль)",
+    "context": "accountinformation_page"
+  },
+  "editUsernameTitle": "Обновите свое имя пользователя",
+  "@editUsernameTitle": {
+    "description": "Название разделения редактирования имени пользователя",
+    "context": "editusername_page"
+  },
+  "editUsernameTitleDesc": "Выберите уникальное имя для нашего сообщества",
+  "@editUsernameTitleDesc": {
+    "description": "Описание разделения редактирования имени пользователя",
+    "context": "editusername_page"
+  },
+  "editUsernameName": "Новое имя пользователя",
+  "@editUsernameName": {
+    "description": "Текст для поля имени пользователя",
+    "context": "editusername_page"
+  },
+  "editUsernameSave": "Сохранить изменения",
+  "@editUsernameSave": {
+    "description": "Текст для кнопки «Сохранить изменения»",
+    "context": "editusername_page"
+  },
+  "editUsernameInfoTitle": "О именах пользователей",
+  "@editUsernameInfoTitle": {
+    "description": "Название ссылки и модала с информацией о именах пользователей",
+    "context": "editusername_page"
+  },
+  "editUsernameInfoBody": "Ваше имя пользователя - ваша личность на Petlink.Рекомендации:\n\n• Используйте что -нибудь незабываемое\n• Включите имя вашего питомца\n• Избегайте специальных персонажей\n• Держите это в целом\n• Минимум 5 символов\n• Нет мест",
+  "@editUsernameInfoBody": {
+    "description": "Информативный текст внутри модального объяснения рекомендаций по выбору имени пользователя",
+    "context": "editusername_page"
+  },
+  "editEmailTitle": "Обновите свою электронную почту",
+  "@editEmailTitle": {
+    "description": "Основное название на экране редактирования электронной почты",
+    "context": "editemail_page"
+  },
+  "editEmailTitleDesc": "Введите свое текущее электронное письмо и новое электронное письмо, чтобы обновить",
+  "@editEmailTitleDesc": {
+    "description": "Объяснительный подзаголовок на экране редактирования электронной почты",
+    "context": "editemail_page"
+  },
+  "editEmailCurrentLabel": "Текущее письмо",
+  "@editEmailCurrentLabel": {
+    "description": "Этикетка для текущего поля электронной почты",
+    "context": "editemail_page"
+  },
+  "editEmailNewLabel": "Новое электронное письмо",
+  "@editEmailNewLabel": {
+    "description": "Этикетка для нового поля электронной почты",
+    "context": "editemail_page"
+  },
+  "editEmailNewHint": "Например, user@example.com",
+  "@editEmailNewHint": {
+    "description": "Пример текста для новой электронной почты",
+    "context": "editemail_page"
+  },
+  "editEmailConfirmLabel": "Подтвердите новое письмо",
+  "@editEmailConfirmLabel": {
+    "description": "Этикетка для подтверждения нового поля электронной почты",
+    "context": "editemail_page"
+  },
+  "editEmailConfirmHint": "Подтвердите свое новое электронное письмо",
+  "@editEmailConfirmHint": {
+    "description": "Пример текста в поле подтверждения электронной почты",
+    "context": "editemail_page"
+  },
+  "editEmailButtonSave": "Обновить электронную почту",
+  "@editEmailButtonSave": {
+    "description": "Текст для кнопки, которая сохраняет изменения электронной почты",
+    "context": "editemail_page"
+  },
+  "editPasswordTitle": "Изменить пароль",
+  "@editPasswordTitle": {
+    "description": "Основное название экрана изменения пароля",
+    "context": "editpassword_page"
+  },
+  "editPasswordTitleDesc": "Введите свой текущий пароль и новый пароль, который вы хотите использовать",
+  "@editPasswordTitleDesc": {
+    "description": "Объяснительный подзаголок на экране изменения пароля",
+    "context": "editpassword_page"
+  },
+  "editPasswordCurrentLabel": "Текущий пароль",
+  "@editPasswordCurrentLabel": {
+    "description": "Метка для текущего поля пароля",
+    "context": "editpassword_page"
+  },
+  "editPasswordCurrentHint": "Введите свой текущий пароль",
+  "@editPasswordCurrentHint": {
+    "description": "Пример текст в текущем поле пароля",
+    "context": "editpassword_page"
+  },
+  "editPasswordNewLabel": "Новый пароль",
+  "@editPasswordNewLabel": {
+    "description": "Метка для нового поля пароля",
+    "context": "editpassword_page"
+  },
+  "editPasswordNewHint": "Введите свой новый пароль",
+  "@editPasswordNewHint": {
+    "description": "Пример текста в новом поле пароля",
+    "context": "editpassword_page"
+  },
+  "editPasswordConfirmLabel": "Подтвердите новый пароль",
+  "@editPasswordConfirmLabel": {
+    "description": "Метка для подтверждения нового поля пароля",
+    "context": "editpassword_page"
+  },
+  "editPasswordConfirmHint": "Подтвердите свой новый пароль",
+  "@editPasswordConfirmHint": {
+    "description": "Пример текста в поле «Подтвердить новый пароль»",
+    "context": "editpassword_page"
+  },
+  "editPasswordButtonSave": "ИЗМЕНИТЬ ПАРОЛЬ",
+  "@editPasswordButtonSave": {
+    "description": "Текст для кнопки, чтобы подтвердить изменение пароля",
+    "context": "editpassword_page"
+  },
+  "editPasswordStrengthIndicatorLabel": "Сила пароля",
+  "@editPasswordStrengthIndicatorLabel": {
+    "description": "Метка отображается рядом с индикатором силы пароля",
+    "context": "indicator_password_strength_component"
+  },
+  "editPasswordStrengthIndicatorLabelWeak": "Слабый",
+  "@editPasswordStrengthIndicatorLabelWeak": {
+    "description": "Метка для слабой силы пароля",
+    "context": "indicator_password_strength_component"
+  },
+  "editPasswordStrengthIndicatorLabelMedium": "Середина",
+  "@editPasswordStrengthIndicatorLabelMedium": {
+    "description": "Метка для среднего пароля",
+    "context": "indicator_password_strength_component"
+  },
+  "editPasswordStrengthIndicatorLabelStrong": "Сильный",
+  "@editPasswordStrengthIndicatorLabelStrong": {
+    "description": "Метка для сильной силы пароля",
+    "context": "indicator_password_strength_component"
+  },
+  "selectLanguageTitle": "Выберите свой язык",
+  "@selectLanguageTitle": {
+    "description": "Название страницы выбора языка",
+    "context": "selectlanguage_page"
+  },
+  "selectLanguageTitleDesc": "Вы можете изменить язык в любое время",
+  "@selectLanguageTitleDesc": {
+    "description": "Описание страницы выбора языка",
+    "context": "selectlanguage_page"
+  },
+  "selectLanguageButtonSave": "Сохранить язык",
+  "@selectLanguageButtonSave": {
+    "description": "Текст для кнопки, чтобы сохранить выбранное язык",
+    "context": "selectlanguage_page"
+  },
+  "newPostTitleDesc": "Поделитесь чем-нибудь о своем четвероногих друга ...",
+  "@newPostTitleDesc": {
+    "description": "Описание контейнер для новой страницы сообщения",
+    "context": "newpost_page"
+  },
+  "newPostImageDesc": "Загрузите фото своего очаровательного щенка здесь",
+  "@newPostImageDesc": {
+    "description": "Описание контейнера изображения для новой страницы пост",
+    "context": "newpost_page"
+  },
+  "newPostCameraDesc": "Откройте камеру",
+  "@newPostCameraDesc": {
+    "description": "Описание контейнера для камеры для новой страницы сообщения",
+    "context": "newpost_page"
+  },
+  "newPostButtonCancel": "ОТМЕНА",
+  "@newPostButtonCancel": {
+    "description": "Текст для кнопки «Отмена» на новой странице сообщения",
+    "context": "newpost_page"
+  },
+  "newPostButtonPublish": "ПУБЛИКОВАТЬ",
+  "@newPostButtonPublish": {
+    "description": "Текст для кнопки «Опубликовать» на новой странице сообщений",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderTitle": "Буд!Напоминание",
+  "@newPostButtonDialogReminderTitle": {
+    "description": "Название кнопки «Напоминание о напоминании»",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderDesc": "Пожалуйста, убедитесь, что изображения, которыми вы делитесь, связаны только с собаками.\n\nСпасибо, что помогли нам сохранить эту собачьную социальную сеть!",
+  "@newPostButtonDialogReminderDesc": {
+    "description": "Описание кнопки «Напоминание о напоминании»",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderButtonConfirm": "Понятно",
+  "@newPostButtonDialogReminderButtonConfirm": {
+    "description": "Текст для кнопки подтверждения оповещения о напоминании о поведении",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderConfirmExitTitle": "Подтверждение",
+  "@newPostButtonDialogReminderConfirmExitTitle": {
+    "description": "Название предупреждения о подтверждении выхода",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderConfirmExitTitleDesc": "Вы хотите выйти?",
+  "@newPostButtonDialogReminderConfirmExitTitleDesc": {
+    "description": "Описание предупреждения о подтверждении выхода",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderConfirmExitYes": "Да",
+  "@newPostButtonDialogReminderConfirmExitYes": {
+    "description": "Текст для предупреждения о подтверждении выхода",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderConfirmExitNo": "Нет",
+  "@newPostButtonDialogReminderConfirmExitNo": {
+    "description": "Текст для предупреждения о подтверждении выхода",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogConfirmTitle": "Подтверждение",
+  "@newPostButtonDialogConfirmTitle": {
+    "description": "Заголовок кнопки подтверждения сообщения",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogConfirmTitleDesc": "Вы хотите опубликовать фото?",
+  "@newPostButtonDialogConfirmTitleDesc": {
+    "description": "Описание кнопки подтверждения сообщения",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogConfirmButtonCancel": "Нет",
+  "@newPostButtonDialogConfirmButtonCancel": {
+    "description": "Текст для кнопки отмены оповещения о подтверждении сообщения",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogConfirmButtonPublish": "Почта",
+  "@newPostButtonDialogConfirmButtonPublish": {
+    "description": "Текст для кнопки «Опубликовать оповещение о подтверждении»",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogPublishedTitle": "Уфи, опубликовано!",
+  "@newPostButtonDialogPublishedTitle": {
+    "description": "Название успешной кнопки сообщения",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogPublishedTitleDesc": "Твой пушистый друг просто\nстал известен",
+  "@newPostButtonDialogPublishedTitleDesc": {
+    "description": "Описание кнопки «Успешная публикация»",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogPublishedReturn": "Назад",
+  "@newPostButtonDialogPublishedReturn": {
+    "description": "Текст для кнопки возврата после публикации",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogErrorTitle": "Ой ... чего -то не хватает",
+  "@newPostButtonDialogErrorTitle": {
+    "description": "Заголовок кнопки ошибки сообщения",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogErrorTitleDesc": "Проверьте поля красным\nпродолжить",
+  "@newPostButtonDialogErrorTitleDesc": {
+    "description": "Описание кнопки ошибки Post",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogErrorReturn": "Пусть сделает это",
+  "@newPostButtonDialogErrorReturn": {
+    "description": "Текст для кнопки возврата после ошибки",
+    "context": "newpost_page"
+  },
+  "lateralMenuProfileTitle": "Мой профиль",
+  "@lateralMenuProfileTitle": {
+    "description": "Название кнопки профиля в боковом меню",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuProfileTitleDesc": "Перейти к моему профилю",
+  "@lateralMenuProfileTitleDesc": {
+    "description": "Описание кнопки профиля в боковом меню",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuProfileLogOutTitleDesc": "Войдите в систему, чтобы просмотреть свой профиль",
+  "@lateralMenuProfileLogOutTitleDesc": {
+    "description": "Описание кнопки отключенного профиля в боковом меню",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuPetsTitle": "Домашние животные",
+  "@lateralMenuPetsTitle": {
+    "description": "Название кнопки домашних животных в боковом меню",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuPetsTitleDesc": "Просмотреть или добавить своих домашних животных",
+  "@lateralMenuPetsTitleDesc": {
+    "description": "Описание кнопки домашних животных в боковом меню",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuPetsLogOutTitleDesc": "Войдите в систему, чтобы просмотреть или добавить своих домашних животных",
+  "@lateralMenuPetsLogOutTitleDesc": {
+    "description": "Описание кнопки отключенных домашних животных в боковом меню",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuSettingsTitle": "НАСТРОЙКИ",
+  "@lateralMenuSettingsTitle": {
+    "description": "Название кнопки «Настройки» в боковом меню",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuSettingsTitleDesc": "Перейти к настройкам",
+  "@lateralMenuSettingsTitleDesc": {
+    "description": "Описание кнопки «Настройки» в боковом меню",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuLogOut": "Выходите из строя",
+  "@lateralMenuLogOut": {
+    "description": "Текст кнопки «Вход» в боковом меню",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuLogIn": "АВТОРИЗОВАТЬСЯ",
+  "@lateralMenuLogIn": {
+    "description": "Текст кнопки «Вход» в боковом меню",
+    "context": "lateralmenu_component"
+  }
+}

@@ -1,0 +1,508 @@
+{
+  "@@locale": "zh",
+  "profileTitle": "轮廓",
+  "@profileTitle": {
+    "description": "个人资料页面的标题",
+    "context": "profile_page"
+  },
+  "editProfile": "编辑个人资料",
+  "@editProfile": {
+    "description": "按钮编辑个人资料",
+    "context": "profile_page"
+  },
+  "recentPosts": "最近的帖子",
+  "@recentPosts": {
+    "description": "文字要查看最近的帖子",
+    "context": "profile_page"
+  },
+  "noPublication": "还没有帖子。",
+  "@noPublication": {
+    "description": "表明没有帖子的文字",
+    "context": "profile_page"
+  },
+  "editProfileTitle": "编辑个人资料",
+  "@editProfileTitle": {
+    "description": "个人资料编辑页面的标题",
+    "context": "profile_edit"
+  },
+  "save": "节省",
+  "@save": {
+    "description": "节省",
+    "context": "profile_edit"
+  },
+  "name": "姓名",
+  "@name": {
+    "description": "姓名",
+    "context": "profile_edit"
+  },
+  "description": "描述",
+  "@description": {
+    "description": "描述",
+    "context": "profile_edit"
+  },
+  "saveChanges": "保存更改",
+  "@saveChanges": {
+    "description": "保存更改",
+    "context": "profile_edit"
+  },
+  "editProfileFront": "选择封面图像",
+  "@editProfileFront": {
+    "description": "选择封面图像",
+    "context": "profile_edit"
+  },
+  "editProfileProfile": "选择个人资料图像",
+  "@editProfileProfile": {
+    "description": "选择个人资料图像",
+    "context": "profile_edit"
+  },
+  "editProfileGallery": "画廊",
+  "@editProfileGallery": {
+    "description": "从画廊中选择的文本说明",
+    "context": "profile_edit"
+  },
+  "editProfileCamera": "相机",
+  "@editProfileCamera": {
+    "description": "从相机中选择的文本说明",
+    "context": "profile_edit"
+  },
+  "editProfileImage": "默认图像",
+  "@editProfileImage": {
+    "description": "选择默认图像的文本说明",
+    "context": "profile_edit"
+  },
+  "editProfileCancel": "取消",
+  "@editProfileCancel": {
+    "description": "取消的文本说明",
+    "context": "profile_edit"
+  },
+  "editProfileNotAvailable": "没有可用的图像",
+  "@editProfileNotAvailable": {
+    "description": "文本说明没有可用的图像",
+    "context": "profile_edit"
+  },
+  "configTitle": "设置",
+  "@configTitle": {
+    "description": "设置部分的标题",
+    "context": "settings_page"
+  },
+  "settingsAccountInformation": "帐户信息",
+  "@settingsAccountInformation": {
+    "description": "帐户信息部分的文字",
+    "context": "settings_page"
+  },
+  "settingsAccountInformationDesc": "个人信息和访问",
+  "@settingsAccountInformationDesc": {
+    "description": "帐户信息部分描述的文字",
+    "context": "settings_page"
+  },
+  "settingsLanguage": "语言",
+  "@settingsLanguage": {
+    "description": "语言部分的文字",
+    "context": "settings_page"
+  },
+  "settingsLanguageDesc": "更改应用程序的语言",
+  "@settingsLanguageDesc": {
+    "description": "语言部分描述的文字",
+    "context": "settings_page"
+  },
+  "personalizationTitle": "个性化",
+  "@personalizationTitle": {
+    "description": "个性化部分",
+    "context": "settings_page"
+  },
+  "settingsDarkMode": "黑暗模式",
+  "@settingsDarkMode": {
+    "description": "黑暗模式部分的文字",
+    "context": "settings_page"
+  },
+  "settingsDarkModeDesc": "更改应用程序的主题",
+  "@settingsDarkModeDesc": {
+    "description": "暗示部分描述的文字",
+    "context": "settings_page"
+  },
+  "notificationTitle": "通知",
+  "@notificationTitle": {
+    "description": "通知部分的标题",
+    "context": "settings_page"
+  },
+  "settingsNotificationPreferences": "通知偏好",
+  "@settingsNotificationPreferences": {
+    "description": "通知首选项部分的文字",
+    "context": "settings_page"
+  },
+  "settingsNotificationPreferencesDesc": "配置警报和提醒",
+  "@settingsNotificationPreferencesDesc": {
+    "description": "通知首选项部分的描述的文字",
+    "context": "settings_page"
+  },
+  "securityTitle": "隐私和安全",
+  "@securityTitle": {
+    "description": "隐私和安全部分的标题",
+    "context": "settings_page"
+  },
+  "settingsPrivacy": "帐户隐私",
+  "@settingsPrivacy": {
+    "description": "隐私部分的文字",
+    "context": "settings_page"
+  },
+  "settingsPrivacyDesc": "控制谁可以看到您的信息",
+  "@settingsPrivacyDesc": {
+    "description": "隐私部分描述的文字",
+    "context": "settings_page"
+  },
+  "settingsSecurity": "安全",
+  "@settingsSecurity": {
+    "description": "安全部分的文字",
+    "context": "settings_page"
+  },
+  "settingsSecurityDesc": "保护您的帐户和个人数据",
+  "@settingsSecurityDesc": {
+    "description": "安全部分描述的文字",
+    "context": "settings_page"
+  },
+  "settingsLogout": "注销",
+  "@settingsLogout": {
+    "description": "登录部分的文字",
+    "context": "settings_page"
+  },
+  "settingsLogoutDesc": "登录您的帐户",
+  "@settingsLogoutDesc": {
+    "description": "登录部分的描述的文字",
+    "context": "settings_page"
+  },
+  "accountInformationTitle": "帐户信息",
+  "@accountInformationTitle": {
+    "description": "帐户信息部分的标题",
+    "context": "accountinformation_page"
+  },
+  "accountInformationTitleDesc": "管理您的帐户详细信息",
+  "@accountInformationTitleDesc": {
+    "description": "帐户信息部分的描述",
+    "context": "accountinformation_page"
+  },
+  "accountInformationUsername": "用户名",
+  "@accountInformationUsername": {
+    "description": "帐户信息部分的文字（用户名）",
+    "context": "accountinformation_page"
+  },
+  "accountInformationEmail": "电子邮件",
+  "@accountInformationEmail": {
+    "description": "帐户信息部分的文字（电子邮件）",
+    "context": "accountinformation_page"
+  },
+  "accountInformationPassword": "密码",
+  "@accountInformationPassword": {
+    "description": "帐户信息部分的文字（密码）",
+    "context": "accountinformation_page"
+  },
+  "editUsernameTitle": "更新您的用户名",
+  "@editUsernameTitle": {
+    "description": "用户名编辑部分的标题",
+    "context": "editusername_page"
+  },
+  "editUsernameTitleDesc": "为我们的社区选择一个唯一的名称",
+  "@editUsernameTitleDesc": {
+    "description": "用户名编辑部分的描述",
+    "context": "editusername_page"
+  },
+  "editUsernameName": "新用户名",
+  "@editUsernameName": {
+    "description": "用户名字段的文字",
+    "context": "editusername_page"
+  },
+  "editUsernameSave": "保存更改",
+  "@editUsernameSave": {
+    "description": "保存更改按钮的文字",
+    "context": "editusername_page"
+  },
+  "editUsernameInfoTitle": "关于用户名",
+  "@editUsernameInfoTitle": {
+    "description": "链接和模式的标题以及有关用户名的信息",
+    "context": "editusername_page"
+  },
+  "editUsernameInfoBody": "您的用户名是您在petlink上的身份。建议：\n\n•使用令人难忘的东西\n•包括宠物的名字\n•避免特殊字符\n•保持适当\n•至少5个字符\n•没有空间",
+  "@editUsernameInfoBody": {
+    "description": "模态内的信息文本解释了选择用户名的建议",
+    "context": "editusername_page"
+  },
+  "editEmailTitle": "更新您的电子邮件",
+  "@editEmailTitle": {
+    "description": "电子邮件编辑屏幕上的主要标题",
+    "context": "editemail_page"
+  },
+  "editEmailTitleDesc": "输入您当前的电子邮件和新电子邮件以更新",
+  "@editEmailTitleDesc": {
+    "description": "电子邮件编辑屏幕上的解释字幕",
+    "context": "editemail_page"
+  },
+  "editEmailCurrentLabel": "当前电子邮件",
+  "@editEmailCurrentLabel": {
+    "description": "当前电子邮件字段的标签",
+    "context": "editemail_page"
+  },
+  "editEmailNewLabel": "新电子邮件",
+  "@editEmailNewLabel": {
+    "description": "新电子邮件字段的标签",
+    "context": "editemail_page"
+  },
+  "editEmailNewHint": "例如，user@example.com",
+  "@editEmailNewHint": {
+    "description": "新电子邮件的示例文本",
+    "context": "editemail_page"
+  },
+  "editEmailConfirmLabel": "确认新电子邮件",
+  "@editEmailConfirmLabel": {
+    "description": "确认新电子邮件字段的标签",
+    "context": "editemail_page"
+  },
+  "editEmailConfirmHint": "确认您的新电子邮件",
+  "@editEmailConfirmHint": {
+    "description": "电子邮件确认字段中的示例文本",
+    "context": "editemail_page"
+  },
+  "editEmailButtonSave": "更新电子邮件",
+  "@editEmailButtonSave": {
+    "description": "保存电子邮件更改的按钮文字",
+    "context": "editemail_page"
+  },
+  "editPasswordTitle": "更改密码",
+  "@editPasswordTitle": {
+    "description": "密码更改屏幕的主要标题",
+    "context": "editpassword_page"
+  },
+  "editPasswordTitleDesc": "输入您当前的密码和您要使用的新密码",
+  "@editPasswordTitleDesc": {
+    "description": "密码更改屏幕上的解释字幕",
+    "context": "editpassword_page"
+  },
+  "editPasswordCurrentLabel": "当前密码",
+  "@editPasswordCurrentLabel": {
+    "description": "当前密码字段的标签",
+    "context": "editpassword_page"
+  },
+  "editPasswordCurrentHint": "输入当前密码",
+  "@editPasswordCurrentHint": {
+    "description": "当前密码字段中的示例文本",
+    "context": "editpassword_page"
+  },
+  "editPasswordNewLabel": "新密码",
+  "@editPasswordNewLabel": {
+    "description": "新密码字段的标签",
+    "context": "editpassword_page"
+  },
+  "editPasswordNewHint": "输入新密码",
+  "@editPasswordNewHint": {
+    "description": "新密码字段中的示例文本",
+    "context": "editpassword_page"
+  },
+  "editPasswordConfirmLabel": "确认新密码",
+  "@editPasswordConfirmLabel": {
+    "description": "确认新密码字段的标签",
+    "context": "editpassword_page"
+  },
+  "editPasswordConfirmHint": "确认您的新密码",
+  "@editPasswordConfirmHint": {
+    "description": "确认新密码字段中的示例文本",
+    "context": "editpassword_page"
+  },
+  "editPasswordButtonSave": "更改密码",
+  "@editPasswordButtonSave": {
+    "description": "该按钮的文本以确认密码更改",
+    "context": "editpassword_page"
+  },
+  "editPasswordStrengthIndicatorLabel": "密码强度",
+  "@editPasswordStrengthIndicatorLabel": {
+    "description": "标签显示在密码强度指示器旁边",
+    "context": "indicator_password_strength_component"
+  },
+  "editPasswordStrengthIndicatorLabelWeak": "虚弱的",
+  "@editPasswordStrengthIndicatorLabelWeak": {
+    "description": "标签弱密码强度",
+    "context": "indicator_password_strength_component"
+  },
+  "editPasswordStrengthIndicatorLabelMedium": "中等的",
+  "@editPasswordStrengthIndicatorLabelMedium": {
+    "description": "标签中等密码强度",
+    "context": "indicator_password_strength_component"
+  },
+  "editPasswordStrengthIndicatorLabelStrong": "强的",
+  "@editPasswordStrengthIndicatorLabelStrong": {
+    "description": "标签强密码强度",
+    "context": "indicator_password_strength_component"
+  },
+  "selectLanguageTitle": "选择您的语言",
+  "@selectLanguageTitle": {
+    "description": "语言选择页的标题",
+    "context": "selectlanguage_page"
+  },
+  "selectLanguageTitleDesc": "您可以随时更改语言",
+  "@selectLanguageTitleDesc": {
+    "description": "语言选择页面的描述",
+    "context": "selectlanguage_page"
+  },
+  "selectLanguageButtonSave": "保存语言",
+  "@selectLanguageButtonSave": {
+    "description": "该按钮的文字以保存所选语言",
+    "context": "selectlanguage_page"
+  },
+  "newPostTitleDesc": "分享有关您四足朋友的一些信息...",
+  "@newPostTitleDesc": {
+    "description": "描述新帖子页面的容器",
+    "context": "newpost_page"
+  },
+  "newPostImageDesc": "在此处上传您可爱的小狗的照片",
+  "@newPostImageDesc": {
+    "description": "新帖子页面的图像容器描述",
+    "context": "newpost_page"
+  },
+  "newPostCameraDesc": "打开相机",
+  "@newPostCameraDesc": {
+    "description": "新帖子页面的相机容器描述",
+    "context": "newpost_page"
+  },
+  "newPostButtonCancel": "取消",
+  "@newPostButtonCancel": {
+    "description": "新帖子页面上的取消按钮的文字",
+    "context": "newpost_page"
+  },
+  "newPostButtonPublish": "发布",
+  "@newPostButtonPublish": {
+    "description": "新帖子页面上发布按钮的文字",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderTitle": "纬！提醒",
+  "@newPostButtonDialogReminderTitle": {
+    "description": "邮政提醒警报按钮的标题",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderDesc": "请确保您共享的图像仅与狗有关。\n\n感谢您帮助我们保持这个狗狗社交网络的爪子！",
+  "@newPostButtonDialogReminderDesc": {
+    "description": "邮政提醒警报按钮的描述",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderButtonConfirm": "知道了",
+  "@newPostButtonDialogReminderButtonConfirm": {
+    "description": "邮政提醒警报的确认按钮的文本",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderConfirmExitTitle": "确认",
+  "@newPostButtonDialogReminderConfirmExitTitle": {
+    "description": "出口确认警报的标题",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderConfirmExitTitleDesc": "你想退出吗？",
+  "@newPostButtonDialogReminderConfirmExitTitleDesc": {
+    "description": "出口确认警报的描述",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderConfirmExitYes": "是的",
+  "@newPostButtonDialogReminderConfirmExitYes": {
+    "description": "出口确认警报的文本",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogReminderConfirmExitNo": "不",
+  "@newPostButtonDialogReminderConfirmExitNo": {
+    "description": "出口确认警报的文本",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogConfirmTitle": "确认",
+  "@newPostButtonDialogConfirmTitle": {
+    "description": "帖子确认按钮的标题",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogConfirmTitleDesc": "您想发布照片吗？",
+  "@newPostButtonDialogConfirmTitleDesc": {
+    "description": "邮政确认按钮的描述",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogConfirmButtonCancel": "不",
+  "@newPostButtonDialogConfirmButtonCancel": {
+    "description": "文本以取消帖子确认警报的取消按钮",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogConfirmButtonPublish": "邮政",
+  "@newPostButtonDialogConfirmButtonPublish": {
+    "description": "文本的发布按钮的帖子确认警报",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogPublishedTitle": "Woof，出版！",
+  "@newPostButtonDialogPublishedTitle": {
+    "description": "成功发布按钮的标题",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogPublishedTitleDesc": "你的毛茸茸的朋友只是\n成名",
+  "@newPostButtonDialogPublishedTitleDesc": {
+    "description": "成功发布按钮的描述",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogPublishedReturn": "后退",
+  "@newPostButtonDialogPublishedReturn": {
+    "description": "发布后返回按钮的文本",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogErrorTitle": "糟糕...缺少东西",
+  "@newPostButtonDialogErrorTitle": {
+    "description": "邮政错误按钮的标题",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogErrorTitleDesc": "检查红色的字段\n继续",
+  "@newPostButtonDialogErrorTitleDesc": {
+    "description": "邮政错误按钮的描述",
+    "context": "newpost_page"
+  },
+  "newPostButtonDialogErrorReturn": "让我们这样做",
+  "@newPostButtonDialogErrorReturn": {
+    "description": "错误后返回按钮的文本",
+    "context": "newpost_page"
+  },
+  "lateralMenuProfileTitle": "我的个人资料",
+  "@lateralMenuProfileTitle": {
+    "description": "侧面菜单中的配置文件按钮标题",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuProfileTitleDesc": "转到我的个人资料",
+  "@lateralMenuProfileTitleDesc": {
+    "description": "横向菜单中的配置文件按钮的描述",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuProfileLogOutTitleDesc": "登录以查看您的个人资料",
+  "@lateralMenuProfileLogOutTitleDesc": {
+    "description": "横向菜单中断开的配置文件按钮的描述",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuPetsTitle": "宠物",
+  "@lateralMenuPetsTitle": {
+    "description": "宠物按钮标题在横向菜单中",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuPetsTitleDesc": "查看或添加宠物",
+  "@lateralMenuPetsTitleDesc": {
+    "description": "侧菜单中的宠物按钮的描述",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuPetsLogOutTitleDesc": "登录以查看或添加宠物",
+  "@lateralMenuPetsLogOutTitleDesc": {
+    "description": "横向菜单中断开的宠物按钮的描述",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuSettingsTitle": "设置",
+  "@lateralMenuSettingsTitle": {
+    "description": "横向菜单中的设置按钮标题",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuSettingsTitleDesc": "转到设置",
+  "@lateralMenuSettingsTitleDesc": {
+    "description": "横向菜单中的设置按钮的描述",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuLogOut": "注销",
+  "@lateralMenuLogOut": {
+    "description": "横向菜单中的登录按钮的文字",
+    "context": "lateralmenu_component"
+  },
+  "lateralMenuLogIn": "登录",
+  "@lateralMenuLogIn": {
+    "description": "横向菜单中的登录按钮的文字",
+    "context": "lateralmenu_component"
+  }
+}
