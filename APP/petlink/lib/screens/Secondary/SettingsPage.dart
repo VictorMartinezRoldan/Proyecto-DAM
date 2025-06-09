@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:petlink/components/dialogoDisponibilidadFutura.dart';
-import 'package:petlink/components/mensajeSnackbar.dart';
-import 'package:petlink/screens/PagesManager.dart';
 import 'package:petlink/screens/Secondary/LoginPage.dart';
 import 'package:petlink/screens/Secondary/Settings/SelectLanguagePage.dart';
 import 'package:petlink/themes/customColors.dart';
@@ -32,7 +30,6 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     bool isLogin = SupabaseAuthService.isLogin.value;
     late var custom =Theme.of(context,).extension<CustomColors>()!; // EXTRAER TEMA DE LA APP CUSTOM
-    late var tema = Theme.of(context).colorScheme; // EXTRAER TEMA DE LA APP
 
     return Scaffold(
       appBar: AppBar(

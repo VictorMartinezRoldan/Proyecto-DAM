@@ -68,6 +68,7 @@ class _FavouriteBreedsPageState extends State<FavouriteBreedsPage> {
       });
     } catch (e) {
       setState(() => cargando = false);
+       if (!mounted) return;
       MensajeSnackbar.mostrarError(context, 'Error al cargar favoritos');
     }
   }
@@ -89,6 +90,7 @@ class _FavouriteBreedsPageState extends State<FavouriteBreedsPage> {
       setState(
         () => razasFavoritas.removeWhere((b) => b['nombre'] == nombreRaza),
       );
+       if (!mounted) return;
       MensajeSnackbar.mostrarInfo(context,'$nombreRaza se ha eliminado de favoritos');
     } catch (e) {
       MensajeSnackbar.mostrarError(context, 'Error al eliminar de favoritos');
@@ -202,7 +204,7 @@ class _FavouriteBreedsPageState extends State<FavouriteBreedsPage> {
             width: 120,
             height: 120,
             decoration: BoxDecoration(
-              color: tema.surfaceVariant.withValues(alpha: 0.3),
+              color: tema.surfaceContainerHighest.withValues(alpha: 0.3),
               shape: BoxShape.circle,
             ),
             // Icono corazon vacio

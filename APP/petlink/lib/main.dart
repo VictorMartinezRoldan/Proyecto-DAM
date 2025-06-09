@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:petlink/screens/StartingAnimation.dart';
 import 'package:petlink/services/supabase_auth.dart';
 import 'package:petlink/themes/themeProvider.dart';
@@ -14,6 +15,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+  
   await Supabase.initialize(
     url: 'https://umiaxicevvhttszjoavu.supabase.co',
     anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVtaWF4aWNldnZodHRzempvYXZ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDMwMjUwNTgsImV4cCI6MjA1ODYwMTA1OH0.S27RkemMF0qexe-7dEYTLxnrXbyblXGSZ8fg2x0Hb1I',

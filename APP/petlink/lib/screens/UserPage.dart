@@ -9,7 +9,6 @@ import 'package:petlink/screens/Secondary/RegisterPage.dart';
 import 'package:petlink/screens/Secondary/SettingsPage.dart';
 import 'package:petlink/themes/customColors.dart';
 import 'package:petlink/services/supabase_auth.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -528,7 +527,7 @@ class _UserPageState extends State<UserPage> {
                             });
                           }
                           : () async {
-                            print('Navegar a publicación: ${userPosts[index]}');
+                            // Navegar a publicación
                           },
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8),

@@ -94,6 +94,7 @@ class _EditPasswordPageState extends State<EditPasswordPage> {
         UserAttributes(password: _controladorNuevoPassword.text),
       );
       
+      if (!mounted) return;
       MensajeSnackbar.mostrarExito(context, 'Contraseña actualizada correctamente');
       
       _controladorPasswordActual.clear();
@@ -233,7 +234,7 @@ class _EditPasswordPageState extends State<EditPasswordPage> {
               ),
               hintText: AppLocalizations.of(context)!.editPasswordCurrentHint,
               hintStyle: TextStyle(
-                color: tema.onBackground.withValues(alpha: 0.4),
+                color: tema.onSurface.withValues(alpha: 0.4),
               ),
             ),
           ),
@@ -297,7 +298,7 @@ class _EditPasswordPageState extends State<EditPasswordPage> {
               ),
               hintText: AppLocalizations.of(context)!.editPasswordNewHint,
               hintStyle: TextStyle(
-                color: tema.onBackground.withValues(alpha: 0.4),
+                color: tema.onSurface.withValues(alpha: 0.4),
               ),
             ),
           ),
@@ -363,7 +364,7 @@ class _EditPasswordPageState extends State<EditPasswordPage> {
               ),
               hintText: AppLocalizations.of(context)!.editPasswordConfirmHint,
               hintStyle: TextStyle(
-                color: tema.onBackground.withValues(alpha: 0.4),
+                color: tema.onSurface.withValues(alpha: 0.4),
               ),
             ),
           ),

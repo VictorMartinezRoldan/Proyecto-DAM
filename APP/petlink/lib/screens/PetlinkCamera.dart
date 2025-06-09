@@ -233,7 +233,7 @@ class _PetlinkCameraState extends State<PetlinkCamera> {
               final respuesta = await Supabase.instance.client
                 .from('perros')
                 .select('*')
-                .eq('raza', '${lineas[clase].trim()}'); 
+                .eq('raza', lineas[clase].trim()); 
               if (respuesta.isEmpty) {
                 throw Exception("Raza no encontrada");
               } 
@@ -504,7 +504,7 @@ class _PetlinkCameraState extends State<PetlinkCamera> {
                     try {
                       imagen = await _cameraController.takePicture();
                     } catch (e){
-                      print("ERROR DE CÁMARA");
+                      // ERROR DE CÁMARA
                     }
                     if (imagen != null) {
                       setState(() {

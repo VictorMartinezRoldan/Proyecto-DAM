@@ -1,6 +1,7 @@
 // BIBLIOTECAS
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:petlink/components/mensajeSnackbar.dart';
 import 'package:petlink/components/menuLateral.dart';
 import 'package:petlink/screens/Secondary/LoginPage.dart';
 import 'package:provider/provider.dart';
@@ -84,7 +85,10 @@ class _ComentariosPageState extends State<ComentariosPage> with SingleTickerProv
       });
       try {
         await Comentario.eliminarRespuesta(context, comentario.comentario.idRespuesta!);
-      } catch (e) {}
+      } catch (e) {
+        if (!mounted) return;
+        MensajeSnackbar.mostrarError(context, "No se a podido eliminar el comentario.");
+      }
     } else {
       setState(() {
         comentarios.remove(comentario);

@@ -264,7 +264,6 @@ class Comentario {
 
   // Metodo para dar like a una respuesta dentro de la BD
   static Future<void> darLikeRespuesta(BuildContext context, int idRespuesta) async {
-    print("RESPUESTA");
     final supaClient = Supabase.instance.client;
     try {
       await supaClient.from('likes_respuestas')

@@ -23,11 +23,11 @@ void procesoRazas(List<dynamic> args) async {
     final newHeight = (original.height * scale).round();
     final resized = img.copyResize(original, width: newWidth, height: newHeight);
 
-    // Calcular padding (relleno) para centrar la imagen en un cuadrado
+    // 2. Calcular padding (relleno) para centrar la imagen en un cuadrado
     final dx = ((inputSize - newWidth) / 2).round();
     final dy = ((inputSize - newHeight) / 2).round();
 
-    // Crear imagen cuadrada (letterboxed) y rellenar de negro
+    // 3. Crear imagen cuadrada (letterboxed) y rellenar de negro
     final square = img.Image(width: inputSize, height: inputSize);
     for (int y = 0; y < square.height; y++) {
       for (int x = 0; x < square.width; x++) {
@@ -35,7 +35,7 @@ void procesoRazas(List<dynamic> args) async {
       }
     }
 
-    // Insertar imagen redimensionada centrada dentro del cuadrado
+    // 4. Insertar imagen redimensionada centrada dentro del cuadrado
     for (int y = 0; y < resized.height; y++) {
       for (int x = 0; x < resized.width; x++) {
         final pixel = resized.getPixel(x, y);
@@ -43,7 +43,7 @@ void procesoRazas(List<dynamic> args) async {
       }
     }
 
-    // 4. Preparar input [1, 224, 224, 3] normalizado
+    // 5. Preparar input [1, 224, 224, 3] normalizado
     final input = List.generate(
       1,
       (_) => List.generate(
@@ -62,7 +62,7 @@ void procesoRazas(List<dynamic> args) async {
       ),
     );
 
-    // 5. Salida esperada: [1, num_clases]
+    // 6. Salida esperada: [1, num_clases]
     final output = List.generate(1, (_) => List.filled(172, 0.0)); // Cambia 172 si hay más clases
 
     modeloRazas.run(input, output);
@@ -78,8 +78,8 @@ void procesoRazas(List<dynamic> args) async {
       'confidence': maxProb,
     });
 
-  } catch (e, stack) {
-    print("❌ Error en procesoRazas: $e");
+  } catch (e) {
+    // ❌ Error en procesoRazas: $e
     sendPort.send("ERROR");
   }
 }

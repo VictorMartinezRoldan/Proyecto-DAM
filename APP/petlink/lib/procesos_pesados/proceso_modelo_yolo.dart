@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 import 'dart:isolate';
+// ignore: depend_on_referenced_packages
 import 'package:image/image.dart' as img;
 import 'package:tflite_flutter/tflite_flutter.dart';
 
@@ -16,7 +17,6 @@ void procesoYOLO(List<dynamic> args) async {
     // Leer la imagen desde el archivo
     final imageBytes = await File(imagePath).readAsBytes();
     final original = img.decodeImage(imageBytes);
-    print("✅ IMAGEN DECODIFICADA");
     if (original == null) return null;
 
     final originalWidth = original.width;
@@ -79,7 +79,6 @@ void procesoYOLO(List<dynamic> args) async {
 
     // Ejecutar inferencia (Preguntar a la IA)
     modeloYolo.run(input, output);
-    print("✅ PREDICIÓN DE YOLOv5 OBTENIDA");
     
     const threshold = 0.6; // Porcentaje mínimo para considerarlo perro
 
@@ -93,18 +92,11 @@ void procesoYOLO(List<dynamic> args) async {
       // Si se detecta un objeto con suficiente confianza y es un perro (clases 15–17)
       // PERRO = 16, pongo 15 y 17 también porque a veces las confunde y realmente es un perro.
       if (conf * maxProb > threshold && (classIndex > 14 && classIndex < 18)) {
-        print("✅ PERRO DETECTADO");
-        print("${row[0]} --> ${row[1]} --> ${row[2]} --> ${row[3]}");
         // Extraer coordenadas normalizadas y convertirlas a píxeles
         double x = row[0] * inputSize;
         double y = row[1] * inputSize;
         double w = row[2] * inputSize;
         double h = row[3] * inputSize;
-
-        print("X --> $x");
-        print("Y --> $y");
-        print("W --> $w");
-        print("H --> $h");
 
         // Reescalar coordenadas al tamaño original de la imagen
         final centerX = ((x - dx) / scale);
@@ -130,7 +122,6 @@ void procesoYOLO(List<dynamic> args) async {
         // Ajustar el tamaño del rectángulo
         w = w + 80;
         h = h + 50;
-        print("✅ COORDENADAS AJUSTADAS");
 
         // Crear mapa con coordenadas finales
         Map<String,double> coordenadas = {
@@ -140,7 +131,7 @@ void procesoYOLO(List<dynamic> args) async {
           "h" : h
         };
         // ----------------
-        print("✅ RESPUESTA OBTENIDA Y PREPARADA");
+        // ✅ RESPUESTA OBTENIDA Y PREPARADA
         sendPort.send(coordenadas) ; // DEVUELVE LAS COORDENADAS
         return;
         // ----------------
@@ -148,11 +139,11 @@ void procesoYOLO(List<dynamic> args) async {
         // Se detectó la clase, pero sin suficiente confianza
       }
     }
-    print('🚫 No se detectó perro.');
+    // 🚫 No se detectó perro.
     sendPort.send("PERRO_NO_ENCONTRADO") ; // DEVUELVE QUE EL PERRO NO A SIDO ENCONTRADO
   } catch (e, problema) {
     // ERROR DE EJECUCIÓN
-    print("🔴⚠️ ERROR PROCESO SEPARADO DE YOLO: $e // $problema");
+    // 🔴⚠️ ERROR PROCESO SEPARADO DE YOLO: $e // $problema
     sendPort.send("ERROR") ; // DEVUELVE TEXTO "ERROR"
   }
 }

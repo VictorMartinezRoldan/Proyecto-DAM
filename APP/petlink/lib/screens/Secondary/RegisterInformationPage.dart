@@ -75,7 +75,11 @@ class _RegisterInformationPageState extends State<RegisterInformationPage> {
                     ),
               )
               .toList();
-    } catch (e) {}
+    } catch (e) {
+
+      if (!mounted) return;
+      MensajeSnackbar.mostrarError(context, 'Error al cargar las imágenes de portada');
+    }
     setState(() => cargandoImagenesPortada = false);
   }
 
@@ -113,42 +117,6 @@ class _RegisterInformationPageState extends State<RegisterInformationPage> {
           imagenPerfil = File(picked.path);
         }
       });
-    }
-  }
-
-  // Descargar imagen predeterminada y guardarla como archivo temporal (evitamos subir la misma imagen varias veces)
-  Future<void> _seleccionarImagenPredeterminada(
-    String url,
-    bool esPortada,
-  ) async {
-    try {
-      // Crear instancia de httpClient
-      final httpClient = HttpClient();
-      // Hacer solicitud get
-      final request = await httpClient.getUrl(Uri.parse(url));
-      final response = await request.close();
-
-      // Leer los chunks y almacenar los bytes
-      final List<int> bytes = [];
-      await for (var chunk in response) {
-        bytes.addAll(chunk);
-      }
-
-      // Crear directorio temporal para evitar duplicados
-      final tempDir = await Directory.systemTemp.createTemp();
-      final tempFile = File('${tempDir.path}/temp_image.jpg');
-      await tempFile.writeAsBytes(bytes);
-
-      // Actualizar estado del widget
-      setState(() {
-        if (esPortada) {
-          imagenPortada = tempFile;
-        } else {
-          imagenPerfil = tempFile;
-        }
-      });
-    } catch (_) {
-      MensajeSnackbar.mostrarError(context, 'Error al seleccionar la imagen');
     }
   }
 
@@ -238,7 +206,7 @@ class _RegisterInformationPageState extends State<RegisterInformationPage> {
                                           ? [
                                             BoxShadow(
                                               color: custom.colorEspecial
-                                                  .withOpacity(0.3),
+                                                  .withValues(alpha: 0.3),
                                               blurRadius: 8,
                                               spreadRadius: 2,
                                             ),
@@ -339,6 +307,7 @@ class _RegisterInformationPageState extends State<RegisterInformationPage> {
         await SupabaseAuthService().obtenerUsuario();
 
         // Redirigir a la pantalla principal
+        if (!mounted) return;
         Navigator.pushReplacement(context,
           MaterialPageRoute(
             builder:
@@ -403,8 +372,10 @@ class _RegisterInformationPageState extends State<RegisterInformationPage> {
 
     if (error != null) {
       // Quitar el teclado para ver bien los snackbar
+      if (!mounted) return;
       FocusScope.of(context).unfocus();
       await Future.delayed(const Duration(milliseconds: 100));
+      if (!mounted) return;
       MensajeSnackbar.mostrarError(context, error);
       return;
     }

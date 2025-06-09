@@ -138,6 +138,7 @@ class Seguridad {
         )
       );
       if (result == true){
+        if (!context.mounted) return true;
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => LoginPage()),

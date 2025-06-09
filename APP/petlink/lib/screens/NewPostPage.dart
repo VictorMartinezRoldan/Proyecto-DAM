@@ -54,7 +54,7 @@ class _NewPostPageState extends State<NewPostPage> {
         });
       }
     } catch (e) {
-      print('❌ Error al seleccionar imagen: $e');
+      // ❌ Error al seleccionar imagen
     } finally {
       _pickerActivo = false; // libera el bloqueo
     }
@@ -72,6 +72,7 @@ class _NewPostPageState extends State<NewPostPage> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async{
       await Future.delayed(Duration(milliseconds: 500));
+      if (!mounted) return;
       showDialog(
         context: context,
         builder: (context) => DialogoInformacion(
@@ -349,6 +350,7 @@ class _NewPostPageState extends State<NewPostPage> {
                               ),
                             );
                             if (respuesta != null && respuesta == false){
+                              if (!context.mounted) return;
                               Navigator.pop(context);
                             }
                           }, 

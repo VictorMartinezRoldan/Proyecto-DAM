@@ -25,9 +25,12 @@ class TarjetaRazaStyle extends StatefulWidget {
   State<TarjetaRazaStyle> createState() => _TarjetaRazaStyleState();
 }
 
-class _TarjetaRazaStyleState extends State<TarjetaRazaStyle> with TickerProviderStateMixin {
-
-  late var custom =Theme.of(context).extension<CustomColors>()!; // EXTRAER TEMA DE LA APP CUSTOM
+class _TarjetaRazaStyleState extends State<TarjetaRazaStyle>
+    with TickerProviderStateMixin {
+  late var custom =
+      Theme.of(
+        context,
+      ).extension<CustomColors>()!; // EXTRAER TEMA DE LA APP CUSTOM
   late var tema = Theme.of(context).colorScheme; // EXTRAER TEMA DE LA APP
 
   final SupabaseAuthService authService = SupabaseAuthService();
@@ -140,7 +143,8 @@ class _TarjetaRazaStyleState extends State<TarjetaRazaStyle> with TickerProvider
         });
       }
     } catch (e) {
-      print('Error al verificar favorito: $e');
+      if (!mounted) return;
+      MensajeSnackbar.mostrarError(context, 'Error al verificar favorito: $e');
     }
   }
 
@@ -232,6 +236,8 @@ class _TarjetaRazaStyleState extends State<TarjetaRazaStyle> with TickerProvider
           }
         });
       }
+
+      if (!mounted) return;
       MensajeSnackbar.mostrarInfo(context, 'Error al actualizar favoritos');
     }
   }
@@ -318,8 +324,12 @@ class _TarjetaRazaStyleState extends State<TarjetaRazaStyle> with TickerProvider
                                     decoration: BoxDecoration(
                                       gradient: LinearGradient(
                                         colors: [
-                                          tema.primaryContainer.withValues(alpha: 0.2),
-                                          tema.primaryContainer.withValues(alpha: 0.2),
+                                          tema.primaryContainer.withValues(
+                                            alpha: 0.2,
+                                          ),
+                                          tema.primaryContainer.withValues(
+                                            alpha: 0.2,
+                                          ),
                                         ],
                                       ),
                                       borderRadius: BorderRadius.circular(20),

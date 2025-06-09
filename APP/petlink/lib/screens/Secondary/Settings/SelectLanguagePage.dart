@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:petlink/components/mensajeSnackbar.dart';
 import 'package:petlink/components/providerIdioma.dart';
 import 'package:petlink/themes/customColors.dart';
-import 'package:petlink/themes/themeProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -44,7 +43,6 @@ class _SelectLanguagePageState extends State<SelectLanguagePage> {
     // Obtener los datos del idioma seleccionado
     final idioma = _idiomas[_idiomaSeleccionado];
     final nombreIdioma = idioma?['nombre'] ?? _idiomaSeleccionado;
-    final bandera = idioma?['bandera'] ?? '';
 
     MensajeSnackbar.mostrarExito(context, 'Idioma cambiado a: $nombreIdioma');
   }

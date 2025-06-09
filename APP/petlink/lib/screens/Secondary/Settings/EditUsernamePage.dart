@@ -109,6 +109,7 @@ class _EditUsernamePageState extends State<EditUsernamePage> {
         .maybeSingle();
 
     if (existe != null && existe['id'] != idUsuario) {
+      if (!mounted) return;
       MensajeSnackbar.mostrarError(context, 'El nombre de usuario ya está en uso');
       return;
     }
@@ -120,6 +121,7 @@ class _EditUsernamePageState extends State<EditUsernamePage> {
         .eq('id', idUsuario);
 
     await SupabaseAuthService().obtenerUsuario();
+    if (!mounted) return;
     MensajeSnackbar.mostrarExito(context, 'Usuario actualizado');
   } catch (e) {
     MensajeSnackbar.mostrarError(context, 'Error: ${e.toString()}');

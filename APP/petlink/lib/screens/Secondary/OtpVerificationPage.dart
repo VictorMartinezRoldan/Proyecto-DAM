@@ -35,7 +35,7 @@ class OtpVerificationPage extends StatelessWidget {
         MensajeSnackbar.mostrarError(context, 'Código incorrecto.');
       }
     } catch (e) {
-      MensajeSnackbar.mostrarError(context, 'Error al verificar: ${e.toString()}');
+      MensajeSnackbar.mostrarError(context, 'Error al verificar.');
     }
   }
 
@@ -50,7 +50,7 @@ class OtpVerificationPage extends StatelessWidget {
       MensajeSnackbar.mostrarInfo(context, 'Se ha reenviado un nuevo código a tu correo.');
 
     } catch (e) {
-      MensajeSnackbar.mostrarError(context, 'Error al reenviar código: ${e.toString()}');
+      MensajeSnackbar.mostrarError(context, 'Error al reenviar código, espere unos segundos.');
     }
   }
 

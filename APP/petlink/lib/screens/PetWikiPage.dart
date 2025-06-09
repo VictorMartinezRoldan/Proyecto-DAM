@@ -322,8 +322,8 @@ class _PetWikiPageState extends State<PetWikiPage> {
                   },
                 backgroundColor: colorEspecial,
                 elevation: 8,
-                child: const Icon(Icons.favorite, size: 28),
                 tooltip: 'Ver favoritos',
+                child: const Icon(Icons.favorite, size: 28),
               )
               : null,
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,

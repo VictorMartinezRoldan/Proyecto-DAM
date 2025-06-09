@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:petlink/themes/customColors.dart';
-import 'package:petlink/themes/themeProvider.dart';
 
 class CardSettingsStyle extends StatefulWidget {
   final IconData icon;
@@ -11,13 +10,14 @@ class CardSettingsStyle extends StatefulWidget {
   final ValueChanged<bool>? onSwitchChanged;
   final VoidCallback? onTap;
 
-  CardSettingsStyle(
+  const CardSettingsStyle(
     this.icon, 
     this.title, 
     this.subtitle, {
     this.isSwitch = false,
     this.onSwitchChanged,
     this.onTap,
+    super.key
     });
 
   @override

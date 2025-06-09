@@ -5,11 +5,7 @@ class BotonRedesSociales extends StatelessWidget {
   final Widget icon;
   final VoidCallback onTap;
 
-  const BotonRedesSociales({
-    Key? key,
-    required this.icon,
-    required this.onTap,
-  }) : super(key: key);
+  const BotonRedesSociales({required this.icon, required this.onTap, super.key});
 
   @override
   Widget build(BuildContext context) {

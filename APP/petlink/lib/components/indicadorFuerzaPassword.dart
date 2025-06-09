@@ -44,7 +44,7 @@ class IndicadorFuerzaPassword extends StatelessWidget {
   Widget build(BuildContext context) {
     final strength = _evaluarFuerza(password);
     final theme = Theme.of(context);
-    final defaultTextColor = textColor ?? theme.colorScheme.onBackground.withOpacity(0.6);
+    final defaultTextColor = textColor ?? theme.colorScheme.onSurface.withValues(alpha: 0.6);
 
     if (password.isEmpty) return const SizedBox.shrink();
     

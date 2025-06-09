@@ -109,7 +109,7 @@ class _AccountInformationPageState extends State<AccountInformationPage> {
             AppLocalizations.of(context)!.accountInformationTitleDesc,
             style: TextStyle(
               fontSize: 14,
-              color: tema.onSurface.withOpacity(0.6),
+              color: tema.onSurface.withValues(alpha: 0.6),
             ),
           ),
           

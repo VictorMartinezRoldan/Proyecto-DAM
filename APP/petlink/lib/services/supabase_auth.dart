@@ -18,10 +18,10 @@ class SupabaseAuthService {
       final user = supabase.auth.currentUser;
       if (user == null) {
         SupabaseAuthService.isLogin.value = false;
-        return null;
+        return;
       }
 
-      print("✅ Usuario autenticado: ${user.email} - ID: ${user.id}");
+      // ✅ Usuario autenticado: ${user.email} - ID: ${user.id}
 
       final datos =
           await supabase
@@ -33,11 +33,11 @@ class SupabaseAuthService {
               .maybeSingle();
 
       if (datos == null) {
-        print("⚠️ No se encontraron datos para el usuario con ID: ${user.id}");
-        return null;
+        // ⚠️ No se encontraron datos para el usuario con ID: ${user.id}
+        return;
       }
 
-      print("📌 Datos obtenidos: $datos");
+      // 📌 Datos obtenidos: $datos
 
       // DATOS OBTENIDOS
       datos as Map<String, dynamic>;
@@ -49,12 +49,11 @@ class SupabaseAuthService {
       descripcion = datos["descripcion"];
       correo = datos["correo"];
       SupabaseAuthService.isLogin.value = true;
-      print("ID --> $id");
 
       await obtenerPublicaciones();
 
     } catch (error) {
-      return null;
+      return;
     }
   }
 
@@ -118,6 +117,7 @@ class SupabaseAuthService {
         return response['perfil_completado'] ?? false;
       }
     } catch (e) {
+
     }
     return false;
   }
@@ -169,33 +169,29 @@ class SupabaseAuthService {
   }
 
   Future<bool> eliminarPublicacionesSeleccionadas(List<String> imagenesUrl) async {
-  try {
-    if (imagenesUrl.isEmpty) {
+    try {
+      if (imagenesUrl.isEmpty) {
+        return false;
+      }
+
+      final user = supabase.auth.currentUser;
+      if (user == null) {
+        return false;
+      }
+
+      await supabase
+          .from('publicaciones')
+          .delete()
+          .eq('id_usuario', user.id)
+          .inFilter('imagen_url', imagenesUrl);
+      
+      await obtenerPublicaciones();
+      
+      return true;
+
+    } catch (error) {
+      // ❌ Error eliminando publicaciones: $error
       return false;
     }
-
-    final user = supabase.auth.currentUser;
-    if (user == null) {
-      return false;
-    }
-
-    final response = await supabase
-        .from('publicaciones')
-        .delete()
-        .eq('id_usuario', user.id)
-        .inFilter('imagen_url', imagenesUrl);
-    
-    await obtenerPublicaciones();
-    
-    return true;
-
-  } catch (error) {
-    print("❌ Error eliminando publicaciones: $error");
-    return false;
   }
-}
-
-
-
-
 }

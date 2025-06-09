@@ -3,8 +3,6 @@ import 'package:petlink/components/mensajeSnackbar.dart';
 import 'package:petlink/services/supabase_auth.dart';
 import 'package:petlink/themes/customColors.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:petlink/themes/themeProvider.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditEmailPage extends StatefulWidget {
@@ -65,10 +63,7 @@ class _EditEmailPageState extends State<EditEmailPage> {
     }
 
     if (nuevoEmail == emailActual) {
-      MensajeSnackbar.mostrarError(
-        context,
-        'El nuevo correo no puede ser igual al actual',
-      );
+      MensajeSnackbar.mostrarError(context,'El nuevo correo no puede ser igual al actual');
       return;
     }
 
@@ -85,35 +80,37 @@ class _EditEmailPageState extends State<EditEmailPage> {
               .eq('correo', nuevoEmail)
               .maybeSingle();
 
+      if (!mounted) return;
+
       if (existe != null) {
-        MensajeSnackbar.mostrarError(
-          context,
-          'El correo electrónico ya está registrado',
-        );
+        MensajeSnackbar.mostrarError(context,'El correo electrónico ya está registrado');
         return;
       }
 
       final UserResponse res = await supabase.auth.updateUser(
         UserAttributes(email: nuevoEmail),
       );
+
+      if (!mounted) return;
+
       final User? updatedUser = res.user;
       if (updatedUser?.email == nuevoEmail) {
-        MensajeSnackbar.mostrarExito(
-          context,
-          'Correo electrónico actualizado exitosamente',
-        );
+
+        if (!mounted) return;
+        MensajeSnackbar.mostrarExito(context, 'Correo electrónico actualizado exitosamente');
       } else {
-        MensajeSnackbar.mostrarExito(
-          context,
-          'Se ha enviado un correo de confirmación a $nuevoEmail. Por favor, verifica tu nuevo correo.',
-        );
+        if (!mounted) return;
+        MensajeSnackbar.mostrarExito(context, 'Se ha enviado un correo de confirmación a $nuevoEmail. Por favor, verifica tu nuevo correo.');
       }
 
       // Actualizar el estado local
       await SupabaseAuthService().obtenerUsuario();
 
+      if (!mounted) return;
       MensajeSnackbar.mostrarExito(context, 'Correo electrónico actualizado');
+
       if (mounted) Navigator.pop(context);
+
     } catch (e) {
       MensajeSnackbar.mostrarError(context, 'Error: ${e.toString()}');
     } finally {
@@ -170,7 +167,7 @@ class _EditEmailPageState extends State<EditEmailPage> {
         Icon(
           Icons.email_outlined,
           size: 70,
-          color: custom.colorEspecial?.withOpacity(0.8),
+          color: custom.colorEspecial.withValues(alpha: 0.8),
         ),
         const SizedBox(height: 16),
         Text(
@@ -227,7 +224,7 @@ class _EditEmailPageState extends State<EditEmailPage> {
               ),
               prefixIcon: const Icon(Icons.email_rounded),
               hintStyle: TextStyle(
-                color: tema.onBackground.withValues(alpha: 0.4),
+                color: tema.onSurface.withValues(alpha: 0.4),
               ),
             ),
           ),
@@ -272,7 +269,7 @@ class _EditEmailPageState extends State<EditEmailPage> {
               prefixIcon: const Icon(Icons.alternate_email_rounded),
               hintText: AppLocalizations.of(context)!.editEmailNewHint,
               hintStyle: TextStyle(
-                color: tema.onBackground.withValues(alpha: 0.4),
+                color: tema.onSurface.withValues(alpha: 0.4),
               ),
             ),
           ),
@@ -317,7 +314,7 @@ class _EditEmailPageState extends State<EditEmailPage> {
               prefixIcon: const Icon(Icons.alternate_email_rounded),
               hintText: AppLocalizations.of(context)!.editEmailConfirmHint,
               hintStyle: TextStyle(
-                color: tema.onBackground.withValues(alpha: 0.4),
+                color: tema.onSurface.withValues(alpha: 0.4),
               ),
             ),
           ),

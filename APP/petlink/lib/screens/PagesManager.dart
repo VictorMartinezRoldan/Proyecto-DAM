@@ -24,8 +24,9 @@ class _PagesManagerState extends State<PagesManager> {
   final PageController _pageController = PageController();
   
   int _selectedIndex = 0;
-
-  late final StreamSubscription _connectionSub;
+  
+  // ignore: unused_field
+  late final StreamSubscription _connectionSub; // SI SE USA
 
 
   // METODOS

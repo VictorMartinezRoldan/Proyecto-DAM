@@ -49,12 +49,14 @@ class _RegisterPageState extends State<RegisterPage> {
 
       // Verificar si el usuario ya existe
       if (response.user != null && response.user!.identities!.isEmpty) {
+        if (!context.mounted) return;
         MensajeSnackbar.mostrarError(context, 'Este correo electrónico ya está registrado. Por favor, inicia sesión o restablece tu contraseña.');
         return;
       }
 
       // Si se registra correctamente llevar a la pagina de verificacion de la cuenta
       if (response.user != null) {
+        if (!context.mounted) return;
         Navigator.push(context,
           MaterialPageRoute(
             builder: (context) => OtpVerificationPage(email: email),
@@ -63,9 +65,11 @@ class _RegisterPageState extends State<RegisterPage> {
       }
     } on AuthException catch (e) {
       // Errores de autenticacion
+      if (!context.mounted) return;
       MensajeSnackbar.mostrarError(context, 'Error de autenticación: ${e.message}');
 
     } catch (e) {
+      if (!context.mounted) return;
       MensajeSnackbar.mostrarError(context, 'Error inesperado: ${e.toString()}');
 
     }

@@ -206,7 +206,7 @@ Descubre, comparte y aprende sobre todas las razas.
         });
         return true;
     } catch (e) {
-      print('❌ Error al subir imagen: $e');
+      // ❌ Error al subir imagen: $e'
       bool isConnected = await Seguridad.comprobarConexion();
       if (!isConnected) {
         if (!context.mounted) return false;

@@ -7,10 +7,10 @@ class BarraHorasEjercicio extends StatelessWidget {
   final String imageUrl;
 
   const BarraHorasEjercicio({
-    Key? key,
     required this.horasEjercicio,
     required this.imageUrl,
-  }) : super(key: key);
+    super.key,
+  });
 
   // Metodo para convertir texto en horas
   double _getProgressValue() {
@@ -39,8 +39,10 @@ class BarraHorasEjercicio extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    late var custom =Theme.of(context).extension<CustomColors>()!; // EXTRAER TEMA DE LA APP CUSTOM
+    late var custom =
+        Theme.of(
+          context,
+        ).extension<CustomColors>()!; // EXTRAER TEMA DE LA APP CUSTOM
 
     const double maxHoras = 2.0;
     const double barraWidth = 280;
@@ -51,10 +53,11 @@ class BarraHorasEjercicio extends StatelessWidget {
     final double progressValue = _getProgressValue();
     final double progress = (progressValue / maxHoras).clamp(0.0, 1.0);
     // Calcular la posicion del icono dependiendo del progreso
-    final double left = progress >= 1.0
-    // Sumar pixeles para que el icono se vea al final del todo en 2h+
-    ? barraWidth - perroSize + 6
-    : (barraWidth - perroSize) * progress;
+    final double left =
+        progress >= 1.0
+            // Sumar pixeles para que el icono se vea al final del todo en 2h+
+            ? barraWidth - perroSize + 6
+            : (barraWidth - perroSize) * progress;
 
     // Contenido principal
     return Column(
@@ -67,10 +70,7 @@ class BarraHorasEjercicio extends StatelessWidget {
             const SizedBox(width: 8),
             Text(
               'Ejercicio Diario',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              ),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
             ),
           ],
         ),
@@ -105,10 +105,11 @@ class BarraHorasEjercicio extends StatelessWidget {
                         child: Icon(
                           Icons.pets,
                           size: 14,
-                          color: (i == 2 && progressValue >= 2) ||
-                                  (i < 2 && i <= progressValue)
-                              ? custom.colorEspecial
-                              : custom.textoSuave.withAlpha(90),
+                          color:
+                              (i == 2 && progressValue >= 2) ||
+                                      (i < 2 && i <= progressValue)
+                                  ? custom.colorEspecial
+                                  : custom.textoSuave.withAlpha(90),
                         ),
                       ),
                     ),
@@ -174,8 +175,11 @@ class BarraHorasEjercicio extends StatelessWidget {
                               width: 37,
                               height: 37,
                               color: custom.fondoSuave,
-                              child: Icon(Icons.pets,
-                                  color: custom.colorEspecial, size: 24),
+                              child: Icon(
+                                Icons.pets,
+                                color: custom.colorEspecial,
+                                size: 24,
+                              ),
                             );
                           },
                         ),
@@ -197,9 +201,10 @@ class BarraHorasEjercicio extends StatelessWidget {
                 '0h',
                 style: TextStyle(
                   fontSize: 13,
-                  color: progressValue > 0
-                      ? custom.colorEspecial
-                      : custom.textoSuave.withAlpha(120),
+                  color:
+                      progressValue > 0
+                          ? custom.colorEspecial
+                          : custom.textoSuave.withAlpha(120),
                   fontWeight:
                       progressValue > 0 ? FontWeight.w600 : FontWeight.w400,
                 ),
@@ -208,9 +213,10 @@ class BarraHorasEjercicio extends StatelessWidget {
                 '1h',
                 style: TextStyle(
                   fontSize: 13,
-                  color: progressValue >= 1
-                      ? custom.colorEspecial
-                      : custom.textoSuave.withAlpha(120),
+                  color:
+                      progressValue >= 1
+                          ? custom.colorEspecial
+                          : custom.textoSuave.withAlpha(120),
                   fontWeight:
                       progressValue >= 1 ? FontWeight.w600 : FontWeight.w400,
                 ),
@@ -219,9 +225,10 @@ class BarraHorasEjercicio extends StatelessWidget {
                 '2h+',
                 style: TextStyle(
                   fontSize: 13,
-                  color: progressValue >= 2
-                      ? custom.colorEspecial
-                      : custom.textoSuave.withAlpha(120),
+                  color:
+                      progressValue >= 2
+                          ? custom.colorEspecial
+                          : custom.textoSuave.withAlpha(120),
                   fontWeight:
                       progressValue >= 2 ? FontWeight.w600 : FontWeight.w400,
                 ),
@@ -232,10 +239,7 @@ class BarraHorasEjercicio extends StatelessWidget {
         const SizedBox(height: 10),
         Text(
           horasEjercicio,
-          style: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w600,
-          ),
+          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
         ),
         const SizedBox(height: 10),
         Row(
@@ -245,10 +249,7 @@ class BarraHorasEjercicio extends StatelessWidget {
             Flexible(
               child: Text(
                 'Las recomendaciones son orientativas y pueden variar según la raza y el tamaño del perro.',
-                style: TextStyle(
-                  fontSize: 13,
-                  color: Colors.grey[500],
-                ),
+                style: TextStyle(fontSize: 13, color: Colors.grey[500]),
                 textAlign: TextAlign.center,
               ),
             ),

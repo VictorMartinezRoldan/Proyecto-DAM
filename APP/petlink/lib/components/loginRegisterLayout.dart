@@ -11,20 +11,19 @@ class LoginRegisterLayout extends StatelessWidget {
   final bool resizeToAvoidBottomInset;
 
   const LoginRegisterLayout({
-    Key? key,
     required this.child,
     required this.iconoSuperior,
     this.contentHeightFactor = 0.70,
     this.imagenFondo = 'assets/imagenFondoPerro.png',
     this.appBar,
     this.resizeToAvoidBottomInset = true,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    
     final custom = Theme.of(context).extension<CustomColors>()!;
-    
+
     return GestureDetector(
       onTap: () {
         // Ocultar el teclado cuando se toca fuera del TextField
@@ -95,7 +94,9 @@ class LoginRegisterLayout extends StatelessWidget {
                           color: custom.contenedor,
                           shape: BoxShape.circle,
                           border: Border.all(
-                            color: custom.bordeContenedor.withValues(alpha: 0.05),
+                            color: custom.bordeContenedor.withValues(
+                              alpha: 0.05,
+                            ),
                             width: 4,
                           ),
                         ),
