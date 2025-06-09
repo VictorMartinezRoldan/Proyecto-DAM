@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:petlink/components/mensajeSnackbar.dart';
+import 'package:petlink/screens/PagesManager.dart';
 import 'package:petlink/screens/Secondary/Settings/SelectLanguagePage.dart';
 import 'package:petlink/themes/customColors.dart';
 import 'package:petlink/components/cardSettingsStyle.dart';
@@ -6,16 +8,21 @@ import 'package:provider/provider.dart';
 import 'package:petlink/themes/themeProvider.dart';
 import 'package:petlink/screens/Secondary/Settings/AccountInformationPage.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:petlink/services/supabase_auth.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
-  
+
   @override
   State<SettingsPage> createState() => _SettingsPageState();
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  late var custom = Theme.of(context).extension<CustomColors>()!; // EXTRAER TEMA DE LA APP CUSTOM
+  late var custom =
+      Theme.of(
+        context,
+      ).extension<CustomColors>()!; // EXTRAER TEMA DE LA APP CUSTOM
   late var tema = Theme.of(context).colorScheme; // EXTRAER TEMA DE LA APP
 
   void _toggleTheme(bool isDarkMode) {
@@ -26,6 +33,8 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
+    bool isLogin = SupabaseAuthService.isLogin.value;
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -46,24 +55,31 @@ class _SettingsPageState extends State<SettingsPage> {
                 child: Text(
                   AppLocalizations.of(context)!.configTitle,
                   textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),
               const SizedBox(height: 15),
-                CardSettingsStyle(
-                Icons.person,
-                AppLocalizations.of(context)!.settingsAccountInformation,
-                AppLocalizations.of(context)!.settingsAccountInformationDesc,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => AccountInformationPage()),
-                  );
-                },
+              // Informacion de la cuenta, solo visible si esta logueado
+              Visibility(
+                visible: isLogin,
+                child: Column(
+                  children: [
+                    CardSettingsStyle(
+                      Icons.person,
+                      AppLocalizations.of(context)!.settingsAccountInformation,
+                      AppLocalizations.of(context)!.settingsAccountInformationDesc,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AccountInformationPage(),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
                 ),
+              ),
               const SizedBox(height: 15),
               CardSettingsStyle(
                 Icons.language,
@@ -72,7 +88,9 @@ class _SettingsPageState extends State<SettingsPage> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SelectLanguagePage()),
+                    MaterialPageRoute(
+                      builder: (context) => SelectLanguagePage(),
+                    ),
                   );
                 },
               ),
@@ -82,10 +100,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 child: Text(
                   AppLocalizations.of(context)!.personalizationTitle,
                   textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),
               const SizedBox(height: 15),
@@ -102,17 +117,16 @@ class _SettingsPageState extends State<SettingsPage> {
                 child: Text(
                   AppLocalizations.of(context)!.notificationTitle,
                   textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),
               const SizedBox(height: 15),
               CardSettingsStyle(
                 Icons.notifications,
                 AppLocalizations.of(context)!.settingsNotificationPreferences,
-                AppLocalizations.of(context)!.settingsNotificationPreferencesDesc,
+                AppLocalizations.of(
+                  context,
+                )!.settingsNotificationPreferencesDesc,
               ),
               const SizedBox(height: 20),
               Align(
@@ -120,10 +134,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 child: Text(
                   AppLocalizations.of(context)!.securityTitle,
                   textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),
               const SizedBox(height: 15),
@@ -139,13 +150,35 @@ class _SettingsPageState extends State<SettingsPage> {
                 AppLocalizations.of(context)!.settingsSecurityDesc,
               ),
               const SizedBox(height: 15),
-              CardSettingsStyle(
-                Icons.logout,
-                AppLocalizations.of(context)!.settingsLogout,
-                AppLocalizations.of(context)!.settingsLogoutDesc,
+              // Logout, solo visible si el usuario esta logueado
+              Visibility(
+                visible: isLogin,
+                child: Column(
+                  children: [
+                    CardSettingsStyle(
+                      Icons.logout,
+                      AppLocalizations.of(context)!.settingsLogout,
+                      AppLocalizations.of(context)!.settingsLogoutDesc,
+                      onTap: () async {
+                        try {
+                          await Supabase.instance.client.auth.signOut();
+                          setState(() {
+                            SupabaseAuthService.isLogin.value = false;
+                          });
 
+                          Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder: (context) => PagesManager()),
+                            (route) => false,
+                          );
+                          MensajeSnackbar.mostrarInfo(context, 'Sesión cerrada');
+                        } catch (e) {
+                          MensajeSnackbar.mostrarError(context, 'Error al cerrar sesión');
+                        }
+                      },
+                    ),
+                  ],
+                ),
               ),
-              const SizedBox(height: 15)
+              const SizedBox(height: 30),
             ],
           ),
         ),

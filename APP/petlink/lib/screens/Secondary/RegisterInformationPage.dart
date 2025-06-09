@@ -442,8 +442,8 @@ class _RegisterInformationPageState extends State<RegisterInformationPage> {
       return 'El nombre debe tener al menos 2 caracteres';
     }
 
-    if (nombreLimpio.length > 50) {
-      return 'El nombre no puede exceder 50 caracteres';
+    if (nombreLimpio.length > 20) {
+      return 'El nombre no puede exceder 20 caracteres';
     }
 
     // No permitir espacios multiples
@@ -520,8 +520,8 @@ class _RegisterInformationPageState extends State<RegisterInformationPage> {
       return 'La descripción debe tener al menos 10 caracteres';
     }
 
-    if (descripcion.length > 500) {
-      return 'La descripción no puede exceder 500 caracteres';
+    if (descripcion.length > 320) {
+      return 'La descripción no puede exceder 320 caracteres';
     }
 
     // Verificar que no sea solo espacios o caracteres especiales

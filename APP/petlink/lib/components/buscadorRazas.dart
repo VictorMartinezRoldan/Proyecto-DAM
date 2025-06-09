@@ -146,6 +146,10 @@ class _BuscadorRazasState extends State<BuscadorRazas> {
           controller: _controladorBusqueda,
           // Boton buscar en teclado
           textInputAction: TextInputAction.search,
+          // Perder el foco al tocar fuera del textfield
+          onTapOutside: (event) {
+          FocusManager.instance.primaryFocus?.unfocus();
+          },
           // Placeholder
           decoration: InputDecoration(
             hintText: widget.textoSugerencia,

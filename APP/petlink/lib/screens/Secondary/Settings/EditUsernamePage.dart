@@ -20,6 +20,50 @@ class _EditUsernamePageState extends State<EditUsernamePage> {
   final _controladorUsuario = TextEditingController();
   bool _guardando = false;
 
+  // Validacion de nombre de usuario
+  String? validarNombreUsuario(String nombreUsuario) {
+    if (nombreUsuario.contains(' ')) {
+      return 'El nombre de usuario no puede contener espacios';
+    }
+
+    nombreUsuario = nombreUsuario.trim().toLowerCase();
+
+    if (nombreUsuario.isEmpty) {
+      return 'El nombre de usuario es obligatorio';
+    }
+
+    if (nombreUsuario.length < 5) {
+      return 'El nombre de usuario debe tener al menos 5 caracteres';
+    }
+
+    if (nombreUsuario.length > 20) {
+      return 'El nombre de usuario no puede exceder 20 caracteres';
+    }
+
+    // Solo letras, numeros, puntos y guiones bajos
+    if (!RegExp(r'^[a-z0-9._]+$').hasMatch(nombreUsuario)) {
+      return 'Solo se permiten letras, números, puntos y guiones bajos';
+    }
+
+    // No puede comenzar o terminar con punto o guion bajo
+    if (nombreUsuario.startsWith('.') ||
+        nombreUsuario.startsWith('_') ||
+        nombreUsuario.endsWith('.') ||
+        nombreUsuario.endsWith('_')) {
+      return 'No puede comenzar o terminar con punto o guión bajo';
+    }
+
+    // No permitir caracteres especiales consecutivos
+    if (nombreUsuario.contains('..') ||
+        nombreUsuario.contains('__') ||
+        nombreUsuario.contains('._') ||
+        nombreUsuario.contains('_.')) {
+      return 'No se permiten caracteres especiales consecutivos';
+    }
+
+    return null;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -32,63 +76,57 @@ class _EditUsernamePageState extends State<EditUsernamePage> {
     super.dispose();
   }
 
+  // Metodo para actualizar el usuario
   Future<void> _actualizarUsuario() async {
-    if (_controladorUsuario.text.isEmpty) {
-      MensajeSnackbar.mostrarError(context, 'Ingresa un nombre de usuario');
+  final nuevoUsuario = _controladorUsuario.text.trim();
+  
+  // Ejecutar todas las validaciones
+  final errorValidacion = validarNombreUsuario(nuevoUsuario);
+  if (errorValidacion != null) {
+    MensajeSnackbar.mostrarError(context, errorValidacion);
+    return;
+  }
+
+  setState(() => _guardando = true);
+
+  try {
+    final supabase = Supabase.instance.client;
+    final idUsuario = SupabaseAuthService.id;
+    final nombreActual = SupabaseAuthService.nombreUsuario;
+
+    // Verificar si el nuevo nombre de usuario es igual al actual
+    if (nuevoUsuario.toLowerCase() == nombreActual.toLowerCase()) {
+      MensajeSnackbar.mostrarError(context, 'El nombre de usuario no ha cambiado');
+      setState(() => _guardando = false);
       return;
     }
 
-    setState(() => _guardando = true);
+    // Verificar si el nuevo nombre de usuario ya existe
+    final existe = await supabase
+        .from('usuarios')
+        .select('id')
+        .eq('nombre_usuario', nuevoUsuario.toLowerCase())
+        .maybeSingle();
 
-    try {
-      // Obtener la instancia de Supabase
-      // y el cliente de autenticación
-      final supabase = Supabase.instance.client;
-      final nuevoUsuario = _controladorUsuario.text.trim();
-      final idUsuario = SupabaseAuthService.id;
-      final nombreActual = SupabaseAuthService.nombreUsuario;
-
-      // Validar el nuevo nombre de usuario
-      if (nuevoUsuario.isEmpty || nuevoUsuario.length <= 5) {
-        MensajeSnackbar.mostrarError(context, 'El nombre de usuario debe tener al menos 5 caracteres');
-        setState(() => _guardando = false);
-        return;
-      }
-
-      // Verificar si el nuevo nombre de usuario es igual al actual
-      if (nuevoUsuario == nombreActual) {
-        MensajeSnackbar.mostrarError(context, 'El nombre de usuario no ha cambiado');
-        setState(() => _guardando = false);
-        return;
-      }
-
-      // Verificar si el nuevo nombre de usuario ya existe
-      final existe = await supabase
-          .from('usuarios')
-          .select('id')
-          .eq('nombre_usuario', nuevoUsuario)
-          .maybeSingle();
-
-      // Si existe y no es el mismo usuario, mostrar error
-      if (existe != null && existe['id'] != idUsuario) {
-        MensajeSnackbar.mostrarError(context, 'El nombre de usuario ya está en uso');
-        return;
-      }
-
-      // Actualizar el nombre de usuario en la BD
-      await supabase
-          .from('usuarios')
-          .update({'nombre_usuario': nuevoUsuario})
-          .eq('id', idUsuario);
-
-      await SupabaseAuthService().obtenerUsuario();
-      MensajeSnackbar.mostrarExito(context, 'Usuario actualizado');
-    } catch (e) {
-      MensajeSnackbar.mostrarError(context, 'Error: ${e.toString()}');
-    } finally {
-      if (mounted) setState(() => _guardando = false);
+    if (existe != null && existe['id'] != idUsuario) {
+      MensajeSnackbar.mostrarError(context, 'El nombre de usuario ya está en uso');
+      return;
     }
+
+    // Actualizar el nombre de usuario en la BD
+    await supabase
+        .from('usuarios')
+        .update({'nombre_usuario': nuevoUsuario.toLowerCase()})
+        .eq('id', idUsuario);
+
+    await SupabaseAuthService().obtenerUsuario();
+    MensajeSnackbar.mostrarExito(context, 'Usuario actualizado');
+  } catch (e) {
+    MensajeSnackbar.mostrarError(context, 'Error: ${e.toString()}');
+  } finally {
+    if (mounted) setState(() => _guardando = false);
   }
+}
 
   @override
   Widget build(BuildContext context) {

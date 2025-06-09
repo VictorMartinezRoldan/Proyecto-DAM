@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:marquee/marquee.dart';
 import 'package:petlink/components/ejercicioHorasStyle.dart';
 import 'package:petlink/components/mensajeSnackbar.dart';
+import 'package:petlink/entidades/seguridad.dart';
+import 'package:petlink/screens/Secondary/NetworkErrorPage.dart';
 import 'package:petlink/services/supabase_auth.dart';
 import 'package:petlink/themes/customColors.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -43,6 +45,19 @@ class _PetWikiInformationPageState extends State<PetWikiInformationPage> {
   // Metodo para iniciar los datos de una raza
   Future<void> _inicializarDatosRaza() async {
 
+  // Verificar conexión antes de realizar la consulta
+  bool isConnected = await Seguridad.comprobarConexion();
+  if (!isConnected) {
+    if (mounted) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => NetworkErrorPage()),
+      );
+    }
+    return;
+  }
+
+    
     // Lista que almacena las urls de las imagenes de Supabase
     List<String> imagenesCarrusel = [];
 
@@ -91,7 +106,8 @@ class _PetWikiInformationPageState extends State<PetWikiInformationPage> {
       if (widget.razaData!['problemas_salud'] != null &&
           widget.razaData!['problemas_salud'].toString().isNotEmpty) {
         String problemasString = widget.razaData!['problemas_salud'] as String;
-        problemasSalud = problemasString.split(',').map((e) => e.trim()).where((e) => e.isNotEmpty).toList();
+        // Separar los problemas por coma y asegurar que empiece la siguiente letra por mayuscula
+        problemasSalud = problemasString.split(',').map((e) => e.trim()).where((e) => e.isNotEmpty).map((e) => e.isEmpty ? e : e[0].toUpperCase() + e.substring(1)).toList();
       }
 
       // Procesar los consejos
@@ -160,6 +176,18 @@ class _PetWikiInformationPageState extends State<PetWikiInformationPage> {
   final userId = SupabaseAuthService.id;
   if (userId == null || userId.isEmpty || widget.razaData == null) return;
 
+  // Verificar conexión antes de realizar la consulta
+  bool isConnected = await Seguridad.comprobarConexion();
+  if (!isConnected) {
+    if (mounted) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => NetworkErrorPage()),
+      );
+    }
+    return;
+  }
+
   try {
     final response = await Supabase.instance.client
         .from('raza_favorito')
@@ -176,7 +204,14 @@ class _PetWikiInformationPageState extends State<PetWikiInformationPage> {
       });
     }
   } catch (e) {
-    debugPrint('Error al verificar favorito: $e');
+    // Verificar conexión en caso de error también
+    bool isConnected = await Seguridad.comprobarConexion();
+    if (!isConnected && mounted) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => NetworkErrorPage()),
+      );
+    }
   }
 }
 
@@ -185,6 +220,18 @@ class _PetWikiInformationPageState extends State<PetWikiInformationPage> {
   final userId = SupabaseAuthService.id;
   if (userId == null || userId.isEmpty || widget.razaData == null) {
     MensajeSnackbar.mostrarError(context, 'Debes iniciar sesión para agregar favoritos');
+    return;
+  }
+
+  // Verificar conexión antes de realizar la consulta
+  bool isConnected = await Seguridad.comprobarConexion();
+  if (!isConnected) {
+    if (mounted) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => NetworkErrorPage()),
+      );
+    }
     return;
   }
 
@@ -807,7 +854,6 @@ class _PetWikiInformationPageState extends State<PetWikiInformationPage> {
                                   ),
                                 ),
                       ),
-                      const SizedBox(height: 30),
                     ],
                   ),
                 ),
@@ -1090,7 +1136,7 @@ class _PetWikiInformationPageState extends State<PetWikiInformationPage> {
       return ColorFiltered(
         colorFilter: ColorFilter.mode(
           Color.fromRGBO(48, 48, 48, 1),
-          BlendMode.multiply,
+          BlendMode.modulate,
         ),
         child: child,
       );

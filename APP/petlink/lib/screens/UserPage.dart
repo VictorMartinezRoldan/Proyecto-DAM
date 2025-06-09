@@ -139,8 +139,10 @@ class _UserPageState extends State<UserPage> {
         appBar: AppBar(
           title: Text(
             esPerfilPropio
-              ? "Mi Perfil"
-              : "Perfil de ${datosUser!['nombre'] ?? 'Usuario'}",
+            ? "Mi Perfil"
+            : datosUser != null 
+            ? "Perfil de ${datosUser!['nombre'] ?? 'Usuario'}"
+            : "Cargando perfil...",
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
           ),
           centerTitle: true,

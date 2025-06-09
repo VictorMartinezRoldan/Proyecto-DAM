@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:petlink/components/buscadorRazas.dart';
 import 'package:petlink/components/tarjetaRazaStyle.dart';
+import 'package:petlink/entidades/seguridad.dart';
 import 'package:petlink/screens/Secondary/FavoriteBreedsPage.dart';
+import 'package:petlink/screens/Secondary/NetworkErrorPage.dart';
 import 'package:petlink/screens/Secondary/PetWikiInformationPage.dart';
 import 'package:petlink/themes/customColors.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -51,34 +53,52 @@ class _PetWikiPageState extends State<PetWikiPage> {
 
   // Metodo para cargar las razas desde la BD
   Future<void> _cargarTodasLasRazas() async {
-    setState(() => _cargando = true);
+  setState(() => _cargando = true);
 
-    // Verifica si el widget sigue montado
-    if (mounted) {
-      setState(() => _cargando = true);
+  try {
+    // Verificar conexión antes de realizar la consulta
+    bool isConnected = await Seguridad.comprobarConexion();
+    if (!isConnected) {
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => NetworkErrorPage()),
+        );
+      }
+      return;
     }
 
-    try {
-      // Seleccionar todos los campos de la tabla perros para su posterior utilizacion
-      final respuesta = await Supabase.instance.client
-          .from('perros')
-          .select('*')
-          .order('raza', ascending: true);
+    // Seleccionar todos los campos de la tabla perros para su posterior utilizacion
+    final respuesta = await Supabase.instance.client
+        .from('perros')
+        .select('*')
+        .order('raza', ascending: true);
 
+    if (mounted) {
       setState(() {
-        // Copnvertirlo a lista
+        // Convertirlo a lista
         todasLasRazas = respuesta.cast<Map<String, dynamic>>();
         // Inicializar los primeros elementos
         _mostrarMasElementos();
         _cargando = false;
       });
-    } catch (e) {
-      // Verificacion
-      if (mounted) {
-        setState(() => _cargando = false);
-      }
+    }
+  } catch (e) {
+    // Verificar conexión en caso de error también
+    bool isConnected = await Seguridad.comprobarConexion();
+    if (!isConnected && mounted) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => NetworkErrorPage()),
+      );
+    }
+    
+    if (mounted) {
+      setState(() => _cargando = false);
     }
   }
+}
+
 
   // Metodo para mostrar mas elementos en la lista
   void _mostrarMasElementos() {
@@ -244,13 +264,22 @@ class _PetWikiPageState extends State<PetWikiPage> {
                   nombreRaza: breed['raza'] as String,
                   rutaImagen: breed['ico_imagen'] as String,
                   // Ir a la informacion de cada raza
-                  onTap: () {
+                  onTap: () async {
+                    // Verificar conexión antes de navegar
+                    bool isConnected = await Seguridad.comprobarConexion();
+                    if (!isConnected) {
+                      if (mounted) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => NetworkErrorPage()),
+                        );
+                      }
+                      return;
+                    }
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder:
-                            (context) =>
-                                PetWikiInformationPage(razaData: breed),
+                        builder: (context) => PetWikiInformationPage(razaData: breed),
                       ),
                     );
                   },
@@ -271,16 +300,26 @@ class _PetWikiPageState extends State<PetWikiPage> {
       floatingActionButton:
           (userId != null && userId.isNotEmpty)
               ? FloatingActionButton(
-                onPressed: () async {
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const FavouriteBreedsPage(),
-                    ),
-                  );
-                  // Refresca la pagina al volver de favoritos
-                  setState(() {});
-                },
+                  onPressed: () async {
+                    // Verificar conexión antes de navegar
+                    bool isConnected = await Seguridad.comprobarConexion();
+                    if (!isConnected) {
+                      if (mounted) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => NetworkErrorPage()),
+                        );
+                      }
+                      return;
+                    }
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const FavouriteBreedsPage(),
+                      ),
+                    );
+                    setState(() {});
+                  },
                 backgroundColor: colorEspecial,
                 elevation: 8,
                 child: const Icon(Icons.favorite, size: 28),

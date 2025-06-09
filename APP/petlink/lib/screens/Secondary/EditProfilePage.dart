@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:petlink/components/mensajeSnackbar.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:petlink/services/supabase_auth.dart';
 import 'package:petlink/themes/customColors.dart';
@@ -44,6 +45,65 @@ class _EditProfilePageState extends State<EditProfilePage> {
     _controladorDescripcion = TextEditingController(text: SupabaseAuthService.descripcion);
     _cargarImagenesPredeterminadas();
   }
+
+  // Validacion nombre
+  String? validarNombre(String nombre) {
+  String nombreOriginal = nombre;
+  String nombreLimpio = nombre.trim();
+
+  if (nombreLimpio.isEmpty) {
+    return 'El nombre es obligatorio';
+  }
+
+  if (nombreLimpio.length < 2) {
+    return 'El nombre debe tener al menos 2 caracteres';
+  }
+
+  if (nombreLimpio.length > 20) {
+    return 'El nombre no puede exceder 20 caracteres';
+  }
+
+  // No permitir espacios multiples
+  if (nombreOriginal.contains(RegExp(r'\s{2,}'))) {
+    return 'No se permiten espacios múltiples';
+  }
+
+   // No permitir espacios al inicio o fin
+  if (nombreOriginal != nombreLimpio) {
+    return 'El nombre no puede comenzar o terminar con espacios';
+  }
+
+  // Solo letras, acentos y espacios
+  if (!RegExp(r'^[a-zA-ZÀ-ÿñÑüÜ\s]+$').hasMatch(nombreLimpio)) {
+    return 'El nombre solo puede contener letras y espacios';
+  }
+
+  return null;
+}
+
+// Validacion descripcion
+String? validarDescripcion(String descripcion) {
+  descripcion = descripcion.trim();
+
+  if (descripcion.isEmpty) {
+    return 'La descripción es obligatoria';
+  }
+
+  if (descripcion.length < 10) {
+    return 'La descripción debe tener al menos 10 caracteres';
+  }
+
+  if (descripcion.length > 320) {
+    return 'La descripción no puede exceder 320 caracteres';
+  }
+
+  // Verificar que no sea solo espacios o caracteres especiales
+  if (!RegExp(r'.*[a-zA-ZÀ-ÿñÑüÜ0-9].*').hasMatch(descripcion)) {
+    return 'La descripción debe contener al menos una letra o número';
+  }
+
+  return null;
+}
 
   // Metodo para cargar imagenes predeterminadas del bucket de Supabase
   Future<void> _cargarImagenesPredeterminadas() async {
@@ -310,8 +370,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error al seleccionar la imagen: $e')),
-        );
+        MensajeSnackbar.mostrarError(context, 'Error al seleccionar la imagen: $e');
       }
     }
   }
@@ -335,8 +394,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error al seleccionar la imagen: $e')),
-        );
+        MensajeSnackbar.mostrarError(context, 'Error al seleccionar la imagen: $e');
       }
     }
   }
@@ -360,23 +418,29 @@ class _EditProfilePageState extends State<EditProfilePage> {
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error al tomar la foto: $e')),
-        );
+        MensajeSnackbar.mostrarError(context, 'Error al tomar la foto: $e');
       }
     }
   }
 
   // Metodo para guardar el perfil
   Future<void> _guardarPerfil() async {
-    if (_controladorNombre.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('El nombre no puede estar vacío')),
-      );
-      return;
-    }
+
+    // Validar nombre
+  final errorNombre = validarNombre(_controladorNombre.text);
+  if (errorNombre != null) {
+    MensajeSnackbar.mostrarError(context, errorNombre);
+    return;
+  }
+
+  // Validar descripción
+  final errorDescripcion = validarDescripcion(_controladorDescripcion.text);
+  if (errorDescripcion != null) {
+    MensajeSnackbar.mostrarError(context, errorDescripcion);
+    return;
+  }
 
     setState(() => _cargando = true);
-
-    final messenger = ScaffoldMessenger.of(context); // VARIABLE ANTES DEL AWAIT PARA QUE NO DE PROBLEMAS DE CONTEXTO
 
     try {
       final userId = SupabaseAuthService.id; // ID DEL USUARIO AUTENTICADO
@@ -385,10 +449,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
         throw Exception('ID de usuario no disponible');
       }
 
-      // Preparar datos para actualizar
+      // Preparar datos para actualizar (usar valores limpios)
       final Map<String, dynamic> updateData = {
-        'nombre': _controladorNombre.text,
-        'descripcion': _controladorDescripcion.text,
+        'nombre': _controladorNombre.text.trim(),
+        'descripcion': _controladorDescripcion.text.trim(),
       };
 
       // Subir imagenes si existen
@@ -422,17 +486,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
       if (mounted) {
         setState(() => _cargando = false);
-        messenger.showSnackBar(
-          const SnackBar(content: Text('Perfil actualizado correctamente')),
-        );
+        MensajeSnackbar.mostrarExito(context, 'Perfil actualizado correctamente');
         Navigator.pop(context, true); // TRUE PARA INDICAR QUE SE HICIERON CAMBIOS
       }
     } catch (e) {
       if (mounted) {
         setState(() => _cargando = false);
-        messenger.showSnackBar(
-          SnackBar(content: Text('Error al guardar el perfil: ${e.toString()}')),
-        );
+        MensajeSnackbar.mostrarError(context, 'Error al guardar el perfil: ${e.toString()}');
       }
     }
   }

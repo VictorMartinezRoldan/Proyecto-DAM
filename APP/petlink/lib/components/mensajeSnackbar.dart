@@ -8,19 +8,27 @@ class MensajeSnackbar {
   static OverlayEntry? _toastActual;
   // Variable para mantener la referencia del timer actual
   static Timer? _timerActual;
+  static CustomColors? _customColors;
+
+  // Método para inicializar los colores personalizados
+  static void _inicializarColores(BuildContext context) {
+    _customColors ??= Theme.of(context).extension<CustomColors>()!;
+  }
 
   static void mostrarInfo(
     BuildContext context,
     String mensaje, {
     VoidCallback? alCerrar,
   }) {
+    _inicializarColores(context);
+
     _mostrarToast(
       context,
       mensaje,
       icono: CupertinoIcons.info_circle,
       colorFondoIcono: const Color(0xFF4B84F4),
       colorIcono: Colors.white,
-      colorTexto: const Color(0xFF28292A),
+      colorTexto: _customColors!.contenedor,
       colorBoton: const Color(0xFF4B84F4),
       alCerrar: alCerrar,
     );
@@ -31,13 +39,15 @@ class MensajeSnackbar {
     String mensaje, {
     VoidCallback? alCerrar,
   }) {
+    _inicializarColores(context);
+
     _mostrarToast(
       context,
       mensaje,
       icono: CupertinoIcons.checkmark_circle,
       colorFondoIcono: Colors.green,
       colorIcono: Colors.white,
-      colorTexto: const Color(0xFF28292A),
+      colorTexto: _customColors!.sombraContenedor,
       colorBoton: Colors.green,
       alCerrar: alCerrar,
     );
@@ -48,13 +58,15 @@ class MensajeSnackbar {
     String mensaje, {
     VoidCallback? alCerrar,
   }) {
+    _inicializarColores(context);
+
     _mostrarToast(
       context,
       mensaje,
       icono: CupertinoIcons.clear_circled,
       colorFondoIcono: Colors.red,
       colorIcono: Colors.white,
-      colorTexto: const Color(0xFF28292A),
+      colorTexto: _customColors!.contenedor,
       colorBoton: Colors.red,
       alCerrar: alCerrar,
     );
@@ -76,23 +88,24 @@ class MensajeSnackbar {
     final superposicion = Overlay.of(context);
 
     _toastActual = OverlayEntry(
-      builder: (context) => Positioned(
-        bottom: 50,
-        left: 16,
-        right: 16,
-        child: _WidgetToast(
-          mensaje: mensaje,
-          icono: icono,
-          colorFondoIcono: colorFondoIcono,
-          colorIcono: colorIcono,
-          colorTexto: colorTexto,
-          colorBoton: colorBoton,
-          alCerrar: () {
-            _eliminarToastActual();
-            if (alCerrar != null) alCerrar();
-          },
-        ),
-      ),
+      builder:
+          (context) => Positioned(
+            bottom: 50,
+            left: 16,
+            right: 16,
+            child: _WidgetToast(
+              mensaje: mensaje,
+              icono: icono,
+              colorFondoIcono: colorFondoIcono,
+              colorIcono: colorIcono,
+              colorTexto: colorTexto,
+              colorBoton: colorBoton,
+              alCerrar: () {
+                _eliminarToastActual();
+                if (alCerrar != null) alCerrar();
+              },
+            ),
+          ),
     );
 
     superposicion.insert(_toastActual!);
@@ -104,7 +117,7 @@ class MensajeSnackbar {
     });
   }
 
-    // Eliminar el toast actual y cancelar el timer
+  // Eliminar el toast actual y cancelar el timer
   static void _eliminarToastActual() {
     // Cancelar el timer anterior si existe
     if (_timerActual != null && _timerActual!.isActive) {
@@ -147,13 +160,12 @@ class _WidgetToast extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Temas de la app
-    late var personalizado = Theme.of(context).extension<CustomColors>()!; // EXTRAER TEMA PERSONALIZADO DE LA APP
-    
+    late var personalizado = Theme.of(context).extension<CustomColors>()!;
+
     return Material(
       color: Colors.transparent,
       child: Container(
-        height: 56,
+        constraints: const BoxConstraints(minHeight: 48),
         decoration: BoxDecoration(
           color: personalizado.contenedor,
           borderRadius: BorderRadius.circular(14),
@@ -165,63 +177,64 @@ class _WidgetToast extends StatelessWidget {
             ),
           ],
         ),
-        child: Row(
-          children: [
-            // Franja vertical redondeada
-            Container(
-              width: 10,
-              height: double.infinity,
-              decoration: BoxDecoration(
-                color: colorFondoIcono,
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  bottomLeft: Radius.circular(20),
-                ),
-              ),
-            ),
-            const SizedBox(width: 12),
-            // Icono en círculo
-            Container(
-              width: 32,
-              height: 32,
-              decoration: BoxDecoration(
-                color: colorFondoIcono.withValues(alpha: 0.2),
-                shape: BoxShape.circle,
-              ),
-              child: Center(
-                child: Icon(
-                  icono,
+        child: IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // Franja vertical
+              Container(
+                width: 8,
+                decoration: BoxDecoration(
                   color: colorFondoIcono,
-                  size: 25,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    bottomLeft: Radius.circular(20),
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(width: 12),
-            // Mensaje
-            Expanded(
-              child: Text(
-                mensaje,
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
+              const SizedBox(width: 10),
+              // Icono
+              Container(
+                width: 28,
+                height: 28,
+                decoration: BoxDecoration(
+                  color: colorFondoIcono.withValues(alpha: 0.2),
+                  shape: BoxShape.circle,
                 ),
-                // Desvanecer el texto si es muy largo
-                overflow: TextOverflow.fade,
-                maxLines: 1,
-                // Evitar el salto de línea para que no se rompa el diseño
-                softWrap: false,
+                child: Center(
+                  child: Icon(icono, color: colorFondoIcono, size: 24),
+                ),
               ),
-            ),
-            // Boton de cerrar
-            IconButton(
-              icon: const Icon(Icons.close, size: 20),
-              color: colorBoton,
-              splashRadius: 20,
-              onPressed: alCerrar,
-              padding: const EdgeInsets.symmetric(horizontal: 4),
-              constraints: const BoxConstraints(),
-            ),
-          ],
+              const SizedBox(width: 10),
+              // Texto
+              Expanded(
+                child: Padding(
+                  // Padding para el texto
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Text(
+                    mensaje,
+                    style: TextStyle(
+                      fontSize: 14.5,
+                      fontWeight: FontWeight.w500,
+                      color: colorTexto,
+                      height: 1.3,
+                    ),
+                    maxLines: null,
+                    softWrap: true,
+                  ),
+                ),
+              ),
+              // Botón más compacto
+              IconButton(
+                icon: const Icon(Icons.close, size: 18),
+                color: colorBoton,
+                splashRadius: 18,
+                onPressed: alCerrar,
+                padding: const EdgeInsets.symmetric(horizontal: 2),
+                constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+              ),
+            ],
+          ),
         ),
       ),
     );
