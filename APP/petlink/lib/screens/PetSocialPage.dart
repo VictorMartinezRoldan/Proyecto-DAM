@@ -16,10 +16,11 @@ class PetSocialPage extends StatefulWidget {
   const PetSocialPage({super.key});
 
   @override
-  State<PetSocialPage> createState() => _PetSocialPageState();
+  State<PetSocialPage> createState() => PetSocialPageState();
 }
 
-class _PetSocialPageState extends State<PetSocialPage> {
+// E CAMBIADO EL SIMBOLO DE PRIVACIDAD _ --> ""
+class PetSocialPageState extends State<PetSocialPage> {
   static List<PublicacionStyle> publicaciones = []; // LISTA DE PUBLICACIONES (PublicacionStyle) [LISTVIEW]
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>(); // Para control endDrawer
   Set<int> publicacionesVistas = {}; // PARA CONTROLAR LAS PUBLICACIONES YA VISTAS EN EL DETECTOR Y HACER LLAMADAS ÚNICAS

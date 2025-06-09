@@ -84,9 +84,8 @@ class _UserPageState extends State<UserPage> {
         esPerfilPropio = widget.idUsuario == SupabaseAuthService.id;
         datosUser = await authService.obtenerUsuarioPorId(widget.idUsuario!);
         if (datosUser != null) {
-          userPosts = await authService.obtenerPublicacionesPorUsuario(
-            widget.idUsuario!,
-          );
+          userPosts = [""]; // CORREGIR AQUÍ ---------------------------------------------------------------------------------------------------------------------
+          // userPosts = await authService.obtenerPublicacionesPorUsuario(widget.idUsuario!); <== ANTES TENÍAS ESTO (Ahora tratas con Publicaciones)
         }
       }
     } catch (e) {
