@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';                          // Para usar la cámara nativa de flutter
+import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';  // Para pedir permisos de cámara manualmente
 import 'package:image_picker/image_picker.dart';              // Para abrir la galería
 import 'package:audioplayers/audioplayers.dart';              // Para reproducir sonidos
@@ -7,6 +8,13 @@ import 'package:lottie/lottie.dart';                          // Para animacione
 import 'dart:io';                                             // Trabajar con archivos
 import 'package:image/image.dart' as img;                     // Para procesamiento de imágenes
 import 'package:flutter/foundation.dart';                     // Para usar compute y procesos pesados en segundo plano
+import 'package:petlink/components/dialogoRaza.dart';
+import 'package:petlink/entidades/seguridad.dart';
+import 'package:petlink/procesos_pesados/proceso_modelo_razas.dart';
+import 'package:petlink/screens/Secondary/NetworkErrorPage.dart';
+import 'package:petlink/themes/themeProvider.dart';
+import 'package:provider/provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'dart:isolate';
 import 'package:tflite_flutter/tflite_flutter.dart';
 
@@ -64,6 +72,10 @@ class _PetlinkCameraState extends State<PetlinkCamera> {
   double caja_eje_y = 130;
   double caja_anchura = 330;
   double caja_altura = 400;
+
+  // BUSCANDO RAZA
+  bool buscandoRaza = false;
+
 
   // MÉTODOS
 
@@ -157,13 +169,15 @@ class _PetlinkCameraState extends State<PetlinkCamera> {
   Future<void> buscarPerro(String imagePath) async {
     // CARGA EL MODELO
     Interpreter modeloYolo = await Interpreter.fromAsset('assets/IA/yolo/yolov5.tflite');
-    print("✅ MODELO YOLO CARGADO");
+    Interpreter modeloRazas = await Interpreter.fromAsset('assets/IA/razas/detector.tflite');
+    print("✅ MODELOS CARGADOS");
 
-    final puertoReceptor = ReceivePort(); // Puerto receptor
+    final puertoReceptorYolo = ReceivePort(); // Puerto receptor YOLO
+    final puertoReceptorRazas = ReceivePort(); // Puerto receptor RAZAS
 
     // Crea isolate y ejecuta la función
     Isolate.spawn(procesoYOLO, [
-      puertoReceptor.sendPort, // Puerto de envío
+      puertoReceptorYolo.sendPort, // Puerto de envío
       modeloYolo, // Modelo de YOLO
       imagePath, // Ruta de la imagen
       _cameraController.value.previewSize!.width, // Ancho de vista previa de la cámara
@@ -171,7 +185,7 @@ class _PetlinkCameraState extends State<PetlinkCamera> {
     ]);
 
     // Se pone en segundo plano a la espera de resultado por parte del método
-    puertoReceptor.listen((resultado) async {
+    puertoReceptorYolo.listen((resultado) async {
       setState(() {
         _searchAnimationVisible = false;
       });
@@ -187,10 +201,71 @@ class _PetlinkCameraState extends State<PetlinkCamera> {
         } catch (e) {
           // NO SE A ENCONTRADO UN PERRO
         } finally {
-          // CONTROL DE ANIMACIONES POSTERIORES
+          // DETECTOR DE RAZAS
+          print("BUSCAR RAZA 🔎");
+          setState(() {
+            buscandoRaza = true;
+          });
+          
+          Isolate.spawn(procesoRazas, [
+            puertoReceptorRazas.sendPort, // Puerto de envío
+            modeloRazas, // Modelo de RAZAS
+            imagePath, // Ruta de la imagen
+          ]);
+
+          puertoReceptorRazas.listen((resultado) async {
+            int clase = resultado['classIndex'];
+            if (resultado is Map) {
+              final contenido = await rootBundle.loadString('assets/IA/razas/clases.txt');
+              final lineas = contenido.split('\n').map((e) => e.trim()).toList();
+              if (clase < 0 || clase >= lineas.length) {
+                throw RangeError("❌ Índice fuera de rango. El archivo tiene ${lineas.length} líneas.");
+              }
+              
+              print("Raza detectada: clase ${lineas[clase].trim()} con ${resultado['confidence'] * 100}%");
+            
+              try {
+                final respuesta = await Supabase.instance.client
+                  .from('perros')
+                  .select('*')
+                  .eq('raza', '${lineas[clase].trim()}');
+                if (respuesta.isEmpty) {
+                  throw Exception("Raza no encontrada");
+                } 
+                if (!mounted) return;
+                showDialog(context: context, builder: (context) => DialogoRaza(razaData: respuesta.first));
+              } catch (e) {
+                if (!mounted) return;
+                await showDialog(
+                  context: context, 
+                  builder: (context) => DialogoInformacion(
+                    imagen: Image.asset("assets/perros_dialogos/info_triste_${(Provider.of<ThemeProvider>(context).isLightMode) ? "light" : "dark"}.png"),
+                    titulo: "No hemos detectado la raza",
+                    texto: "Ocurrió un error al intentar detectar la raza del perro. Por favor, inténtalo de nuevo más tarde.",
+                    textoBtn: "Aceptar",
+                  ),
+                );
+                // ERROR
+                bool isConnected = await Seguridad.comprobarConexion();
+                if (!isConnected) {
+                  if (!mounted) return;
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => NetworkErrorPage())
+                  );
+                }
+              } finally {
+                setState(() {
+                  buscandoRaza = false;
+                  imagen = null;
+                });
+              }
+            }
+          });
         }
       });
     });
+
   }
 
   // -------------------------------------------------------
@@ -344,6 +419,28 @@ class _PetlinkCameraState extends State<PetlinkCamera> {
                         animate: true,
                       ),
                     ),
+                  ),
+                ),
+                Positioned(
+                  bottom: 100,
+                  right: 0,
+                  left: 0,
+                  child: Center(
+                    child: AnimatedOpacity(
+                      duration: Duration(seconds: 1),
+                      opacity: buscandoRaza ? 1 : 0,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 13,
+                          vertical: 10
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.black54,
+                          borderRadius: BorderRadius.circular(40)
+                        ),
+                        child: Text("Buscando raza...", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                      ),
+                    )
                   ),
                 )
               ],

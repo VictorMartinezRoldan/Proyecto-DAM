@@ -131,8 +131,6 @@ void procesoYOLO(List<dynamic> args) async {
         w = w + 80;
         h = h + 50;
         print("✅ COORDENADAS AJUSTADAS");
-        print('📷 Imagen original: ${originalWidth}x$originalHeight');
-        print("CLASS = $classIndex");
 
         // Crear mapa con coordenadas finales
         Map<String,double> coordenadas = {
@@ -148,8 +146,6 @@ void procesoYOLO(List<dynamic> args) async {
         // ----------------
       } else if (classIndex > 14 && classIndex < 18){
         // Se detectó la clase, pero sin suficiente confianza
-        print("CLASE= $classIndex // Porcentaje= ${conf * maxProb} > $threshold");
-        print("CONDICIONAL 1 -> ${conf * maxProb > threshold}");
       }
     }
     print('🚫 No se detectó perro.');

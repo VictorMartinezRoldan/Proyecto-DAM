@@ -126,6 +126,7 @@ class _PublicacionStyleState extends State<PublicacionStyle> with TickerProvider
             // SI NO ES COMENTARIOS PAGE ABRE LA PÁGINA DE LOS COMENTARIOS
             if (!widget.isComentariosPage) {
               await Navigator.push(context, MaterialPageRoute(builder: (context) => ComentariosPage(publicacion: publi)));
+              if (!mounted) return;
               setState(() {
                 // RECARGAR CAMBIOS
               });
@@ -166,7 +167,9 @@ class _PublicacionStyleState extends State<PublicacionStyle> with TickerProvider
                     right: 10,
                   ),
                   child: GestureDetector(
-                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => UserPage())),
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => UserPage(idUsuario: publi.uuidPubli)));
+                    },
                     child: Row(
                       children: [
                         // IMAGEN DE PERFIL

@@ -1,0 +1,172 @@
+Airedale Terrier
+Akita Inu
+Alaskan Malamute
+American Eskimo Dog
+American Staffordshire Terrier
+Australian Shepherd
+Australian Terrier
+Basenji
+Basset Fauve de Bretagne
+Basset Hound
+Beagle
+Bearded Collie
+Belgian Malinois
+Belgian Sheepdog
+Belgian Tervuren
+Berger Picard
+Bichón Frisé
+Black and Tan Coonhound
+Bloodhound
+Bluetick Coonhound
+Boerboel
+Border Collie
+Border Terrier
+Borzoi
+Boston Terrier
+Boxer
+Boyero de Berna
+Boykin Spaniel
+Braque Saint-Germain
+Brazilian Terrier
+Brittany
+Bull Terrier
+Bull Terrier Miniatura
+Bulldog Francés
+Bulldog Inglés
+Bullmastiff
+Cairn Terrier
+Canadian Eskimo Dog
+Cane Corso
+Cardigan Welsh Corgi
+Cavalier King Charles Spaniel
+Chesapeake Bay Retriever
+Chihuahua
+Chinese Crested
+Chinese Shar-Pei
+Chinook
+Chow Chow
+Cocker Spaniel Inglés
+Corgi Galés de Pembroke
+Coton de Tulear
+Dachshund (Teckel)
+Dandie Dinmont Terrier
+Danish-Swedish Farmdog
+Doberman
+Dogo Argentino
+Dogue de Bordeaux
+Dutch Shepherd
+Dálmata
+English Cocker Spaniel
+English Setter
+English Springer Spaniel
+English Toy Spaniel
+Estrela Mountain Dog
+Eurasier
+Finnish Lapphund
+Finnish Spitz
+Flat-Coated Retriever
+Giant Schnauzer
+Golden Retriever
+Gordon Setter
+Gran Danés
+Great Pyrenees
+Greyhound
+Hamiltonstovare
+Harrier
+Havanese
+Husky Siberiano
+Icelandic Sheepdog
+Irish Red and White Setter
+Irish Wolfhound
+Japanese Chin
+Keeshond
+Komondor
+Labrador Retriever
+Lagotto Romagnolo
+Lakeland Terrier
+Lhasa Apso
+Manchester Terrier (Standard)
+Mastiff
+Michon Maltés
+Miniature American Shepherd
+Neapolitan Mastiff
+Nederlandse Kooikerhondje
+Norfolk Terrier
+Norwegian Buhund
+Norwegian Elkhound
+Nova Scotia Duck Tolling Retriever
+Old English Sheepdog
+Papillon
+Parson Russell Terrier
+Pastor Alemán
+Pekingese
+Pharaoh Hound
+Pinscher Aleman
+Pinscher Miniatura
+Plott Hound
+Pointer
+Pomerania
+Pont-Audemer Spaniel
+Poodle (Caniche)
+Portuguese Podengo
+Portuguese Pointer
+Portuguese Water Dog
+Presa Canario
+Pug Carlino
+Puli
+Pyrenean Mastiff
+Rat Terrier
+Redbone Coonhound
+Rhodesian Ridgeback
+Romanian Mioritic Shepherd Dog
+Rottweiler
+Rough Collie
+Russell Terrier
+Russian Toy
+Saint Bernard
+Saluki
+Samoyedo
+Schnauzer Miniatura
+Scottish Deerhound
+Scottish Terrier
+Setter Irlandés
+Shar Pei
+Shetland Sheepdog
+Shiba Inu
+Shih Tzu
+Shikoku
+Shorthaired Pointer Alemán
+Silky Terrier
+Slovensky Cuvac
+Small Munsterlander
+Soft Coated Wheaten Terrier
+Spaniel Francés
+Spanish Mastiff
+Spinone Italiano
+Spitz Alemán
+Spitz Japonés
+Staffordshire Bull Terrier
+Standard Schnauzer
+Sussex Spaniel
+Swedish Lapphund
+Swedish Vallhund
+Terranova
+Tibetan Mastiff
+Tibetan Spaniel
+Tibetan Terrier
+Tornjak
+Tosa Inu
+Toy Fox Terrier
+Transylvanian Hound
+Treeing Tennessee Brindle
+Treeing Walker Coonhound
+Vizsla
+Volpino Italiano
+Weimaraner
+Welsh Springer Spaniel
+Welsh Terrier
+West Highland White Terrier
+Wetterhoun
+Whippet
+Wirehaired Pointer Alemán
+Yorkshire Terrier

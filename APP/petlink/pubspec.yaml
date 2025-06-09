@@ -110,6 +110,7 @@ flutter:
      - assets/audios/
      - assets/animaciones/
      - assets/IA/yolo/
+     - assets/IA/razas/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

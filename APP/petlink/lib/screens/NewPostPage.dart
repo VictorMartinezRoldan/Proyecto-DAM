@@ -376,9 +376,11 @@ class _NewPostPageState extends State<NewPostPage> {
                             if (respuesta != null && respuesta == true){
                               if (await _comprobar()){
                                 // LOGICA PARA SUBIR LA PUBLICACIÓN
+                                if (!context.mounted) return;
                                 bool resultado = await Publicacion.publicar(_textController.text, _imagen!, context);
                                 if (resultado) {
                                   // DIALOGO EXITO
+                                  if (!context.mounted) return;
                                   await showDialog(
                                     context: context, 
                                     builder: (context) => DialogoInformacion(
@@ -388,9 +390,11 @@ class _NewPostPageState extends State<NewPostPage> {
                                       textoBtn: AppLocalizations.of(context)!.newPostButtonDialogPublishedReturn,
                                     ),
                                   );
+                                  if (!context.mounted) return;
                                   Navigator.pop(context);
                                 } else {
                                   // DIALOGO ERROR (NO SE PUDO PUBLICAR)
+                                  if (!context.mounted) return;
                                   await showDialog(
                                     context: context, 
                                     builder: (context) => DialogoInformacion(
@@ -403,6 +407,7 @@ class _NewPostPageState extends State<NewPostPage> {
                                 }
                               } else {
                                 // DIALOGO ERROR
+                                if (!context.mounted) return;
                                 showDialog(
                                   context: context, 
                                   builder: (context) => DialogoInformacion(

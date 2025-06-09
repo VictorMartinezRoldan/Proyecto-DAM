@@ -10,6 +10,7 @@ import 'package:petlink/components/mensajeSnackbar.dart';
 import 'package:petlink/entidades/comentario.dart';
 import 'package:petlink/entidades/seguridad.dart';
 import 'package:petlink/screens/Secondary/ComentariosPage.dart';
+import 'package:petlink/screens/UserPage.dart';
 import 'package:petlink/services/supabase_auth.dart';
 import 'package:petlink/themes/customColors.dart';
 
@@ -186,11 +187,14 @@ class ComentarioStyleState extends State<ComentarioStyle> with TickerProviderSta
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 5),
-                    child: CircleAvatar(
-                      backgroundColor: custom.contenedor,
-                      backgroundImage: CachedNetworkImageProvider(comentario.imagenPerfil),
+                  GestureDetector(
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => UserPage(idUsuario: comentario.uuid))),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 5),
+                      child: CircleAvatar(
+                        backgroundColor: custom.contenedor,
+                        backgroundImage: CachedNetworkImageProvider(comentario.imagenPerfil),
+                      ),
                     ),
                   ),
                   SizedBox(width: 15),
@@ -198,70 +202,73 @@ class ComentarioStyleState extends State<ComentarioStyle> with TickerProviderSta
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          crossAxisAlignment: widget.isRespuesta ? CrossAxisAlignment.center : CrossAxisAlignment.start,
-                          children: [
-                            Flexible(
-                              child: Wrap(
-                                crossAxisAlignment: WrapCrossAlignment.center,
-                                children: [
-                                  IntrinsicWidth(child: Text(!widget.isRespuesta ? comentario.nombre : acortarNombreUsuario(comentario.nombre, (widget.isRespuesta && isPropietario) ? 8 : 12), style: TextStyle(fontWeight: FontWeight.w500))),
-                                  SizedBox(width: widget.isRespuesta ? 5 : 10),
-                                  if (!widget.isRespuesta)
-                                  IntrinsicWidth(
-                                    child: Container(
-                                      padding: EdgeInsets.only(
-                                        left: 8,
-                                        right: 8,
-                                        bottom: 1,
-                                        top: 1,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: custom.colorEspecial,
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            Icons.pets,
-                                            size: 18,
-                                            color: custom.contenedor,
-                                          ),
-                                          SizedBox(width: 5),
-                                          Text(
-                                            comentario.usuario,
-                                            style: TextStyle(color: custom.contenedor),
-                                          ),
-                                        ],
+                        GestureDetector(
+                          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => UserPage(idUsuario: comentario.uuid))),
+                          child: Row(
+                            crossAxisAlignment: widget.isRespuesta ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+                            children: [
+                              Flexible(
+                                child: Wrap(
+                                  crossAxisAlignment: WrapCrossAlignment.center,
+                                  children: [
+                                    IntrinsicWidth(child: Text(!widget.isRespuesta ? comentario.nombre : acortarNombreUsuario(comentario.nombre, (widget.isRespuesta && isPropietario) ? 8 : 12), style: TextStyle(fontWeight: FontWeight.w500))),
+                                    SizedBox(width: widget.isRespuesta ? 5 : 10),
+                                    if (!widget.isRespuesta)
+                                    IntrinsicWidth(
+                                      child: Container(
+                                        padding: EdgeInsets.only(
+                                          left: 8,
+                                          right: 8,
+                                          bottom: 1,
+                                          top: 1,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: custom.colorEspecial,
+                                          borderRadius: BorderRadius.circular(20),
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Icon(
+                                              Icons.pets,
+                                              size: 18,
+                                              color: custom.contenedor,
+                                            ),
+                                            SizedBox(width: 5),
+                                            Text(
+                                              comentario.usuario,
+                                              style: TextStyle(color: custom.contenedor),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                            // NOMBRE DE USUARIO
-                            SizedBox(width: (!widget.isRespuesta) ? 10 : 0),
-                            if (isPropietario)
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 5),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: custom.fondoSuave,
-                                border: Border.all(
-                                  color: custom.textoSuave,
-                                  width: 2
-                                )
+                              // NOMBRE DE USUARIO
+                              SizedBox(width: (!widget.isRespuesta) ? 10 : 0),
+                              if (isPropietario)
+                              Container(
+                                padding: EdgeInsets.symmetric(horizontal: 5),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: custom.fondoSuave,
+                                  border: Border.all(
+                                    color: custom.textoSuave,
+                                    width: 2
+                                  )
+                                ),
+                                child: Text("Autor", style: TextStyle(color: custom.textoSuave, fontWeight: FontWeight.bold)),
                               ),
-                              child: Text("Autor", style: TextStyle(color: custom.textoSuave, fontWeight: FontWeight.bold)),
-                            ),
-                            if (widget.isRespuesta)
-                            SizedBox(width: 5),
-                            if (widget.isRespuesta)
-                            Icon(Icons.keyboard_double_arrow_right_sharp, size: 20, color: custom.colorEspecial),
-                            SizedBox(width: (isPropietario) ? 5 : 8),
-                            if (widget.isRespuesta)
-                            Text(acortarNombreUsuario(comentario.usuarioRespondido!, isPropietario ? 8 : 12), style: TextStyle(fontWeight: FontWeight.w500)),
-                          ],
+                              if (widget.isRespuesta)
+                              SizedBox(width: 5),
+                              if (widget.isRespuesta)
+                              Icon(Icons.keyboard_double_arrow_right_sharp, size: 20, color: custom.colorEspecial),
+                              SizedBox(width: (isPropietario) ? 5 : 8),
+                              if (widget.isRespuesta)
+                              Text(acortarNombreUsuario(comentario.usuarioRespondido!, isPropietario ? 8 : 12), style: TextStyle(fontWeight: FontWeight.w500)),
+                            ],
+                          ),
                         ),
                         SizedBox(height: 7),
                         Text(comentario.texto)
