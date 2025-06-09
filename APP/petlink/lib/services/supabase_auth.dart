@@ -84,7 +84,6 @@ class SupabaseAuthService {
 
      try {
       if (id.isEmpty) {
-        print("⛔ ID de usuario no disponible");
         return;
       }
 
@@ -93,21 +92,16 @@ class SupabaseAuthService {
           .select('imagen_url')
           .eq('id_usuario', id);
 
-      print("📡 Respuesta de publicaciones: $response");
-
       if (response.isNotEmpty) {
         publicaciones = response
             .map((post) => post['imagen_url'] as String?)
             .whereType<String>()
             .toList();
-        print("✅ Publicaciones cargadas: ${publicaciones.length}");
       } else {
         publicaciones = [];
-        print("⚠️ No hay publicaciones para este usuario.");
       }
     } catch (e) {
       publicaciones = [];
-      print("❌ Error obteniendo publicaciones: $e");
     }
   }
 
@@ -124,7 +118,6 @@ class SupabaseAuthService {
         return response['perfil_completado'] ?? false;
       }
     } catch (e) {
-      print('Error al verificar perfil: $e');
     }
     return false;
   }
@@ -140,15 +133,11 @@ class SupabaseAuthService {
           .maybeSingle();
 
       if (datos == null) {
-        print("⚠️ No se encontraron datos para el usuario con ID: $userId");
         return null;
       }
-
-      print("📌 Datos de usuario obtenidos: $datos");
       return datos as Map<String, dynamic>;
 
     } catch (error) {
-      print("❌ Error obteniendo usuario: $error");
       return null;
     }
   }
@@ -156,7 +145,6 @@ class SupabaseAuthService {
   Future<List<String>> obtenerPublicacionesPorUsuario(String userId) async {
     try {
       if (userId.isEmpty) {
-        print("⛔ ID de usuario no disponible");
         return [];
       }
 
@@ -165,23 +153,49 @@ class SupabaseAuthService {
           .select('imagen_url')
           .eq('id_usuario', userId);
 
-      print("📡 Respuesta de publicaciones para usuario $userId: $response");
 
       if (response.isNotEmpty) {
         List<String> publicacionesUsuario = response
             .map((post) => post['imagen_url'] as String?)
             .whereType<String>()
             .toList();
-        print("✅ Publicaciones cargadas: ${publicacionesUsuario.length}");
         return publicacionesUsuario;
       } else {
-        print("⚠️ No hay publicaciones para este usuario.");
         return [];
       }
     } catch (e) {
-      print("❌ Error obteniendo publicaciones: $e");
       return [];
     }
   }
+
+  Future<bool> eliminarPublicacionesSeleccionadas(List<String> imagenesUrl) async {
+  try {
+    if (imagenesUrl.isEmpty) {
+      return false;
+    }
+
+    final user = supabase.auth.currentUser;
+    if (user == null) {
+      return false;
+    }
+
+    final response = await supabase
+        .from('publicaciones')
+        .delete()
+        .eq('id_usuario', user.id)
+        .inFilter('imagen_url', imagenesUrl);
+    
+    await obtenerPublicaciones();
+    
+    return true;
+
+  } catch (error) {
+    print("❌ Error eliminando publicaciones: $error");
+    return false;
+  }
+}
+
+
+
 
 }

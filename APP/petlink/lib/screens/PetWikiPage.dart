@@ -180,7 +180,7 @@ class _PetWikiPageState extends State<PetWikiPage> {
             borderRadius: BorderRadius.circular(2),
             boxShadow: [
               BoxShadow(
-                color: color.withOpacity(0.4),
+                color: color.withValues(alpha: 0.4),
                 blurRadius: 4,
                 offset: const Offset(0, 2),
               ),
@@ -267,18 +267,18 @@ class _PetWikiPageState extends State<PetWikiPage> {
                   onTap: () async {
                     // Verificar conexión antes de navegar
                     bool isConnected = await Seguridad.comprobarConexion();
+
+                    if (!context.mounted) return;
+                    
                     if (!isConnected) {
                       if (mounted) {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(builder: (context) => NetworkErrorPage()),
+                        Navigator.pushReplacement(context, MaterialPageRoute(
+                          builder: (context) => NetworkErrorPage()),
                         );
                       }
                       return;
                     }
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
+                    Navigator.push(context, MaterialPageRoute(
                         builder: (context) => PetWikiInformationPage(razaData: breed),
                       ),
                     );
@@ -303,18 +303,18 @@ class _PetWikiPageState extends State<PetWikiPage> {
                   onPressed: () async {
                     // Verificar conexión antes de navegar
                     bool isConnected = await Seguridad.comprobarConexion();
+
+                    if (!context.mounted) return;
+
                     if (!isConnected) {
                       if (mounted) {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(builder: (context) => NetworkErrorPage()),
+                        Navigator.pushReplacement(context, MaterialPageRoute(
+                          builder: (context) => NetworkErrorPage()),
                         );
                       }
                       return;
                     }
-                    await Navigator.push(
-                      context,
-                      MaterialPageRoute(
+                    await Navigator.push(context, MaterialPageRoute(
                         builder: (_) => const FavouriteBreedsPage(),
                       ),
                     );

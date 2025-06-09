@@ -512,14 +512,14 @@
     "description": "Descripción del botón de perfil desconectado en el menú lateral",
     "context": "lateralmenu_component"
   },
-  "lateralMenuPetsTitle": "MASCOTAS",
+  "lateralMenuPetsTitle": "FAVORITOS",
   "@lateralMenuPetsTitle": {
-    "description": "Tiutlo boton de mascotas en el menu lateral",
+    "description": "Tiutlo boton de favoritos en el menu lateral",
     "context": "lateralmenu_component"
   },
-  "lateralMenuPetsTitleDesc": "Ver o agregar tus mascotas",
+  "lateralMenuPetsTitleDesc": "Ver o agregar tus razas favoritas",
   "@lateralMenuPetsTitleDesc": {
-    "description": "Descripción del botón de mascotas en el menú lateral",
+    "description": "Descripción del botón de razas favoritas en el menú lateral",
     "context": "lateralmenu_component"
   },
   "lateralMenuPetsLogOutTitleDesc": "Inicia sesión para ver o agregar tus mascotas",

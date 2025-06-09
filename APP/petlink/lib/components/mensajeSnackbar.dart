@@ -8,19 +8,12 @@ class MensajeSnackbar {
   static OverlayEntry? _toastActual;
   // Variable para mantener la referencia del timer actual
   static Timer? _timerActual;
-  static CustomColors? _customColors;
-
-  // Método para inicializar los colores personalizados
-  static void _inicializarColores(BuildContext context) {
-    _customColors ??= Theme.of(context).extension<CustomColors>()!;
-  }
-
   static void mostrarInfo(
     BuildContext context,
     String mensaje, {
     VoidCallback? alCerrar,
   }) {
-    _inicializarColores(context);
+    final custom = Theme.of(context).extension<CustomColors>()!;
 
     _mostrarToast(
       context,
@@ -28,7 +21,7 @@ class MensajeSnackbar {
       icono: CupertinoIcons.info_circle,
       colorFondoIcono: const Color(0xFF4B84F4),
       colorIcono: Colors.white,
-      colorTexto: _customColors!.contenedor,
+      colorTexto: custom.bordeContenedor,
       colorBoton: const Color(0xFF4B84F4),
       alCerrar: alCerrar,
     );
@@ -39,7 +32,7 @@ class MensajeSnackbar {
     String mensaje, {
     VoidCallback? alCerrar,
   }) {
-    _inicializarColores(context);
+    final custom = Theme.of(context).extension<CustomColors>()!;
 
     _mostrarToast(
       context,
@@ -47,7 +40,7 @@ class MensajeSnackbar {
       icono: CupertinoIcons.checkmark_circle,
       colorFondoIcono: Colors.green,
       colorIcono: Colors.white,
-      colorTexto: _customColors!.sombraContenedor,
+      colorTexto: custom.bordeContenedor,
       colorBoton: Colors.green,
       alCerrar: alCerrar,
     );
@@ -58,7 +51,7 @@ class MensajeSnackbar {
     String mensaje, {
     VoidCallback? alCerrar,
   }) {
-    _inicializarColores(context);
+    final custom = Theme.of(context).extension<CustomColors>()!;
 
     _mostrarToast(
       context,
@@ -66,7 +59,7 @@ class MensajeSnackbar {
       icono: CupertinoIcons.clear_circled,
       colorFondoIcono: Colors.red,
       colorIcono: Colors.white,
-      colorTexto: _customColors!.contenedor,
+      colorTexto: custom.bordeContenedor,
       colorBoton: Colors.red,
       alCerrar: alCerrar,
     );

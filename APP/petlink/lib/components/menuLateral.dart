@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:petlink/components/cardSettingsStyle.dart';
+import 'package:petlink/screens/Secondary/FavoriteBreedsPage.dart';
 import 'package:petlink/screens/Secondary/LoginPage.dart';
 import 'package:petlink/screens/Secondary/SettingsPage.dart';
 import 'package:petlink/screens/UserPage.dart';
@@ -111,9 +112,12 @@ class _MenuLateralState extends State<MenuLateral> {
                   ),
                   SizedBox(height: 20),
                   CardSettingsStyle(
-                    Icons.pets,
+                    Icons.favorite,
                     AppLocalizations.of(context)!.lateralMenuPetsTitle,
-                    (isLogin) ? AppLocalizations.of(context)!.lateralMenuPetsTitleDesc : AppLocalizations.of(context)!.lateralMenuPetsLogOutTitleDesc,
+                    (isLogin) ? AppLocalizations.of(context)!.lateralMenuPetsTitleDesc : AppLocalizations.of(context)!.lateralMenuPetsLogOutTitleDesc, onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => FavouriteBreedsPage()));
+                    },
                   ),
                   SizedBox(height: 20),
                   // Botón de ajustes
@@ -130,6 +134,9 @@ class _MenuLateralState extends State<MenuLateral> {
                         if (isLogin){
                           try {
                             await Supabase.instance.client.auth.signOut();
+                            
+                            if (!context.mounted) return;
+
                             setState(() {
                               SupabaseAuthService.isLogin.value = false;
                             });
